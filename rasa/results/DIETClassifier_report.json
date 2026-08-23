@@ -1,10 +1,37 @@
 {
+  "player": {
+    "precision": 0.9862068965517241,
+    "recall": 0.807909604519774,
+    "f1-score": 0.8881987577639752,
+    "support": 177.0,
+    "confused_with": {
+      "team": 1
+    }
+  },
+  "team": {
+    "precision": 0.9636363636363636,
+    "recall": 0.7464788732394366,
+    "f1-score": 0.8412698412698413,
+    "support": 71.0,
+    "confused_with": {
+      "player": 1
+    }
+  },
   "season": {
-    "precision": 0.8888888888888888,
+    "precision": 0.88,
     "recall": 1.0,
-    "f1-score": 0.9411764705882353,
-    "support": 48.0,
+    "f1-score": 0.9361702127659575,
+    "support": 44.0,
     "confused_with": {}
+  },
+  "stat": {
+    "precision": 0.5,
+    "recall": 0.15,
+    "f1-score": 0.23076923076923078,
+    "support": 20.0,
+    "confused_with": {
+      "team": 1
+    }
   },
   "award": {
     "precision": 0.0,
@@ -13,44 +40,23 @@
     "support": 3.0,
     "confused_with": {}
   },
-  "team": {
-    "precision": 1.0,
-    "recall": 0.6410256410256411,
-    "f1-score": 0.78125,
-    "support": 78.0,
-    "confused_with": {}
-  },
-  "stat": {
-    "precision": 0.7142857142857143,
-    "recall": 0.22727272727272727,
-    "f1-score": 0.3448275862068966,
-    "support": 22.0,
-    "confused_with": {}
-  },
-  "player": {
-    "precision": 0.9876543209876543,
-    "recall": 0.8839779005524862,
-    "f1-score": 0.9329446064139941,
-    "support": 181.0,
-    "confused_with": {}
-  },
   "micro avg": {
-    "precision": 0.9633699633699634,
-    "recall": 0.7921686746987951,
-    "f1-score": 0.8694214876033057,
-    "support": 332.0
+    "precision": 0.94921875,
+    "recall": 0.7714285714285715,
+    "f1-score": 0.851138353765324,
+    "support": 315.0
   },
   "macro avg": {
-    "precision": 0.7181657848324515,
-    "recall": 0.5504552537701709,
-    "f1-score": 0.6000397326418252,
-    "support": 332.0
+    "precision": 0.6659686520376176,
+    "recall": 0.5408776955518422,
+    "f1-score": 0.579281608513801,
+    "support": 315.0
   },
   "weighted avg": {
-    "precision": 0.9492360978304752,
-    "recall": 0.7921686746987951,
-    "f1-score": 0.8510938290533734,
-    "support": 332.0
+    "precision": 0.9260215952629746,
+    "recall": 0.7714285714285715,
+    "f1-score": 0.8341213105760924,
+    "support": 315.0
   },
-  "accuracy": 0.9153269024651661
+  "accuracy": 0.9060710194730813
 }

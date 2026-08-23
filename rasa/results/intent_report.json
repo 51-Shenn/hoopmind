@@ -1,75 +1,17 @@
 {
   "player_info": {
-    "precision": 0.6923076923076923,
-    "recall": 0.5454545454545454,
-    "f1-score": 0.6101694915254238,
+    "precision": 0.7,
+    "recall": 0.6363636363636364,
+    "f1-score": 0.6666666666666666,
     "support": 33.0,
     "confused_with": {
-      "player_stats": 5,
-      "team_info": 3
-    }
-  },
-  "team_info": {
-    "precision": 0.5652173913043478,
-    "recall": 0.5416666666666666,
-    "f1-score": 0.5531914893617021,
-    "support": 24.0,
-    "confused_with": {
-      "player_info": 3,
-      "player_stats": 2
-    }
-  },
-  "draft_info": {
-    "precision": 0.75,
-    "recall": 0.6,
-    "f1-score": 0.6666666666666666,
-    "support": 5.0,
-    "confused_with": {
-      "compare": 1,
-      "player_stats": 1
-    }
-  },
-  "greeting": {
-    "precision": 0.75,
-    "recall": 1.0,
-    "f1-score": 0.8571428571428571,
-    "support": 12.0,
-    "confused_with": {}
-  },
-  "league_info": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 4.0,
-    "confused_with": {
-      "team_info": 2,
-      "player_stats": 1,
-      "player_info": 1
-    }
-  },
-  "player_stats": {
-    "precision": 0.6981132075471698,
-    "recall": 0.925,
-    "f1-score": 0.7956989247311828,
-    "support": 40.0,
-    "confused_with": {
-      "team_stats": 1,
-      "team_info": 1
-    }
-  },
-  "dataset_scope": {
-    "precision": 0.5,
-    "recall": 0.4,
-    "f1-score": 0.4444444444444444,
-    "support": 5.0,
-    "confused_with": {
-      "team_info": 2,
-      "player_stats": 1
+      "draft_info": 4,
+      "player_stats": 4
     }
   },
   "all_star": {
-    "precision": 0.8,
-    "recall": 0.5714285714285714,
+    "precision": 0.625,
+    "recall": 0.7142857142857143,
     "f1-score": 0.6666666666666666,
     "support": 7.0,
     "confused_with": {
@@ -78,51 +20,94 @@
     }
   },
   "compare": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
+    "precision": 0.16666666666666666,
+    "recall": 0.16666666666666666,
+    "f1-score": 0.16666666666666666,
     "support": 6.0,
     "confused_with": {
-      "team_info": 2,
-      "player_stats": 2,
-      "player_info": 2
+      "team_info": 3,
+      "player_info": 1,
+      "all_star": 1
     }
   },
-  "team_stats": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 3.0,
+  "team_info": {
+    "precision": 0.7391304347826086,
+    "recall": 0.7083333333333334,
+    "f1-score": 0.723404255319149,
+    "support": 24.0,
     "confused_with": {
-      "player_stats": 3
+      "player_info": 2,
+      "goodbye": 2
+    }
+  },
+  "player_stats": {
+    "precision": 0.8636363636363636,
+    "recall": 0.95,
+    "f1-score": 0.9047619047619048,
+    "support": 40.0,
+    "confused_with": {
+      "team_info": 1,
+      "player_info": 1
+    }
+  },
+  "greeting": {
+    "precision": 0.8,
+    "recall": 0.6666666666666666,
+    "f1-score": 0.7272727272727273,
+    "support": 12.0,
+    "confused_with": {
+      "goodbye": 2,
+      "player_info": 1
     }
   },
   "goodbye": {
-    "precision": 0.9090909090909091,
-    "recall": 0.8333333333333334,
-    "f1-score": 0.8695652173913043,
+    "precision": 0.6,
+    "recall": 0.75,
+    "f1-score": 0.6666666666666666,
     "support": 12.0,
     "confused_with": {
-      "greeting": 2
+      "player_info": 2,
+      "greeting": 1
     }
   },
-  "accuracy": 0.6556291390728477,
+  "dataset_scope": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 5.0,
+    "confused_with": {
+      "compare": 2,
+      "goodbye": 1,
+      "player_stats": 1
+    }
+  },
+  "draft_info": {
+    "precision": 0.375,
+    "recall": 0.6,
+    "f1-score": 0.46153846153846156,
+    "support": 5.0,
+    "confused_with": {
+      "team_info": 1,
+      "player_info": 1
+    }
+  },
+  "accuracy": 0.7083333333333334,
   "macro avg": {
-    "precision": 0.51497538184092,
-    "recall": 0.4924439197166469,
-    "f1-score": 0.49668597799365893,
-    "support": 151.0
+    "precision": 0.5410481627872932,
+    "recall": 0.5769240019240018,
+    "f1-score": 0.5537382239509898,
+    "support": 144.0
   },
   "weighted avg": {
-    "precision": 0.6363906652214297,
-    "recall": 0.6556291390728477,
-    "f1-score": 0.6369726163635716,
-    "support": 151.0
+    "precision": 0.6905179512516468,
+    "recall": 0.7083333333333334,
+    "f1-score": 0.696207014026163,
+    "support": 144.0
   },
   "micro avg": {
-    "precision": 0.6556291390728477,
-    "recall": 0.6556291390728477,
-    "f1-score": 0.6556291390728477,
-    "support": 151.0
+    "precision": 0.7083333333333334,
+    "recall": 0.7083333333333334,
+    "f1-score": 0.7083333333333334,
+    "support": 144.0
   }
 }
