@@ -1,0 +1,81 @@
+version: "3.1"
+
+intents:
+  - greeting
+  - goodbye
+  - player_information
+  - player_career_information
+  - player_season_stats
+  - player_career_totals
+  - player_advanced_stats
+  - player_shooting_stats
+  - player_per_36_stats
+  - player_per_100_stats
+  - player_play_by_play_stats
+  - player_awards
+  - team_information
+  - team_season_stats
+  - team_summary
+  - team_opponent_stats
+  - compare_players
+  - compare_teams
+  - all_star_selection
+  - end_of_season_team
+  - draft_information
+  - league_information
+  - dataset_scope
+
+entities:
+  - player
+  - team
+  - season
+  - stat
+  - position
+  - award
+  - league
+
+slots:
+  player:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: player
+  player2:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: player
+  team:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: team
+  season:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: season
+  stat:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: stat
+  league:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: league
+
+responses:
+  utter_greeting:
+    - text: "Hello! I'm HoopMind, your NBA knowledge chatbot. How can I help you?"
+  utter_goodbye:
+    - text: "Goodbye! Enjoy the game!"
+  utter_default:
+    - text: "I'm not sure I understand. Could you rephrase that?"
+  utter_ask_player:
+    - text: "Which player are you interested in?"
+  utter_ask_team:
+    - text: "Which team are you interested in?"
+  utter_ask_season:
+    - text: "Which season?"

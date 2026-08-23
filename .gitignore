@@ -220,3 +220,4 @@ __marimo__/
 # Rasa-generated files
 rasa/.rasa/
 rasa/models/
+rasa/config.yml

@@ -1,0 +1,12 @@
+recipe: default.v1
+assistant_id: leather-castle
+language: en
+pipeline:
+- name: CompactLLMCommandGenerator
+  llm:
+    model_group: gemini_llm
+  flow_retrieval:
+    embeddings:
+      model_group: gemini_embeddings
+policies:
+- name: FlowPolicy
