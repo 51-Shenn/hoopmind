@@ -1,0 +1,114 @@
+{
+  "name": "end_of_season_team",
+  "displayName": "end_of_season_team",
+  "priority": 500000,
+  "webhookState": "WEBHOOK_STATE_ENABLED",
+  "trainingPhrases": [
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Was "
+        },
+        {
+          "text": "LeBron James",
+          "entityType": "@player",
+          "alias": "player",
+          "userDefined": true
+        },
+        {
+          "text": " selected to an All-NBA team in "
+        },
+        {
+          "text": "2013",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Which All-NBA team was "
+        },
+        {
+          "text": "Stephen Curry",
+          "entityType": "@player",
+          "alias": "player",
+          "userDefined": true
+        },
+        {
+          "text": " selected to in "
+        },
+        {
+          "text": "2016",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Did "
+        },
+        {
+          "text": "Giannis Antetokounmpo",
+          "entityType": "@player",
+          "alias": "player",
+          "userDefined": true
+        },
+        {
+          "text": " make an end of season team in "
+        },
+        {
+          "text": "2019",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "name": "player",
+      "displayName": "player",
+      "value": "$player",
+      "entityTypeDisplayName": "@player",
+      "mandatory": false,
+      "prompts": []
+    },
+    {
+      "name": "season",
+      "displayName": "season",
+      "value": "$season",
+      "entityTypeDisplayName": "@season",
+      "mandatory": false,
+      "prompts": []
+    }
+  ],
+  "messages": [],
+  "defaultResponsePlatforms": [
+    "PLATFORM_UNSPECIFIED"
+  ],
+  "rootFollowupIntentName": "",
+  "parentFollowupIntentName": "",
+  "followupIntentInfo": []
+}
