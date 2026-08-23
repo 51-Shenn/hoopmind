@@ -1,0 +1,58 @@
+{
+  "award": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 3.0,
+    "confused_with": {
+      "player": 2
+    }
+  },
+  "team": {
+    "precision": 1.0,
+    "recall": 0.6538461538461539,
+    "f1-score": 0.7906976744186046,
+    "support": 78.0,
+    "confused_with": {}
+  },
+  "stat": {
+    "precision": 0.5,
+    "recall": 0.22727272727272727,
+    "f1-score": 0.3125,
+    "support": 22.0,
+    "confused_with": {}
+  },
+  "season": {
+    "precision": 0.84375,
+    "recall": 0.5625,
+    "f1-score": 0.675,
+    "support": 48.0,
+    "confused_with": {}
+  },
+  "player": {
+    "precision": 0.9814814814814815,
+    "recall": 0.8784530386740331,
+    "f1-score": 0.9271137026239067,
+    "support": 181.0,
+    "confused_with": {}
+  },
+  "micro avg": {
+    "precision": 0.9490196078431372,
+    "recall": 0.7289156626506024,
+    "f1-score": 0.8245315161839863,
+    "support": 332.0
+  },
+  "macro avg": {
+    "precision": 0.6650462962962963,
+    "recall": 0.4644143839585829,
+    "f1-score": 0.5410622754085023,
+    "support": 332.0
+  },
+  "weighted avg": {
+    "precision": 0.9251450245426149,
+    "recall": 0.7289156626506024,
+    "f1-score": 0.8095090324686091,
+    "support": 332.0
+  },
+  "accuracy": 0.8917470525187567
+}
