@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Rasa-generated files
+rasa/.rasa/
+rasa/models/
