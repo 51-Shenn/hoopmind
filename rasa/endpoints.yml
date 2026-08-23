@@ -66,9 +66,13 @@ action_endpoint:
 #   type: rephrase
 
 model_groups:
-  - id: openai-gpt-5-1
+  - id: gemini_llm
     models:
-      - provider: openai
-        model: gpt-5.1-2025-11-13
+      - provider: gemini
+        model: gemini-3.6-flash
         reasoning_effort: "none"
-        timeout: 15
+        timeout: 60
+  - id: gemini_embeddings
+    models:
+      - provider: gemini
+        model: gemini-embedding-001
