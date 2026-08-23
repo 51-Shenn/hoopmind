@@ -220,7 +220,6 @@ __marimo__/
 # Node.js
 node_modules/
 
-# ─────────────────────────────────────────────
 # Rasa
 rasa/.rasa/
 rasa/models/
