@@ -13,7 +13,25 @@ class ActionTeamInfo(Action):
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         team_name = tracker.get_slot("team")
         if not team_name:
-            dispatcher.utter_message(text="Which team are you interested in?")
+            latest_msg = tracker.latest_message.get("text", "")
+            parts = latest_msg.lower().strip()
+            for phrase in ["tell me about", "info on", "information about", "what about"]:
+                parts = parts.replace(phrase, "")
+            parts = parts.strip()
+            if parts:
+                info = get_team_info(parts)
+                if info:
+                    response = f"{info['name']} ({info['abbreviation']}) - {info['season']} season.\n"
+                    response += f"- Record: {info['wins']}-{info['losses']}\n"
+                    if info["arena"] and info["arena"] != "nan":
+                        response += f"- Arena: {info['arena']}\n"
+                    if info["off_rating"] is not None:
+                        response += f"- Off Rtg: {info['off_rating']}, Def Rtg: {info['def_rating']}, Net Rtg: {info['net_rating']}\n"
+                    if info["attendance"] > 0:
+                        response += f"- Attendance: {info['attendance']:,}\n"
+                    dispatcher.utter_message(text=response)
+                    return [SlotSet("team", info["name"])]
+            dispatcher.utter_message(text="I'm not sure which team you're asking about. Could you provide the team name or abbreviation?")
             return []
 
         info = get_team_info(team_name)

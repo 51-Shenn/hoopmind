@@ -30,19 +30,23 @@ slots:
   player:
     type: text
     mappings:
-      - type: custom
+      - type: from_entity
+        entity: player
   player2:
     type: text
     mappings:
-      - type: custom
+      - type: from_entity
+        entity: player
   team:
     type: text
     mappings:
-      - type: custom
+      - type: from_entity
+        entity: team
   season:
     type: text
     mappings:
-      - type: custom
+      - type: from_entity
+        entity: season
 
 actions:
   - action_player_info
@@ -61,7 +65,7 @@ responses:
   utter_goodbye:
     - text: "Goodbye! Enjoy the game!"
   utter_default:
-    - text: "I'm not sure I understand. Could you rephrase that?"
+    - text: "I'm not sure I understand. I can help with NBA players, teams, stats, drafts, and league info. Could you rephrase?"
   utter_ask_player:
     - text: "Which player are you interested in?"
   utter_ask_team:

@@ -40,6 +40,16 @@ nlu:
     - Where did [Stephen Curry](player) go to college?
     - Who is [Michael Jordan](player)
     - Tell me about [Giannis Antetokounmpo](player)
+    - [mj]
+    - [kd]
+    - [shaq]
+    - [cp3]
+    - [ai]
+    - [ad]
+    - [pg]
+    - [scottie]
+    - [magic]
+    - [bird]
     - What team does [Luka Doncic](player) play for
     - How old is [Jayson Tatum](player)
     - Give me info on [Nikola Jokic](player)
@@ -55,6 +65,8 @@ nlu:
     - I want to know about [LeBron James](player)
     - Describe [Michael Jordan](player)
     - [LeBron James](player)
+    - [king james]
+    - [lebron james]
     - [Stephen Curry](player)
     - [Kevin Durant](player)
     - What was [Tim Duncan](player)'s career span?
@@ -65,6 +77,13 @@ nlu:
     - Did [Stephen Curry](player) win the [MVP](award)?
     - Who won [MVP](award) in [2016](season)?
     - How many times did [Michael Jordan](player) win [MVP](award)?
+    - Did [LeBron James](player) win [Finals MVP](award)?
+    - How many [All-NBA First Team](award) selections does [Kobe Bryant](player) have?
+    - Did [Stephen Curry](player) win [DPOY](award)?
+    - How many [ROY](award) awards did [Tim Duncan](player) win?
+    - Did [Giannis Antetokounmpo](player) win [MVP](award)?
+    - How many [All-Defensive First Team](award) selections does [Kevin Garnett](player) have?
+    - Did [Shaquille O'Neal](player) win [Finals MVP](award)?
 
 - intent: player_stats
   examples: |
@@ -108,6 +127,15 @@ nlu:
     - How many [assists](stat) did [Chris Paul](player) generate in [2015](season)?
     - What was [Stephen Curry](player)'s [plus-minus](stat) per 100 possessions?
     - How many shooting fouls did [James Harden](player) draw?
+    - What was [LeBron James](player)'s [field goal percentage](stat)?
+    - How many [steals](stat) did [Michael Jordan](player) average?
+    - What is [Stephen Curry](player)'s [three point percentage](stat)?
+    - How many [blocks](stat) did [Hakeem Olajuwon](player) have?
+    - What was [Kobe Bryant](player)'s [free throw percentage](stat)?
+    - How many [minutes](stat) did [Kevin Durant](player) play?
+    - What is [James Harden](player)'s [usage percentage](stat)?
+    - How many [games played](stat) did [Robert Parish](player) have?
+    - What was [Tim Duncan](player)'s [win shares](stat)?
 
 - intent: team_info
   examples: |
@@ -119,6 +147,11 @@ nlu:
     - Tell me about [Chicago Bulls](team)
     - Information on the [Phoenix Suns](team)
     - What division are the [Golden State Warriors](team) in
+    - [gsw]
+    - [lakers]
+    - [celtics]
+    - [heat]
+    - [bulls]
     - Who is the coach of the [Los Angeles Lakers](team)
     - Details about [Milwaukee Bucks](team)
     - [Boston Celtics](team) info
@@ -128,13 +161,15 @@ nlu:
     - [Los Angeles Lakers](team)
     - [Golden State Warriors](team)
     - [Boston Celtics](team)
-    - What was the record of the [Boston Celtics](team) in [2024](season)?
-    - What was the point differential for the [Golden State Warriors](team) in [2016](season)?
-    - What was the pace of the [Sacramento Kings](team) in [2023](season)?
-    - What was the offensive rating of the [Phoenix Suns](team) in [2021](season)?
-    - How many points per game did opponents score against the [Boston Celtics](team) in [2024](season)?
-    - What was the opponent three-point percentage against the [Golden State Warriors](team) in [2016](season)?
-    - How many rebounds did opponents average against the [Milwaukee Bucks](team)?
+    - Who are the [Los Angeles Lakers](team) starters?
+    - What is the [Boston Celtics](team) roster?
+    - Who is the star player on the [Golden State Warriors](team)?
+    - When was the [Miami Heat](team) founded?
+    - What city are the [Chicago Bulls](team) from?
+    - How many championships have the [Boston Celtics](team) won?
+    - Who is the owner of the [Phoenix Suns](team)?
+    - What is the home arena for the [Milwaukee Bucks](team)?
+    - Tell me about the history of the [Los Angeles Lakers](team)
 
 - intent: team_stats
   examples: |
@@ -158,6 +193,13 @@ nlu:
     - How many [steals](stat) did the [Boston Celtics](team) average last season?
     - What was the [Milwaukee Bucks](team)'s [field goal percentage](stat) in [2024](season)?
     - Show the [Golden State Warriors](team) [rebounds](stat) for [2023](season)
+    - What was the record of the [Boston Celtics](team) in [2024](season)?
+    - What was the point differential for the [Golden State Warriors](team) in [2016](season)?
+    - What was the pace of the [Sacramento Kings](team) in [2023](season)?
+    - What was the offensive rating of the [Phoenix Suns](team) in [2021](season)?
+    - How many [points](stat) per game did the [Boston Celtics](team) average in [2024](season)?
+    - What was the [field goal percentage](stat) of the [Golden State Warriors](team) in [2016](season)?
+    - How many [wins](stat) did the [Milwaukee Bucks](team) have last season?
 
 - intent: compare
   examples: |
@@ -222,6 +264,12 @@ nlu:
     - What pick was [Luka Doncic](player)?
     - Which team drafted [Zion Williamson](player)?
     - What was [Jayson Tatum](player)'s draft position?
+    - [2024](season) nba draft
+    - nba draft [2023](season)
+    - draft [2022](season)
+    - who was drafted in [2021](season)
+    - [2020](season) draft picks
+    - nba draft results [2019](season)
     - Who was the number one pick in [2019](season)?
     - What round was [Nikola Jokic](player) drafted in?
     - Tell me about [Anthony Edwards](player) draft
@@ -287,6 +335,11 @@ lookup_tables:
       - ABA Most Valuable Player
       - ABA ROY
       - ABA Rookie of the Year
+      - All-NBA First Team
+      - All-NBA Second Team
+      - All-NBA Third Team
+      - All-Defensive First Team
+      - All-Defensive Second Team
       - BAA ROY
       - BAA Rookie of the Year
       - CPOY
@@ -294,8 +347,7 @@ lookup_tables:
       - Clutch Player of the Year
       - DPOY
       - Defensive Player of the Year
-      - MIP
-      - MVP
+      - Finals MVP
       - Most Improved Player
       - Most Valuable Player
       - NBA DPOY
@@ -309,13 +361,45 @@ lookup_tables:
       - Sixth Man of the Year
       - aba mvp
       - aba roy
+      - all-defensive first team
+      - all-nba first team
+      - all-nba second team
+      - all-nba third team
       - baa roy
+      - finals mvp
       - nba clutch_poy
       - nba dpoy
       - nba mip
       - nba mvp
       - nba roy
       - nba smoy
+  - lookup: stat
+    examples: |
+      - assists
+      - blocks
+      - defensive rating
+      - defensive rebounds
+      - field goal percentage
+      - field goals
+      - free throw percentage
+      - free throws
+      - games played
+      - minutes
+      - offensive rating
+      - offensive rebounds
+      - personal fouls
+      - plus-minus
+      - points
+      - rebounds
+      - steals
+      - team turnovers
+      - three point percentage
+      - three pointers
+      - total rebounds
+      - turnovers
+      - true shooting percentage
+      - usage percentage
+      - win shares
   - lookup: league
     examples: |
       - ABA
