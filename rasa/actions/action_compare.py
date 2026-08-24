@@ -26,15 +26,15 @@ class ActionCompare(Action):
         p2 = result["player2"]
 
         response = f"{p1['player']} ({p1['season']}) vs {p2['player']} ({p2['season']}):\n"
-        response += f"- Points: {p1['points']} vs {p2['points']} PPG\n"
-        response += f"- Rebounds: {p1['rebounds']} vs {p2['rebounds']} RPG\n"
-        response += f"- Assists: {p1['assists']} vs {p2['assists']} APG\n"
-        response += f"- Steals: {p1['steals']} vs {p2['steals']} SPG\n"
-        response += f"- Blocks: {p1['blocks']} vs {p2['blocks']} BPG\n"
+        response += f"- Points Per Game (PPG): {p1['points']} vs {p2['points']}\n"
+        response += f"- Rebounds Per Game (RPG): {p1['rebounds']} vs {p2['rebounds']}\n"
+        response += f"- Assists Per Game (APG): {p1['assists']} vs {p2['assists']}\n"
+        response += f"- Steals Per Game (SPG): {p1['steals']} vs {p2['steals']}\n"
+        response += f"- Blocks Per Game (BPG): {p1['blocks']} vs {p2['blocks']}\n"
         if p1["fg_pct"] is not None and p2["fg_pct"] is not None:
-            response += f"- FG%: {p1['fg_pct']}% vs {p2['fg_pct']}%\n"
+            response += f"- Field Goal Percentage (FG%): {p1['fg_pct']}% vs {p2['fg_pct']}%\n"
         if p1["three_pct"] is not None and p2["three_pct"] is not None:
-            response += f"- 3P%: {p1['three_pct']}% vs {p2['three_pct']}%\n"
+            response += f"- Three-Point Percentage (3P%): {p1['three_pct']}% vs {p2['three_pct']}%\n"
 
         dispatcher.utter_message(text=response)
         return []

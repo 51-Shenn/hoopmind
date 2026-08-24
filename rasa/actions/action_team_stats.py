@@ -26,13 +26,13 @@ class ActionTeamStats(Action):
             return []
 
         response = f"{stats['team']} {stats['season']} stats ({stats['games']} games):\n"
-        response += f"- Points: {stats['points']} PPG\n"
-        response += f"- Rebounds: {stats['rebounds']} RPG\n"
-        response += f"- Assists: {stats['assists']} APG\n"
+        response += f"- Points Per Game (PPG): {stats['points']}\n"
+        response += f"- Rebounds Per Game (RPG): {stats['rebounds']}\n"
+        response += f"- Assists Per Game (APG): {stats['assists']}\n"
         if stats["fg_pct"] is not None:
-            response += f"- FG%: {stats['fg_pct']}%\n"
+            response += f"- Field Goal Percentage (FG%): {stats['fg_pct']}%\n"
         if stats["three_pct"] is not None:
-            response += f"- 3P%: {stats['three_pct']}%\n"
+            response += f"- Three-Point Percentage (3P%): {stats['three_pct']}%\n"
 
         dispatcher.utter_message(text=response)
         return []

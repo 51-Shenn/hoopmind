@@ -26,9 +26,11 @@ class ActionTeamInfo(Action):
                     if info["arena"] and info["arena"] != "nan":
                         response += f"- Arena: {info['arena']}\n"
                     if info["off_rating"] is not None:
-                        response += f"- Off Rtg: {info['off_rating']}, Def Rtg: {info['def_rating']}, Net Rtg: {info['net_rating']}\n"
+                        response += f"- Offensive Rating: {info['off_rating']}\n"
+                        response += f"- Defensive Rating: {info['def_rating']}\n"
+                        response += f"- Net Rating: {info['net_rating']}\n"
                     if info["attendance"] > 0:
-                        response += f"- Attendance: {info['attendance']:,}\n"
+                        response += f"- Total Home Attendance: {info['attendance']:,}\n"
                     dispatcher.utter_message(text=response)
                     return [SlotSet("team", info["name"])]
             dispatcher.utter_message(text="I'm not sure which team you're asking about. Could you provide the team name or abbreviation?")
@@ -44,9 +46,11 @@ class ActionTeamInfo(Action):
         if info["arena"] and info["arena"] != "nan":
             response += f"- Arena: {info['arena']}\n"
         if info["off_rating"] is not None:
-            response += f"- Off Rtg: {info['off_rating']}, Def Rtg: {info['def_rating']}, Net Rtg: {info['net_rating']}\n"
+            response += f"- Offensive Rating: {info['off_rating']}\n"
+            response += f"- Defensive Rating: {info['def_rating']}\n"
+            response += f"- Net Rating: {info['net_rating']}\n"
         if info["attendance"] > 0:
-            response += f"- Attendance: {info['attendance']:,}\n"
+            response += f"- Total Home Attendance: {info['attendance']:,}\n"
 
         dispatcher.utter_message(text=response)
         return [SlotSet("team", info["name"])]

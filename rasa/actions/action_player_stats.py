@@ -26,17 +26,17 @@ class ActionPlayerStats(Action):
                 stats = get_player_stats(parts, season)
                 if stats:
                     response = f"{stats['player']}'s {stats['season']} stats with {stats['team']}:\n"
-                    response += f"- Points: {stats['points']} PPG\n"
-                    response += f"- Rebounds: {stats['rebounds']} RPG\n"
-                    response += f"- Assists: {stats['assists']} APG\n"
+                    response += f"- Points Per Game (PPG): {stats['points']}\n"
+                    response += f"- Rebounds Per Game (RPG): {stats['rebounds']}\n"
+                    response += f"- Assists Per Game (APG): {stats['assists']}\n"
                     if stats["steals"] > 0:
-                        response += f"- Steals: {stats['steals']} SPG\n"
+                        response += f"- Steals Per Game (SPG): {stats['steals']}\n"
                     if stats["blocks"] > 0:
-                        response += f"- Blocks: {stats['blocks']} BPG\n"
+                        response += f"- Blocks Per Game (BPG): {stats['blocks']}\n"
                     if stats["fg_pct"] is not None:
-                        response += f"- FG%: {stats['fg_pct']}%\n"
+                        response += f"- Field Goal Percentage (FG%): {stats['fg_pct']}%\n"
                     if stats["three_pct"] is not None:
-                        response += f"- 3P%: {stats['three_pct']}%\n"
+                        response += f"- Three-Point Percentage (3P%): {stats['three_pct']}%\n"
                     dispatcher.utter_message(text=response)
                     return []
             dispatcher.utter_message(text="I'm not sure which player you're asking about. Could you provide their full name?")
@@ -48,17 +48,17 @@ class ActionPlayerStats(Action):
             return []
 
         response = f"{stats['player']}'s {stats['season']} stats with {stats['team']}:\n"
-        response += f"- Points: {stats['points']} PPG\n"
-        response += f"- Rebounds: {stats['rebounds']} RPG\n"
-        response += f"- Assists: {stats['assists']} APG\n"
+        response += f"- Points Per Game (PPG): {stats['points']}\n"
+        response += f"- Rebounds Per Game (RPG): {stats['rebounds']}\n"
+        response += f"- Assists Per Game (APG): {stats['assists']}\n"
         if stats["steals"] > 0:
-            response += f"- Steals: {stats['steals']} SPG\n"
+            response += f"- Steals Per Game (SPG): {stats['steals']}\n"
         if stats["blocks"] > 0:
-            response += f"- Blocks: {stats['blocks']} BPG\n"
+            response += f"- Blocks Per Game (BPG): {stats['blocks']}\n"
         if stats["fg_pct"] is not None:
-            response += f"- FG%: {stats['fg_pct']}%\n"
+            response += f"- Field Goal Percentage (FG%): {stats['fg_pct']}%\n"
         if stats["three_pct"] is not None:
-            response += f"- 3P%: {stats['three_pct']}%\n"
+            response += f"- Three-Point Percentage (3P%): {stats['three_pct']}%\n"
 
         dispatcher.utter_message(text=response)
         return []
