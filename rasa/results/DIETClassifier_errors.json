@@ -1,5 +1,47 @@
 [
   {
+    "text": "Details about James Harden",
+    "entities": [
+      {
+        "start": 14,
+        "end": 26,
+        "value": "James Harden",
+        "entity": "player"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 20,
+        "end": 26,
+        "confidence_entity": 0.7404155135154724,
+        "value": "Harden",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "LeBron James",
+    "entities": [
+      {
+        "start": 0,
+        "end": 12,
+        "value": "LeBron James",
+        "entity": "player"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.8216038346290588,
+        "value": "LeBron",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
     "text": "When did Shaquille O'Neal start and finish his career?",
     "entities": [
       {
@@ -14,19 +56,98 @@
         "entity": "player",
         "start": 9,
         "end": 18,
-        "confidence_entity": 0.8828583359718323,
+        "confidence_entity": 0.7320215702056885,
         "value": "Shaquille",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "player",
-        "start": 21,
-        "end": 25,
-        "confidence_entity": 0.8518022298812866,
-        "value": "Neal",
         "extractor": "DIETClassifier"
       }
     ]
+  },
+  {
+    "text": "When did Magic Johnson make his debut?",
+    "entities": [
+      {
+        "start": 9,
+        "end": 22,
+        "value": "Magic Johnson",
+        "entity": "player"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 15,
+        "end": 22,
+        "confidence_entity": 0.749220073223114,
+        "value": "Johnson",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "What awards did LeBron James win?",
+    "entities": [
+      {
+        "start": 16,
+        "end": 28,
+        "value": "LeBron James",
+        "entity": "player"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 16,
+        "end": 22,
+        "confidence_entity": 0.7346953749656677,
+        "value": "LeBron",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Did Stephen Curry win the MVP?",
+    "entities": [
+      {
+        "start": 4,
+        "end": 17,
+        "value": "Stephen Curry",
+        "entity": "player"
+      },
+      {
+        "start": 26,
+        "end": 29,
+        "value": "MVP",
+        "entity": "award"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 4,
+        "end": 17,
+        "confidence_entity": 0.6682188510894775,
+        "value": "Stephen Curry",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Who won MVP in 2016?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 11,
+        "value": "MVP",
+        "entity": "award"
+      },
+      {
+        "start": 15,
+        "end": 19,
+        "value": "2016",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": []
   },
   {
     "text": "How many times did Michael Jordan win MVP?",
@@ -49,16 +170,89 @@
         "entity": "player",
         "start": 19,
         "end": 33,
-        "confidence_entity": 0.844950795173645,
+        "confidence_entity": 0.7481614351272583,
         "value": "Michael Jordan",
         "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "What were Stephen Curry's stats in 2016?",
+    "entities": [
+      {
+        "start": 10,
+        "end": 23,
+        "value": "Stephen Curry",
+        "entity": "player"
       },
       {
+        "start": 35,
+        "end": 39,
+        "value": "2016",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
         "entity": "player",
+        "start": 10,
+        "end": 23,
+        "confidence_entity": 0.6846180558204651,
+        "value": "Stephen Curry",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Show me LeBron James's statistics for 2018",
+    "entities": [
+      {
+        "start": 8,
+        "end": 20,
+        "value": "LeBron James",
+        "entity": "player"
+      },
+      {
         "start": 38,
-        "end": 41,
-        "confidence_entity": 0.2756800353527069,
-        "value": "MVP",
+        "end": 42,
+        "value": "2018",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 8,
+        "end": 14,
+        "confidence_entity": 0.7716279029846191,
+        "value": "LeBron",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "How many points did Michael Jordan average in 1991?",
+    "entities": [
+      {
+        "start": 20,
+        "end": 34,
+        "value": "Michael Jordan",
+        "entity": "player"
+      },
+      {
+        "start": 46,
+        "end": 50,
+        "value": "1991",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 20,
+        "end": 34,
+        "confidence_entity": 0.7426775097846985,
+        "value": "Michael Jordan",
         "extractor": "DIETClassifier"
       }
     ]
@@ -90,16 +284,292 @@
         "entity": "player",
         "start": 9,
         "end": 21,
-        "confidence_entity": 0.8415428996086121,
+        "confidence_entity": 0.5818027853965759,
         "value": "Kevin Durant",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Give me the rebounds for Nikola Jokic in 2023",
+    "entities": [
+      {
+        "start": 12,
+        "end": 20,
+        "value": "rebounds",
+        "entity": "stat"
+      },
+      {
+        "start": 25,
+        "end": 37,
+        "value": "Nikola Jokic",
+        "entity": "player"
+      },
+      {
+        "start": 41,
+        "end": 45,
+        "value": "2023",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "stat",
+        "start": 12,
+        "end": 20,
+        "confidence_entity": 0.7712005972862244,
+        "value": "rebounds",
         "extractor": "DIETClassifier"
       },
       {
-        "entity": "season",
-        "start": 34,
-        "end": 38,
-        "confidence_entity": 0.6643812656402588,
+        "entity": "player",
+        "start": 25,
+        "end": 37,
+        "confidence_entity": 0.6608386039733887,
+        "value": "Nikola Jokic",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "LeBron James stats 2013",
+    "entities": [
+      {
+        "start": 0,
+        "end": 12,
+        "value": "LeBron James",
+        "entity": "player"
+      },
+      {
+        "start": 19,
+        "end": 23,
+        "value": "2013",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.8353766202926636,
+        "value": "LeBron",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Show Stephen Curry 2016 numbers",
+    "entities": [
+      {
+        "start": 5,
+        "end": 18,
+        "value": "Stephen Curry",
+        "entity": "player"
+      },
+      {
+        "start": 19,
+        "end": 23,
+        "value": "2016",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 5,
+        "end": 18,
+        "confidence_entity": 0.6923187375068665,
+        "value": "Stephen Curry",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "What are Giannis Antetokounmpo stats for 2021",
+    "entities": [
+      {
+        "start": 9,
+        "end": 30,
+        "value": "Giannis Antetokounmpo",
+        "entity": "player"
+      },
+      {
+        "start": 41,
+        "end": 45,
+        "value": "2021",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 9,
+        "end": 30,
+        "confidence_entity": 0.7673538327217102,
+        "value": "Giannis Antetokounmpo",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Kevin Durant statistics 2014",
+    "entities": [
+      {
+        "start": 0,
+        "end": 12,
+        "value": "Kevin Durant",
+        "entity": "player"
+      },
+      {
+        "start": 24,
+        "end": 28,
         "value": "2014",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 0,
+        "end": 12,
+        "confidence_entity": 0.5567746162414551,
+        "value": "Kevin Durant",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "How did James Harden perform in 2019",
+    "entities": [
+      {
+        "start": 8,
+        "end": 20,
+        "value": "James Harden",
+        "entity": "player"
+      },
+      {
+        "start": 32,
+        "end": 36,
+        "value": "2019",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 14,
+        "end": 20,
+        "confidence_entity": 0.6895309090614319,
+        "value": "Harden",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Show me Jayson Tatum stats for 2023",
+    "entities": [
+      {
+        "start": 8,
+        "end": 20,
+        "value": "Jayson Tatum",
+        "entity": "player"
+      },
+      {
+        "start": 31,
+        "end": 35,
+        "value": "2023",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 8,
+        "end": 20,
+        "confidence_entity": 0.650158703327179,
+        "value": "Jayson Tatum",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "What were Joel Embiid numbers in 2022",
+    "entities": [
+      {
+        "start": 10,
+        "end": 21,
+        "value": "Joel Embiid",
+        "entity": "player"
+      },
+      {
+        "start": 33,
+        "end": 37,
+        "value": "2022",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 10,
+        "end": 21,
+        "confidence_entity": 0.603644847869873,
+        "value": "Joel Embiid",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Luka Doncic stats 2024",
+    "entities": [
+      {
+        "start": 0,
+        "end": 11,
+        "value": "Luka Doncic",
+        "entity": "player"
+      },
+      {
+        "start": 18,
+        "end": 22,
+        "value": "2024",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 0,
+        "end": 11,
+        "confidence_entity": 0.4823298752307892,
+        "value": "Luka Doncic",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Damian Lillard stats 2020",
+    "entities": [
+      {
+        "start": 0,
+        "end": 14,
+        "value": "Damian Lillard",
+        "entity": "player"
+      },
+      {
+        "start": 21,
+        "end": 25,
+        "value": "2020",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 0,
+        "end": 14,
+        "confidence_entity": 0.558771550655365,
+        "value": "Damian Lillard",
         "extractor": "DIETClassifier"
       }
     ]
@@ -125,7 +595,7 @@
         "entity": "stat",
         "start": 9,
         "end": 16,
-        "confidence_entity": 0.6076256632804871,
+        "confidence_entity": 0.6503618359565735,
         "value": "assists",
         "extractor": "DIETClassifier"
       },
@@ -133,16 +603,172 @@
         "entity": "player",
         "start": 21,
         "end": 31,
-        "confidence_entity": 0.7762675285339355,
+        "confidence_entity": 0.5429227948188782,
         "value": "Chris Paul",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Show Anthony Davis 2020 stats",
+    "entities": [
+      {
+        "start": 5,
+        "end": 18,
+        "value": "Anthony Davis",
+        "entity": "player"
+      },
+      {
+        "start": 19,
+        "end": 23,
+        "value": "2020",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 5,
+        "end": 18,
+        "confidence_entity": 0.4984818398952484,
+        "value": "Anthony Davis",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "What were the rebounds for Nikola Jokic in 2022",
+    "entities": [
+      {
+        "start": 14,
+        "end": 22,
+        "value": "rebounds",
+        "entity": "stat"
+      },
+      {
+        "start": 27,
+        "end": 39,
+        "value": "Nikola Jokic",
+        "entity": "player"
+      },
+      {
+        "start": 43,
+        "end": 47,
+        "value": "2022",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "stat",
+        "start": 14,
+        "end": 22,
+        "confidence_entity": 0.7725179195404053,
+        "value": "rebounds",
         "extractor": "DIETClassifier"
       },
       {
-        "entity": "season",
-        "start": 40,
-        "end": 44,
-        "confidence_entity": 0.6718668341636658,
-        "value": "2015",
+        "entity": "player",
+        "start": 27,
+        "end": 39,
+        "confidence_entity": 0.6554057598114014,
+        "value": "Nikola Jokic",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "LeBron James in 2013",
+    "entities": [
+      {
+        "start": 0,
+        "end": 12,
+        "value": "LeBron James",
+        "entity": "player"
+      },
+      {
+        "start": 16,
+        "end": 20,
+        "value": "2013",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.8326128721237183,
+        "value": "LeBron",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Stephen Curry numbers 2016",
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "value": "Stephen Curry",
+        "entity": "player"
+      },
+      {
+        "start": 22,
+        "end": 26,
+        "value": "2016",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 0,
+        "end": 13,
+        "confidence_entity": 0.7452101111412048,
+        "value": "Stephen Curry",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "What are LeBron James's career totals?",
+    "entities": [
+      {
+        "start": 9,
+        "end": 21,
+        "value": "LeBron James",
+        "entity": "player"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 9,
+        "end": 15,
+        "confidence_entity": 0.7682058215141296,
+        "value": "LeBron",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "How many career points does LeBron James have?",
+    "entities": [
+      {
+        "start": 28,
+        "end": 40,
+        "value": "LeBron James",
+        "entity": "player"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 28,
+        "end": 34,
+        "confidence_entity": 0.7013161778450012,
+        "value": "LeBron",
         "extractor": "DIETClassifier"
       }
     ]
@@ -162,7 +788,7 @@
         "entity": "stat",
         "start": 16,
         "end": 23,
-        "confidence_entity": 0.6498730182647705,
+        "confidence_entity": 0.5882914662361145,
         "value": "assists",
         "extractor": "DIETClassifier"
       },
@@ -170,7 +796,7 @@
         "entity": "player",
         "start": 28,
         "end": 41,
-        "confidence_entity": 0.3627737760543823,
+        "confidence_entity": 0.49194973707199097,
         "value": "John Stockton",
         "extractor": "DIETClassifier"
       }
@@ -203,16 +829,8 @@
         "entity": "player",
         "start": 9,
         "end": 21,
-        "confidence_entity": 0.9122133255004883,
+        "confidence_entity": 0.677282989025116,
         "value": "Nikola Jokic",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "season",
-        "start": 31,
-        "end": 35,
-        "confidence_entity": 0.6625375151634216,
-        "value": "2023",
         "extractor": "DIETClassifier"
       }
     ]
@@ -238,16 +856,8 @@
         "entity": "player",
         "start": 5,
         "end": 26,
-        "confidence_entity": 0.9151942133903503,
+        "confidence_entity": 0.7871729731559753,
         "value": "Giannis Antetokounmpo",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "stat",
-        "start": 43,
-        "end": 53,
-        "confidence_entity": 0.4348088502883911,
-        "value": "percentage",
         "extractor": "DIETClassifier"
       }
     ]
@@ -279,24 +889,84 @@
         "entity": "player",
         "start": 9,
         "end": 22,
-        "confidence_entity": 0.8428127765655518,
+        "confidence_entity": 0.6811317801475525,
         "value": "Stephen Curry",
         "extractor": "DIETClassifier"
       },
       {
         "entity": "stat",
         "start": 25,
-        "end": 30,
-        "confidence_entity": 0.34946298599243164,
-        "value": "usage",
+        "end": 41,
+        "confidence_entity": 0.4043019115924835,
+        "value": "usage percentage",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "What was LeBron James's VORP in 2013?",
+    "entities": [
+      {
+        "start": 9,
+        "end": 21,
+        "value": "LeBron James",
+        "entity": "player"
+      },
+      {
+        "start": 24,
+        "end": 28,
+        "value": "VORP",
+        "entity": "stat"
+      },
+      {
+        "start": 32,
+        "end": 36,
+        "value": "2013",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 9,
+        "end": 15,
+        "confidence_entity": 0.7679898738861084,
+        "value": "LeBron",
         "extractor": "DIETClassifier"
       },
       {
-        "entity": "season",
-        "start": 45,
-        "end": 49,
-        "confidence_entity": 0.6738895177841187,
+        "entity": "stat",
+        "start": 24,
+        "end": 28,
+        "confidence_entity": 0.6545528769493103,
+        "value": "VORP",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "How good was Stephen Curry from three in 2016?",
+    "entities": [
+      {
+        "start": 13,
+        "end": 26,
+        "value": "Stephen Curry",
+        "entity": "player"
+      },
+      {
+        "start": 41,
+        "end": 45,
         "value": "2016",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 13,
+        "end": 26,
+        "confidence_entity": 0.6352947354316711,
+        "value": "Stephen Curry",
         "extractor": "DIETClassifier"
       }
     ]
@@ -322,16 +992,35 @@
         "entity": "player",
         "start": 9,
         "end": 22,
-        "confidence_entity": 0.7490863800048828,
+        "confidence_entity": 0.7237780690193176,
         "value": "Klay Thompson",
         "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "How many dunks did LeBron James have in 2013?",
+    "entities": [
+      {
+        "start": 19,
+        "end": 31,
+        "value": "LeBron James",
+        "entity": "player"
       },
       {
-        "entity": "stat",
-        "start": 37,
-        "end": 47,
-        "confidence_entity": 0.43253740668296814,
-        "value": "percentage",
+        "start": 40,
+        "end": 44,
+        "value": "2013",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 19,
+        "end": 25,
+        "confidence_entity": 0.7039508819580078,
+        "value": "LeBron",
         "extractor": "DIETClassifier"
       }
     ]
@@ -355,61 +1044,45 @@
     "predicted_entities": [
       {
         "entity": "player",
-        "start": 9,
+        "start": 15,
         "end": 21,
-        "confidence_entity": 0.46995222568511963,
-        "value": "James Harden",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "season",
-        "start": 28,
-        "end": 31,
-        "confidence_entity": 0.6259220838546753,
-        "value": "100",
+        "confidence_entity": 0.6918300986289978,
+        "value": "Harden",
         "extractor": "DIETClassifier"
       }
     ]
   },
   {
-    "text": "Show Stephen Curry's per 100 possession statistics in 2016",
+    "text": "What was LeBron James's offensive rating in 2013?",
     "entities": [
       {
-        "start": 5,
-        "end": 18,
-        "value": "Stephen Curry",
+        "start": 9,
+        "end": 21,
+        "value": "LeBron James",
         "entity": "player"
       },
       {
-        "start": 54,
-        "end": 58,
-        "value": "2016",
+        "start": 44,
+        "end": 48,
+        "value": "2013",
         "entity": "season"
       }
     ],
     "predicted_entities": [
       {
         "entity": "player",
-        "start": 5,
-        "end": 18,
-        "confidence_entity": 0.7822015881538391,
-        "value": "Stephen Curry",
+        "start": 9,
+        "end": 15,
+        "confidence_entity": 0.7696265578269958,
+        "value": "LeBron",
         "extractor": "DIETClassifier"
       },
       {
-        "entity": "season",
-        "start": 25,
-        "end": 28,
-        "confidence_entity": 0.6105759143829346,
-        "value": "100",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "season",
-        "start": 54,
-        "end": 58,
-        "confidence_entity": 0.6951780915260315,
-        "value": "2016",
+        "entity": "stat",
+        "start": 24,
+        "end": 33,
+        "confidence_entity": 0.6139377355575562,
+        "value": "offensive",
         "extractor": "DIETClassifier"
       }
     ]
@@ -435,16 +1108,8 @@
         "entity": "player",
         "start": 9,
         "end": 22,
-        "confidence_entity": 0.6323110461235046,
+        "confidence_entity": 0.4669356346130371,
         "value": "Anthony Davis",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "season",
-        "start": 29,
-        "end": 31,
-        "confidence_entity": 0.6276025772094727,
-        "value": "36",
         "extractor": "DIETClassifier"
       }
     ]
@@ -470,110 +1135,189 @@
         "entity": "player",
         "start": 5,
         "end": 17,
-        "confidence_entity": 0.802223801612854,
+        "confidence_entity": 0.5986775159835815,
         "value": "Kevin Durant",
         "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "How many assists did Chris Paul generate in 2015?",
+    "entities": [
+      {
+        "start": 9,
+        "end": 16,
+        "value": "assists",
+        "entity": "stat"
       },
       {
-        "entity": "season",
-        "start": 24,
+        "start": 21,
+        "end": 31,
+        "value": "Chris Paul",
+        "entity": "player"
+      },
+      {
+        "start": 44,
+        "end": 48,
+        "value": "2015",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "stat",
+        "start": 9,
+        "end": 16,
+        "confidence_entity": 0.6522365808486938,
+        "value": "assists",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "player",
+        "start": 21,
+        "end": 31,
+        "confidence_entity": 0.547418475151062,
+        "value": "Chris Paul",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "How many shooting fouls did James Harden draw?",
+    "entities": [
+      {
+        "start": 28,
+        "end": 40,
+        "value": "James Harden",
+        "entity": "player"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 34,
+        "end": 40,
+        "confidence_entity": 0.6421152949333191,
+        "value": "Harden",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Who owns the Miami Heat",
+    "entities": [
+      {
+        "start": 13,
+        "end": 23,
+        "value": "Miami Heat",
+        "entity": "team"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "team",
+        "start": 13,
+        "end": 18,
+        "confidence_entity": 0.8983797430992126,
+        "value": "Miami",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Tell me about Chicago Bulls",
+    "entities": [
+      {
+        "start": 14,
+        "end": 27,
+        "value": "Chicago Bulls",
+        "entity": "team"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "team",
+        "start": 14,
+        "end": 21,
+        "confidence_entity": 0.7326002717018127,
+        "value": "Chicago",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Information on the Phoenix Suns",
+    "entities": [
+      {
+        "start": 19,
+        "end": 31,
+        "value": "Phoenix Suns",
+        "entity": "team"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "team",
+        "start": 19,
         "end": 26,
-        "confidence_entity": 0.6130509376525879,
-        "value": "36",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "season",
-        "start": 41,
-        "end": 45,
-        "confidence_entity": 0.6758266687393188,
-        "value": "2014",
+        "confidence_entity": 0.8737240433692932,
+        "value": "Phoenix",
         "extractor": "DIETClassifier"
       }
     ]
   },
   {
-    "text": "What is Nikola Jokic's per 36 rebounds?",
-    "entities": [
-      {
-        "start": 8,
-        "end": 20,
-        "value": "Nikola Jokic",
-        "entity": "player"
-      },
-      {
-        "start": 30,
-        "end": 38,
-        "value": "rebounds",
-        "entity": "stat"
-      }
-    ],
+    "text": "[celtics]",
+    "entities": [],
     "predicted_entities": [
       {
-        "entity": "player",
-        "start": 8,
-        "end": 20,
-        "confidence_entity": 0.9132565855979919,
-        "value": "Nikola Jokic",
+        "entity": "team",
+        "start": 1,
+        "end": 8,
+        "confidence_entity": 0.4240367114543915,
+        "value": "celtics",
         "extractor": "DIETClassifier"
-      },
+      }
+    ]
+  },
+  {
+    "text": "Details about Milwaukee Bucks",
+    "entities": [
       {
-        "entity": "season",
-        "start": 27,
+        "start": 14,
         "end": 29,
-        "confidence_entity": 0.7277765870094299,
-        "value": "36",
-        "extractor": "DIETClassifier"
-      },
+        "value": "Milwaukee Bucks",
+        "entity": "team"
+      }
+    ],
+    "predicted_entities": [
       {
-        "entity": "stat",
-        "start": 30,
-        "end": 38,
-        "confidence_entity": 0.6579477190971375,
-        "value": "rebounds",
+        "entity": "team",
+        "start": 14,
+        "end": 23,
+        "confidence_entity": 0.9341539144515991,
+        "value": "Milwaukee",
         "extractor": "DIETClassifier"
       }
     ]
   },
   {
-    "text": "What was Stephen Curry's plus-minus per 100 possessions?",
+    "text": "Los Angeles Lakers",
     "entities": [
       {
-        "start": 9,
-        "end": 22,
-        "value": "Stephen Curry",
-        "entity": "player"
-      },
-      {
-        "start": 25,
-        "end": 35,
-        "value": "plus-minus",
-        "entity": "stat"
+        "start": 0,
+        "end": 18,
+        "value": "Los Angeles Lakers",
+        "entity": "team"
       }
     ],
     "predicted_entities": [
       {
-        "entity": "player",
-        "start": 9,
-        "end": 22,
-        "confidence_entity": 0.8426283597946167,
-        "value": "Stephen Curry",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "stat",
-        "start": 25,
-        "end": 35,
-        "confidence_entity": 0.31786787509918213,
-        "value": "plus-minus",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "season",
-        "start": 40,
-        "end": 43,
-        "confidence_entity": 0.6262530088424683,
-        "value": "100",
+        "entity": "team",
+        "start": 0,
+        "end": 11,
+        "confidence_entity": 0.7116527557373047,
+        "value": "Los Angeles",
         "extractor": "DIETClassifier"
       }
     ]
@@ -599,24 +1343,59 @@
         "entity": "team",
         "start": 25,
         "end": 35,
-        "confidence_entity": 0.6429934501647949,
+        "confidence_entity": 0.8485300540924072,
         "value": "Sacramento",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "player",
-        "start": 36,
-        "end": 41,
-        "confidence_entity": 0.2931787371635437,
-        "value": "Kings",
         "extractor": "DIETClassifier"
       },
       {
         "entity": "season",
         "start": 45,
         "end": 49,
-        "confidence_entity": 0.6965715885162354,
+        "confidence_entity": 0.45037388801574707,
         "value": "2023",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "What was the offensive rating of the Phoenix Suns in 2021?",
+    "entities": [
+      {
+        "start": 37,
+        "end": 49,
+        "value": "Phoenix Suns",
+        "entity": "team"
+      },
+      {
+        "start": 53,
+        "end": 57,
+        "value": "2021",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "stat",
+        "start": 13,
+        "end": 22,
+        "confidence_entity": 0.4553537666797638,
+        "value": "offensive",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "team",
+        "start": 37,
+        "end": 49,
+        "confidence_entity": 0.4110345244407654,
+        "value": "Phoenix Suns",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "season",
+        "start": 53,
+        "end": 57,
+        "confidence_entity": 0.5580187439918518,
+        "value": "2021",
         "extractor": "DIETClassifier"
       }
     ]
@@ -636,7 +1415,7 @@
         "entity": "stat",
         "start": 9,
         "end": 17,
-        "confidence_entity": 0.5555996298789978,
+        "confidence_entity": 0.7753213047981262,
         "value": "rebounds",
         "extractor": "DIETClassifier"
       },
@@ -644,8 +1423,35 @@
         "entity": "team",
         "start": 52,
         "end": 67,
-        "confidence_entity": 0.41522249579429626,
+        "confidence_entity": 0.385602205991745,
         "value": "Milwaukee Bucks",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "What were the Boston Celtics's stats in 2024?",
+    "entities": [
+      {
+        "start": 14,
+        "end": 28,
+        "value": "Boston Celtics",
+        "entity": "team"
+      },
+      {
+        "start": 40,
+        "end": 44,
+        "value": "2024",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "team",
+        "start": 14,
+        "end": 28,
+        "confidence_entity": 0.6894140243530273,
+        "value": "Boston Celtics",
         "extractor": "DIETClassifier"
       }
     ]
@@ -676,25 +1482,71 @@
       {
         "entity": "team",
         "start": 13,
-        "end": 28,
-        "confidence_entity": 0.5368017554283142,
-        "value": "Milwaukee Bucks",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "stat",
-        "start": 43,
-        "end": 53,
-        "confidence_entity": 0.4129578173160553,
-        "value": "percentage",
+        "end": 22,
+        "confidence_entity": 0.9323892593383789,
+        "value": "Milwaukee",
         "extractor": "DIETClassifier"
       },
       {
         "entity": "season",
         "start": 57,
         "end": 61,
-        "confidence_entity": 0.6941920518875122,
+        "confidence_entity": 0.45111480355262756,
         "value": "2021",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Show me the Los Angeles Lakers statistics for 2023",
+    "entities": [
+      {
+        "start": 12,
+        "end": 30,
+        "value": "Los Angeles Lakers",
+        "entity": "team"
+      },
+      {
+        "start": 46,
+        "end": 50,
+        "value": "2023",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "team",
+        "start": 12,
+        "end": 30,
+        "confidence_entity": 0.48571208119392395,
+        "value": "Los Angeles Lakers",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "What was the Denver Nuggets's record in 2023?",
+    "entities": [
+      {
+        "start": 13,
+        "end": 27,
+        "value": "Denver Nuggets",
+        "entity": "team"
+      },
+      {
+        "start": 40,
+        "end": 44,
+        "value": "2023",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "team",
+        "start": 13,
+        "end": 27,
+        "confidence_entity": 0.47174355387687683,
+        "value": "Denver Nuggets",
         "extractor": "DIETClassifier"
       }
     ]
@@ -725,17 +1577,52 @@
       {
         "entity": "team",
         "start": 13,
-        "end": 25,
-        "confidence_entity": 0.3882792890071869,
-        "value": "Phoenix Suns",
+        "end": 20,
+        "confidence_entity": 0.8744983673095703,
+        "value": "Phoenix",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "stat",
+        "start": 28,
+        "end": 37,
+        "confidence_entity": 0.6490448117256165,
+        "value": "offensive",
         "extractor": "DIETClassifier"
       },
       {
         "entity": "season",
         "start": 48,
         "end": 52,
-        "confidence_entity": 0.6957222819328308,
+        "confidence_entity": 0.4519062936306,
         "value": "2022",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Show Miami Heat stats for 2023",
+    "entities": [
+      {
+        "start": 5,
+        "end": 15,
+        "value": "Miami Heat",
+        "entity": "team"
+      },
+      {
+        "start": 26,
+        "end": 30,
+        "value": "2023",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "team",
+        "start": 5,
+        "end": 10,
+        "confidence_entity": 0.9076878428459167,
+        "value": "Miami",
         "extractor": "DIETClassifier"
       }
     ]
@@ -767,16 +1654,59 @@
         "entity": "team",
         "start": 13,
         "end": 31,
-        "confidence_entity": 0.6694154739379883,
+        "confidence_entity": 0.5794692039489746,
         "value": "Philadelphia 76ers",
         "extractor": "DIETClassifier"
       },
       {
+        "entity": "stat",
+        "start": 34,
+        "end": 38,
+        "confidence_entity": 0.500427782535553,
+        "value": "pace",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Show me the Golden State Warriors shooting stats for 2022",
+    "entities": [
+      {
+        "start": 12,
+        "end": 33,
+        "value": "Golden State Warriors",
+        "entity": "team"
+      },
+      {
+        "start": 53,
+        "end": 57,
+        "value": "2022",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "team",
+        "start": 12,
+        "end": 18,
+        "confidence_entity": 0.9108643531799316,
+        "value": "Golden",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "team",
+        "start": 25,
+        "end": 33,
+        "confidence_entity": 0.7710726857185364,
+        "value": "Warriors",
+        "extractor": "DIETClassifier"
+      },
+      {
         "entity": "season",
-        "start": 42,
-        "end": 46,
-        "confidence_entity": 0.673011839389801,
-        "value": "2024",
+        "start": 53,
+        "end": 57,
+        "confidence_entity": 0.45160213112831116,
+        "value": "2022",
         "extractor": "DIETClassifier"
       }
     ]
@@ -802,7 +1732,7 @@
         "entity": "team",
         "start": 13,
         "end": 27,
-        "confidence_entity": 0.5651589035987854,
+        "confidence_entity": 0.692809522151947,
         "value": "Boston Celtics",
         "extractor": "DIETClassifier"
       },
@@ -810,43 +1740,62 @@
         "entity": "stat",
         "start": 30,
         "end": 39,
-        "confidence_entity": 0.7255579829216003,
+        "confidence_entity": 0.7200589179992676,
         "value": "defensive",
         "extractor": "DIETClassifier"
       }
     ]
   },
   {
-    "text": "How many turnovers did the Phoenix Suns average last season?",
+    "text": "Show the Los Angeles Clippers stats for 2024",
     "entities": [
       {
         "start": 9,
-        "end": 18,
-        "value": "turnovers",
-        "entity": "stat"
+        "end": 29,
+        "value": "Los Angeles Clippers",
+        "entity": "team"
       },
       {
-        "start": 27,
-        "end": 39,
-        "value": "Phoenix Suns",
-        "entity": "team"
+        "start": 40,
+        "end": 44,
+        "value": "2024",
+        "entity": "season"
       }
     ],
     "predicted_entities": [
       {
-        "entity": "player",
+        "entity": "team",
         "start": 9,
-        "end": 18,
-        "confidence_entity": 0.21649949252605438,
-        "value": "turnovers",
+        "end": 29,
+        "confidence_entity": 0.5964552760124207,
+        "value": "Los Angeles Clippers",
         "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "What was the Dallas Mavericks's record in 2023?",
+    "entities": [
+      {
+        "start": 13,
+        "end": 29,
+        "value": "Dallas Mavericks",
+        "entity": "team"
       },
       {
+        "start": 42,
+        "end": 46,
+        "value": "2023",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
         "entity": "team",
-        "start": 27,
-        "end": 39,
-        "confidence_entity": 0.3892766535282135,
-        "value": "Phoenix Suns",
+        "start": 13,
+        "end": 29,
+        "confidence_entity": 0.8185163140296936,
+        "value": "Dallas Mavericks",
         "extractor": "DIETClassifier"
       }
     ]
@@ -877,17 +1826,9 @@
       {
         "entity": "team",
         "start": 12,
-        "end": 22,
-        "confidence_entity": 0.3983618915081024,
-        "value": "Miami Heat",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "season",
-        "start": 50,
-        "end": 54,
-        "confidence_entity": 0.6745606660842896,
-        "value": "2024",
+        "end": 17,
+        "confidence_entity": 0.89933180809021,
+        "value": "Miami",
         "extractor": "DIETClassifier"
       }
     ]
@@ -913,8 +1854,133 @@
         "entity": "team",
         "start": 24,
         "end": 38,
-        "confidence_entity": 0.5934279561042786,
+        "confidence_entity": 0.7220659255981445,
         "value": "Boston Celtics",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "What was the Milwaukee Bucks's field goal percentage in 2024?",
+    "entities": [
+      {
+        "start": 13,
+        "end": 28,
+        "value": "Milwaukee Bucks",
+        "entity": "team"
+      },
+      {
+        "start": 31,
+        "end": 52,
+        "value": "field goal percentage",
+        "entity": "stat"
+      },
+      {
+        "start": 56,
+        "end": 60,
+        "value": "2024",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "team",
+        "start": 13,
+        "end": 22,
+        "confidence_entity": 0.9320597052574158,
+        "value": "Milwaukee",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "stat",
+        "start": 31,
+        "end": 36,
+        "confidence_entity": 0.5335460305213928,
+        "value": "field",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "season",
+        "start": 56,
+        "end": 60,
+        "confidence_entity": 0.5595641136169434,
+        "value": "2024",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Show the Golden State Warriors rebounds for 2023",
+    "entities": [
+      {
+        "start": 9,
+        "end": 30,
+        "value": "Golden State Warriors",
+        "entity": "team"
+      },
+      {
+        "start": 31,
+        "end": 39,
+        "value": "rebounds",
+        "entity": "stat"
+      },
+      {
+        "start": 44,
+        "end": 48,
+        "value": "2023",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "team",
+        "start": 9,
+        "end": 30,
+        "confidence_entity": 0.5466043949127197,
+        "value": "Golden State Warriors",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "stat",
+        "start": 31,
+        "end": 39,
+        "confidence_entity": 0.6788077354431152,
+        "value": "rebounds",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Compare LeBron James and Michael Jordan",
+    "entities": [
+      {
+        "start": 8,
+        "end": 20,
+        "value": "LeBron James",
+        "entity": "player"
+      },
+      {
+        "start": 25,
+        "end": 39,
+        "value": "Michael Jordan",
+        "entity": "player"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 8,
+        "end": 14,
+        "confidence_entity": 0.7858375310897827,
+        "value": "LeBron",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "player",
+        "start": 25,
+        "end": 39,
+        "confidence_entity": 0.7965265512466431,
+        "value": "Michael Jordan",
         "extractor": "DIETClassifier"
       }
     ]
@@ -945,17 +2011,58 @@
       {
         "entity": "player",
         "start": 21,
-        "end": 33,
-        "confidence_entity": 0.6987894177436829,
-        "value": "LeBron James",
+        "end": 27,
+        "confidence_entity": 0.7014363408088684,
+        "value": "LeBron",
         "extractor": "DIETClassifier"
       },
       {
         "entity": "player",
         "start": 37,
         "end": 49,
-        "confidence_entity": 0.8293673396110535,
+        "confidence_entity": 0.6762430667877197,
         "value": "Kevin Durant",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Compare Boston Celtics and Miami Heat in 2024",
+    "entities": [
+      {
+        "start": 8,
+        "end": 22,
+        "value": "Boston Celtics",
+        "entity": "team"
+      },
+      {
+        "start": 27,
+        "end": 37,
+        "value": "Miami Heat",
+        "entity": "team"
+      },
+      {
+        "start": 41,
+        "end": 45,
+        "value": "2024",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "team",
+        "start": 8,
+        "end": 22,
+        "confidence_entity": 0.6203351616859436,
+        "value": "Boston Celtics",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "team",
+        "start": 27,
+        "end": 32,
+        "confidence_entity": 0.8951215147972107,
+        "value": "Miami",
         "extractor": "DIETClassifier"
       }
     ]
@@ -981,7 +2088,7 @@
         "entity": "player",
         "start": 8,
         "end": 21,
-        "confidence_entity": 0.7809246182441711,
+        "confidence_entity": 0.6774954199790955,
         "value": "Stephen Curry",
         "extractor": "DIETClassifier"
       },
@@ -989,7 +2096,7 @@
         "entity": "player",
         "start": 26,
         "end": 38,
-        "confidence_entity": 0.7117012739181519,
+        "confidence_entity": 0.5620364546775818,
         "value": "Kyrie Irving",
         "extractor": "DIETClassifier"
       },
@@ -997,7 +2104,7 @@
         "entity": "stat",
         "start": 42,
         "end": 49,
-        "confidence_entity": 0.6142493486404419,
+        "confidence_entity": 0.6864805221557617,
         "value": "assists",
         "extractor": "DIETClassifier"
       }
@@ -1024,7 +2131,7 @@
         "entity": "stat",
         "start": 0,
         "end": 8,
-        "confidence_entity": 0.5828437209129333,
+        "confidence_entity": 0.7484751343727112,
         "value": "rebounds",
         "extractor": "DIETClassifier"
       },
@@ -1032,7 +2139,7 @@
         "entity": "player",
         "start": 28,
         "end": 41,
-        "confidence_entity": 0.8570595979690552,
+        "confidence_entity": 0.5273771286010742,
         "value": "Dennis Rodman",
         "extractor": "DIETClassifier"
       },
@@ -1040,8 +2147,98 @@
         "entity": "player",
         "start": 46,
         "end": 57,
-        "confidence_entity": 0.5104413628578186,
+        "confidence_entity": 0.5212433338165283,
         "value": "Ben Wallace",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Which team was better in 2016, the Golden State Warriors or the San Antonio Spurs?",
+    "entities": [
+      {
+        "start": 25,
+        "end": 29,
+        "value": "2016",
+        "entity": "season"
+      },
+      {
+        "start": 35,
+        "end": 56,
+        "value": "Golden State Warriors",
+        "entity": "team"
+      },
+      {
+        "start": 64,
+        "end": 81,
+        "value": "San Antonio Spurs",
+        "entity": "team"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "team",
+        "start": 35,
+        "end": 56,
+        "confidence_entity": 0.4673098921775818,
+        "value": "Golden State Warriors",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "team",
+        "start": 64,
+        "end": 81,
+        "confidence_entity": 0.4724331498146057,
+        "value": "San Antonio Spurs",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Head to head stats for the Miami Heat versus the Dallas Mavericks in 2011",
+    "entities": [
+      {
+        "start": 27,
+        "end": 37,
+        "value": "Miami Heat",
+        "entity": "team"
+      },
+      {
+        "start": 49,
+        "end": 65,
+        "value": "Dallas Mavericks",
+        "entity": "team"
+      },
+      {
+        "start": 69,
+        "end": 73,
+        "value": "2011",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "team",
+        "start": 27,
+        "end": 32,
+        "confidence_entity": 0.8747364282608032,
+        "value": "Miami",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "team",
+        "start": 49,
+        "end": 65,
+        "confidence_entity": 0.7153265476226807,
+        "value": "Dallas Mavericks",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "season",
+        "start": 69,
+        "end": 73,
+        "confidence_entity": 0.476020485162735,
+        "value": "2011",
         "extractor": "DIETClassifier"
       }
     ]
@@ -1067,7 +2264,7 @@
         "entity": "team",
         "start": 12,
         "end": 32,
-        "confidence_entity": 0.5222768783569336,
+        "confidence_entity": 0.6009584069252014,
         "value": "Los Angeles Clippers",
         "extractor": "DIETClassifier"
       },
@@ -1075,16 +2272,8 @@
         "entity": "team",
         "start": 42,
         "end": 52,
-        "confidence_entity": 0.651912271976471,
+        "confidence_entity": 0.8134030699729919,
         "value": "Sacramento",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "player",
-        "start": 53,
-        "end": 58,
-        "confidence_entity": 0.33227282762527466,
-        "value": "Kings",
         "extractor": "DIETClassifier"
       }
     ]
@@ -1115,17 +2304,128 @@
       {
         "entity": "player",
         "start": 19,
-        "end": 31,
-        "confidence_entity": 0.7038854360580444,
-        "value": "LeBron James",
+        "end": 25,
+        "confidence_entity": 0.6990855932235718,
+        "value": "LeBron",
         "extractor": "DIETClassifier"
       },
       {
         "entity": "player",
         "start": 35,
         "end": 48,
-        "confidence_entity": 0.8156449198722839,
+        "confidence_entity": 0.7986040711402893,
         "value": "Stephen Curry",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "How do LeBron James and Kobe Bryant compare?",
+    "entities": [
+      {
+        "start": 7,
+        "end": 19,
+        "value": "LeBron James",
+        "entity": "player"
+      },
+      {
+        "start": 24,
+        "end": 35,
+        "value": "Kobe Bryant",
+        "entity": "player"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 7,
+        "end": 13,
+        "confidence_entity": 0.7594075798988342,
+        "value": "LeBron",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "player",
+        "start": 24,
+        "end": 35,
+        "confidence_entity": 0.44189873337745667,
+        "value": "Kobe Bryant",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Compare Phoenix Suns and Dallas Mavericks in 2024",
+    "entities": [
+      {
+        "start": 8,
+        "end": 20,
+        "value": "Phoenix Suns",
+        "entity": "team"
+      },
+      {
+        "start": 25,
+        "end": 41,
+        "value": "Dallas Mavericks",
+        "entity": "team"
+      },
+      {
+        "start": 45,
+        "end": 49,
+        "value": "2024",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "team",
+        "start": 8,
+        "end": 15,
+        "confidence_entity": 0.8881824612617493,
+        "value": "Phoenix",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "team",
+        "start": 25,
+        "end": 41,
+        "confidence_entity": 0.8213504552841187,
+        "value": "Dallas Mavericks",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Compare Golden State Warriors dynasty to Chicago Bulls dynasty",
+    "entities": [
+      {
+        "start": 8,
+        "end": 29,
+        "value": "Golden State Warriors",
+        "entity": "team"
+      },
+      {
+        "start": 41,
+        "end": 54,
+        "value": "Chicago Bulls",
+        "entity": "team"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "team",
+        "start": 8,
+        "end": 29,
+        "confidence_entity": 0.4591437578201294,
+        "value": "Golden State Warriors",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "team",
+        "start": 41,
+        "end": 48,
+        "confidence_entity": 0.6992205381393433,
+        "value": "Chicago",
         "extractor": "DIETClassifier"
       }
     ]
@@ -1151,26 +2451,266 @@
         "entity": "player",
         "start": 23,
         "end": 32,
-        "confidence_entity": 0.8500617146492004,
+        "confidence_entity": 0.6751802563667297,
         "value": "Shaquille",
-        "extractor": "DIETClassifier"
-      },
-      {
-        "entity": "player",
-        "start": 35,
-        "end": 39,
-        "confidence_entity": 0.8742865324020386,
-        "value": "Neal",
         "extractor": "DIETClassifier"
       },
       {
         "entity": "player",
         "start": 43,
         "end": 58,
-        "confidence_entity": 0.6705881953239441,
+        "confidence_entity": 0.7538953423500061,
         "value": "Hakeem Olajuwon",
         "extractor": "DIETClassifier"
       }
     ]
+  },
+  {
+    "text": "Was LeBron James an All-Star in 2020?",
+    "entities": [
+      {
+        "start": 4,
+        "end": 16,
+        "value": "LeBron James",
+        "entity": "player"
+      },
+      {
+        "start": 32,
+        "end": 36,
+        "value": "2020",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 4,
+        "end": 10,
+        "confidence_entity": 0.7960547804832458,
+        "value": "LeBron",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Who was selected as an All-Star in 2015?",
+    "entities": [
+      {
+        "start": 35,
+        "end": 39,
+        "value": "2015",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Was LeBron James selected to an All-NBA team in 2013?",
+    "entities": [
+      {
+        "start": 4,
+        "end": 16,
+        "value": "LeBron James",
+        "entity": "player"
+      },
+      {
+        "start": 48,
+        "end": 52,
+        "value": "2013",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 4,
+        "end": 10,
+        "confidence_entity": 0.795089066028595,
+        "value": "LeBron",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "season",
+        "start": 48,
+        "end": 52,
+        "confidence_entity": 0.4454699456691742,
+        "value": "2013",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "What pick was LeBron James in the draft?",
+    "entities": [
+      {
+        "start": 14,
+        "end": 26,
+        "value": "LeBron James",
+        "entity": "player"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 14,
+        "end": 20,
+        "confidence_entity": 0.7370012402534485,
+        "value": "LeBron",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Who was the first overall pick in 2003?",
+    "entities": [
+      {
+        "start": 34,
+        "end": 38,
+        "value": "2003",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Who got picked first overall in 2003?",
+    "entities": [
+      {
+        "start": 32,
+        "end": 36,
+        "value": "2003",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "2024 nba draft",
+    "entities": [
+      {
+        "start": 0,
+        "end": 4,
+        "value": "2024",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "nba draft 2023",
+    "entities": [
+      {
+        "start": 10,
+        "end": 14,
+        "value": "2023",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "draft 2022",
+    "entities": [
+      {
+        "start": 6,
+        "end": 10,
+        "value": "2022",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "who was drafted in 2021",
+    "entities": [
+      {
+        "start": 19,
+        "end": 23,
+        "value": "2021",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "2020 draft picks",
+    "entities": [
+      {
+        "start": 0,
+        "end": 4,
+        "value": "2020",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "nba draft results 2019",
+    "entities": [
+      {
+        "start": 18,
+        "end": 22,
+        "value": "2019",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Who was the number one pick in 2019?",
+    "entities": [
+      {
+        "start": 31,
+        "end": 35,
+        "value": "2019",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Where was James Harden selected in the draft?",
+    "entities": [
+      {
+        "start": 10,
+        "end": 22,
+        "value": "James Harden",
+        "entity": "player"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "player",
+        "start": 16,
+        "end": 22,
+        "confidence_entity": 0.6948418021202087,
+        "value": "Harden",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Who was the second overall pick in 2003?",
+    "entities": [
+      {
+        "start": 35,
+        "end": 39,
+        "value": "2003",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Which league was active in 1975?",
+    "entities": [
+      {
+        "start": 27,
+        "end": 31,
+        "value": "1975",
+        "entity": "season"
+      }
+    ],
+    "predicted_entities": []
   }
 ]
