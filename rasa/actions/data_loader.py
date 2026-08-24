@@ -410,13 +410,16 @@ def get_draft_info(name: str) -> Optional[Dict[str, Any]]:
     if picks.empty:
         return None
     row = picks.iloc[0]
+    college = row.get("college", "Unknown")
+    if pd.isna(college):
+        college = "Unknown"
     return {
         "player": row.get("player", name),
         "season": int(row.get("season", 0)),
         "overall_pick": int(row.get("overall_pick", 0)),
         "round": int(row.get("round", 0)),
         "team": row.get("tm", "Unknown"),
-        "college": row.get("college", "Unknown"),
+        "college": college,
     }
 
 
