@@ -57,10 +57,6 @@ flows:
     nlu_trigger:
       - intent: team_stats
     steps:
-      - collect: team
-        description: "the name of a basketball team"
-      - collect: season
-        description: "the season year"
       - action: action_team_stats
         next: END
 
@@ -70,10 +66,6 @@ flows:
     nlu_trigger:
       - intent: compare
     steps:
-      - collect: player
-        description: "the name of the first basketball player or team"
-      - collect: player2
-        description: "the name of the second basketball player or team"
       - action: action_compare
         next: END
 
