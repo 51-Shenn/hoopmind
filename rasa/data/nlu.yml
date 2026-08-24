@@ -141,6 +141,23 @@ nlu:
     - What were the [Boston Celtics](team)'s stats in [2024](season)?
     - How many points per game did the [Golden State Warriors](team) average in [2016](season)?
     - What was the [Milwaukee Bucks](team)'s [three-point percentage](stat) in [2021](season)?
+    - Show me the [Los Angeles Lakers](team) statistics for [2023](season)
+    - What was the [Denver Nuggets](team)'s record in [2023](season)?
+    - How many wins did the [Boston Celtics](team) have in [2024](season)?
+    - What was the [Phoenix Suns](team)'s [offensive rating](stat) in [2022](season)?
+    - Show [Miami Heat](team) stats for [2023](season)
+    - How many [rebounds](stat) did the [Milwaukee Bucks](team) average last season?
+    - What was the [Philadelphia 76ers](team)'s [pace](stat) in [2024](season)?
+    - Show me the [Golden State Warriors](team) shooting stats for [2022](season)
+    - How many [assists](stat) did the [Denver Nuggets](team) average in [2023](season)?
+    - What was the [Boston Celtics](team)'s [defensive rating](stat) last season?
+    - Show the [Los Angeles Clippers](team) stats for [2024](season)
+    - How many [turnovers](stat) did the [Phoenix Suns](team) average last season?
+    - What was the [Dallas Mavericks](team)'s record in [2023](season)?
+    - Show me the [Miami Heat](team) [three-point percentage](stat) for [2024](season)
+    - How many [steals](stat) did the [Boston Celtics](team) average last season?
+    - What was the [Milwaukee Bucks](team)'s [field goal percentage](stat) in [2024](season)?
+    - Show the [Golden State Warriors](team) [rebounds](stat) for [2023](season)
 
 - intent: compare
   examples: |
@@ -150,6 +167,34 @@ nlu:
     - Compare the [Boston Celtics](team) and [Los Angeles Lakers](team)
     - Which team scored more, the [Golden State Warriors](team) or the [Phoenix Suns](team)?
     - Compare [Boston Celtics](team) and [Miami Heat](team) in [2024](season)
+    - Who scored more points, [Kobe Bryant](player) or [Tim Duncan](player)?
+    - Compare [Stephen Curry](player) and [Kyrie Irving](player) in assists
+    - rebounds comparison between [Dennis Rodman](player) and [Ben Wallace](player)
+    - Which player averaged more steals : [Chris Paul](player) or [Gary Payton](player)?
+    - [Kevin Durant](player) vs [Carmelo Anthony](player) career scoring
+    - Which team was better in [2016](season), the [Golden State Warriors](team) or the [San Antonio Spurs](team)?
+    - Head to head stats for the [Miami Heat](team) versus the [Dallas Mavericks](team) in [2011](season)
+    - Compare the [Los Angeles Clippers](team) with the [Sacramento Kings](team) this season
+    - Team comparison: [Portland Trail Blazers](team) against [Minnesota Timberwolves](team) in [2000](season)
+    - Who is better, [Stephen Curry](player) or [Kevin Durant](player)?
+    - Compare the [assists](stat) of [Chris Paul](player) and [John Stockton](player)
+    - Which player has more rings, [LeBron James](player) or [Michael Jordan](player)?
+    - Compare [Giannis Antetokounmpo](player) and [Nikola Jokic](player)
+    - Who won more [MVP](award)s, [LeBron James](player) or [Stephen Curry](player)?
+    - Compare the stats of [Jayson Tatum](player) and [Luka Doncic](player)
+    - Which team had a better record, [Boston Celtics](team) or [Denver Nuggets](team)?
+    - Compare [Philadelphia 76ers](team) and [Milwaukee Bucks](team)
+    - Who is taller, [Kevin Durant](player) or [Giannis Antetokounmpo](player)?
+    - Compare the shooting percentage of [Stephen Curry](player) and [Klay Thompson](player)
+    - How do [LeBron James](player) and [Kobe Bryant](player) compare?
+    - Which player scored more points last season, [Jayson Tatum](player) or [Luka Doncic](player)?
+    - Compare [Phoenix Suns](team) and [Dallas Mavericks](team) in [2024](season)
+    - Who had more [rebounds](stat) last season, [Nikola Jokic](player) or [Anthony Davis](player)?
+    - Compare the career stats of [Tim Duncan](player) and [Kevin Garnett](player)
+    - Which team has more championships, [Boston Celtics](team) or [Los Angeles Lakers](team)?
+    - Compare [Golden State Warriors](team) dynasty to [Chicago Bulls](team) dynasty
+    - Who was more dominant, [Shaquille O'Neal](player) or [Hakeem Olajuwon](player)?
+    - Compare [Trae Young](player) and [Damian Lillard](player)
 
 - intent: all_star
   examples: |
@@ -168,6 +213,21 @@ nlu:
     - Which college did [Michael Jordan](player) enter the draft from?
     - Who was the first overall pick in [2003](season)?
     - What round was [Kobe Bryant](player) drafted in?
+    - When was [Stephen Curry](player) drafted?
+    - What was the draft position of [Giannis Antetokounmpo](player)?
+    - Who got picked first overall in [2003](season)?
+    - Tell me about the draft history of [Kobe Bryant](player)
+    - Where did [Tim Duncan](player) get drafted?
+    - Draft info for [Kevin Garnett](player)
+    - What pick was [Luka Doncic](player)?
+    - Which team drafted [Zion Williamson](player)?
+    - What was [Jayson Tatum](player)'s draft position?
+    - Who was the number one pick in [2019](season)?
+    - What round was [Nikola Jokic](player) drafted in?
+    - Tell me about [Anthony Edwards](player) draft
+    - Where was [James Harden](player) selected in the draft?
+    - What pick was [Dwyane Wade](player)?
+    - Who was the second overall pick in [2003](season)?
 
 - intent: league_info
   examples: |
@@ -175,6 +235,24 @@ nlu:
     - What is the difference between the NBA and ABA?
     - Was [Kareem Abdul-Jabbar](player) in the ABA?
     - Which league was active in [1975](season)?
+    - Which basketball leagues do you support?
+    - Do you cover the NBA?
+    - Tell me about the league data you have
+    - What is the NBA?
+    - How many teams are in the NBA?
+    - When was the NBA founded?
+    - What is the history of the NBA?
+    - Tell me about the ABA
+    - What happened to the ABA?
+    - When did the NBA and ABA merge?
+    - What leagues existed before the NBA?
+    - What is the BAA?
+    - Tell me about basketball league history
+    - How many championships have been won in the NBA?
+    - What is the current NBA season?
+    - How is the NBA season structured?
+    - What are the NBA divisions?
+    - How does the NBA playoffs work?
 
 - intent: dataset_scope
   examples: |
@@ -183,6 +261,22 @@ nlu:
     - Which players are in the database?
     - What statistics can you provide?
     - Which teams are included?
+    - What data do you have access to?
+    - Tell me about your database
+    - What information can you give me?
+    - Do you have historical NBA data?
+    - What years of data do you have?
+    - Can you tell me about the data available?
+    - What stats are stored in your database?
+    - How far back does your data go?
+    - Do you have data on all NBA teams?
+    - What players are in your system?
+    - Can you access NBA statistics?
+    - What kind of basketball data do you have?
+    - Do you have ABA data too?
+    - What is the scope of your knowledge?
+    - Do you have data from the 1990s?
+    - What can you answer questions about?
 
 
 lookup_tables:
