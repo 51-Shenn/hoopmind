@@ -1,6 +1,7 @@
 import pandas as pd
 from pathlib import Path
 from typing import Optional, Dict, Any, List
+from difflib import get_close_matches
 
 DATA_DIR = Path(__file__).parent.parent / "data" / "nba"
 
@@ -49,14 +50,103 @@ def _normalize_name(name: str) -> str:
     return name.strip().lower()
 
 
-def find_player(name: str) -> Optional[pd.DataFrame]:
+_PLAYER_SYNONYMS = {
+    "cury": "stephen curry",
+    "curry": "stephen curry",
+    "steph": "stephen curry",
+    "steph curry": "stephen curry",
+    "lebron": "lebron james",
+    "king james": "lebron james",
+    "mj": "michael jordan",
+    "jordan": "michael jordan",
+    "kobe": "kobe bryant",
+    "shaq": "shaquille o'neal",
+    "kd": "kevin durant",
+    "giannis": "giannis antetokounmpo",
+    "jokic": "nikola jokic",
+    "luka": "luka doncic",
+    "tatum": "jayson tatum",
+    "booker": "devin booker",
+    "harden": "james harden",
+    "dame": "damian lillard",
+    "cp3": "chris paul",
+    "ad": "anthony davis",
+    "embiid": "joel embiid",
+    "zion": "zion williamson",
+    "trae": "trae young",
+    "lamelo": "lamelo ball",
+    "ja": "ja morant",
+    "ant": "anthony edwards",
+    "scottie": "scottie pippen",
+    "magic": "magic johnson",
+    "bird": "larry bird",
+    "dirk": "dirk nowitzki",
+    "wade": "dwyane wade",
+    "melo": "carmelo anthony",
+    "russ": "russell westbrook",
+    "pg": "paul george",
+    "jimmy": "jimmy butler",
+    "butler": "jimmy butler",
+    "draymond": "draymond green",
+    "klay": "klay thompson",
+    "beal": "bradley beal",
+    "dwight": "dwight howard",
+    "vince": "vince carter",
+    "ray": "ray allen",
+    "reggie": "reggie miller",
+    "charles": "charles barkley",
+    "barkley": "charles barkley",
+    "ai": "allen iverson",
+    "hakeem": "hakeem olajuwon",
+    "stockton": "john stockton",
+    "malone": "karl malone",
+    "penny": "anfernee hardaway",
+    "webber": "chris webber",
+}
+
+
+def _fuzzy_find_player(name: str, df: pd.DataFrame, col: str = "player") -> Optional[str]:
     _ensure_loaded()
     n = _normalize_name(name)
-    mask = player_season_df["player"].str.lower() == n
+
+    if n in _PLAYER_SYNONYMS:
+        return _PLAYER_SYNONYMS[n]
+
+    all_names = df[col].dropna().unique().tolist()
+    all_names_lower = [a.lower() for a in all_names]
+    name_to_original = {a.lower(): a for a in all_names}
+
+    exact = name_to_original.get(n)
+    if exact:
+        return exact
+
+    close = get_close_matches(n, all_names_lower, n=1, cutoff=0.75)
+    if close:
+        return name_to_original[close[0]]
+
+    matches = [a for a in all_names_lower if n in a]
+    if len(matches) == 1:
+        return name_to_original[matches[0]]
+    if len(matches) > 1:
+        def _match_quality(candidate: str, query: str) -> float:
+            starts = 1.0 if candidate.startswith(query) else 0.0
+            coverage = len(query) / len(candidate) if len(candidate) > 0 else 0.0
+            length_diff = abs(len(candidate) - len(query)) / max(len(candidate), len(query))
+            return starts * 0.5 + coverage * 0.3 + (1.0 - length_diff) * 0.2
+
+        best = max(matches, key=lambda x: _match_quality(x, n))
+        return name_to_original[best]
+
+    return None
+
+
+def find_player(name: str) -> Optional[pd.DataFrame]:
+    _ensure_loaded()
+    resolved = _fuzzy_find_player(name, player_season_df)
+    if not resolved:
+        return None
+    mask = player_season_df["player"].str.lower() == resolved.lower()
     matches = player_season_df[mask]
-    if matches.empty:
-        mask = player_season_df["player"].str.lower().str.contains(n, na=False)
-        matches = player_season_df[mask]
     return matches if not matches.empty else None
 
 
@@ -69,6 +159,11 @@ def find_team(name_or_abbr: str) -> Optional[pd.DataFrame]:
         mask = team_abbrev_df["abbreviation"].str.upper() == name_or_abbr.upper()
         matches = team_abbrev_df[mask]
     if matches.empty:
+        resolved = _fuzzy_find_player(name_or_abbr, team_abbrev_df, col="team")
+        if resolved:
+            mask = team_abbrev_df["team"].str.lower() == resolved.lower()
+            matches = team_abbrev_df[mask]
+    if matches.empty:
         mask = team_abbrev_df["team"].str.lower().str.contains(n, na=False)
         matches = team_abbrev_df[mask]
     return matches if not matches.empty else None
@@ -76,19 +171,18 @@ def find_team(name_or_abbr: str) -> Optional[pd.DataFrame]:
 
 def get_player_info(name: str) -> Optional[Dict[str, Any]]:
     _ensure_loaded()
-    n = _normalize_name(name)
+    resolved = _fuzzy_find_player(name, player_career_df)
+    if not resolved:
+        return None
+    n = resolved.lower()
 
     career = player_career_df[player_career_df["player"].str.lower() == n]
-    if career.empty:
-        career = player_career_df[player_career_df["player"].str.lower().str.contains(n, na=False)]
     if career.empty:
         return None
 
     row = career.iloc[0]
 
     seasons = player_season_df[player_season_df["player"].str.lower() == n]
-    if seasons.empty:
-        seasons = player_season_df[player_season_df["player"].str.lower().str.contains(n, na=False)]
 
     teams_played = []
     if not seasons.empty:
@@ -111,13 +205,13 @@ def get_player_info(name: str) -> Optional[Dict[str, Any]]:
 
 def get_player_stats(name: str, season: Optional[str] = None) -> Optional[Dict[str, Any]]:
     _ensure_loaded()
-    n = _normalize_name(name)
+    resolved = _fuzzy_find_player(name, player_per_game_df)
+    if not resolved:
+        return None
+    n = resolved.lower()
 
     mask = player_per_game_df["player"].str.lower() == n
     stats = player_per_game_df[mask]
-    if stats.empty:
-        mask = player_per_game_df["player"].str.lower().str.contains(n, na=False)
-        stats = player_per_game_df[mask]
     if stats.empty:
         return None
 
@@ -163,6 +257,11 @@ def get_team_info(name_or_abbr: str) -> Optional[Dict[str, Any]]:
         mask = team_summaries_df["abbreviation"].str.upper() == name_or_abbr.upper()
         matches = team_summaries_df[mask]
     if matches.empty:
+        resolved = _fuzzy_find_player(name_or_abbr, team_summaries_df, col="team")
+        if resolved:
+            mask = team_summaries_df["team"].str.lower() == resolved.lower()
+            matches = team_summaries_df[mask]
+    if matches.empty:
         mask = team_summaries_df["team"].str.lower().str.contains(n, na=False)
         matches = team_summaries_df[mask]
 
@@ -196,6 +295,11 @@ def get_team_stats(name_or_abbr: str, season: str) -> Optional[Dict[str, Any]]:
     if stats.empty:
         mask = team_stats_df["abbreviation"].str.upper() == name_or_abbr.upper()
         stats = team_stats_df[mask]
+    if stats.empty:
+        resolved = _fuzzy_find_player(name_or_abbr, team_stats_df, col="team")
+        if resolved:
+            mask = team_stats_df["team"].str.lower() == resolved.lower()
+            stats = team_stats_df[mask]
     if stats.empty:
         mask = team_stats_df["team"].str.lower().str.contains(n, na=False)
         stats = team_stats_df[mask]
@@ -239,12 +343,12 @@ def compare_players(name1: str, name2: str) -> Optional[Dict[str, Any]]:
 
 def get_all_star(name: str) -> Optional[Dict[str, Any]]:
     _ensure_loaded()
-    n = _normalize_name(name)
+    resolved = _fuzzy_find_player(name, all_star_df)
+    if not resolved:
+        return None
+    n = resolved.lower()
     mask = all_star_df["player"].str.lower() == n
     selections = all_star_df[mask]
-    if selections.empty:
-        mask = all_star_df["player"].str.lower().str.contains(n, na=False)
-        selections = all_star_df[mask]
     if selections.empty:
         return None
     return {
@@ -256,12 +360,12 @@ def get_all_star(name: str) -> Optional[Dict[str, Any]]:
 
 def get_draft_info(name: str) -> Optional[Dict[str, Any]]:
     _ensure_loaded()
-    n = _normalize_name(name)
+    resolved = _fuzzy_find_player(name, draft_df)
+    if not resolved:
+        return None
+    n = resolved.lower()
     mask = draft_df["player"].str.lower() == n
     picks = draft_df[mask]
-    if picks.empty:
-        mask = draft_df["player"].str.lower().str.contains(n, na=False)
-        picks = draft_df[mask]
     if picks.empty:
         return None
     row = picks.iloc[0]
@@ -293,4 +397,29 @@ def get_dataset_scope() -> Dict[str, Any]:
         "total_players": int(player_career_df["player"].nunique()),
         "total_teams": int(team_abbrev_df["team"].nunique()),
         "total_seasons": int(player_per_game_df["season"].nunique()),
+    }
+
+
+def get_draft_year(year: str) -> Optional[Dict[str, Any]]:
+    _ensure_loaded()
+    try:
+        year_int = int(year)
+    except ValueError:
+        return None
+    picks = draft_df[draft_df["season"] == year_int]
+    if picks.empty:
+        return None
+    top_5 = picks.sort_values("overall_pick").head(5)
+    picks_list = []
+    for _, row in top_5.iterrows():
+        picks_list.append({
+            "pick": int(row.get("overall_pick", 0)),
+            "player": row.get("player", "Unknown"),
+            "team": row.get("tm", "Unknown"),
+            "college": row.get("college", "Unknown"),
+        })
+    return {
+        "year": year_int,
+        "total_picks": len(picks),
+        "top_5": picks_list,
     }

@@ -2,7 +2,7 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
-from actions.data_loader import get_draft_info
+from actions.data_loader import get_draft_info, get_draft_year
 
 
 class ActionDraftInfo(Action):
@@ -11,8 +11,32 @@ class ActionDraftInfo(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         player_name = tracker.get_slot("player")
+        season = tracker.get_slot("season")
+
+        if not player_name and season:
+            year_info = get_draft_year(season)
+            if year_info:
+                response = f"Top 5 picks in the {year_info['year']} NBA Draft:\n"
+                for pick in year_info["top_5"]:
+                    response += f"  #{pick['pick']}: {pick['player']} ({pick['team']})\n"
+                response += f"Total picks: {year_info['total_picks']}"
+                dispatcher.utter_message(text=response)
+                return []
+
         if not player_name:
-            dispatcher.utter_message(text="Which player are you interested in?")
+            latest_msg = tracker.latest_message.get("text", "").lower()
+            import re
+            year_match = re.search(r'\b(19|20)\d{2}\b', latest_msg)
+            if year_match:
+                year_info = get_draft_year(year_match.group())
+                if year_info:
+                    response = f"Top 5 picks in the {year_info['year']} NBA Draft:\n"
+                    for pick in year_info["top_5"]:
+                        response += f"  #{pick['pick']}: {pick['player']} ({pick['team']})\n"
+                    response += f"Total picks: {year_info['total_picks']}"
+                    dispatcher.utter_message(text=response)
+                    return []
+            dispatcher.utter_message(text="I can help with draft info. Which player are you interested in, or which year's draft?")
             return []
 
         info = get_draft_info(player_name)
