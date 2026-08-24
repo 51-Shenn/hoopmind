@@ -44,6 +44,17 @@ slots:
     mappings:
       - type: custom
 
+actions:
+  - action_player_info
+  - action_player_stats
+  - action_team_info
+  - action_team_stats
+  - action_compare
+  - action_all_star
+  - action_draft_info
+  - action_league_info
+  - action_dataset_scope
+
 responses:
   utter_greeting:
     - text: "Hello! I'm HoopMind, your NBA knowledge chatbot. How can I help you?"
