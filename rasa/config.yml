@@ -11,13 +11,16 @@ pipeline:
   max_ngram: 4
 - name: EntitySynonymMapper
 - name: DIETClassifier
-  epochs: 50
+  epochs: 100
   BILOU_flag: true
   constrain_similarities: true
   model_confidence: softmax
   regularization_scale: 0.005
+  intent_classification: true
+  entity_recognition: true
 - name: FallbackClassifier
-  threshold: 0.3
+  threshold: 0.5
+  ambiguity_threshold: 0.1
 - name: NLUCommandAdapter
 policies:
 - name: FlowPolicy

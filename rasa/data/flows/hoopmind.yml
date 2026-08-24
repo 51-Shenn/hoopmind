@@ -25,37 +25,29 @@ flows:
         next: END
 
   player_info:
-    description: "show general information about a basketball player like position, height, team, awards, career span. Extract the player name from the user message."
+    description: "show general information about a basketball player like position, height, team, awards, career span"
     name: player info
     nlu_trigger:
       - intent: player_info
     steps:
-      - collect: player
-        description: "the name of a basketball player, e.g. LeBron James, Stephen Curry"
       - action: action_player_info
         next: END
 
   player_stats:
-    description: "show a player's statistics for a specific season or career, including points, rebounds, assists, advanced stats, shooting stats. Extract both the player name and season year if provided."
+    description: "show a player's statistics for a specific season or career"
     name: player stats
     nlu_trigger:
       - intent: player_stats
     steps:
-      - collect: player
-        description: "the name of a basketball player"
-      - collect: season
-        description: "the season year, e.g. 2024, 2023-24 (optional)"
       - action: action_player_stats
         next: END
 
   team_info:
-    description: "show general information about a basketball team like arena, conference, division, roster, record, opponent stats"
+    description: "show general information about a basketball team like arena, conference, division, roster, record"
     name: team info
     nlu_trigger:
       - intent: team_info
     steps:
-      - collect: team
-        description: "the name of a basketball team, e.g. Boston Celtics, Lakers"
       - action: action_team_info
         next: END
 
@@ -81,7 +73,7 @@ flows:
       - collect: player
         description: "the name of the first basketball player or team"
       - collect: player2
-        description: "the name of the second basketball player or team (optional)"
+        description: "the name of the second basketball player or team"
       - action: action_compare
         next: END
 
@@ -91,8 +83,6 @@ flows:
     nlu_trigger:
       - intent: all_star
     steps:
-      - collect: player
-        description: "the name of a basketball player"
       - action: action_all_star
         next: END
 
@@ -102,8 +92,6 @@ flows:
     nlu_trigger:
       - intent: draft_info
     steps:
-      - collect: player
-        description: "the name of a basketball player"
       - action: action_draft_info
         next: END
 

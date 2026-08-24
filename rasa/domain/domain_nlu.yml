@@ -29,21 +29,26 @@ slots:
       - type: controlled
   player:
     type: text
+    influence_conversation: false
     mappings:
       - type: from_entity
         entity: player
   player2:
     type: text
+    influence_conversation: false
     mappings:
       - type: from_entity
         entity: player
+        role: second
   team:
     type: text
+    influence_conversation: false
     mappings:
       - type: from_entity
         entity: team
   season:
     type: text
+    influence_conversation: false
     mappings:
       - type: from_entity
         entity: season
