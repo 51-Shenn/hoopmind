@@ -1,7 +1,10 @@
+import logging
 import pandas as pd
 from pathlib import Path
 from typing import Optional, Dict, Any, List
 from difflib import get_close_matches
+
+logger = logging.getLogger(__name__)
 
 DATA_DIR = Path(__file__).parent.parent / "data" / "nba"
 
@@ -23,22 +26,29 @@ def load_all_data():
     if _data_loaded:
         return
 
-    player_season_df = pd.read_csv(DATA_DIR / "Player Season Info.csv")
-    player_per_game_df = pd.read_csv(DATA_DIR / "Player Per Game.csv")
-    player_career_df = pd.read_csv(DATA_DIR / "Player Career Info.csv")
-    team_abbrev_df = pd.read_csv(DATA_DIR / "Team Abbrev.csv")
-    team_stats_df = pd.read_csv(DATA_DIR / "Team Stats Per Game.csv")
-    team_summaries_df = pd.read_csv(DATA_DIR / "Team Summaries.csv")
-    all_star_df = pd.read_csv(DATA_DIR / "All-Star Selections.csv")
-    draft_df = pd.read_csv(DATA_DIR / "Draft Pick History.csv")
+    try:
+        player_season_df = pd.read_csv(DATA_DIR / "Player Season Info.csv")
+        player_per_game_df = pd.read_csv(DATA_DIR / "Player Per Game.csv")
+        player_career_df = pd.read_csv(DATA_DIR / "Player Career Info.csv")
+        team_abbrev_df = pd.read_csv(DATA_DIR / "Team Abbrev.csv")
+        team_stats_df = pd.read_csv(DATA_DIR / "Team Stats Per Game.csv")
+        team_summaries_df = pd.read_csv(DATA_DIR / "Team Summaries.csv")
+        all_star_df = pd.read_csv(DATA_DIR / "All-Star Selections.csv")
+        draft_df = pd.read_csv(DATA_DIR / "Draft Pick History.csv")
 
-    _data_loaded = True
-    print(f"[DataLoader] Loaded {len(player_season_df)} player-season records")
-    print(f"[DataLoader] Loaded {len(player_per_game_df)} player per-game records")
-    print(f"[DataLoader] Loaded {len(player_career_df)} player career records")
-    print(f"[DataLoader] Loaded {len(team_abbrev_df)} team records")
-    print(f"[DataLoader] Loaded {len(all_star_df)} All-Star records")
-    print(f"[DataLoader] Loaded {len(draft_df)} draft records")
+        _data_loaded = True
+        logger.info(f"Loaded {len(player_season_df)} player-season records")
+        logger.info(f"Loaded {len(player_per_game_df)} player per-game records")
+        logger.info(f"Loaded {len(player_career_df)} player career records")
+        logger.info(f"Loaded {len(team_abbrev_df)} team records")
+        logger.info(f"Loaded {len(all_star_df)} All-Star records")
+        logger.info(f"Loaded {len(draft_df)} draft records")
+    except FileNotFoundError as e:
+        logger.error(f"Data file not found: {e}")
+        raise
+    except Exception as e:
+        logger.error(f"Error loading data: {e}")
+        raise
 
 
 def _ensure_loaded():
@@ -105,12 +115,19 @@ _PLAYER_SYNONYMS = {
 }
 
 
-def _fuzzy_find_player(name: str, df: pd.DataFrame, col: str = "player") -> Optional[str]:
+def _fuzzy_find_player(name: str, df: pd.DataFrame = None, col: str = "player") -> Optional[str]:
     _ensure_loaded()
     n = _normalize_name(name)
 
     if n in _PLAYER_SYNONYMS:
         return _PLAYER_SYNONYMS[n]
+
+    # Use provided df, or default to player_per_game_df
+    if df is None:
+        df = player_per_game_df
+    if df is None:
+        logger.error("player_per_game_df is still None after _ensure_loaded()")
+        return None
 
     all_names = df[col].dropna().unique().tolist()
     all_names_lower = [a.lower() for a in all_names]
@@ -124,15 +141,35 @@ def _fuzzy_find_player(name: str, df: pd.DataFrame, col: str = "player") -> Opti
     if close:
         return name_to_original[close[0]]
 
+    # Check if query matches a last name exactly
+    last_name_matches = [a for a in all_names_lower if a.split()[-1] == n]
+    if len(last_name_matches) == 1:
+        return name_to_original[last_name_matches[0]]
+
+    # Substring matching with popularity weighting
     matches = [a for a in all_names_lower if n in a]
     if len(matches) == 1:
         return name_to_original[matches[0]]
     if len(matches) > 1:
         def _match_quality(candidate: str, query: str) -> float:
-            starts = 1.0 if candidate.startswith(query) else 0.0
+            # Prefer last name matches
+            last_name_match = 1.0 if candidate.split()[-1] == query else 0.0
+            # Prefer candidates whose name starts with the query
+            starts = 0.5 if candidate.startswith(query) else 0.0
+            # Prefer longer careers (proxy for fame) using career data
+            popularity = 0.0
+            if player_career_df is not None:
+                career = player_career_df[player_career_df["player"].str.lower() == candidate]
+                if not career.empty:
+                    row = career.iloc[0]
+                    career_from = row.get("from", 0)
+                    career_to = row.get("to", 0)
+                    if pd.notna(career_from) and pd.notna(career_to):
+                        career_len = int(career_to) - int(career_from)
+                        popularity = min(career_len / 20.0, 1.0)
+            # Coverage: how much of the candidate name is matched
             coverage = len(query) / len(candidate) if len(candidate) > 0 else 0.0
-            length_diff = abs(len(candidate) - len(query)) / max(len(candidate), len(query))
-            return starts * 0.5 + coverage * 0.3 + (1.0 - length_diff) * 0.2
+            return last_name_match * 2.0 + starts * 0.5 + popularity * 1.0 + coverage * 0.3
 
         best = max(matches, key=lambda x: _match_quality(x, n))
         return name_to_original[best]
@@ -204,47 +241,51 @@ def get_player_info(name: str) -> Optional[Dict[str, Any]]:
 
 
 def get_player_stats(name: str, season: Optional[str] = None) -> Optional[Dict[str, Any]]:
-    _ensure_loaded()
-    resolved = _fuzzy_find_player(name, player_per_game_df)
-    if not resolved:
+    try:
+        _ensure_loaded()
+        resolved = _fuzzy_find_player(name, player_per_game_df)
+        if not resolved:
+            return None
+        n = resolved.lower()
+
+        mask = player_per_game_df["player"].str.lower() == n
+        stats = player_per_game_df[mask]
+        if stats.empty:
+            return None
+
+        if season is not None:
+            try:
+                season_int = int(season)
+                stats = stats[stats["season"] == season_int]
+            except ValueError:
+                stats = stats[stats["season"].astype(str).str.contains(season, na=False)]
+
+        if stats.empty:
+            return None
+
+        row = stats.iloc[0]
+
+        return {
+            "player": row.get("player", name),
+            "season": int(row.get("season", 0)),
+            "team": row.get("team", "Unknown"),
+            "position": row.get("pos", "Unknown"),
+            "games": int(row.get("g", 0)),
+            "games_started": int(row.get("gs", 0)),
+            "minutes": round(row.get("mp_per_game", 0), 1),
+            "points": round(row.get("pts_per_game", 0), 1),
+            "rebounds": round(row.get("trb_per_game", 0), 1),
+            "assists": round(row.get("ast_per_game", 0), 1),
+            "steals": round(row.get("stl_per_game", 0), 1),
+            "blocks": round(row.get("blk_per_game", 0), 1),
+            "turnovers": round(row.get("tov_per_game", 0), 1),
+            "fg_pct": round(row.get("fg_percent", 0) * 100, 1) if pd.notna(row.get("fg_percent")) else None,
+            "three_pct": round(row.get("x3p_percent", 0) * 100, 1) if pd.notna(row.get("x3p_percent")) else None,
+            "ft_pct": round(row.get("ft_percent", 0) * 100, 1) if pd.notna(row.get("ft_percent")) else None,
+        }
+    except Exception as e:
+        logger.error(f"Error in get_player_stats for {name}, season {season}: {e}", exc_info=True)
         return None
-    n = resolved.lower()
-
-    mask = player_per_game_df["player"].str.lower() == n
-    stats = player_per_game_df[mask]
-    if stats.empty:
-        return None
-
-    if season is not None:
-        try:
-            season_int = int(season)
-            stats = stats[stats["season"] == season_int]
-        except ValueError:
-            stats = stats[stats["season"].astype(str).str.contains(season, na=False)]
-
-    if stats.empty:
-        return None
-
-    row = stats.iloc[0]
-
-    return {
-        "player": row.get("player", name),
-        "season": int(row.get("season", 0)),
-        "team": row.get("team", "Unknown"),
-        "position": row.get("pos", "Unknown"),
-        "games": int(row.get("g", 0)),
-        "games_started": int(row.get("gs", 0)),
-        "minutes": round(row.get("mp_per_game", 0), 1),
-        "points": round(row.get("pts_per_game", 0), 1),
-        "rebounds": round(row.get("trb_per_game", 0), 1),
-        "assists": round(row.get("ast_per_game", 0), 1),
-        "steals": round(row.get("stl_per_game", 0), 1),
-        "blocks": round(row.get("blk_per_game", 0), 1),
-        "turnovers": round(row.get("tov_per_game", 0), 1),
-        "fg_pct": round(row.get("fg_percent", 0) * 100, 1) if pd.notna(row.get("fg_percent")) else None,
-        "three_pct": round(row.get("x3p_percent", 0) * 100, 1) if pd.notna(row.get("x3p_percent")) else None,
-        "ft_pct": round(row.get("ft_percent", 0) * 100, 1) if pd.notna(row.get("ft_percent")) else None,
-    }
 
 
 def get_team_info(name_or_abbr: str) -> Optional[Dict[str, Any]]:
