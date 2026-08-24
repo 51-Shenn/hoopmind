@@ -1,826 +1,714 @@
 [
   {
-    "text": "Was LeBron James an All-Star in 2020?",
-    "intent": "all_star_selection",
+    "text": "Hi HoopMind",
+    "intent": "greeting",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "goodbye",
+      "confidence": 0.43754351139068604
     }
   },
   {
-    "text": "How many All-Star selections does LeBron James have?",
-    "intent": "all_star_selection",
+    "text": "Where did Stephen Curry go to college?",
+    "intent": "player_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "greeting",
+      "confidence": 0.3058115243911743
     }
   },
   {
-    "text": "Which team did Stephen Curry represent as an All-Star in 2016?",
-    "intent": "all_star_selection",
+    "text": "Tell me about Giannis Antetokounmpo",
+    "intent": "player_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "dataset_scope",
+      "confidence": 0.2148689180612564
     }
   },
   {
-    "text": "Who was selected as an All-Star in 2015?",
-    "intent": "all_star_selection",
+    "text": "How old is Jayson Tatum",
+    "intent": "player_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "player_stats",
+      "confidence": 0.29053086042404175
     }
   },
   {
-    "text": "Compare LeBron James and Michael Jordan",
-    "intent": "compare_players",
+    "text": "Luka Doncic stats 2024",
+    "intent": "player_stats",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "team_stats",
+      "confidence": 0.28169047832489014
     }
   },
   {
-    "text": "Who had more points, LeBron James or Kevin Durant?",
-    "intent": "compare_players",
+    "text": "What was Klay Thompson's three-point percentage?",
+    "intent": "player_stats",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "team_stats",
+      "confidence": 0.5343816876411438
     }
   },
   {
-    "text": "Compare the rebounds of Nikola Jokic and Joel Embiid",
-    "intent": "compare_players",
+    "text": "Who owns the Miami Heat",
+    "intent": "team_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "team_stats",
+      "confidence": 0.8484824299812317
     }
   },
   {
-    "text": "Compare the Boston Celtics and Los Angeles Lakers",
-    "intent": "compare_teams",
+    "text": "Details about Milwaukee Bucks",
+    "intent": "team_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "team_stats",
+      "confidence": 0.32718491554260254
     }
   },
   {
-    "text": "Which team scored more, the Golden State Warriors or the Phoenix Suns?",
-    "intent": "compare_teams",
+    "text": "Who plays for the Philadelphia 76ers",
+    "intent": "team_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "team_stats",
+      "confidence": 0.3927627503871918
     }
   },
   {
-    "text": "Compare Boston Celtics and Miami Heat in 2024",
-    "intent": "compare_teams",
+    "text": "Golden State Warriors",
+    "intent": "team_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "team_stats",
+      "confidence": 0.4731593430042267
     }
   },
   {
-    "text": "What NBA data do you have?",
-    "intent": "dataset_scope",
+    "text": "Show me the Los Angeles Lakers statistics for 2023",
+    "intent": "team_stats",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "player_stats",
+      "confidence": 0.33504652976989746
     }
   },
   {
-    "text": "What seasons are available?",
-    "intent": "dataset_scope",
+    "text": "Head to head stats for the Miami Heat versus the Dallas Mavericks in 2011",
+    "intent": "compare",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Which players are in the database?",
-    "intent": "dataset_scope",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What statistics can you provide?",
-    "intent": "dataset_scope",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Which teams are included?",
-    "intent": "dataset_scope",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Where was Stephen Curry drafted?",
-    "intent": "draft_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What pick was LeBron James in the draft?",
-    "intent": "draft_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Which college did Michael Jordan enter the draft from?",
-    "intent": "draft_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Who was the first overall pick in 2003?",
-    "intent": "draft_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What round was Kobe Bryant drafted in?",
-    "intent": "draft_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Was LeBron James selected to an All-NBA team in 2013?",
-    "intent": "end_of_season_team",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Which All-NBA team was Stephen Curry selected to in 2016?",
-    "intent": "end_of_season_team",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "team_stats",
+      "confidence": 0.8462326526641846
     }
   },
   {
     "text": "Did Giannis Antetokounmpo make an end of season team in 2019?",
-    "intent": "end_of_season_team",
+    "intent": "all_star",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "compare",
+      "confidence": 0.23763872683048248
     }
   },
   {
-    "text": "Bye",
-    "intent": "goodbye",
+    "text": "Draft info for Kevin Garnett",
+    "intent": "draft_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "compare",
+      "confidence": 0.22616764903068542
     }
   },
   {
-    "text": "Goodbye",
-    "intent": "goodbye",
+    "text": "Tell me about Anthony Edwards draft",
+    "intent": "draft_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "player_info",
+      "confidence": 0.31884700059890747
     }
   },
   {
-    "text": "See you",
-    "intent": "goodbye",
+    "text": "What league did Michael Jordan play in?",
+    "intent": "league_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "player_info",
+      "confidence": 0.4173538088798523
     }
   },
   {
-    "text": "See you later",
-    "intent": "goodbye",
+    "text": "Do you cover the NBA?",
+    "intent": "league_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "dataset_scope",
+      "confidence": 0.41831663250923157
     }
   },
   {
     "text": "That's all",
     "intent": "goodbye",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "player_info",
+      "confidence": 0.21754533052444458
     }
   },
   {
-    "text": "I'm done",
-    "intent": "goodbye",
+    "text": "When did Kobe Bryant debut?",
+    "intent": "player_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "draft_info",
+      "confidence": 0.8158978223800659
     }
   },
   {
-    "text": "Thanks, bye",
-    "intent": "goodbye",
+    "text": "Give me info on Nikola Jokic",
+    "intent": "player_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "draft_info",
+      "confidence": 0.3930385708808899
     }
   },
   {
-    "text": "Thank you, goodbye",
-    "intent": "goodbye",
+    "text": "Did Bill Russell make the Hall of Fame?",
+    "intent": "player_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "team_info",
+      "confidence": 0.3053170144557953
     }
   },
   {
-    "text": "Talk to you later",
-    "intent": "goodbye",
+    "text": "What are LeBron James's career totals?",
+    "intent": "player_stats",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "team_info",
+      "confidence": 0.3031812608242035
     }
   },
   {
-    "text": "See ya",
-    "intent": "goodbye",
+    "text": "How many career points does LeBron James have?",
+    "intent": "player_stats",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "compare",
+      "confidence": 0.1876012235879898
     }
   },
   {
-    "text": "Bye HoopMind",
+    "text": "How many career assists did John Stockton record?",
+    "intent": "player_stats",
+    "intent_prediction": {
+      "name": "compare",
+      "confidence": 0.27509605884552
+    }
+  },
+  {
+    "text": "Show career rebounds for Dennis Rodman",
+    "intent": "player_stats",
+    "intent_prediction": {
+      "name": "player_info",
+      "confidence": 0.4565585255622864
+    }
+  },
+  {
+    "text": "Los Angeles Lakers",
+    "intent": "team_info",
+    "intent_prediction": {
+      "name": "compare",
+      "confidence": 0.34673580527305603
+    }
+  },
+  {
+    "text": "What was the Milwaukee Bucks's three-point percentage in 2021?",
+    "intent": "team_stats",
+    "intent_prediction": {
+      "name": "compare",
+      "confidence": 0.330578088760376
+    }
+  },
+  {
+    "text": "What was the Phoenix Suns's offensive rating in 2022?",
+    "intent": "team_stats",
+    "intent_prediction": {
+      "name": "player_stats",
+      "confidence": 0.22971808910369873
+    }
+  },
+  {
+    "text": "What was the Boston Celtics's defensive rating last season?",
+    "intent": "team_stats",
+    "intent_prediction": {
+      "name": "team_info",
+      "confidence": 0.5120466351509094
+    }
+  },
+  {
+    "text": "Who is taller, Kevin Durant or Giannis Antetokounmpo?",
+    "intent": "compare",
+    "intent_prediction": {
+      "name": "draft_info",
+      "confidence": 0.5432744026184082
+    }
+  },
+  {
+    "text": "Who was more dominant, Shaquille O'Neal or Hakeem Olajuwon?",
+    "intent": "compare",
+    "intent_prediction": {
+      "name": "greeting",
+      "confidence": 0.32568177580833435
+    }
+  },
+  {
+    "text": "Was LeBron James selected to an All-NBA team in 2013?",
+    "intent": "all_star",
+    "intent_prediction": {
+      "name": "team_info",
+      "confidence": 0.35102954506874084
+    }
+  },
+  {
+    "text": "Which All-NBA team was Stephen Curry selected to in 2016?",
+    "intent": "all_star",
+    "intent_prediction": {
+      "name": "team_info",
+      "confidence": 0.23810963332653046
+    }
+  },
+  {
+    "text": "How many championships have been won in the NBA?",
+    "intent": "league_info",
+    "intent_prediction": {
+      "name": "compare",
+      "confidence": 0.5571063160896301
+    }
+  },
+  {
+    "text": "What NBA data do you have?",
+    "intent": "dataset_scope",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.3620351552963257
+    }
+  },
+  {
+    "text": "What information can you give me?",
+    "intent": "dataset_scope",
+    "intent_prediction": {
+      "name": "player_info",
+      "confidence": 0.3950512409210205
+    }
+  },
+  {
+    "text": "Goodbye",
     "intent": "goodbye",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "greeting",
+      "confidence": 0.47666287422180176
     }
   },
   {
     "text": "Goodbye HoopMind",
     "intent": "goodbye",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "greeting",
+      "confidence": 0.7537370920181274
     }
   },
   {
-    "text": "Hi",
-    "intent": "greeting",
+    "text": "Who is Michael Jordan",
+    "intent": "player_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Hello",
-    "intent": "greeting",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Hey",
-    "intent": "greeting",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Hi HoopMind",
-    "intent": "greeting",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Hello HoopMind",
-    "intent": "greeting",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Hey HoopMind",
-    "intent": "greeting",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Good morning",
-    "intent": "greeting",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Good afternoon",
-    "intent": "greeting",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Good evening",
-    "intent": "greeting",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Hey there",
-    "intent": "greeting",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Hi there",
-    "intent": "greeting",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Hello there",
-    "intent": "greeting",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What league did Michael Jordan play in?",
-    "intent": "league_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What is the difference between the NBA and ABA?",
-    "intent": "league_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Was Kareem Abdul-Jabbar in the ABA?",
-    "intent": "league_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Which league was active in 1975?",
-    "intent": "league_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What was Nikola Jokic's PER in 2023?",
-    "intent": "player_advanced_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Show Giannis Antetokounmpo's true shooting percentage.",
-    "intent": "player_advanced_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What was Stephen Curry's usage percentage in 2016?",
-    "intent": "player_advanced_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What was LeBron James's VORP in 2013?",
-    "intent": "player_advanced_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What awards did LeBron James win?",
-    "intent": "player_awards",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Did Stephen Curry win the MVP?",
-    "intent": "player_awards",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Who won MVP in 2016?",
-    "intent": "player_awards",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "How many times did Michael Jordan win MVP?",
-    "intent": "player_awards",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What was Tim Duncan's career span?",
-    "intent": "player_career_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "When did Shaquille O'Neal start and finish his career?",
-    "intent": "player_career_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Did Bill Russell make the Hall of Fame?",
-    "intent": "player_career_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "When did Magic Johnson make his debut?",
-    "intent": "player_career_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What are LeBron James's career totals?",
-    "intent": "player_career_totals",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "How many career points does LeBron James have?",
-    "intent": "player_career_totals",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "How many career assists did John Stockton record?",
-    "intent": "player_career_totals",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Show career rebounds for Dennis Rodman",
-    "intent": "player_career_totals",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Who is Stephen Curry",
-    "intent": "player_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Tell me about LeBron James",
-    "intent": "player_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What position does Kevin Durant play?",
-    "intent": "player_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "How tall is LeBron James?",
-    "intent": "player_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "When did Kobe Bryant debut?",
-    "intent": "player_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Where did Stephen Curry go to college?",
-    "intent": "player_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What are James Harden's per 100 possession points?",
-    "intent": "player_per_100_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Show Stephen Curry's per 100 possession statistics in 2016",
-    "intent": "player_per_100_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What was LeBron James's offensive rating in 2013?",
-    "intent": "player_per_100_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What are Anthony Davis's per 36 points?",
-    "intent": "player_per_36_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Show Kevin Durant's per 36 statistics in 2014",
-    "intent": "player_per_36_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What is Nikola Jokic's per 36 rebounds?",
-    "intent": "player_per_36_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "How many assists did Chris Paul generate in 2015?",
-    "intent": "player_play_by_play_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What was Stephen Curry's plus-minus per 100 possessions?",
-    "intent": "player_play_by_play_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "league_info",
+      "confidence": 0.4782831370830536
     }
   },
   {
     "text": "How many shooting fouls did James Harden draw?",
-    "intent": "player_play_by_play_stats",
+    "intent": "player_stats",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "player_info",
+      "confidence": 0.4386759400367737
     }
   },
   {
-    "text": "What were Stephen Curry's stats in 2016?",
-    "intent": "player_season_stats",
+    "text": "Boston Celtics",
+    "intent": "team_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Show me LeBron James's statistics for 2018",
-    "intent": "player_season_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "How many points did Michael Jordan average in 1991?",
-    "intent": "player_season_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What was Kevin Durant's points in 2014?",
-    "intent": "player_season_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Give me the rebounds for Nikola Jokic in 2023",
-    "intent": "player_season_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "How good was Stephen Curry from three in 2016?",
-    "intent": "player_shooting_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What was Klay Thompson's three-point percentage?",
-    "intent": "player_shooting_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "How many dunks did LeBron James have in 2013?",
-    "intent": "player_shooting_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Tell me about the Boston Celtics",
-    "intent": "team_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What is the abbreviation for the Golden State Warriors?",
-    "intent": "team_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "Which league did the Los Angeles Lakers play in?",
-    "intent": "team_information",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "How many points per game did opponents score against the Boston Celtics in 2024?",
-    "intent": "team_opponent_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What was the opponent three-point percentage against the Golden State Warriors in 2016?",
-    "intent": "team_opponent_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "How many rebounds did opponents average against the Milwaukee Bucks?",
-    "intent": "team_opponent_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What were the Boston Celtics's stats in 2024?",
-    "intent": "team_season_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "How many points per game did the Golden State Warriors average in 2016?",
-    "intent": "team_season_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What was the Milwaukee Bucks's three-point percentage in 2021?",
-    "intent": "team_season_stats",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "league_info",
+      "confidence": 0.223286435008049
     }
   },
   {
     "text": "What was the record of the Boston Celtics in 2024?",
-    "intent": "team_summary",
+    "intent": "team_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "team_stats",
+      "confidence": 0.6643253564834595
+    }
+  },
+  {
+    "text": "How many points per game did opponents score against the Boston Celtics in 2024?",
+    "intent": "team_info",
+    "intent_prediction": {
+      "name": "player_stats",
+      "confidence": 0.30799081921577454
+    }
+  },
+  {
+    "text": "How many rebounds did opponents average against the Milwaukee Bucks?",
+    "intent": "team_info",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.6812413334846497
+    }
+  },
+  {
+    "text": "How many assists did the Denver Nuggets average in 2023?",
+    "intent": "team_stats",
+    "intent_prediction": {
+      "name": "player_stats",
+      "confidence": 0.5662996768951416
+    }
+  },
+  {
+    "text": "Which team scored more, the Golden State Warriors or the Phoenix Suns?",
+    "intent": "compare",
+    "intent_prediction": {
+      "name": "league_info",
+      "confidence": 0.3897315263748169
+    }
+  },
+  {
+    "text": "Kevin Durant vs Carmelo Anthony career scoring",
+    "intent": "compare",
+    "intent_prediction": {
+      "name": "player_stats",
+      "confidence": 0.3250417709350586
+    }
+  },
+  {
+    "text": "Which college did Michael Jordan enter the draft from?",
+    "intent": "draft_info",
+    "intent_prediction": {
+      "name": "league_info",
+      "confidence": 0.37072017788887024
+    }
+  },
+  {
+    "text": "Which teams are included?",
+    "intent": "dataset_scope",
+    "intent_prediction": {
+      "name": "league_info",
+      "confidence": 0.2398591935634613
+    }
+  },
+  {
+    "text": "I'm done",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "player_info",
+      "confidence": 0.38416895270347595
+    }
+  },
+  {
+    "text": "Information about Kevin Durant",
+    "intent": "player_info",
+    "intent_prediction": {
+      "name": "team_info",
+      "confidence": 0.4128769636154175
+    }
+  },
+  {
+    "text": "Details about James Harden",
+    "intent": "player_info",
+    "intent_prediction": {
+      "name": "team_info",
+      "confidence": 0.3525340259075165
+    }
+  },
+  {
+    "text": "Kevin Durant",
+    "intent": "player_info",
+    "intent_prediction": {
+      "name": "compare",
+      "confidence": 0.3613918721675873
+    }
+  },
+  {
+    "text": "What was Tim Duncan's career span?",
+    "intent": "player_info",
+    "intent_prediction": {
+      "name": "player_stats",
+      "confidence": 0.4336124658584595
+    }
+  },
+  {
+    "text": "Show Stephen Curry 2016 numbers",
+    "intent": "player_stats",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.4743158519268036
+    }
+  },
+  {
+    "text": "Show Giannis Antetokounmpo's true shooting percentage.",
+    "intent": "player_stats",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.566946804523468
+    }
+  },
+  {
+    "text": "What was LeBron James's VORP in 2013?",
+    "intent": "player_stats",
+    "intent_prediction": {
+      "name": "player_info",
+      "confidence": 0.2496417611837387
+    }
+  },
+  {
+    "text": "How good was Stephen Curry from three in 2016?",
+    "intent": "player_stats",
+    "intent_prediction": {
+      "name": "draft_info",
+      "confidence": 0.4302237629890442
+    }
+  },
+  {
+    "text": "How many dunks did LeBron James have in 2013?",
+    "intent": "player_stats",
+    "intent_prediction": {
+      "name": "player_info",
+      "confidence": 0.32684317231178284
+    }
+  },
+  {
+    "text": "Show Kevin Durant's per 36 statistics in 2014",
+    "intent": "player_stats",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.4030362665653229
+    }
+  },
+  {
+    "text": "How many assists did Chris Paul generate in 2015?",
+    "intent": "player_stats",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.33315619826316833
+    }
+  },
+  {
+    "text": "Which league did the Los Angeles Lakers play in?",
+    "intent": "team_info",
+    "intent_prediction": {
+      "name": "league_info",
+      "confidence": 0.29074686765670776
+    }
+  },
+  {
+    "text": "Tell me about Chicago Bulls",
+    "intent": "team_info",
+    "intent_prediction": {
+      "name": "compare",
+      "confidence": 0.426608681678772
+    }
+  },
+  {
+    "text": "Tell me about Denver Nuggets",
+    "intent": "team_info",
+    "intent_prediction": {
+      "name": "player_info",
+      "confidence": 0.6431389451026917
     }
   },
   {
     "text": "What was the point differential for the Golden State Warriors in 2016?",
-    "intent": "team_summary",
+    "intent": "team_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
-    }
-  },
-  {
-    "text": "What was the pace of the Sacramento Kings in 2023?",
-    "intent": "team_summary",
-    "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "team_stats",
+      "confidence": 0.4120800495147705
     }
   },
   {
     "text": "What was the offensive rating of the Phoenix Suns in 2021?",
-    "intent": "team_summary",
+    "intent": "team_info",
     "intent_prediction": {
-      "name": "",
-      "confidence": 0.0
+      "name": "team_stats",
+      "confidence": 0.7353947162628174
+    }
+  },
+  {
+    "text": "What was the Philadelphia 76ers's pace in 2024?",
+    "intent": "team_stats",
+    "intent_prediction": {
+      "name": "team_info",
+      "confidence": 0.38852500915527344
+    }
+  },
+  {
+    "text": "What is the BAA?",
+    "intent": "league_info",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.15741661190986633
+    }
+  },
+  {
+    "text": "What team does Luka Doncic play for",
+    "intent": "player_info",
+    "intent_prediction": {
+      "name": "all_star",
+      "confidence": 0.5733737945556641
+    }
+  },
+  {
+    "text": "Luka Doncic who is he",
+    "intent": "player_info",
+    "intent_prediction": {
+      "name": "compare",
+      "confidence": 0.38992324471473694
+    }
+  },
+  {
+    "text": "When did Shaquille O'Neal start and finish his career?",
+    "intent": "player_info",
+    "intent_prediction": {
+      "name": "compare",
+      "confidence": 0.8448529243469238
+    }
+  },
+  {
+    "text": "What awards did LeBron James win?",
+    "intent": "player_info",
+    "intent_prediction": {
+      "name": "player_stats",
+      "confidence": 0.3879735767841339
+    }
+  },
+  {
+    "text": "Who won MVP in 2016?",
+    "intent": "player_info",
+    "intent_prediction": {
+      "name": "player_stats",
+      "confidence": 0.3190554678440094
+    }
+  },
+  {
+    "text": "How many times did Michael Jordan win MVP?",
+    "intent": "player_info",
+    "intent_prediction": {
+      "name": "player_stats",
+      "confidence": 0.40590566396713257
+    }
+  },
+  {
+    "text": "Show me LeBron James's statistics for 2018",
+    "intent": "player_stats",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.657166600227356
+    }
+  },
+  {
+    "text": "How many points did Michael Jordan average in 1991?",
+    "intent": "player_stats",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.6691897511482239
+    }
+  },
+  {
+    "text": "What was Kevin Durant's points in 2014?",
+    "intent": "player_stats",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.5500786900520325
+    }
+  },
+  {
+    "text": "Show me Jayson Tatum stats for 2023",
+    "intent": "player_stats",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.7518724799156189
+    }
+  },
+  {
+    "text": "Damian Lillard stats 2020",
+    "intent": "player_stats",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.33268940448760986
+    }
+  },
+  {
+    "text": "What was Stephen Curry's usage percentage in 2016?",
+    "intent": "player_stats",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.7803630828857422
+    }
+  },
+  {
+    "text": "What was the pace of the Sacramento Kings in 2023?",
+    "intent": "team_info",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.7360314130783081
+    }
+  },
+  {
+    "text": "How many points per game did the Golden State Warriors average in 2016?",
+    "intent": "team_stats",
+    "intent_prediction": {
+      "name": "team_info",
+      "confidence": 0.4861764907836914
+    }
+  },
+  {
+    "text": "What was the Dallas Mavericks's record in 2023?",
+    "intent": "team_stats",
+    "intent_prediction": {
+      "name": "compare",
+      "confidence": 0.44347020983695984
+    }
+  },
+  {
+    "text": "Tell me about the draft history of Kobe Bryant",
+    "intent": "draft_info",
+    "intent_prediction": {
+      "name": "league_info",
+      "confidence": 0.4166741967201233
+    }
+  },
+  {
+    "text": "Who was the second overall pick in 2003?",
+    "intent": "draft_info",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.4043116569519043
+    }
+  },
+  {
+    "text": "Which league was active in 1975?",
+    "intent": "league_info",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.2593911588191986
+    }
+  },
+  {
+    "text": "What statistics can you provide?",
+    "intent": "dataset_scope",
+    "intent_prediction": {
+      "name": "draft_info",
+      "confidence": 0.30502572655677795
+    }
+  },
+  {
+    "text": "What players are in your system?",
+    "intent": "dataset_scope",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.4687667787075043
+    }
+  },
+  {
+    "text": "What can you answer questions about?",
+    "intent": "dataset_scope",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.3269056975841522
     }
   }
 ]
