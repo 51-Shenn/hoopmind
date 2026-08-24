@@ -68,7 +68,11 @@ class ActionTeamInfo(Action):
             cleaned = latest_msg.lower()
             for phrase in ["tell me about the", "tell me about", "info on the", "info on",
                            "information about the", "information about", "what about the",
-                           "what about", "details about the", "details about", "team"]:
+                           "what about", "details about the", "details about",
+                           "who are the", "who are", "who is the", "who is",
+                           "what are the", "what are", "what is the", "what is",
+                           "how are the", "how are", "how is the", "how is",
+                           "the", "team"]:
                 cleaned = cleaned.replace(phrase, "")
             cleaned = cleaned.strip().strip("?").strip()
             if cleaned:
