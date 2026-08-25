@@ -67,16 +67,30 @@ class ActionPlayerStats(Action):
         """Try to extract a player name from the raw message text."""
         import re
         cleaned = text.lower().strip()
+        # Strip question prefixes
         for phrase in ["what were", "show me", "how many", "what are", "what was",
-                       "what is", "show", "give me", "how did", "how good was"]:
+                       "what is", "show", "give me", "how did", "how good was",
+                       "how many points did", "how many assists did",
+                       "how many rebounds did", "how many steals did",
+                       "how many blocks did", "career points of",
+                       "career stats for", "per 36 minutes stats for",
+                       "per 36 stats for", "per 100 stats for",
+                       "per 36 minutes for", "per 36 for"]:
             cleaned = cleaned.replace(phrase, "")
+        # Strip stat-related words and suffixes (longer words first!)
         for word in ["stats", "statistics", "numbers", "career totals",
-                     "per game", "per 100", "per 36", "'s", "'s"]:
+                     "per game", "per 100", "per 36", "per 100 possessions",
+                     "'s", "shooting splits for", "shooting splits",
+                     "shooting", "splits", "points", "rebounds", "assists",
+                     "steals", "blocks", "average", "career",
+                     "per", "for", "in", "did", "was", "is", "season"]:
             cleaned = cleaned.replace(word, "")
         if season:
             cleaned = cleaned.replace(season, "")
         # Remove 4-digit years (seasons) from the text
         cleaned = re.sub(r'\b\d{4}\b', '', cleaned)
+        # Remove remaining punctuation
+        cleaned = re.sub(r'[^\w\s]', '', cleaned)
         # Clean up extra whitespace
         cleaned = re.sub(r'\s+', ' ', cleaned).strip()
         return cleaned if cleaned else None
