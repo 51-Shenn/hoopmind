@@ -1,4 +1,4 @@
-import logging
+﻿import logging
 import re
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
@@ -8,6 +8,7 @@ from actions.data_loader import (
     compare_players, get_team_stats,
     _fuzzy_find_player, _PLAYER_SYNONYMS, _normalize_name, _ensure_loaded
 )
+from actions.llm_answer import compose_answer
 
 logger = logging.getLogger(__name__)
 
@@ -76,6 +77,7 @@ class ActionCompare(Action):
                     response += f"- Field Goal Percentage (FG%): {p1['fg_pct']}% vs {p2['fg_pct']}%\n"
                 if p1["three_pct"] is not None and p2["three_pct"] is not None:
                     response += f"- Three-Point Percentage (3P%): {p1['three_pct']}% vs {p2['three_pct']}%\n"
+                response = compose_answer(tracker.latest_message.get("text", ""), response, response)
                 dispatcher.utter_message(text=response)
                 return []
 
@@ -96,6 +98,7 @@ class ActionCompare(Action):
                         response += f"- Field Goal Percentage (FG%): {t1['fg_pct']}% vs {t2['fg_pct']}%\n"
                     if t1.get("three_pct") is not None and t2.get("three_pct") is not None:
                         response += f"- Three-Point Percentage (3P%): {t1['three_pct']}% vs {t2['three_pct']}%\n"
+                    response = compose_answer(tracker.latest_message.get("text", ""), response, response)
                     dispatcher.utter_message(text=response)
                     return []
 

@@ -1,9 +1,10 @@
-import re
+﻿import re
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
 from actions.data_loader import get_league_info, _fuzzy_find_player, player_per_game_df, _ensure_loaded
+from actions.llm_answer import compose_answer
 
 
 class ActionLeagueInfo(Action):
@@ -25,6 +26,7 @@ class ActionLeagueInfo(Action):
                 "and New York Nets (now Brooklyn Nets), which joined the NBA after the merger.\n"
                 "- The ABA operated from 1967 to 1976. The NBA was founded in 1946."
             )
+            response = compose_answer(tracker.latest_message.get("text", ""), response, response)
             dispatcher.utter_message(text=response)
             return []
 
@@ -34,12 +36,14 @@ class ActionLeagueInfo(Action):
             found = _fuzzy_find_player(player_name, player_per_game_df)
             if found:
                 response = f"{found} played in the NBA."
+                response = compose_answer(tracker.latest_message.get("text", ""), response, response)
                 dispatcher.utter_message(text=response)
                 return []
 
         info = get_league_info()
         response = f"The database covers {', '.join(info['leagues'])} records from {info['season_range']}. "
         response += f"It includes {info['total_players']} players and {info['total_teams']} teams."
+        response = compose_answer(tracker.latest_message.get("text", ""), response, response)
         dispatcher.utter_message(text=response)
         return []
 

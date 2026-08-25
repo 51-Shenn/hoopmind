@@ -1,9 +1,10 @@
-from typing import Any, Text, Dict, List
+﻿from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 
 from actions.data_loader import get_team_info
+from actions.llm_answer import compose_answer
 
 # Team nickname synonyms for text-parsing fallback
 _TEAM_SYNONYMS = {
@@ -97,6 +98,7 @@ class ActionTeamInfo(Action):
             return [SlotSet("team", None)]
 
         response = self._format_response(info)
+        response = compose_answer(tracker.latest_message.get("text", ""), response, response)
         dispatcher.utter_message(text=response)
         return [SlotSet("team", None)]
 

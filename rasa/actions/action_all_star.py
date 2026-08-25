@@ -1,10 +1,11 @@
-import logging
+﻿import logging
 import re
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
 from actions.data_loader import get_all_star, get_player_info, _ensure_loaded
+from actions.llm_answer import compose_answer
 import actions.data_loader as data_loader
 
 logger = logging.getLogger(__name__)
@@ -63,6 +64,7 @@ class ActionAllStar(Action):
                     response = f"Yes, {info['player']} was an All-Star in {year}."
                 else:
                     response = f"No, {info['player']} was not an All-Star in {year}."
+                response = compose_answer(tracker.latest_message.get("text", ""), response, response)
                 dispatcher.utter_message(text=response)
                 return []
 
@@ -74,6 +76,7 @@ class ActionAllStar(Action):
                 if len(info["seasons"]) > 5:
                     response += f" and {len(info['seasons']) - 5} more"
 
+            response = compose_answer(tracker.latest_message.get("text", ""), response, response)
             dispatcher.utter_message(text=response)
             return []
         except Exception as e:

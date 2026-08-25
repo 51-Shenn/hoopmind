@@ -1,10 +1,11 @@
-import logging
+﻿import logging
 import re
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
 from actions.data_loader import get_draft_info, get_draft_year, _fuzzy_find_player, _PLAYER_SYNONYMS, _normalize_name, _ensure_loaded, draft_df
+from actions.llm_answer import compose_answer
 
 logger = logging.getLogger(__name__)
 
@@ -49,6 +50,7 @@ class ActionDraftInfo(Action):
                 response = f"{info['player']} was not drafted in {season}. " + response
             if info["college"] and info["college"] not in ("nan", "Unknown", ""):
                 response += f" College: {info['college']}."
+            response = compose_answer(tracker.latest_message.get("text", ""), response, response)
             dispatcher.utter_message(text=response)
             return []
 
@@ -60,6 +62,7 @@ class ActionDraftInfo(Action):
                 for pick in year_info["top_5"]:
                     response += f"  #{pick['pick']}: {pick['player']} ({pick['team']})\n"
                 response += f"Total picks: {year_info['total_picks']}"
+                response = compose_answer(tracker.latest_message.get("text", ""), response, response)
                 dispatcher.utter_message(text=response)
                 return []
             else:

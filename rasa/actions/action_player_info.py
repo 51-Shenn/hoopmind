@@ -1,9 +1,10 @@
-from typing import Any, Text, Dict, List
+﻿from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 
 from actions.data_loader import get_player_info
+from actions.llm_answer import compose_answer
 
 
 class ActionPlayerInfo(Action):
@@ -28,6 +29,7 @@ class ActionPlayerInfo(Action):
             info = get_player_info(cleaned)
             if info:
                 response = self._format_response(info)
+                response = compose_answer(tracker.latest_message.get("text", ""), response, response)
                 dispatcher.utter_message(text=response)
                 return [SlotSet("player", None)]
 
@@ -37,6 +39,7 @@ class ActionPlayerInfo(Action):
             info = get_player_info(player_name)
             if info:
                 response = self._format_response(info)
+                response = compose_answer(tracker.latest_message.get("text", ""), response, response)
                 dispatcher.utter_message(text=response)
                 return [SlotSet("player", None)]
 

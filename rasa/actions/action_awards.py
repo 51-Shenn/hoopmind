@@ -1,9 +1,10 @@
-from typing import Any, Text, Dict, List
+﻿from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 
 from actions.data_loader import get_award_winner, get_player_awards, _fuzzy_find_player
+from actions.llm_answer import compose_answer
 
 
 class ActionAwardWinner(Action):
@@ -79,6 +80,7 @@ class ActionAwardWinner(Action):
             return []
 
         response = f"{result['player']} won the {result['award'].upper()} in the {result['season']} season."
+        response = compose_answer(tracker.latest_message.get("text", ""), response, response)
         dispatcher.utter_message(text=response)
 
         return [
@@ -145,6 +147,7 @@ class ActionPlayerAwards(Action):
                 f"{awards_text}"
             )
 
+        response = compose_answer(tracker.latest_message.get("text", ""), response, response)
         dispatcher.utter_message(text=response)
 
         return [SlotSet("player", result['player'])]

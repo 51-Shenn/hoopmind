@@ -1,4 +1,4 @@
-import re
+﻿import re
 import logging
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
@@ -11,6 +11,7 @@ from actions.data_loader import (
     normalize_stat_type,
     _fuzzy_find_player, _PLAYER_SYNONYMS, _normalize_name, _ensure_loaded
 )
+from actions.llm_answer import compose_answer
 
 logger = logging.getLogger(__name__)
 
@@ -79,6 +80,7 @@ class ActionPlayerStats(Action):
                 return [SlotSet("player", None), SlotSet("season", None), SlotSet("stat_type", None)]
 
             response = self._format_response(stats, stat_type, latest_msg)
+            response = compose_answer(tracker.latest_message.get("text", ""), response, response)
             dispatcher.utter_message(text=response)
             return [SlotSet("player", None), SlotSet("season", None), SlotSet("stat_type", None)]
         except Exception as e:
