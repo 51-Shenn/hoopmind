@@ -1,0 +1,123 @@
+{
+  "name": "all_star_selection",
+  "displayName": "all_star_selection",
+  "priority": 500000,
+  "webhookState": "WEBHOOK_STATE_ENABLED",
+  "trainingPhrases": [
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Was "
+        },
+        {
+          "text": "LeBron James",
+          "entityType": "@player",
+          "alias": "player",
+          "userDefined": true
+        },
+        {
+          "text": " an All-Star in "
+        },
+        {
+          "text": "2020",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "How many All-Star selections does "
+        },
+        {
+          "text": "LeBron James",
+          "entityType": "@player",
+          "alias": "player",
+          "userDefined": true
+        },
+        {
+          "text": " have?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Which team did "
+        },
+        {
+          "text": "Stephen Curry",
+          "entityType": "@player",
+          "alias": "player",
+          "userDefined": true
+        },
+        {
+          "text": " represent as an All-Star in "
+        },
+        {
+          "text": "2016",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Who was selected as an All-Star in "
+        },
+        {
+          "text": "2015",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "name": "player",
+      "displayName": "player",
+      "value": "$player",
+      "entityTypeDisplayName": "@player",
+      "mandatory": false,
+      "prompts": []
+    },
+    {
+      "name": "season",
+      "displayName": "season",
+      "value": "$season",
+      "entityTypeDisplayName": "@season",
+      "mandatory": false,
+      "prompts": []
+    }
+  ],
+  "messages": [],
+  "defaultResponsePlatforms": [
+    "PLATFORM_UNSPECIFIED"
+  ],
+  "rootFollowupIntentName": "",
+  "parentFollowupIntentName": "",
+  "followupIntentInfo": []
+}

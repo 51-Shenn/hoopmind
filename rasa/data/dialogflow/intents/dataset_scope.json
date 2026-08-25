@@ -1,0 +1,61 @@
+{
+  "name": "dataset_scope",
+  "displayName": "dataset_scope",
+  "priority": 500000,
+  "webhookState": "WEBHOOK_STATE_ENABLED",
+  "trainingPhrases": [
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "What NBA data do you have?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "What seasons are available?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Which players are in the database?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "What statistics can you provide?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Which teams are included?"
+        }
+      ]
+    }
+  ],
+  "parameters": [],
+  "messages": [],
+  "defaultResponsePlatforms": [
+    "PLATFORM_UNSPECIFIED"
+  ],
+  "rootFollowupIntentName": "",
+  "parentFollowupIntentName": "",
+  "followupIntentInfo": []
+}

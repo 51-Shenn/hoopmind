@@ -1,0 +1,17 @@
+recipe: default.v1
+assistant_id: leather-castle
+language: en
+pipeline:
+- name: CompactLLMCommandGenerator
+  prompt_template: prompts/gemini_command_prompt.jinja2
+  llm:
+    model_group: gemini_llm
+  flow_retrieval:
+    embeddings:
+      model_group: gemini_embeddings
+policies:
+- name: FlowPolicy
+- name: RulePolicy
+  core_fallback_threshold: 0.4
+  core_fallback_action_name: "action_default_fallback"
+  enable_fallback_prediction: true

@@ -1,0 +1,124 @@
+flows:
+  greeting:
+    description: "respond to user greeting, say hello and offer help"
+    name: greeting
+    nlu_trigger:
+      - intent: greeting
+    steps:
+      - action: utter_greeting
+        next: END
+
+  goodbye:
+    description: "say goodbye when user is leaving"
+    name: goodbye
+    nlu_trigger:
+      - intent: goodbye
+    steps:
+      - action: utter_goodbye
+        next: END
+
+  default_fallback:
+    description: "handle unrecognized input by asking user to rephrase"
+    name: default_fallback
+    steps:
+      - action: utter_default
+        next: END
+
+  player_info:
+    description: "show general information about a basketball player like position, height, team, awards, career span"
+    name: player info
+    nlu_trigger:
+      - intent: player_info
+    steps:
+      - action: action_player_info
+        next: END
+
+  player_stats:
+    description: "show a player's statistics for a specific season or career"
+    name: player stats
+    nlu_trigger:
+      - intent: player_stats
+    steps:
+      - action: action_player_stats
+        next: END
+
+  team_info:
+    description: "show general information about a basketball team like arena, conference, division, roster, record"
+    name: team info
+    nlu_trigger:
+      - intent: team_info
+    steps:
+      - action: action_team_info
+        next: END
+
+  team_stats:
+    description: "show a team's statistics for a specific season"
+    name: team stats
+    nlu_trigger:
+      - intent: team_stats
+    steps:
+      - action: action_team_stats
+        next: END
+
+  compare:
+    description: "compare statistics between two basketball players or two basketball teams"
+    name: compare
+    nlu_trigger:
+      - intent: compare
+    steps:
+      - action: action_compare
+        next: END
+
+  all_star:
+    description: "show All-Star selection history or end of season team selections like All-NBA, All-Defensive for a player"
+    name: all star
+    nlu_trigger:
+      - intent: all_star
+    steps:
+      - action: action_all_star
+        next: END
+
+  draft_info:
+    description: "show draft information for a player like draft pick, draft year, college"
+    name: draft info
+    nlu_trigger:
+      - intent: draft_info
+    steps:
+      - action: action_draft_info
+        next: END
+
+  league_info:
+    description: "show general NBA league information like rules, history, current season"
+    name: league info
+    nlu_trigger:
+      - intent: league_info
+    steps:
+      - action: action_league_info
+        next: END
+
+  dataset_scope:
+    description: "show what data is available in the database like players, seasons, teams"
+    name: dataset scope
+    nlu_trigger:
+      - intent: dataset_scope
+    steps:
+      - action: action_dataset_scope
+        next: END
+
+  award_winner:
+    description: "find out who won a specific award in a given season"
+    name: award winner
+    nlu_trigger:
+      - intent: award_winner
+    steps:
+      - action: action_award_winner
+        next: END
+
+  player_awards:
+    description: "show all awards won by a specific player"
+    name: player awards
+    nlu_trigger:
+      - intent: player_awards
+    steps:
+      - action: action_player_awards
+        next: END

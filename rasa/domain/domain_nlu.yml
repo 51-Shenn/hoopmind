@@ -1,0 +1,110 @@
+version: "3.1"
+
+intents:
+  - greeting
+  - goodbye
+  - player_info
+  - player_stats
+  - team_info
+  - team_stats
+  - compare
+  - all_star
+  - draft_info
+  - league_info
+  - dataset_scope
+  - award_winner
+  - player_awards
+
+entities:
+  - player
+  - team
+  - season
+  - stat
+  - stat_type
+  - position
+  - award
+  - league
+
+slots:
+  return_value:
+    type: any
+    mappings:
+      - type: controlled
+  player:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: player
+  player2:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: player
+        role: second
+  team:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: team
+  season:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: season
+  stat_type:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: stat_type
+
+actions:
+  - action_player_info
+  - action_player_stats
+  - action_team_info
+  - action_team_stats
+  - action_compare
+  - action_all_star
+  - action_draft_info
+  - action_league_info
+  - action_dataset_scope
+  - action_award_winner
+  - action_player_awards
+
+responses:
+  utter_greeting:
+    - text: "Hello! I'm HoopMind, your NBA knowledge chatbot. How can I help you?"
+  utter_goodbye:
+    - text: "Goodbye! Enjoy the game!"
+  utter_default:
+    - text: "I'm not sure I understand. I can help with NBA players, teams, stats, drafts, and league info. Could you rephrase?"
+  utter_ask_player:
+    - text: "Which player are you interested in?"
+  utter_ask_team:
+    - text: "Which team are you interested in?"
+  utter_ask_season:
+    - text: "Which season?"
+  utter_player_info:
+    - text: "Let me look up information about {player}."
+  utter_player_stats:
+    - text: "Let me get {player}'s statistics for you."
+  utter_team_info:
+    - text: "Let me look up information about the {team}."
+  utter_team_stats:
+    - text: "Let me get the {team}'s statistics for you."
+  utter_ask_player2:
+    - text: "And who would you like to compare them with?"
+  utter_compare_players:
+    - text: "Let me compare {player} and {player2} for you."
+  utter_compare_teams:
+    - text: "Let me compare those teams for you."
+  utter_league_info:
+    - text: "Here is information about the NBA league."
+  utter_dataset_scope:
+    - text: "Our database contains NBA, ABA, and BAA records from 1947 to 2027, with data on 5000+ players and 90+ teams."
+  utter_ask_award:
+    - text: "Which award? (e.g., MVP, DPOY, ROY, Finals MVP)"
