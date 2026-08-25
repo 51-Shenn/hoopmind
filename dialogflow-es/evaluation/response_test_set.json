@@ -1,0 +1,110 @@
+{
+  "description": "Response-quality test set. Each case runs through query_engine + response_generator locally; BLEU/ROUGE-L are computed against the reference answer.",
+  "cases": [
+    {
+      "intent": "greeting",
+      "params": {},
+      "reference": "Hello! I am HoopMind, your NBA chatbot. What would you like to know today?"
+    },
+    {
+      "intent": "goodbye",
+      "params": {},
+      "reference": "Goodbye and thanks for chatting! Come back soon for more NBA facts."
+    },
+    {
+      "intent": "dataset_scope",
+      "params": {},
+      "reference": "I have access to over twenty NBA datasets covering players, teams, awards, All-Star selections, draft history and advanced statistics."
+    },
+    {
+      "intent": "all_star_selection",
+      "params": {"player": ["LeBron James"], "season": ["2020"]},
+      "reference": "Yes, LeBron James was chosen for the NBA All-Star game in 2020."
+    },
+    {
+      "intent": "all_star_selection",
+      "params": {"player": ["Kobe Bryant"]},
+      "reference": "Kobe Bryant earned 18 All-Star nods across his famous career."
+    },
+    {
+      "intent": "draft_information",
+      "params": {"player": ["Stephen Curry"], "season": ["2009"]},
+      "reference": "Stephen Curry went seventh overall to the Golden State Warriors in the 2009 NBA draft out of Davidson College."
+    },
+    {
+      "intent": "player_season_stats",
+      "params": {"player": ["Stephen Curry"], "stat": ["ppg"], "season": ["2016"]},
+      "reference": "Stephen Curry averaged 30.1 points per game during the 2016 season."
+    },
+    {
+      "intent": "player_season_stats",
+      "params": {"player": ["Michael Jordan"], "stat": ["points"], "season": ["1991"]},
+      "reference": "In 1991 Michael Jordan put up 31.5 points a night for the Bulls."
+    },
+    {
+      "intent": "player_season_stats",
+      "params": {"player": ["Nikola Jokic"], "stat": ["assists"], "season": ["2023"]},
+      "reference": "Jokic dished out 9.8 assists per contest in 2023."
+    },
+    {
+      "intent": "player_information",
+      "params": {"player": ["Michael Jordan"]},
+      "reference": "Michael Jordan is a Hall of Fame shooting guard who starred in the NBA between 1984 and 2003 after playing at UNC."
+    },
+    {
+      "intent": "player_career_totals",
+      "params": {"player": ["Michael Jordan"], "stat": ["points"]},
+      "reference": "Over fifteen seasons Michael Jordan accumulated 32,292 career points."
+    },
+    {
+      "intent": "player_advanced_stats",
+      "params": {"player": ["Nikola Jokic"], "stat": ["win shares"], "season": ["2021"]},
+      "reference": "In the 2021 season Nikola Jokic produced 15.6 win shares."
+    },
+    {
+      "intent": "player_shooting_stats",
+      "params": {"player": ["Stephen Curry"], "stat": ["three-point percentage"], "season": ["2016"]},
+      "reference": "Steph Curry connected on 45.4 percent of his three point attempts in 2016."
+    },
+    {
+      "intent": "player_per_100_stats",
+      "params": {"player": ["Stephen Curry"], "stat": ["points"], "season": ["2016"]},
+      "reference": "Per one hundred possessions in 2016, Stephen Curry scored at an elite rate for Golden State."
+    },
+    {
+      "intent": "player_awards",
+      "params": {"player": ["Giannis Antetokounmpo"], "season": ["2019"]},
+      "reference": "Giannis captured the league MVP trophy in 2019."
+    },
+    {
+      "intent": "end_of_season_team",
+      "params": {"player": ["Giannis Antetokounmpo"], "season": ["2019"]},
+      "reference": "Giannis was voted to both the All-NBA First Team and the All-Defensive First Team in 2019."
+    },
+    {
+      "intent": "team_information",
+      "params": {"team": ["Boston Celtics"]},
+      "reference": "Founded in 1947, the Boston Celtics are one of the most storied franchises with a strong all-time win percentage and dozens of playoff appearances."
+    },
+    {
+      "intent": "team_summary",
+      "params": {"team": ["Los Angeles Lakers"], "season": ["2000"]},
+      "reference": "The 2000 Lakers finished 67 and 15 and marched into the playoffs with a healthy scoring margin."
+    },
+    {
+      "intent": "team_opponent_stats",
+      "params": {"team": ["Chicago Bulls"], "stat": ["points"], "season": ["1996"]},
+      "reference": "Chicago's defense held opponents to roughly 93 points a game in 1996."
+    },
+    {
+      "intent": "compare_players",
+      "params": {"player1": ["Michael Jordan"], "player2": ["LeBron James"], "stat": ["points"]},
+      "reference": "Comparing their most recent seasons, LeBron James edges out Michael Jordan in scoring average."
+    },
+    {
+      "intent": "compare_teams",
+      "params": {"team1": ["Los Angeles Lakers"], "team2": ["Boston Celtics"], "season": ["2010"], "stat": ["points"]},
+      "reference": "The Lakers posted the stronger scoring numbers against Boston in 2010."
+    }
+  ]
+}
