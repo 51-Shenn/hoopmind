@@ -103,7 +103,9 @@ class ActionPlayerStats(Action):
                      "shooting splits for", "shooting splits",
                      "shooting", "splits", "points", "rebounds", "assists",
                      "steals", "blocks", "average", "career",
-                     "per", "for", "in", "did", "was", "is", "season"]:
+                     "per", "for", "in", "did", "was", "is", "season",
+                     "warp", "vorp", "bpm", "ws", "ts", "true shooting",
+                     "usage", "win shares", "offensive rating", "defensive rating"]:
             cleaned = cleaned.replace(word, "")
         cleaned = cleaned.replace("\u2019", "").replace("\u2018", "").replace("'", "")
         if season:
@@ -143,7 +145,7 @@ class ActionPlayerStats(Action):
             return "shooting"
         if re.search(r'\badvanced\b', lower):
             return "advanced"
-        if re.search(r'\b(per|vorp|bpm|ws|ts%|true shooting|usage|win shares|offensive rating|defensive rating)\b', lower):
+        if re.search(r'\b(per|vorp|bpm|ws|ts%|true shooting|usage|win shares|offensive rating|defensive rating|warp)\b', lower):
             return "advanced"
         return None
 

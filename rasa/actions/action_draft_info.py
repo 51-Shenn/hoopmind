@@ -74,20 +74,44 @@ class ActionDraftInfo(Action):
     def _extract_player_from_text(text: str) -> str:
         """Try to extract a player name from the raw message text."""
         cleaned = text.lower().strip()
-        for phrase in ["when was", "where was", "which team drafted", "which college did",
-                       "what pick was", "what round was", "what was the draft position of",
-                       "tell me about the draft history of", "draft info for",
-                       "who got picked first overall in", "who was the first overall pick in",
-                       "who was the second overall pick in", "where did", "get drafted",
-                       "drafted in", "nba draft", "draft", "in"]:
-            cleaned = cleaned.replace(phrase, "")
-        # Remove 4-digit years
+
+        # Remove multi-word phrases first (regex word boundaries)
+        multi_phrases = [
+            r'when\s+was',
+            r'where\s+was',
+            r'which\s+team\s+drafted',
+            r'which\s+college\s+did',
+            r'what\s+pick\s+was',
+            r'what\s+round\s+was',
+            r'what\s+was\s+the\s+draft\s+position\s+of',
+            r'tell\s+me\s+about\s+the\s+draft\s+history\s+of',
+            r'draft\s+info\s+for',
+            r'who\s+got\s+picked\s+first\s+overall\s+in',
+            r'who\s+was\s+the\s+first\s+overall\s+pick\s+in',
+            r'who\s+was\s+the\s+second\s+overall\s+pick\s+in',
+            r'where\s+did',
+            r'get\s+drafted',
+            r'drafted\s+in',
+            r'nba\s+draft',
+        ]
+        for pattern in multi_phrases:
+            cleaned = re.sub(pattern, ' ', cleaned)
+
+        # Remove single words with word boundaries
+        cleaned = re.sub(r'\b(draft|drafted|in|the|a|an|was|is|does|did|do)\b', ' ', cleaned)
+
+        # Remove years
         cleaned = re.sub(r'\b\d{4}\b', '', cleaned)
-        # Remove common filler words
-        for word in ["the", "a", "an", "was", "is", "does", "did", "do"]:
-            cleaned = cleaned.replace(word, "")
-        cleaned = re.sub(r'\s+', ' ', cleaned).strip().strip("?").strip()
-        return cleaned if cleaned else None
+        cleaned = re.sub(r'[^\w\s]', ' ', cleaned)
+        cleaned = re.sub(r'\s+', ' ', cleaned).strip()
+
+        if not cleaned:
+            return None
+
+        from actions.data_loader import player_per_game_df
+        from actions.data_loader import _fuzzy_find_player
+        found = _fuzzy_find_player(cleaned, player_per_game_df)
+        return found
 
     @staticmethod
     def _extract_season_from_text(text: str) -> str:

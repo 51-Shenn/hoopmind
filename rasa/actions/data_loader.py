@@ -102,7 +102,7 @@ _PLAYER_SYNONYMS = {
     "shaq": "shaquille o'neal",
     "kd": "kevin durant",
     "giannis": "giannis antetokounmpo",
-    "jokic": "nikola jokic",
+    "jokic": "nikola jokić",
     "luka": "luka doncic",
     "tatum": "jayson tatum",
     "booker": "devin booker",
