@@ -63,19 +63,18 @@ class ActionTeamStats(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         try:
-            team_name = tracker.get_slot("team")
-            season = tracker.get_slot("season")
-            logger.info(f"action_team_stats called: team={team_name}, season={season}")
+            # Always extract from current message first
+            latest_msg = tracker.latest_message.get("text", "")
+            team_name = self._extract_team_from_text(latest_msg)
+            season = self._extract_season_from_text(latest_msg)
+            logger.info(f"Extracted from text: team={team_name}, season={season}")
 
-            # If no team slot, extract from text
+            # Fallback to slots only if extraction failed
             if not team_name:
-                team_name = self._extract_team_from_text(tracker.latest_message.get("text", ""))
-                logger.info(f"Extracted team from text: {team_name}")
-
-            # If no season slot, extract from text
+                team_name = tracker.get_slot("team")
             if not season:
-                season = self._extract_season_from_text(tracker.latest_message.get("text", ""))
-                logger.info(f"Extracted season from text: {season}")
+                season = tracker.get_slot("season")
+            logger.info(f"Final values: team={team_name}, season={season}")
 
             if not team_name:
                 dispatcher.utter_message(text="Which team are you interested in?")

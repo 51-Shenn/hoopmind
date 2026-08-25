@@ -60,26 +60,27 @@ class ActionTeamInfo(Action):
         return "action_team_info"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        team_name = tracker.get_slot("team")
+        # Always extract from current message first
+        team_name = None
+        latest_msg = tracker.latest_message.get("text", "").strip()
+        cleaned = latest_msg.lower()
+        for phrase in ["tell me about the", "tell me about", "info on the", "info on",
+                       "information about the", "information about", "what about the",
+                       "what about", "details about the", "details about",
+                       "who are the", "who are", "who is the", "who is",
+                       "what are the", "what are", "what is the", "what is",
+                       "how are the", "how are", "how is the", "how is",
+                       "the", "team"]:
+            cleaned = cleaned.replace(phrase, "")
+        cleaned = cleaned.strip().strip("?").strip()
+        if cleaned:
+            if cleaned in _TEAM_SYNONYMS:
+                cleaned = _TEAM_SYNONYMS[cleaned]
+            team_name = cleaned
 
-        # Fallback: extract team name from message text
+        # Fallback to slot only if extraction failed
         if not team_name:
-            latest_msg = tracker.latest_message.get("text", "").strip()
-            cleaned = latest_msg.lower()
-            for phrase in ["tell me about the", "tell me about", "info on the", "info on",
-                           "information about the", "information about", "what about the",
-                           "what about", "details about the", "details about",
-                           "who are the", "who are", "who is the", "who is",
-                           "what are the", "what are", "what is the", "what is",
-                           "how are the", "how are", "how is the", "how is",
-                           "the", "team"]:
-                cleaned = cleaned.replace(phrase, "")
-            cleaned = cleaned.strip().strip("?").strip()
-            if cleaned:
-                # Check team synonyms first
-                if cleaned in _TEAM_SYNONYMS:
-                    cleaned = _TEAM_SYNONYMS[cleaned]
-                team_name = cleaned
+            team_name = tracker.get_slot("team")
 
         if not team_name:
             dispatcher.utter_message(text="I'm not sure which team you're asking about. Could you provide the team name or abbreviation?")

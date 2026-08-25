@@ -10,20 +10,22 @@ class ActionAllStar(Action):
         return "action_all_star"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        player_name = tracker.get_slot("player")
+        # Always extract from current message first
+        player_name = None
+        cleaned = tracker.latest_message.get("text", "").lower().strip()
+        for phrase in ["was", "how many", "all-star", "all star", "selections",
+                       "does", "have", "did", "make", "is", "an", "the", "team",
+                       "in", "end of season"]:
+            cleaned = cleaned.replace(phrase, "")
+        cleaned = cleaned.strip().strip("?").strip()
+        if cleaned:
+            info = get_player_info(cleaned)
+            if info:
+                player_name = info["name"]
+
+        # Fallback to slot only if extraction failed
         if not player_name:
-            # Try to extract from message text
-            cleaned = tracker.latest_message.get("text", "").lower().strip()
-            for phrase in ["was", "how many", "all-star", "all star", "selections",
-                           "does", "have", "did", "make", "is", "an", "the", "team",
-                           "in", "end of season"]:
-                cleaned = cleaned.replace(phrase, "")
-            cleaned = cleaned.strip().strip("?").strip()
-            if cleaned:
-                # Try resolving via get_player_info (uses synonyms + fuzzy matching)
-                info = get_player_info(cleaned)
-                if info:
-                    player_name = info["name"]
+            player_name = tracker.get_slot("player")
         if not player_name:
             dispatcher.utter_message(text="Which player's All-Star history would you like to see?")
             return []

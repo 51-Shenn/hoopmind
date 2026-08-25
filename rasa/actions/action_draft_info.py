@@ -14,19 +14,18 @@ class ActionDraftInfo(Action):
         return "action_draft_info"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        player_name = tracker.get_slot("player")
-        season = tracker.get_slot("season")
-        logger.info(f"action_draft_info called: player={player_name}, season={season}")
+        # Always extract from current message first
+        latest_msg = tracker.latest_message.get("text", "")
+        player_name = self._extract_player_from_text(latest_msg)
+        season = self._extract_season_from_text(latest_msg)
+        logger.info(f"Extracted from text: player={player_name}, season={season}")
 
-        # If no player slot, try to extract from message text
+        # Fallback to slots only if extraction failed
         if not player_name:
-            player_name = self._extract_player_from_text(tracker.latest_message.get("text", ""))
-            logger.info(f"Extracted player from text: {player_name}")
-
-        # If no season slot, try to extract from message text
+            player_name = tracker.get_slot("player")
         if not season:
-            season = self._extract_season_from_text(tracker.latest_message.get("text", ""))
-            logger.info(f"Extracted season from text: {season}")
+            season = tracker.get_slot("season")
+        logger.info(f"Final values: player={player_name}, season={season}")
 
         # Priority 1: Player-based lookup
         if player_name:

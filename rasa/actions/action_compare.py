@@ -15,19 +15,19 @@ class ActionCompare(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         try:
-            player1 = tracker.get_slot("player")
-            player2 = tracker.get_slot("player2")
-            logger.info(f"action_compare called: player1={player1}, player2={player2}")
+            # Always extract from current message first
+            extracted = self._extract_players_from_text(tracker.latest_message.get("text", ""))
+            logger.info(f"Extracted players from text: {extracted}")
 
-            # If either player is missing, extract from text
-            if not player1 or not player2:
-                extracted = self._extract_players_from_text(tracker.latest_message.get("text", ""))
-                logger.info(f"Extracted players from text: {extracted}")
-                if extracted:
-                    if not player1:
-                        player1 = extracted[0]
-                    if not player2 and len(extracted) > 1:
-                        player2 = extracted[1]
+            player1 = extracted[0] if extracted and len(extracted) > 0 else None
+            player2 = extracted[1] if extracted and len(extracted) > 1 else None
+
+            # Fallback to slots only if extraction failed
+            if not player1:
+                player1 = tracker.get_slot("player")
+            if not player2:
+                player2 = tracker.get_slot("player2")
+            logger.info(f"Final values: player1={player1}, player2={player2}")
 
             if not player1 or not player2:
                 dispatcher.utter_message(text="Please specify two players to compare. For example: 'compare LeBron James and Michael Jordan'")
