@@ -84,7 +84,7 @@ Or configure Gemini credentials if using Google's LLM.
 
 The assistant is configured in `rasa/config.yml`:
 
-- **Pipeline**: `CompactLLMCommandGenerator` with Gemini LLM and embeddings
+- **Pipeline**: `WhitespaceTokenizer` → `RegexFeaturizer` → `CountVectorsFeaturizer` (word + char_wb) → `EntitySynonymMapper` → `DIETClassifier` (100 epochs) → `FallbackClassifier`
 - **Policies**: `FlowPolicy`
 
 ### Botpress
@@ -125,13 +125,31 @@ uv run rasa run
 
 Starts the Rasa HTTP server (default: `http://localhost:5005`).
 
-#### Run tests
+#### Train NLU model
 
 ```powershell
-uv run rasa test
+rasa train nlu
 ```
 
-Runs end-to-end tests defined in `rasa/e2e_tests/`.
+Trains intent classification only (no dialogue). Model saved to `rasa/models/`.
+
+#### Test NLU model
+
+```powershell
+rasa test nlu
+```
+
+Runs 80/20 train-test split evaluation. Results saved to `rasa/results/`.
+
+#### Cross-validation
+
+```powershell
+rasa test nlu --cross-validation -f 10
+```
+
+Runs 10-fold cross-validation for more reliable intent performance estimates.
+
+#### Inspect flows
 
 ### Botpress
 
@@ -147,10 +165,12 @@ Runs end-to-end tests defined in `rasa/e2e_tests/`.
 hoopmind/
 ├── rasa/                  # Rasa Pro assistant
 │   ├── actions/           # Custom action code
-│   ├── data/              # Training data (flows)
+│   ├── data/              # Training data (flows + NLU)
+│   ├── data/nba/          # NBA raw data files
 │   ├── domain/            # Domain definitions
 │   ├── e2e_tests/         # End-to-end test stories
 │   ├── models/            # Trained model archives
+│   ├── results/           # NLU evaluation reports
 │   ├── config.yml         # Pipeline & policy configuration
 │   ├── credentials.yml    # Input/output channel credentials
 │   └── endpoints.yml      # Action server & tracker store config
