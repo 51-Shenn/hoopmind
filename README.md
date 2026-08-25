@@ -24,7 +24,8 @@ Each platform is developed independently under its own directory.
 
 ### Dialogflow ES
 
-> Coming soon.
+- **Python 3.10–3.12** (developed on 3.12)
+- Internet only needed for optional Google Dialogflow NLU mode; the offline classifier works fully offline
 
 ## Installation
 
@@ -64,7 +65,26 @@ For the full installation transcript, see [`rasa/docs/INSTALLATION.md`](rasa/doc
 
 ### Dialogflow ES
 
-> Coming soon.
+#### 1. Install dependencies
+
+```powershell
+cd dialogflow-es
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+#### 2. Run
+
+**Windows:** double-click `run_hoopmind.bat`
+
+**macOS / Linux:** from `dialogflow-es/`, in two terminals:
+
+```bash
+python -X utf8 webhook.py                          # terminal 1: API on :5000
+python -X utf8 -m streamlit run streamlit_app.py   # terminal 2: UI on :8501
+```
+
+Open **http://localhost:8501** in your browser.
 
 ## Configuration
 
@@ -93,7 +113,16 @@ The assistant is configured in `rasa/config.yml`:
 
 ### Dialogflow ES
 
-> Coming soon.
+No configuration required by default — the built-in offline classifier handles all queries. To enable live Google Dialogflow NLU:
+
+1. Create a service account with the **Dialogflow API Client** role in Google Cloud Console
+2. Download the JSON key and set:
+
+   ```powershell
+   setx GOOGLE_APPLICATION_CREDENTIALS "C:\path\to\your-key.json"
+   ```
+
+3. Restart the terminal — the API log will show `source=dialogflow` when active
 
 ## Usage
 
@@ -149,33 +178,48 @@ rasa test nlu --cross-validation -f 10
 
 Runs 10-fold cross-validation for more reliable intent performance estimates.
 
-#### Inspect flows
-
 ### Botpress
 
 > Coming soon.
 
 ### Dialogflow ES
 
-> Coming soon.
+From `dialogflow-es/`:
+
+```powershell
+python -X utf8 webhook.py                          # API server on :5000
+python -X utf8 -m streamlit run streamlit_app.py   # Chat UI on :8501
+```
+
+Stop with Ctrl+C in each terminal, or close the windows.
 
 ## Project Structure
 
 ```
 hoopmind/
-├── rasa/                  # Rasa Pro assistant
-│   ├── actions/           # Custom action code
-│   ├── data/              # Training data (flows + NLU)
-│   ├── data/nba/          # NBA raw data files
-│   ├── domain/            # Domain definitions
-│   ├── e2e_tests/         # End-to-end test stories
-│   ├── models/            # Trained model archives
-│   ├── results/           # NLU evaluation reports
-│   ├── config.yml         # Pipeline & policy configuration
-│   ├── credentials.yml    # Input/output channel credentials
-│   └── endpoints.yml      # Action server & tracker store config
-├── botpress/              # Botpress integration (planned)
-├── dialogflow-es/         # Dialogflow ES integration (planned)
+├── rasa/                   # Rasa Pro assistant
+│   ├── actions/            # Custom action code
+│   ├── data/               # Training data (flows + NLU)
+│   ├── data/nba/           # NBA raw data files
+│   ├── domain/             # Domain definitions
+│   ├── models/             # Trained model archives
+│   ├── results/            # NLU evaluation reports
+│   ├── config.yml          # Pipeline & policy configuration
+│   ├── credentials.yml     # Input/output channel credentials
+│   └── endpoints.yml       # Action server & tracker store config
+├── botpress/               # Botpress integration (planned)
+├── dialogflow-es/          # Dialogflow ES integration
+│   ├── data/               # 22 Basketball Reference CSV datasets
+│   ├── evaluation/         # Test suites, metrics scripts, checklists
+│   ├── webhook.py          # Flask /chat endpoint + message pipeline
+│   ├── streamlit_app.py    # Chat UI (rich cards + suggestion chips)
+│   ├── dialogflow_client.py# Dialogflow ES detection + offline fallback
+│   ├── entity_extractor.py # Player/team/season/stat recovery from text
+│   ├── query_engine.py     # NBA queries over CSV datasets
+│   ├── response_generator.py# Text answers + rich card payloads
+│   ├── config.py           # Paths
+│   ├── run_hoopmind.bat    # One-click launcher (Windows)
+│   └── requirements.txt    # Python dependencies
 └── LICENSE
 ```
 

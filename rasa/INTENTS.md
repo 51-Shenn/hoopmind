@@ -1,6 +1,6 @@
 # HoopMind - Intents and Training Phrases
 
-Total intents: 13 | Total training phrases: 541
+Total intents: 13 | Total training phrases: 621
 
 Source: `rasa/data/nlu.yml`
 
@@ -304,7 +304,7 @@ Source: `rasa/data/nlu.yml`
 40. [Toronto Raptors](team) info
 41. Tell me about the [Brooklyn Nets](team)
 
-## 6. team_stats (89 phrases)
+## 6. team_stats (109 phrases)
 
 1. What were the [Boston Celtics](team)'s stats in [2024](season)?
 2. How many points per game did the [Golden State Warriors](team) average in [2016](season)?
@@ -395,8 +395,28 @@ Source: `rasa/data/nlu.yml`
 87. [Rockets](team) [three-point percentage](stat) in [2018](season)
 88. [Thunder](team) [offensive rating](stat) in [2012](season)
 89. [Pistons](team) [defensive rating](stat) in [2004](season)
+90. What were the team statistics for the [Lakers](team) in [2018](season)?
+91. What were the statistics for the [Boston Celtics](team) in [2010](season)?
+92. How did the [Chicago Bulls](team) perform statistically in [1996](season)?
+93. What were the [Warriors](team)' numbers in [2016](season)?
+94. How many points did the [Lakers](team) average in [2018](season)?
+95. How many rebounds did the [Celtics](team) average in [2010](season)?
+96. How many assists did the [Warriors](team) average in [2016](season)?
+97. How many turnovers did the team average in [2015](season)?
+98. What was the team's [field goal percentage](stat) in [2014](season)?
+99. What was their [three point percentage](stat) that season?
+100. How accurate were the team from the field?
+101. What was the team's scoring average?
+102. What was the team's average rebounding?
+103. What was the team's average assists?
+104. What were the team's average turnovers?
+105. How many games did the team play that season?
+106. What were the shooting numbers for the team?
+107. How did the team perform that season?
+108. Show me the team's statistics for that year.
+109. Give me the team stats for that season.
 
-## 7. compare (56 phrases)
+## 7. compare (81 phrases)
 
 1. Compare [LeBron James](player) and [Michael Jordan](player)
 2. Who had more [points](stat), [LeBron James](player) or [Kevin Durant](player)?
@@ -454,6 +474,31 @@ Source: `rasa/data/nlu.yml`
 54. Compare [Golden State Warriors](team) dynasty to [Chicago Bulls](team) dynasty
 55. Who was more dominant, [Shaquille O'Neal](player) or [Hakeem Olajuwon](player)?
 56. Compare [Trae Young](player) and [Damian Lillard](player)
+57. Who was better between two players?
+58. Who was the better scorer between the two?
+59. Who was the better passer?
+60. Which player had the better statistics?
+61. Which player performed better that season?
+62. Who had the better overall numbers?
+63. Who had better offensive numbers?
+64. Who had better defensive numbers?
+65. Which team was stronger?
+66. Which team performed better?
+67. Which team had better statistics?
+68. Which team had the better offense?
+69. Which team had the better defense?
+70. Who had more points between the two players?
+71. Who had more assists between them?
+72. Who had more rebounds?
+73. Compare these two players.
+74. Compare these two teams.
+75. Compare the statistics of these two players.
+76. Compare the statistics of these two teams.
+77. Which one had the better season?
+78. Which player had the better season?
+79. Which team had the better season?
+80. Who had the higher scoring average?
+81. Who was the more efficient player?
 
 ## 8. all_star (33 phrases)
 
@@ -520,7 +565,7 @@ Source: `rasa/data/nlu.yml`
 25. What pick was [Dwyane Wade](player)?
 26. Who was the second overall pick in [2003](season)?
 
-## 10. league_info (22 phrases)
+## 10. league_info (40 phrases)
 
 1. What league did [Michael Jordan](player) play in?
 2. What is the difference between the NBA and ABA?
@@ -544,8 +589,26 @@ Source: `rasa/data/nlu.yml`
 20. How is the NBA season structured?
 21. What are the NBA divisions?
 22. How does the NBA playoffs work?
+23. Which league does your data cover?
+24. Which basketball league is included?
+25. What league is this data from?
+26. Which competition does your database cover?
+27. What competition is represented in your data?
+28. Does your database contain NBA data?
+29. Is the data from the NBA?
+30. Which basketball competition do you support?
+31. What league are these statistics from?
+32. Which league are these players from?
+33. What league does HoopMind cover?
+34. What basketball league is supported?
+35. Does your data cover the NBA?
+36. Are these statistics from the NBA?
+37. Which competition is included in the dataset?
+38. What league is included in the dataset?
+39. What basketball competition does your data come from?
+40. Which league does your database focus on?
 
-## 11. dataset_scope (21 phrases)
+## 11. dataset_scope (40 phrases)
 
 1. What NBA data do you have?
 2. What seasons are available?
@@ -568,8 +631,27 @@ Source: `rasa/data/nlu.yml`
 19. What is the scope of your knowledge?
 20. Do you have data from the 1990s?
 21. What can you answer questions about?
+22. What statistics can you provide?
+23. What stats do you have available?
+24. What kind of statistics can I ask about?
+25. What player statistics are available?
+26. What team statistics are available?
+27. What NBA data do you have?
+28. What information can you provide?
+29. What information is available?
+30. What types of data do you have?
+31. What can I ask you about?
+32. What can you tell me about NBA statistics?
+33. Which statistics are included in your database?
+34. What data is available in your system?
+35. What categories of statistics do you support?
+36. What basketball statistics do you support?
+37. What types of NBA data are available?
+38. What can HoopMind tell me?
+39. What does your database contain?
+40. What kind of NBA information do you have?
 
-## 12. award_winner (20 phrases)
+## 12. award_winner (18 phrases)
 
 1. Who won [MVP](award) in [2016](season)?
 2. Who won the [Most Valuable Player](award) award in [2015](season)?
@@ -577,20 +659,18 @@ Source: `rasa/data/nlu.yml`
 4. Who won [Defensive Player of the Year](award) in [2019](season)?
 5. Who won [Rookie of the Year](award) in [2018](season)?
 6. Who won the [ROY](award) in [2017](season)?
-7. Who was the [Finals MVP](award) in [2016](season)?
-8. Who won [MVP](award) in [2014](season)?
-9. Who won [MVP](award) in [2013](season)?
-10. Who won [Most Improved Player](award) in [2021](season)?
-11. Who won [Sixth Man of the Year](award) in [2020](season)?
-12. Who was [MVP](award) in [2012](season)?
-13. Who won [MVP](award) in [2011](season)?
-14. Who won [MVP](award) in [2010](season)?
-15. Who was the [SMOY](award) in [2019](season)?
-16. Who won [DPOY](award) in [2018](season)?
-17. Who won [ROY](award) in [2020](season)?
-18. Who was the [Finals MVP](award) in [2015](season)?
-19. Who won [MVP](award) in [2009](season)?
-20. Who won [MVP](award) in [2008](season)?
+7. Who won [MVP](award) in [2014](season)?
+8. Who won [MVP](award) in [2013](season)?
+9. Who won [Most Improved Player](award) in [2021](season)?
+10. Who won [Sixth Man of the Year](award) in [2020](season)?
+11. Who was [MVP](award) in [2012](season)?
+12. Who won [MVP](award) in [2011](season)?
+13. Who won [MVP](award) in [2010](season)?
+14. Who was the [SMOY](award) in [2019](season)?
+15. Who won [DPOY](award) in [2018](season)?
+16. Who won [ROY](award) in [2020](season)?
+17. Who won [MVP](award) in [2009](season)?
+18. Who won [MVP](award) in [2008](season)?
 
 ## 13. player_awards (20 phrases)
 
@@ -606,11 +686,11 @@ Source: `rasa/data/nlu.yml`
 10. How many championships did [LeBron James](player) win?
 11. Did [Kevin Durant](player) win MVP?
 12. What awards does [Giannis Antetokounmpo](player) have?
-13. Show [Nikola Jokic](player]'s awards
-14. List [Tim Duncan](player]'s honors
+13. Show [Nikola Jokic](player)'s awards
+14. List [Tim Duncan](player)'s honors
 15. What did [Hakeem Olajuwon](player) win?
 16. How many DPOY did [Kevin Garnett](player) win?
 17. Did [Dennis Rodman](player) win any awards?
 18. What awards has [Stephen Curry](player) won?
 19. How many All-Star selections does [LeBron James](player) have?
-20. Show me [Kobe Bryant](player]'s trophy case
+20. Show me [Kobe Bryant](player)'s trophy case

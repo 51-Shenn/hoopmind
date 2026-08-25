@@ -360,6 +360,26 @@ nlu:
     - [Rockets](team) [three-point percentage](stat) in [2018](season)
     - [Thunder](team) [offensive rating](stat) in [2012](season)
     - [Pistons](team) [defensive rating](stat) in [2004](season)
+    - What were the team statistics for the [Lakers](team) in [2018](season)?
+    - What were the statistics for the [Boston Celtics](team) in [2010](season)?
+    - How did the [Chicago Bulls](team) perform statistically in [1996](season)?
+    - What were the [Warriors](team)' numbers in [2016](season)?
+    - How many points did the [Lakers](team) average in [2018](season)?
+    - How many rebounds did the [Celtics](team) average in [2010](season)?
+    - How many assists did the [Warriors](team) average in [2016](season)?
+    - How many turnovers did the team average in [2015](season)?
+    - What was the team's [field goal percentage](stat) in [2014](season)?
+    - What was their [three point percentage](stat) that season?
+    - How accurate were the team from the field?
+    - What was the team's scoring average?
+    - What was the team's average rebounding?
+    - What was the team's average assists?
+    - What were the team's average turnovers?
+    - How many games did the team play that season?
+    - What were the shooting numbers for the team?
+    - How did the team perform that season?
+    - Show me the team's statistics for that year.
+    - Give me the team stats for that season.
 
 - intent: compare
   examples: |
@@ -419,6 +439,31 @@ nlu:
     - [Celtics](team) versus [Nets](team) in [2023](season)
     - Compare [Lakers](team) and [Celtics](team) all time
     - [Heat](team) vs [Spurs](team) in [2013](season)
+    - Who was better between two players?
+    - Who was the better scorer between the two?
+    - Who was the better passer?
+    - Which player had the better statistics?
+    - Which player performed better that season?
+    - Who had the better overall numbers?
+    - Who had better offensive numbers?
+    - Who had better defensive numbers?
+    - Which team was stronger?
+    - Which team performed better?
+    - Which team had better statistics?
+    - Which team had the better offense?
+    - Which team had the better defense?
+    - Who had more points between the two players?
+    - Who had more assists between them?
+    - Who had more rebounds?
+    - Compare these two players.
+    - Compare these two teams.
+    - Compare the statistics of these two players.
+    - Compare the statistics of these two teams.
+    - Which one had the better season?
+    - Which player had the better season?
+    - Which team had the better season?
+    - Who had the higher scoring average?
+    - Who was the more efficient player?
 
 - intent: all_star
   examples: |
@@ -509,6 +554,24 @@ nlu:
     - How is the NBA season structured?
     - What are the NBA divisions?
     - How does the NBA playoffs work?
+    - Which league does your data cover?
+    - Which basketball league is included?
+    - What league is this data from?
+    - Which competition does your database cover?
+    - What competition is represented in your data?
+    - Does your database contain NBA data?
+    - Is the data from the NBA?
+    - Which basketball competition do you support?
+    - What league are these statistics from?
+    - Which league are these players from?
+    - What league does HoopMind cover?
+    - What basketball league is supported?
+    - Does your data cover the NBA?
+    - Are these statistics from the NBA?
+    - Which competition is included in the dataset?
+    - What league is included in the dataset?
+    - What basketball competition does your data come from?
+    - Which league does your database focus on?
 
 - intent: award_winner
   examples: |
@@ -518,7 +581,6 @@ nlu:
     - Who won [Defensive Player of the Year](award) in [2019](season)?
     - Who won [Rookie of the Year](award) in [2018](season)?
     - Who won the [ROY](award) in [2017](season)?
-    - Who was the [Finals MVP](award) in [2016](season)?
     - Who won [MVP](award) in [2014](season)?
     - Who won [MVP](award) in [2013](season)?
     - Who won [Most Improved Player](award) in [2021](season)?
@@ -529,7 +591,6 @@ nlu:
     - Who was the [SMOY](award) in [2019](season)?
     - Who won [DPOY](award) in [2018](season)?
     - Who won [ROY](award) in [2020](season)?
-    - Who was the [Finals MVP](award) in [2015](season)?
     - Who won [MVP](award) in [2009](season)?
     - Who won [MVP](award) in [2008](season)?
 
@@ -579,6 +640,26 @@ nlu:
     - What is the scope of your knowledge?
     - Do you have data from the 1990s?
     - What can you answer questions about?
+    - What statistics can you provide?
+    - What stats do you have available?
+    - What kind of statistics can I ask about?
+    - What player statistics are available?
+    - What team statistics are available?
+    - What NBA data do you have?
+    - What information can you provide?
+    - What information is available?
+    - What types of data do you have?
+    - What can I ask you about?
+    - What can you tell me about NBA statistics?
+    - Which statistics are included in your database?
+    - What data is available in your system?
+    - What categories of statistics do you support?
+    - What basketball statistics do you support?
+    - What types of NBA data are available?
+    - What can HoopMind tell me?
+    - What does your database contain?
+    - What kind of NBA information do you have?
+    - What statistics does your database contain?
 
 
 - synonym: LeBron James
@@ -925,7 +1006,6 @@ lookup_tables:
       - Clutch Player of the Year
       - DPOY
       - Defensive Player of the Year
-      - Finals MVP
       - Most Improved Player
       - Most Valuable Player
       - NBA DPOY
