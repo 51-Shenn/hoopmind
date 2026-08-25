@@ -254,7 +254,6 @@ nlu:
     - Who is the star player on the [Golden State Warriors](team)?
     - When was the [Miami Heat](team) founded?
     - What city are the [Chicago Bulls](team) from?
-    - How many championships have the [Boston Celtics](team) won?
     - Who is the owner of the [Phoenix Suns](team)?
     - What is the home arena for the [Milwaukee Bucks](team)?
     - Tell me about the history of the [Los Angeles Lakers](team)
@@ -400,7 +399,6 @@ nlu:
     - Team comparison: [Portland Trail Blazers](team) against [Minnesota Timberwolves](team) in [2000](season)
     - Who is better, [Stephen Curry](player) or [Kevin Durant](player)?
     - Compare the [assists](stat) of [Chris Paul](player) and [John Stockton](player)
-    - Which player has more rings, [LeBron James](player) or [Michael Jordan](player)?
     - Compare [Giannis Antetokounmpo](player) and [Nikola Jokic](player)
     - Who won more [MVP](award)s, [LeBron James](player) or [Stephen Curry](player)?
     - Compare the stats of [Jayson Tatum](player) and [Luka Doncic](player)
@@ -413,7 +411,6 @@ nlu:
     - Compare [Phoenix Suns](team) and [Dallas Mavericks](team) in [2024](season)
     - Who had more [rebounds](stat) last season, [Nikola Jokic](player) or [Anthony Davis](player)?
     - Compare the career stats of [Tim Duncan](player) and [Kevin Garnett](player)
-    - Which team has more championships, [Boston Celtics](team) or [Los Angeles Lakers](team)?
     - Compare [Golden State Warriors](team) dynasty to [Chicago Bulls](team) dynasty
     - Who was more dominant, [Shaquille O'Neal](player) or [Hakeem Olajuwon](player)?
     - Compare [Trae Young](player) and [Damian Lillard](player)
@@ -429,7 +426,6 @@ nlu:
     - Compare [Phoenix Suns](team) and [Dallas Mavericks](team) in [2024](season)
     - Who had more [rebounds](stat) last season, [Nikola Jokic](player) or [Anthony Davis](player)?
     - Compare the career stats of [Tim Duncan](player) and [Kevin Garnett](player)
-    - Which team has more championships, [Boston Celtics](team) or [Los Angeles Lakers](team)?
     - Compare [Golden State Warriors](team) dynasty to [Chicago Bulls](team) dynasty
     - Who was more dominant, [Shaquille O'Neal](player) or [Hakeem Olajuwon](player)?
     - Compare [Trae Young](player) and [Damian Lillard](player)
@@ -500,6 +496,10 @@ nlu:
     - Did [LeBron James](player) play in the All-Star game?
     - Has [Stephen Curry](player) been an All-Star?
     - Were you an All-Star [Karl Malone](player)?
+    - Tell me if [Stephen Curry](player) made the All-Star game in [2015](season)
+    - Did [Yao Ming](player) play in the All-Star game in [2007](season)?
+    - All-Star appearances for [Tim Duncan](player)
+    - [Dirk Nowitzki](player) All-Star selections
 
 - intent: draft_info
   examples: |
@@ -549,7 +549,6 @@ nlu:
     - What leagues existed before the NBA?
     - What is the BAA?
     - Tell me about basketball league history
-    - How many championships have been won in the NBA?
     - What is the current NBA season?
     - How is the NBA season structured?
     - What are the NBA divisions?
@@ -605,7 +604,6 @@ nlu:
     - Show me [Shaquille O'Neal](player)'s awards
     - What trophies did [Stephen Curry](player) win?
     - How many MVPs did [Michael Jordan](player) win?
-    - How many championships did [LeBron James](player) win?
     - Did [Kevin Durant](player) win MVP?
     - What awards does [Giannis Antetokounmpo](player) have?
     - Show [Nikola Jokic](player)'s awards

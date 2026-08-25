@@ -1,6 +1,6 @@
 # HoopMind - Intents and Training Phrases
 
-Total intents: 13 | Total training phrases: 621
+Total intents: 13 | Total training phrases: 620
 
 Source: `rasa/data/nlu.yml`
 
@@ -260,7 +260,7 @@ Source: `rasa/data/nlu.yml`
 81. Show me [Kawhi Leonard](player)'s numbers in [2017](season)
 82. Show me [Stephen Curry](player)'s numbers in [2016](season)
 
-## 5. team_info (41 phrases)
+## 5. team_info (40 phrases)
 
 1. Tell me about the [Boston Celtics](team)
 2. What is the abbreviation for the [Golden State Warriors](team)?
@@ -289,20 +289,19 @@ Source: `rasa/data/nlu.yml`
 25. Who is the star player on the [Golden State Warriors](team)?
 26. When was the [Miami Heat](team) founded?
 27. What city are the [Chicago Bulls](team) from?
-28. How many championships have the [Boston Celtics](team) won?
-29. Who is the owner of the [Phoenix Suns](team)?
-30. What is the home arena for the [Milwaukee Bucks](team)?
-31. Tell me about the history of the [Los Angeles Lakers](team)
-32. [warriors](team)
-33. [knicks](team)
-34. [sixers](team)
-35. [cavs](team)
-36. [clips](team)
-37. Tell me about the [New York Knicks](team)
-38. Info on [Cleveland Cavaliers](team)
-39. What about the [Dallas Mavericks](team)
-40. [Toronto Raptors](team) info
-41. Tell me about the [Brooklyn Nets](team)
+28. Who is the owner of the [Phoenix Suns](team)?
+29. What is the home arena for the [Milwaukee Bucks](team)?
+30. Tell me about the history of the [Los Angeles Lakers](team)
+31. [warriors](team)
+32. [knicks](team)
+33. [sixers](team)
+34. [cavs](team)
+35. [clips](team)
+36. Tell me about the [New York Knicks](team)
+37. Info on [Cleveland Cavaliers](team)
+38. What about the [Dallas Mavericks](team)
+39. [Toronto Raptors](team) info
+40. Tell me about the [Brooklyn Nets](team)
 
 ## 6. team_stats (109 phrases)
 
@@ -416,7 +415,7 @@ Source: `rasa/data/nlu.yml`
 108. Show me the team's statistics for that year.
 109. Give me the team stats for that season.
 
-## 7. compare (81 phrases)
+## 7. compare (78 phrases)
 
 1. Compare [LeBron James](player) and [Michael Jordan](player)
 2. Who had more [points](stat), [LeBron James](player) or [Kevin Durant](player)?
@@ -435,72 +434,69 @@ Source: `rasa/data/nlu.yml`
 15. Team comparison: [Portland Trail Blazers](team) against [Minnesota Timberwolves](team) in [2000](season)
 16. Who is better, [Stephen Curry](player) or [Kevin Durant](player)?
 17. Compare the [assists](stat) of [Chris Paul](player) and [John Stockton](player)
-18. Which player has more rings, [LeBron James](player) or [Michael Jordan](player)?
-19. Compare [Giannis Antetokounmpo](player) and [Nikola Jokic](player)
-20. Who won more [MVP](award)s, [LeBron James](player) or [Stephen Curry](player)?
-21. Compare the stats of [Jayson Tatum](player) and [Luka Doncic](player)
-22. Which team had a better record, [Boston Celtics](team) or [Denver Nuggets](team)?
-23. Compare [Philadelphia 76ers](team) and [Milwaukee Bucks](team)
-24. Who is taller, [Kevin Durant](player) or [Giannis Antetokounmpo](player)?
-25. Compare the shooting percentage of [Stephen Curry](player) and [Klay Thompson](player)
-26. How do [LeBron James](player) and [Kobe Bryant](player) compare?
-27. Which player scored more points last season, [Jayson Tatum](player) or [Luka Doncic](player)?
-28. Compare [Phoenix Suns](team) and [Dallas Mavericks](team) in [2024](season)
-29. Who had more [rebounds](stat) last season, [Nikola Jokic](player) or [Anthony Davis](player)?
-30. Compare the career stats of [Tim Duncan](player) and [Kevin Garnett](player)
-31. Which team has more championships, [Boston Celtics](team) or [Los Angeles Lakers](team)?
-32. Compare [Golden State Warriors](team) dynasty to [Chicago Bulls](team) dynasty
-33. Who was more dominant, [Shaquille O'Neal](player) or [Hakeem Olajuwon](player)?
-34. Compare [Trae Young](player) and [Damian Lillard](player)
-35. compare lebron james and michael jordan
-36. compare stephen curry and kevin durant
-37. kobe vs lebron
-38. kobe or lebron
-39. who scored more kobe or lebron
-40. who is better curry or durant
-41. Compare [Jordan](player) and [LeBron](player) scoring
-42. [Bulls](team) vs [Lakers](team) best seasons
-43. [Warriors](team) or [Spurs](team) better in [2016](season)?
-44. [Celtics](team) versus [Nets](team) in [2023](season)
-45. Compare [Lakers](team) and [Celtics](team) all time
-46. [Heat](team) vs [Spurs](team) in [2013](season)
-47. Compare the shooting percentage of [Stephen Curry](player) and [Klay Thompson](player)
-48. How do [LeBron James](player) and [Kobe Bryant](player) compare?
-49. Which player scored more points last season, [Jayson Tatum](player) or [Luka Doncic](player)?
-50. Compare [Phoenix Suns](team) and [Dallas Mavericks](team) in [2024](season)
-51. Who had more [rebounds](stat) last season, [Nikola Jokic](player) or [Anthony Davis](player)?
-52. Compare the career stats of [Tim Duncan](player) and [Kevin Garnett](player)
-53. Which team has more championships, [Boston Celtics](team) or [Los Angeles Lakers](team)?
-54. Compare [Golden State Warriors](team) dynasty to [Chicago Bulls](team) dynasty
-55. Who was more dominant, [Shaquille O'Neal](player) or [Hakeem Olajuwon](player)?
-56. Compare [Trae Young](player) and [Damian Lillard](player)
-57. Who was better between two players?
-58. Who was the better scorer between the two?
-59. Who was the better passer?
-60. Which player had the better statistics?
-61. Which player performed better that season?
-62. Who had the better overall numbers?
-63. Who had better offensive numbers?
-64. Who had better defensive numbers?
-65. Which team was stronger?
-66. Which team performed better?
-67. Which team had better statistics?
-68. Which team had the better offense?
-69. Which team had the better defense?
-70. Who had more points between the two players?
-71. Who had more assists between them?
-72. Who had more rebounds?
-73. Compare these two players.
-74. Compare these two teams.
-75. Compare the statistics of these two players.
-76. Compare the statistics of these two teams.
-77. Which one had the better season?
-78. Which player had the better season?
-79. Which team had the better season?
-80. Who had the higher scoring average?
-81. Who was the more efficient player?
+18. Compare [Giannis Antetokounmpo](player) and [Nikola Jokic](player)
+19. Who won more [MVP](award)s, [LeBron James](player) or [Stephen Curry](player)?
+20. Compare the stats of [Jayson Tatum](player) and [Luka Doncic](player)
+21. Which team had a better record, [Boston Celtics](team) or [Denver Nuggets](team)?
+22. Compare [Philadelphia 76ers](team) and [Milwaukee Bucks](team)
+23. Who is taller, [Kevin Durant](player) or [Giannis Antetokounmpo](player)?
+24. Compare the shooting percentage of [Stephen Curry](player) and [Klay Thompson](player)
+25. How do [LeBron James](player) and [Kobe Bryant](player) compare?
+26. Which player scored more points last season, [Jayson Tatum](player) or [Luka Doncic](player)?
+27. Compare [Phoenix Suns](team) and [Dallas Mavericks](team) in [2024](season)
+28. Who had more [rebounds](stat) last season, [Nikola Jokic](player) or [Anthony Davis](player)?
+29. Compare the career stats of [Tim Duncan](player) and [Kevin Garnett](player)
+30. Compare [Golden State Warriors](team) dynasty to [Chicago Bulls](team) dynasty
+31. Who was more dominant, [Shaquille O'Neal](player) or [Hakeem Olajuwon](player)?
+32. Compare [Trae Young](player) and [Damian Lillard](player)
+33. compare lebron james and michael jordan
+34. compare stephen curry and kevin durant
+35. kobe vs lebron
+36. kobe or lebron
+37. who scored more kobe or lebron
+38. who is better curry or durant
+39. Compare [Jordan](player) and [LeBron](player) scoring
+40. [Bulls](team) vs [Lakers](team) best seasons
+41. [Warriors](team) or [Spurs](team) better in [2016](season)?
+42. [Celtics](team) versus [Nets](team) in [2023](season)
+43. Compare [Lakers](team) and [Celtics](team) all time
+44. [Heat](team) vs [Spurs](team) in [2013](season)
+45. Compare the shooting percentage of [Stephen Curry](player) and [Klay Thompson](player)
+46. How do [LeBron James](player) and [Kobe Bryant](player) compare?
+47. Which player scored more points last season, [Jayson Tatum](player) or [Luka Doncic](player)?
+48. Compare [Phoenix Suns](team) and [Dallas Mavericks](team) in [2024](season)
+49. Who had more [rebounds](stat) last season, [Nikola Jokic](player) or [Anthony Davis](player)?
+50. Compare the career stats of [Tim Duncan](player) and [Kevin Garnett](player)
+51. Compare [Golden State Warriors](team) dynasty to [Chicago Bulls](team) dynasty
+52. Who was more dominant, [Shaquille O'Neal](player) or [Hakeem Olajuwon](player)?
+53. Compare [Trae Young](player) and [Damian Lillard](player)
+54. Who was better between two players?
+55. Who was the better scorer between the two?
+56. Who was the better passer?
+57. Which player had the better statistics?
+58. Which player performed better that season?
+59. Who had the better overall numbers?
+60. Who had better offensive numbers?
+61. Who had better defensive numbers?
+62. Which team was stronger?
+63. Which team performed better?
+64. Which team had better statistics?
+65. Which team had the better offense?
+66. Which team had the better defense?
+67. Who had more points between the two players?
+68. Who had more assists between them?
+69. Who had more rebounds?
+70. Compare these two players.
+71. Compare these two teams.
+72. Compare the statistics of these two players.
+73. Compare the statistics of these two teams.
+74. Which one had the better season?
+75. Which player had the better season?
+76. Which team had the better season?
+77. Who had the higher scoring average?
+78. Who was the more efficient player?
 
-## 8. all_star (33 phrases)
+## 8. all_star (37 phrases)
 
 1. Was [LeBron James](player) an All-Star in [2020](season)?
 2. How many All-Star selections does [LeBron James](player) have?
@@ -535,6 +531,10 @@ Source: `rasa/data/nlu.yml`
 31. Did [LeBron James](player) play in the All-Star game?
 32. Has [Stephen Curry](player) been an All-Star?
 33. Were you an All-Star [Karl Malone](player)?
+34. Tell me if [Stephen Curry](player) made the All-Star game in [2015](season)
+35. Did [Yao Ming](player) play in the All-Star game in [2007](season)?
+36. All-Star appearances for [Tim Duncan](player)
+37. [Dirk Nowitzki](player) All-Star selections
 
 ## 9. draft_info (26 phrases)
 
@@ -565,7 +565,7 @@ Source: `rasa/data/nlu.yml`
 25. What pick was [Dwyane Wade](player)?
 26. Who was the second overall pick in [2003](season)?
 
-## 10. league_info (40 phrases)
+## 10. league_info (39 phrases)
 
 1. What league did [Michael Jordan](player) play in?
 2. What is the difference between the NBA and ABA?
@@ -584,29 +584,28 @@ Source: `rasa/data/nlu.yml`
 15. What leagues existed before the NBA?
 16. What is the BAA?
 17. Tell me about basketball league history
-18. How many championships have been won in the NBA?
-19. What is the current NBA season?
-20. How is the NBA season structured?
-21. What are the NBA divisions?
-22. How does the NBA playoffs work?
-23. Which league does your data cover?
-24. Which basketball league is included?
-25. What league is this data from?
-26. Which competition does your database cover?
-27. What competition is represented in your data?
-28. Does your database contain NBA data?
-29. Is the data from the NBA?
-30. Which basketball competition do you support?
-31. What league are these statistics from?
-32. Which league are these players from?
-33. What league does HoopMind cover?
-34. What basketball league is supported?
-35. Does your data cover the NBA?
-36. Are these statistics from the NBA?
-37. Which competition is included in the dataset?
-38. What league is included in the dataset?
-39. What basketball competition does your data come from?
-40. Which league does your database focus on?
+18. What is the current NBA season?
+19. How is the NBA season structured?
+20. What are the NBA divisions?
+21. How does the NBA playoffs work?
+22. Which league does your data cover?
+23. Which basketball league is included?
+24. What league is this data from?
+25. Which competition does your database cover?
+26. What competition is represented in your data?
+27. Does your database contain NBA data?
+28. Is the data from the NBA?
+29. Which basketball competition do you support?
+30. What league are these statistics from?
+31. Which league are these players from?
+32. What league does HoopMind cover?
+33. What basketball league is supported?
+34. Does your data cover the NBA?
+35. Are these statistics from the NBA?
+36. Which competition is included in the dataset?
+37. What league is included in the dataset?
+38. What basketball competition does your data come from?
+39. Which league does your database focus on?
 
 ## 11. dataset_scope (40 phrases)
 
@@ -672,7 +671,7 @@ Source: `rasa/data/nlu.yml`
 17. Who won [MVP](award) in [2009](season)?
 18. Who won [MVP](award) in [2008](season)?
 
-## 13. player_awards (20 phrases)
+## 13. player_awards (19 phrases)
 
 1. What awards did [Michael Jordan](player) win?
 2. What awards has [LeBron James](player) won?
@@ -683,14 +682,13 @@ Source: `rasa/data/nlu.yml`
 7. Show me [Shaquille O'Neal](player)'s awards
 8. What trophies did [Stephen Curry](player) win?
 9. How many MVPs did [Michael Jordan](player) win?
-10. How many championships did [LeBron James](player) win?
-11. Did [Kevin Durant](player) win MVP?
-12. What awards does [Giannis Antetokounmpo](player) have?
-13. Show [Nikola Jokic](player)'s awards
-14. List [Tim Duncan](player)'s honors
-15. What did [Hakeem Olajuwon](player) win?
-16. How many DPOY did [Kevin Garnett](player) win?
-17. Did [Dennis Rodman](player) win any awards?
-18. What awards has [Stephen Curry](player) won?
-19. How many All-Star selections does [LeBron James](player) have?
-20. Show me [Kobe Bryant](player)'s trophy case
+10. Did [Kevin Durant](player) win MVP?
+11. What awards does [Giannis Antetokounmpo](player) have?
+12. Show [Nikola Jokic](player)'s awards
+13. List [Tim Duncan](player)'s honors
+14. What did [Hakeem Olajuwon](player) win?
+15. How many DPOY did [Kevin Garnett](player) win?
+16. Did [Dennis Rodman](player) win any awards?
+17. What awards has [Stephen Curry](player) won?
+18. How many All-Star selections does [LeBron James](player) have?
+19. Show me [Kobe Bryant](player)'s trophy case
