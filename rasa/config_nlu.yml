@@ -18,6 +18,7 @@ pipeline:
   regularization_scale: 0.01
 - name: FallbackClassifier
   threshold: 0.3
+- name: NLUCommandAdapter
 policies:
 - name: FlowPolicy
 - name: RulePolicy
