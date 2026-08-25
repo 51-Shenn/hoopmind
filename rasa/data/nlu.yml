@@ -378,6 +378,12 @@ nlu:
     - Compare [Golden State Warriors](team) dynasty to [Chicago Bulls](team) dynasty
     - Who was more dominant, [Shaquille O'Neal](player) or [Hakeem Olajuwon](player)?
     - Compare [Trae Young](player) and [Damian Lillard](player)
+    - Compare [Jordan](player) and [LeBron](player) scoring
+    - [Bulls](team) vs [Lakers](team) best seasons
+    - [Warriors](team) or [Spurs](team) better in [2016](season)?
+    - [Celtics](team) versus [Nets](team) in [2023](season)
+    - Compare [Lakers](team) and [Celtics](team) all time
+    - [Heat](team) vs [Spurs](team) in [2013](season)
 
 - intent: all_star
   examples: |
