@@ -12,6 +12,8 @@ intents:
   - draft_info
   - league_info
   - dataset_scope
+  - award_winner
+  - player_awards
 
 entities:
   - player
@@ -63,6 +65,8 @@ actions:
   - action_draft_info
   - action_league_info
   - action_dataset_scope
+  - action_award_winner
+  - action_player_awards
 
 responses:
   utter_greeting:
@@ -95,3 +99,5 @@ responses:
     - text: "Here is information about the NBA league."
   utter_dataset_scope:
     - text: "Our database contains NBA, ABA, and BAA records from 1947 to 2027, with data on 5000+ players and 90+ teams."
+  utter_ask_award:
+    - text: "Which award? (e.g., MVP, DPOY, ROY, Finals MVP)"

@@ -1,4 +1,5 @@
 import logging
+import os
 import pandas as pd
 from pathlib import Path
 from typing import Optional, Dict, Any, List
@@ -17,11 +18,12 @@ team_stats_df = None
 team_summaries_df = None
 all_star_df = None
 draft_df = None
+award_df = None
 
 
 def load_all_data():
     global _data_loaded, player_season_df, player_per_game_df, player_career_df
-    global team_abbrev_df, team_stats_df, team_summaries_df, all_star_df, draft_df
+    global team_abbrev_df, team_stats_df, team_summaries_df, all_star_df, draft_df, award_df
 
     if _data_loaded:
         return
@@ -35,6 +37,13 @@ def load_all_data():
         team_summaries_df = pd.read_csv(DATA_DIR / "Team Summaries.csv")
         all_star_df = pd.read_csv(DATA_DIR / "All-Star Selections.csv")
         draft_df = pd.read_csv(DATA_DIR / "Draft Pick History.csv")
+        
+        award_path = DATA_DIR / "Player Award Shares.csv"
+        if award_path.exists():
+            award_df = pd.read_csv(award_path)
+        else:
+            award_df = pd.DataFrame()
+            logger.warning(f"Award data file not found: {award_path}")
 
         _data_loaded = True
         logger.info(f"Loaded {len(player_season_df)} player-season records")
@@ -43,6 +52,7 @@ def load_all_data():
         logger.info(f"Loaded {len(team_abbrev_df)} team records")
         logger.info(f"Loaded {len(all_star_df)} All-Star records")
         logger.info(f"Loaded {len(draft_df)} draft records")
+        logger.info(f"Loaded {len(award_df)} award records")
     except FileNotFoundError as e:
         logger.error(f"Data file not found: {e}")
         raise
@@ -466,4 +476,106 @@ def get_draft_year(year: str) -> Optional[Dict[str, Any]]:
         "year": year_int,
         "total_picks": len(picks),
         "top_5": picks_list,
+    }
+
+
+def get_award_winner(award: str, season: int) -> Optional[Dict[str, Any]]:
+    """Get the winner of a specific award in a given season."""
+    _ensure_loaded()
+    if award_df is None or award_df.empty:
+        return None
+    
+    award_lower = award.lower().strip()
+    
+    # Map user input to actual award names in the data
+    award_map = {
+        'mvp': 'nba mvp',
+        'most valuable player': 'nba mvp',
+        'dpoy': 'nba dpoy',
+        'defensive player of the year': 'nba dpoy',
+        'defensive player': 'nba dpoy',
+        'roy': 'nba roy',
+        'rookie of the year': 'nba roy',
+        'smoy': 'nba smoy',
+        'sixth man of the year': 'nba smoy',
+        'sixth man': 'nba smoy',
+        'mip': 'nba mip',
+        'most improved player': 'nba mip',
+        'most improved': 'nba mip',
+        'cpoy': 'nba clutch_poy',
+        'clutch player of the year': 'nba clutch_poy',
+        'clutch player': 'nba clutch_poy',
+    }
+    
+    award_full = award_map.get(award_lower, award_lower)
+    
+    mask = (
+        (award_df['award'].str.lower() == award_full) &
+        (award_df['season'] == season) &
+        (award_df['winner'] == True)
+    )
+    
+    winners = award_df[mask]
+    if winners.empty:
+        return None
+    
+    winner = winners.iloc[0]
+    return {
+        'player': winner.get('player', 'Unknown'),
+        'award': winner.get('award', award),
+        'season': int(season),
+    }
+
+
+def get_player_awards(player: str) -> Optional[Dict[str, Any]]:
+    """Get all awards won by a specific player."""
+    _ensure_loaded()
+    if award_df is None or award_df.empty:
+        return None
+    
+    matched_name = _fuzzy_find_player(player, award_df)
+    if not matched_name:
+        return None
+    
+    mask = (
+        (award_df['player'].str.lower() == matched_name.lower()) &
+        (award_df['winner'] == True)
+    )
+    
+    awards_df = award_df[mask]
+    if awards_df.empty:
+        return {
+            'player': matched_name,
+            'awards': [],
+            'count': 0,
+            'award_counts': {},
+        }
+    
+    # Format award names for display
+    award_display_map = {
+        'nba mvp': 'NBA MVP',
+        'aba mvp': 'ABA MVP',
+        'nba dpoy': 'NBA DPOY',
+        'nba roy': 'NBA ROY',
+        'aba roy': 'ABA ROY',
+        'nba smoy': 'NBA SMOY',
+        'nba mip': 'NBA MIP',
+        'nba clutch_poy': 'NBA Clutch Player of the Year',
+        'baa roy': 'BAA ROY',
+    }
+    
+    awards = []
+    award_counts = {}
+    for _, row in awards_df.iterrows():
+        award_name = row.get('award', 'Unknown')
+        season = row.get('season', 'Unknown')
+        display_name = award_display_map.get(award_name, award_name.upper())
+        awards.append({'award': display_name, 'season': int(season) if pd.notna(season) else season})
+        award_counts[display_name] = award_counts.get(display_name, 0) + 1
+    
+    return {
+        'player': matched_name,
+        'awards': awards,
+        'count': len(awards),
+        'award_counts': award_counts,
     }

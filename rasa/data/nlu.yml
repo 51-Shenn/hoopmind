@@ -100,17 +100,6 @@ nlu:
     - When did [Shaquille O'Neal](player) start and finish his career?
     - Did [Bill Russell](player) make the Hall of Fame?
     - When did [Magic Johnson](player) make his debut?
-    - What awards did [LeBron James](player) win?
-    - Did [Stephen Curry](player) win the [MVP](award)?
-    - Who won [MVP](award) in [2016](season)?
-    - How many times did [Michael Jordan](player) win [MVP](award)?
-    - Did [LeBron James](player) win [Finals MVP](award)?
-    - How many [All-NBA First Team](award) selections does [Kobe Bryant](player) have?
-    - Did [Stephen Curry](player) win [DPOY](award)?
-    - How many [ROY](award) awards did [Tim Duncan](player) win?
-    - Did [Giannis Antetokounmpo](player) win [MVP](award)?
-    - How many [All-Defensive First Team](award) selections does [Kevin Garnett](player) have?
-    - Did [Shaquille O'Neal](player) win [Finals MVP](award)?
     - Who is [steph](player)
     - Tell me about [jordan](player)
     - Who is [kobe](player)
@@ -143,6 +132,13 @@ nlu:
     - Tell me about [Larry Bird](player)'s career
     - Give me a profile of [Wilt Chamberlain](player)
     - Is [Tracy McGrady](player) in the Hall of Fame?
+    - Is [Kobe Bryant](player) a Hall of Famer?
+    - Did [Michael Jordan](player) make the Hall of Fame?
+    - Is [Shaquille O'Neal](player) in the Hall of Fame?
+    - Did [Tim Duncan](player) get inducted into the Hall of Fame?
+    - Is [LeBron James](player) a Hall of Famer?
+    - Did [Magic Johnson](player) make the Hall of Fame?
+    - Is [Larry Bird](player) in the Hall of Fame?
 
 - intent: player_stats
   examples: |
@@ -269,6 +265,20 @@ nlu:
     - How many [points](stat) per game did the [Boston Celtics](team) average in [2024](season)?
     - What was the [field goal percentage](stat) of the [Golden State Warriors](team) in [2016](season)?
     - How many [wins](stat) did the [Milwaukee Bucks](team) have last season?
+    - [Lakers](team) stats [2024](season)
+    - [Golden State Warriors](team) stats [2016](season)
+    - [Celtics](team) stats [2024](season)
+    - [Heat](team) stats [2023](season)
+    - [Bucks](team) stats [2021](season)
+    - [Nets](team) stats [2022](season)
+    - [76ers](team) stats [2024](season)
+    - [Mavericks](team) stats [2023](season)
+    - [Suns](team) stats [2022](season)
+    - [Nuggets](team) stats [2023](season)
+    - lakers stats 2024
+    - golden state warriors stats 2016
+    - boston celtics stats 2024
+    - miami heat stats 2023
 
 - intent: compare
   examples: |
@@ -296,6 +306,22 @@ nlu:
     - Which team had a better record, [Boston Celtics](team) or [Denver Nuggets](team)?
     - Compare [Philadelphia 76ers](team) and [Milwaukee Bucks](team)
     - Who is taller, [Kevin Durant](player) or [Giannis Antetokounmpo](player)?
+    - Compare the shooting percentage of [Stephen Curry](player) and [Klay Thompson](player)
+    - How do [LeBron James](player) and [Kobe Bryant](player) compare?
+    - Which player scored more points last season, [Jayson Tatum](player) or [Luka Doncic](player)?
+    - Compare [Phoenix Suns](team) and [Dallas Mavericks](team) in [2024](season)
+    - Who had more [rebounds](stat) last season, [Nikola Jokic](player) or [Anthony Davis](player)?
+    - Compare the career stats of [Tim Duncan](player) and [Kevin Garnett](player)
+    - Which team has more championships, [Boston Celtics](team) or [Los Angeles Lakers](team)?
+    - Compare [Golden State Warriors](team) dynasty to [Chicago Bulls](team) dynasty
+    - Who was more dominant, [Shaquille O'Neal](player) or [Hakeem Olajuwon](player)?
+    - Compare [Trae Young](player) and [Damian Lillard](player)
+    - compare lebron james and michael jordan
+    - compare stephen curry and kevin durant
+    - kobe vs lebron
+    - kobe or lebron
+    - who scored more kobe or lebron
+    - who is better curry or durant
     - Compare the shooting percentage of [Stephen Curry](player) and [Klay Thompson](player)
     - How do [LeBron James](player) and [Kobe Bryant](player) compare?
     - Which player scored more points last season, [Jayson Tatum](player) or [Luka Doncic](player)?
@@ -382,6 +408,52 @@ nlu:
     - How is the NBA season structured?
     - What are the NBA divisions?
     - How does the NBA playoffs work?
+
+- intent: award_winner
+  examples: |
+    - Who won [MVP](award) in [2016](season)?
+    - Who won the [Most Valuable Player](award) award in [2015](season)?
+    - Who was the [DPOY](award) in [2020](season)?
+    - Who won [Defensive Player of the Year](award) in [2019](season)?
+    - Who won [Rookie of the Year](award) in [2018](season)?
+    - Who won the [ROY](award) in [2017](season)?
+    - Who was the [Finals MVP](award) in [2016](season)?
+    - Who won [MVP](award) in [2014](season)?
+    - Who won [MVP](award) in [2013](season)?
+    - Who won [Most Improved Player](award) in [2021](season)?
+    - Who won [Sixth Man of the Year](award) in [2020](season)?
+    - Who was [MVP](award) in [2012](season)?
+    - Who won [MVP](award) in [2011](season)?
+    - Who won [MVP](award) in [2010](season)?
+    - Who was the [SMOY](award) in [2019](season)?
+    - Who won [DPOY](award) in [2018](season)?
+    - Who won [ROY](award) in [2020](season)?
+    - Who was the [Finals MVP](award) in [2015](season)?
+    - Who won [MVP](award) in [2009](season)?
+    - Who won [MVP](award) in [2008](season)?
+
+- intent: player_awards
+  examples: |
+    - What awards did [Michael Jordan](player) win?
+    - What awards has [LeBron James](player) won?
+    - How many awards did [Kobe Bryant](player) win?
+    - Did [Tim Duncan](player) win any awards?
+    - What honors did [Magic Johnson](player) receive?
+    - List [Larry Bird](player)'s awards
+    - Show me [Shaquille O'Neal](player)'s awards
+    - What trophies did [Stephen Curry](player) win?
+    - How many MVPs did [Michael Jordan](player) win?
+    - How many championships did [LeBron James](player) win?
+    - Did [Kevin Durant](player) win MVP?
+    - What awards does [Giannis Antetokounmpo](player) have?
+    - Show [Nikola Jokic](player)'s awards
+    - List [Tim Duncan](player)'s honors
+    - What did [Hakeem Olajuwon](player) win?
+    - How many DPOY did [Kevin Garnett](player) win?
+    - Did [Dennis Rodman](player) win any awards?
+    - What awards has [Stephen Curry](player) won?
+    - How many All-Star selections does [LeBron James](player) have?
+    - Show me [Kobe Bryant](player]'s trophy case
 
 - intent: dataset_scope
   examples: |

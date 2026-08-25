@@ -104,3 +104,21 @@ flows:
     steps:
       - action: action_dataset_scope
         next: END
+
+  award_winner:
+    description: "find out who won a specific award in a given season"
+    name: award winner
+    nlu_trigger:
+      - intent: award_winner
+    steps:
+      - action: action_award_winner
+        next: END
+
+  player_awards:
+    description: "show all awards won by a specific player"
+    name: player awards
+    nlu_trigger:
+      - intent: player_awards
+    steps:
+      - action: action_player_awards
+        next: END
