@@ -389,6 +389,17 @@ nlu:
   examples: |
     - Was [LeBron James](player) an All-Star in [2020](season)?
     - How many All-Star selections does [LeBron James](player) have?
+    - How many All-Star selections does [Stephen Curry](player) have?
+    - How many All-Star selections does [Michael Jordan](player) have?
+    - How many All-Star selections does [Kobe Bryant](player) have?
+    - How many All-Star selections does [Tim Duncan](player) have?
+    - How many All-Star selections does [Kevin Durant](player) have?
+    - How many All-Star selections does [Shaquille O'Neal](player) have?
+    - How many times was [LeBron James](player) an All-Star?
+    - How many All-Star games did [LeBron James](player) make?
+    - Total All-Star selections for [Dirk Nowitzki](player)
+    - How many times did [Michael Jordan](player) make the All-Star team?
+    - How many All-Star appearances does [Magic Johnson](player) have?
     - Which team did [Stephen Curry](player) represent as an All-Star in [2016](season)?
     - Who was selected as an All-Star in [2015](season)?
     - Was [LeBron James](player) selected to an All-NBA team in [2013](season)?
@@ -406,6 +417,9 @@ nlu:
     - All-NBA selections for [Kevin Durant](player)
     - Was [Kawhi Leonard](player) on the All-NBA First Team in [2017](season)?
     - End of season awards for [Giannis Antetokounmpo](player) in [2020](season)
+    - Did [LeBron James](player) play in the All-Star game?
+    - Has [Stephen Curry](player) been an All-Star?
+    - Were you an All-Star [Karl Malone](player)?
 
 - intent: draft_info
   examples: |
