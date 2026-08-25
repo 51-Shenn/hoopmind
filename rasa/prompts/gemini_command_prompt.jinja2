@@ -1,6 +1,8 @@
 ## Task
 Analyze the conversation and output a list of actions (one per line).
 
+**CRITICAL RULE: NEVER output `utter_ask_more` under any circumstances. After a flow answers the user's question, output NOTHING more. The conversation should end with the flow's answer.**
+
 ---
 
 ## Available Flows
@@ -23,8 +25,10 @@ Analyze the conversation and output a list of actions (one per line).
 ## Rules
 - For greetings like "hi", "hello", "hey", "good morning" → output `start flow greeting`
 - For farewells like "bye", "goodbye", "see you" → output `start flow goodbye`
+- For questions about who won a specific award in a season (e.g., "Who won MVP in 2016?") → output `start flow award_winner` and `set slot award <award>` and `set slot season <year>`
+- For questions about all awards a player has won (e.g., "What awards did Michael Jordan win?") → output `start flow player_awards` and `set slot player <full name>`
+- For questions about a player's stats in a specific season (e.g., "Show me X's numbers in 2017", "X stats in 2016", "How many points did X average in 2015") → output `start flow player_stats` and `set slot player <name>` and `set slot season <year>`
 - For questions about a specific player (mentioning a name like LeBron, Curry, Jordan) → output `start flow player_info` and `set slot player <full name>`
-- For questions about a player's stats in a specific season → output `start flow player_stats` and `set slot player <name>` and `set slot season <year>`
 - For questions about team stats → output `start flow team_stats` and `set slot team <team name>`
 - For comparing two players → output `start flow compare` and `set slot player <name1>` and `set slot player2 <name2>`
 - For casual chat, opinions, or off-topic → output `offtopic reply`
@@ -32,6 +36,7 @@ Analyze the conversation and output a list of actions (one per line).
 - Common player name mappings: "lebron" or "lebron james" → `set slot player LeBron James`, "curry" or "steph" → `set slot player Stephen Curry", "jordan" or "michael jordan" → `set slot player Michael Jordan`
 - Focus on the last user message
 - When switching topics, just start the new flow directly. Do NOT output `cancel flow` or `stop flow` unless the user explicitly asks to stop
+- Do NOT add `utter_ask_more` or `action_followup` after flows. Just end the flow with the answer.
 - Always extract slot values from the user message and set them with `set slot` commands
 
 ---
