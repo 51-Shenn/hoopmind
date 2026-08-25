@@ -114,19 +114,28 @@ class ActionTeamStats(Action):
     def _extract_team_from_text(text: str) -> str:
         """Try to extract a team name from the raw message text."""
         cleaned = text.lower().strip()
+        # Strip question prefixes
         for phrase in ["stats for the", "stats for", "statistics for the", "statistics for",
                        "numbers for the", "numbers for", "how did the", "how did",
                        "show me the", "show me", "show the", "show",
                        "what were the", "what were", "what are the", "what are",
                        "tell me about the", "tell me about", "info on the", "info on",
+                       "points allowed by the", "points allowed by", "points allowed",
+                       "points scored by the", "points scored by", "points scored",
+                       "points per game for the", "points per game for",
+                       "points per game for", "record for the", "record for",
+                       "record of the", "record of", "record in", "record",
                        "the", "team"]:
             cleaned = cleaned.replace(phrase, "")
-        # Remove stat-related words
-        for word in ["stats", "statistics", "numbers", "shooting", "scoring"]:
+        # Remove stat-related words (longer first!)
+        for word in ["stats", "statistics", "numbers", "shooting", "scoring",
+                     "points per game", "points", "per game", "allowed",
+                     "offensive", "defensive", "rating", "in"]:
             cleaned = cleaned.replace(word, "")
         # Remove 4-digit years
         cleaned = re.sub(r'\b\d{4}\b', '', cleaned)
-        cleaned = re.sub(r'\s+', ' ', cleaned).strip().strip("?").strip()
+        cleaned = re.sub(r'[^\w\s]', '', cleaned)
+        cleaned = re.sub(r'\s+', ' ', cleaned).strip()
         if cleaned:
             if cleaned in _TEAM_SYNONYMS:
                 return _TEAM_SYNONYMS[cleaned]

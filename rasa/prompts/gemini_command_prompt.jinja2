@@ -29,7 +29,8 @@ Analyze the conversation and output a list of actions (one per line).
 - For questions about all awards a player has won (e.g., "What awards did Michael Jordan win?") → output `start flow player_awards` and `set slot player <full name>`
 - For questions about a player's stats in a specific season (e.g., "Show me X's numbers in 2017", "X stats in 2016", "How many points did X average in 2015") → output `start flow player_stats` and `set slot player <name>` and `set slot season <year>`
 - For questions about a specific player (mentioning a name like LeBron, Curry, Jordan) → output `start flow player_info` and `set slot player <full name>`
-- For questions about team stats → output `start flow team_stats` and `set slot team <team name>`
+- For questions about team stats (mentioning a team name like Lakers, Celtics, Warriors, Bulls, Jazz, etc.) → output `start flow team_stats` and `set slot team <team name>` and `set slot season <year>` if mentioned
+- For questions about a team's record, record, wins/losses, or standings → output `start flow team_info` and `set slot team <team name>`
 - For comparing two players → output `start flow compare` and `set slot player <name1>` and `set slot player2 <name2>`
 - For casual chat, opinions, or off-topic → output `offtopic reply`
 - If user mentions a player name, always extract it into a `set slot player` command
