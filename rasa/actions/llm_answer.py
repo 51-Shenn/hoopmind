@@ -106,9 +106,13 @@ def _try_direct(prompt: str) -> Optional[str]:
 def compose_answer(question: str, data_text: str, fallback: str = "", context: str = "") -> str:
     """Compose a natural answer from `data_text` grounded in the CSV facts.
 
-    Returns `fallback` (typically the original template-formatted string)
-    whenever the LLM cannot be reached.
+    Only active when the HOOPMIND_GROUND_ANSWERS environment variable is set
+    (run_rasa_llm.ps1 sets it). Otherwise returns `fallback` immediately,
+    keeping NLU mode fully offline.
     """
+    if os.environ.get("HOOPMIND_GROUND_ANSWERS", "").strip().lower() not in ("1", "true", "yes"):
+        return fallback or data_text
+
     fallback = fallback or data_text
     prompt = _PROMPT_TEMPLATE.format(question=question or context or "NBA question", data=data_text)
     if context:

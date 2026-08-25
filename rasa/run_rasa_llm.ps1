@@ -37,6 +37,9 @@ function Load-EnvFile($path) {
 
 Load-EnvFile (Join-Path $ScriptDir ".env")
 
+# LLM mode grounds custom-action answers in Gemini (actions/llm_answer.py)
+[Environment]::SetEnvironmentVariable("HOOPMIND_GROUND_ANSWERS", "true", "Process")
+
 # -- Validate keys -------------------------------------------
 $keys = @()
 $primary = $env:GEMINI_API_KEY
