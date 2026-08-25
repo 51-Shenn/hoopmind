@@ -1,10 +1,11 @@
-import logging
+﻿import logging
 import re
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
 from actions.data_loader import get_team_stats, _normalize_name, _ensure_loaded
+from actions.llm_answer import compose_answer
 
 logger = logging.getLogger(__name__)
 
@@ -92,6 +93,7 @@ class ActionTeamStats(Action):
                 return []
 
             response = self._format_response(stats, latest_msg)
+            response = compose_answer(tracker.latest_message.get("text", ""), response, response)
             dispatcher.utter_message(text=response)
             return []
         except Exception as e:

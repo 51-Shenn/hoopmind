@@ -1,9 +1,10 @@
 # Switch between LLM and NLU modes for HoopMind Rasa chatbot.
-# Usage: .\switch_mode.ps1 [llm|nlu]
+# Usage: .\switch_mode.ps1 [llm|nlu] [-SkipTrain]
 
 param(
     [ValidateSet("llm", "nlu")]
-    [string]$Mode
+    [string]$Mode,
+    [switch]$SkipTrain
 )
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -24,12 +25,31 @@ if ([string]::IsNullOrEmpty($Mode)) {
 switch ($Mode) {
     "llm" {
         Copy-Item (Join-Path $ScriptDir "config_llm.yml") $configPath -Force
-        Write-Host "Switched to LLM mode (Gemini + Flows)"
+        Copy-Item (Join-Path $ScriptDir "domain_modes\domain_llm.yml") (Join-Path $ScriptDir "domain.yml") -Force
+        Write-Host "Switched to LLM mode (Gemini + Flows)" -ForegroundColor Green
     }
     "nlu" {
         Copy-Item (Join-Path $ScriptDir "config_nlu.yml") $configPath -Force
-        Write-Host "Switched to NLU mode (DIETClassifier + TEDPolicy)"
+        Copy-Item (Join-Path $ScriptDir "domain_modes\domain_nlu.yml") (Join-Path $ScriptDir "domain.yml") -Force
+        Write-Host "Switched to NLU mode (DIETClassifier + TEDPolicy)" -ForegroundColor Green
     }
 }
 
-Write-Host "Run 'rasa train' to retrain with the new config."
+if ($SkipTrain) {
+    Write-Host "Skipping training (-SkipTrain)" -ForegroundColor Gray
+    exit 0
+}
+
+Write-Host "Training with new config..." -ForegroundColor Yellow
+Push-Location $ScriptDir
+try {
+    & uv run rasa train
+} finally {
+    Pop-Location
+}
+if ($LASTEXITCODE -eq 0) {
+    Write-Host "Training complete - ready to use" -ForegroundColor Green
+} else {
+    Write-Host "Training failed (exit code $LASTEXITCODE)" -ForegroundColor Red
+    exit $LASTEXITCODE
+}

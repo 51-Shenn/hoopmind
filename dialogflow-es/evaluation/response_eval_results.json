@@ -1,0 +1,322 @@
+{
+  "corpus_bleu4": 0.0374,
+  "avg_sentence_bleu": 0.1048,
+  "avg_rouge_l_f1": 0.233,
+  "cases": [
+    {
+      "intent": "greeting",
+      "params": {},
+      "reference": "Hello! I am HoopMind, your NBA chatbot. What would you like to know today?",
+      "generated": "👋 Welcome to HoopMind!\nYour NBA knowledge assistant.\n\nI can help you with:\n👤 Players      📊 Statistics\n🏀 Teams        🏆 Awards\n🎓 Drafts       ⭐ All-Stars",
+      "sentence_bleu": 0.1113,
+      "rouge_l_f1": 0.25
+    },
+    {
+      "intent": "goodbye",
+      "params": {},
+      "reference": "Goodbye and thanks for chatting! Come back soon for more NBA facts.",
+      "generated": "👋 Thanks for using HoopMind!\nCome back anytime for more NBA information. 🏀",
+      "sentence_bleu": 0.2162,
+      "rouge_l_f1": 0.6087
+    },
+    {
+      "intent": "dataset_scope",
+      "params": {},
+      "reference": "I have access to over twenty NBA datasets covering players, teams, awards, All-Star selections, draft history and advanced statistics.",
+      "generated": "📚 HoopMind Data\nI can provide information about:\n\n👤 NBA Players (profiles & careers)\n📊 Player statistics (season, advanced,\n   shooting, per-36, per-100, play-by-play)\n🏀 Teams (records, season stats, defense)\n🏆 Awards & All-Star selections\n🎓 Draft history\n📅 Seasons covered across 22 datasets",
+      "sentence_bleu": 0.1241,
+      "rouge_l_f1": 0.3396
+    },
+    {
+      "intent": "all_star_selection",
+      "params": {
+        "player": [
+          "LeBron James"
+        ],
+        "season": [
+          "2020"
+        ]
+      },
+      "reference": "Yes, LeBron James was chosen for the NBA All-Star game in 2020.",
+      "generated": "⭐ 2020 All-Star\nLeBron James\nSelected: ✅ YES\nTeam: Team LeBron",
+      "sentence_bleu": 0.1272,
+      "rouge_l_f1": 0.1905
+    },
+    {
+      "intent": "all_star_selection",
+      "params": {
+        "player": [
+          "Kobe Bryant"
+        ]
+      },
+      "reference": "Kobe Bryant earned 18 All-Star nods across his famous career.",
+      "generated": "⭐ Kobe Bryant\nAll-Star Selections\n⭐ 18\nselections\n\nFirst: 1998   Latest: 2016\n1998, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012 +4 more",
+      "sentence_bleu": 0.0566,
+      "rouge_l_f1": 0.1667
+    },
+    {
+      "intent": "draft_information",
+      "params": {
+        "player": [
+          "Stephen Curry"
+        ],
+        "season": [
+          "2009"
+        ]
+      },
+      "reference": "Stephen Curry went seventh overall to the Golden State Warriors in the 2009 NBA draft out of Davidson College.",
+      "generated": "🎓 Stephen Curry\nDraft Profile\nDraft year: 2009\nRound: 1st\nPick: 7th overall\nDrafted by: Golden State Warriors\nCollege: Davidson",
+      "sentence_bleu": 0.1286,
+      "rouge_l_f1": 0.3684
+    },
+    {
+      "intent": "player_season_stats",
+      "params": {
+        "player": [
+          "Stephen Curry"
+        ],
+        "stat": [
+          "ppg"
+        ],
+        "season": [
+          "2016"
+        ]
+      },
+      "reference": "Stephen Curry averaged 30.1 points per game during the 2016 season.",
+      "generated": "📊 Stephen Curry - 2016\nGolden State Warriors\nPpg\n\n⭐ 30.1\nGames: 79  •  Age: 27",
+      "sentence_bleu": 0.1181,
+      "rouge_l_f1": 0.25
+    },
+    {
+      "intent": "player_season_stats",
+      "params": {
+        "player": [
+          "Michael Jordan"
+        ],
+        "stat": [
+          "points"
+        ],
+        "season": [
+          "1991"
+        ]
+      },
+      "reference": "In 1991 Michael Jordan put up 31.5 points a night for the Bulls.",
+      "generated": "📊 Michael Jordan - 1991\nChicago Bulls\nPoints\n\n⭐ 31.5\nGames: 82  •  Age: 27",
+      "sentence_bleu": 0.1253,
+      "rouge_l_f1": 0.24
+    },
+    {
+      "intent": "player_season_stats",
+      "params": {
+        "player": [
+          "Nikola Jokic"
+        ],
+        "stat": [
+          "assists"
+        ],
+        "season": [
+          "2023"
+        ]
+      },
+      "reference": "Jokic dished out 9.8 assists per contest in 2023.",
+      "generated": "📊 Nikola Jokić - 2023\nDenver Nuggets\nAssists\n\n⭐ 9.8\nGames: 69  •  Age: 27",
+      "sentence_bleu": 0.106,
+      "rouge_l_f1": 0.0952
+    },
+    {
+      "intent": "player_information",
+      "params": {
+        "player": [
+          "Michael Jordan"
+        ]
+      },
+      "reference": "Michael Jordan is a Hall of Fame shooting guard who starred in the NBA between 1984 and 2003 after playing at UNC.",
+      "generated": "👤 Michael Jordan\nG/F\nPlayer Profile\nPosition: G/F\nHeight: 6'6\" (198 cm)\nWeight: 198 lb (90 kg)\nBorn: 1963-02-17\nCollege: UNC\nCareer: 1985 - 2003\nHall of Fame 🏆: Yes",
+      "sentence_bleu": 0.0717,
+      "rouge_l_f1": 0.1923
+    },
+    {
+      "intent": "player_career_totals",
+      "params": {
+        "player": [
+          "Michael Jordan"
+        ],
+        "stat": [
+          "points"
+        ]
+      },
+      "reference": "Over fifteen seasons Michael Jordan accumulated 32,292 career points.",
+      "generated": "👑 Michael Jordan\nCareer Points\nPoints\n\n⭐ 32,292\nCareer span: 1985-2003  •  Teams: 2",
+      "sentence_bleu": 0.1836,
+      "rouge_l_f1": 0.4545
+    },
+    {
+      "intent": "player_advanced_stats",
+      "params": {
+        "player": [
+          "Nikola Jokic"
+        ],
+        "stat": [
+          "win shares"
+        ],
+        "season": [
+          "2021"
+        ]
+      },
+      "reference": "In the 2021 season Nikola Jokic produced 15.6 win shares.",
+      "generated": "📊 Nikola Jokić - 2021\nDenver Nuggets, Advanced\nWin shares\n\n⭐ 15.6\nGames: 72  •  Age: 25",
+      "sentence_bleu": 0.1069,
+      "rouge_l_f1": 0.1667
+    },
+    {
+      "intent": "player_shooting_stats",
+      "params": {
+        "player": [
+          "Stephen Curry"
+        ],
+        "stat": [
+          "three-point percentage"
+        ],
+        "season": [
+          "2016"
+        ]
+      },
+      "reference": "Steph Curry connected on 45.4 percent of his three point attempts in 2016.",
+      "generated": "📊 Stephen Curry - 2016\nGolden State Warriors, Shooting\nThree-point percentage\n\n⭐ 45.4%\nGames: 79  •  Age: 27",
+      "sentence_bleu": 0.0703,
+      "rouge_l_f1": 0.0714
+    },
+    {
+      "intent": "player_per_100_stats",
+      "params": {
+        "player": [
+          "Stephen Curry"
+        ],
+        "stat": [
+          "points"
+        ],
+        "season": [
+          "2016"
+        ]
+      },
+      "reference": "Per one hundred possessions in 2016, Stephen Curry scored at an elite rate for Golden State.",
+      "generated": "📊 Stephen Curry - 2016\nGolden State Warriors, Per 100 Possessions\nPoints\n\n⭐ 42.5\nGames: 79  •  Age: 27",
+      "sentence_bleu": 0.1045,
+      "rouge_l_f1": 0.1875
+    },
+    {
+      "intent": "player_awards",
+      "params": {
+        "player": [
+          "Giannis Antetokounmpo"
+        ],
+        "season": [
+          "2019"
+        ]
+      },
+      "reference": "Giannis captured the league MVP trophy in 2019.",
+      "generated": "🏆 Giannis Antetokounmpo\nAwards\nNBA MVP x1: 2019",
+      "sentence_bleu": 0.1665,
+      "rouge_l_f1": 0.2667
+    },
+    {
+      "intent": "end_of_season_team",
+      "params": {
+        "player": [
+          "Giannis Antetokounmpo"
+        ],
+        "season": [
+          "2019"
+        ]
+      },
+      "reference": "Giannis was voted to both the All-NBA First Team and the All-Defensive First Team in 2019.",
+      "generated": "🏆 Giannis Antetokounmpo - 2019\nEnd-of-Season Honors\n⭐ All-Defense First Team\n⭐ All-NBA First Team (F)",
+      "sentence_bleu": 0.1395,
+      "rouge_l_f1": 0.3448
+    },
+    {
+      "intent": "team_information",
+      "params": {
+        "team": [
+          "Boston Celtics"
+        ]
+      },
+      "reference": "Founded in 1947, the Boston Celtics are one of the most storied franchises with a strong all-time win percentage and dozens of playoff appearances.",
+      "generated": "🏀 Boston Celtics\nAbbreviation: BOS\nLeague: NBA\nFirst season: 1947\nArena: TD Garden\nSeasons completed: 80\nAll-time record: 3751-2527\nWin rate: 59.7%\nPlayoff appearances: 80\nBest season: 1973 (68-14)\nLast season (2026): 56-26",
+      "sentence_bleu": 0.0505,
+      "rouge_l_f1": 0.1786
+    },
+    {
+      "intent": "team_summary",
+      "params": {
+        "team": [
+          "Los Angeles Lakers"
+        ],
+        "season": [
+          "2000"
+        ]
+      },
+      "reference": "The 2000 Lakers finished 67 and 15 and marched into the playoffs with a healthy scoring margin.",
+      "generated": "🏀 Los Angeles Lakers — 2000\nSeason Summary\nRecord: 67 - 15\nWin percentage: 81.7%\nPoint differential: +8.6\nOffensive rating: 107.3\nDefensive rating: 98.2\nPace: 93.3\n📈 Made the playoffs.",
+      "sentence_bleu": 0.057,
+      "rouge_l_f1": 0.1818
+    },
+    {
+      "intent": "team_opponent_stats",
+      "params": {
+        "team": [
+          "Chicago Bulls"
+        ],
+        "stat": [
+          "points"
+        ],
+        "season": [
+          "1996"
+        ]
+      },
+      "reference": "Chicago's defense held opponents to roughly 93 points a game in 1996.",
+      "generated": "🛡️ Chicago Bulls — 1996\nOpponent Statistics (per game allowed)\nPoints: 92.9\nRebounds: 38\nAssists: 19.4\nField goal %: 44.8%\nThree-point %: 35.0%",
+      "sentence_bleu": 0.0588,
+      "rouge_l_f1": 0.0606
+    },
+    {
+      "intent": "compare_players",
+      "params": {
+        "player1": [
+          "Michael Jordan"
+        ],
+        "player2": [
+          "LeBron James"
+        ],
+        "stat": [
+          "points"
+        ]
+      },
+      "reference": "Comparing their most recent seasons, LeBron James edges out Michael Jordan in scoring average.",
+      "generated": "⚔️ Michael Jordan vs LeBron James\nPlayer Comparison\nHead-to-head\nPoints\n• Michael Jordan: 20\n• LeBron James: 20.9\nLatest recorded season used.\n🏆 Result: LeBron James leads with 20.9 versus 20 for Michael Jordan.",
+      "sentence_bleu": 0.058,
+      "rouge_l_f1": 0.1818
+    },
+    {
+      "intent": "compare_teams",
+      "params": {
+        "team1": [
+          "Los Angeles Lakers"
+        ],
+        "team2": [
+          "Boston Celtics"
+        ],
+        "season": [
+          "2010"
+        ],
+        "stat": [
+          "points"
+        ]
+      },
+      "reference": "The Lakers posted the stronger scoring numbers against Boston in 2010.",
+      "generated": "⚔️ Los Angeles Lakers vs Boston Celtics\nTeam Comparison\nLos Angeles Lakers — 2010\n• Points: 101.7\n• Field goal %: 45.7%\n• Three-point %: 34.1%\nBoston Celtics — 2010\n• Points: 99.2\n• Field goal %: 48.3%\n• Three-point %: 34.8%\nSeason records\n• Records: 57-25 (Los Angeles Lakers, 2010)\n• Records: 50-32 (Boston Celtics, 2010)\n🏆 Result: The Los Angeles Lakers leads with 101.7 versus 99.2 for the Boston Celtics.\nResult: The Los Angeles Lakers had the better record (69.5% wins).",
+      "sentence_bleu": 0.0198,
+      "rouge_l_f1": 0.0964
+    }
+  ]
+}
