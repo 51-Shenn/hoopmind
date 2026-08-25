@@ -20,6 +20,7 @@ entities:
   - team
   - season
   - stat
+  - stat_type
   - position
   - award
   - league
@@ -54,6 +55,12 @@ slots:
     mappings:
       - type: from_entity
         entity: season
+  stat_type:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: stat_type
 
 actions:
   - action_player_info
