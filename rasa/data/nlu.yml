@@ -612,8 +612,7 @@ nlu:
     - How many DPOY did [Kevin Garnett](player) win?
     - Did [Dennis Rodman](player) win any awards?
     - What awards has [Stephen Curry](player) won?
-    - How many All-Star selections does [LeBron James](player) have?
-    - Show me [Kobe Bryant](player]'s trophy case
+    - Show me [Kobe Bryant](player)'s trophy case
 
 - intent: dataset_scope
   examples: |
