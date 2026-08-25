@@ -1,0 +1,131 @@
+{
+  "name": "goodbye",
+  "displayName": "goodbye",
+  "priority": 500000,
+  "webhookState": "WEBHOOK_STATE_ENABLED",
+  "trainingPhrases": [
+    {
+      "name": "goodbye_1",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Bye"
+        }
+      ]
+    },
+    {
+      "name": "goodbye_2",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Goodbye"
+        }
+      ]
+    },
+    {
+      "name": "goodbye_3",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "See you"
+        }
+      ]
+    },
+    {
+      "name": "goodbye_4",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "See you later"
+        }
+      ]
+    },
+    {
+      "name": "goodbye_5",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "That's all"
+        }
+      ]
+    },
+    {
+      "name": "goodbye_6",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "I'm done"
+        }
+      ]
+    },
+    {
+      "name": "goodbye_7",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Thanks, bye"
+        }
+      ]
+    },
+    {
+      "name": "goodbye_8",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Thank you, goodbye"
+        }
+      ]
+    },
+    {
+      "name": "goodbye_9",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Talk to you later"
+        }
+      ]
+    },
+    {
+      "name": "goodbye_10",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "See ya"
+        }
+      ]
+    },
+    {
+      "name": "goodbye_11",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Bye HoopMind"
+        }
+      ]
+    },
+    {
+      "name": "goodbye_12",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Goodbye HoopMind"
+        }
+      ]
+    }
+  ],
+  "parameters": [],
+  "messages": [
+    {
+      "lang": "en",
+      "speech": [
+        "Goodbye! Thanks for using HoopMind. Have a great day!"
+      ]
+    }
+  ],
+  "defaultResponsePlatforms": [
+    "PLATFORM_UNSPECIFIED"
+  ],
+  "rootFollowupIntentName": "",
+  "parentFollowupIntentName": "",
+  "followupIntentInfo": []
+}

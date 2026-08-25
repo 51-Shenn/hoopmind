@@ -1,0 +1,125 @@
+{
+  "name": "compare_teams",
+  "displayName": "compare_teams",
+  "priority": 500000,
+  "webhookState": "WEBHOOK_STATE_ENABLED",
+  "trainingPhrases": [
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Compare the "
+        },
+        {
+          "text": "Boston Celtics",
+          "entityType": "@team",
+          "alias": "team",
+          "userDefined": true
+        },
+        {
+          "text": " and "
+        },
+        {
+          "text": "Los Angeles Lakers",
+          "entityType": "@team",
+          "alias": "team",
+          "userDefined": true
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Which team scored more, the "
+        },
+        {
+          "text": "Golden State Warriors",
+          "entityType": "@team",
+          "alias": "team",
+          "userDefined": true
+        },
+        {
+          "text": " or the "
+        },
+        {
+          "text": "Phoenix Suns",
+          "entityType": "@team",
+          "alias": "team",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Compare "
+        },
+        {
+          "text": "Boston Celtics",
+          "entityType": "@team",
+          "alias": "team",
+          "userDefined": true
+        },
+        {
+          "text": " and "
+        },
+        {
+          "text": "Miami Heat",
+          "entityType": "@team",
+          "alias": "team",
+          "userDefined": true
+        },
+        {
+          "text": " in "
+        },
+        {
+          "text": "2024",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        }
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "name": "team1",
+      "displayName": "team1",
+      "value": "$team1",
+      "entityTypeDisplayName": "@team",
+      "mandatory": false,
+      "prompts": []
+    },
+    {
+      "name": "team2",
+      "displayName": "team2",
+      "value": "$team2",
+      "entityTypeDisplayName": "@team",
+      "mandatory": false,
+      "prompts": []
+    },
+    {
+      "name": "season",
+      "displayName": "season",
+      "value": "$season",
+      "entityTypeDisplayName": "@season",
+      "mandatory": false,
+      "prompts": []
+    }
+  ],
+  "messages": [],
+  "defaultResponsePlatforms": [
+    "PLATFORM_UNSPECIFIED"
+  ],
+  "rootFollowupIntentName": "",
+  "parentFollowupIntentName": "",
+  "followupIntentInfo": []
+}

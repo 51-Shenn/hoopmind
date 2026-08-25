@@ -1,0 +1,141 @@
+{
+  "name": "team_summary",
+  "displayName": "team_summary",
+  "priority": 500000,
+  "webhookState": "WEBHOOK_STATE_ENABLED",
+  "trainingPhrases": [
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "What was the record of the "
+        },
+        {
+          "text": "Boston Celtics",
+          "entityType": "@team",
+          "alias": "team",
+          "userDefined": true
+        },
+        {
+          "text": " in "
+        },
+        {
+          "text": "2024",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "What was the point differential for the "
+        },
+        {
+          "text": "Golden State Warriors",
+          "entityType": "@team",
+          "alias": "team",
+          "userDefined": true
+        },
+        {
+          "text": " in "
+        },
+        {
+          "text": "2016",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "What was the pace of the "
+        },
+        {
+          "text": "Sacramento Kings",
+          "entityType": "@team",
+          "alias": "team",
+          "userDefined": true
+        },
+        {
+          "text": " in "
+        },
+        {
+          "text": "2023",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "What was the offensive rating of the "
+        },
+        {
+          "text": "Phoenix Suns",
+          "entityType": "@team",
+          "alias": "team",
+          "userDefined": true
+        },
+        {
+          "text": " in "
+        },
+        {
+          "text": "2021",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "name": "team",
+      "displayName": "team",
+      "value": "$team",
+      "entityTypeDisplayName": "@team",
+      "mandatory": false,
+      "prompts": []
+    },
+    {
+      "name": "season",
+      "displayName": "season",
+      "value": "$season",
+      "entityTypeDisplayName": "@season",
+      "mandatory": false,
+      "prompts": []
+    }
+  ],
+  "messages": [],
+  "defaultResponsePlatforms": [
+    "PLATFORM_UNSPECIFIED"
+  ],
+  "rootFollowupIntentName": "",
+  "parentFollowupIntentName": "",
+  "followupIntentInfo": []
+}

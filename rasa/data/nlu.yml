@@ -1,0 +1,1124 @@
+version: "3.1"
+nlu:
+- intent: greeting
+  examples: |
+    - Hi
+    - Hello
+    - Hey
+    - Hi HoopMind
+    - Hello HoopMind
+    - Hey HoopMind
+    - Good morning
+    - Good afternoon
+    - Good evening
+    - Hey there
+    - Hi there
+    - Hello there
+    - What's up
+    - Sup
+    - Yo
+    - Howdy
+    - Greetings
+    - What's good
+    - Hey hey
+    - Hiya
+    - Hello hello
+    - Morning
+    - Afternoon
+    - Evening
+    - Hi, how are you?
+    - Hey, what's up?
+
+- intent: goodbye
+  examples: |
+    - Bye
+    - Goodbye
+    - See you
+    - See you later
+    - That's all
+    - I'm done
+    - Thanks, bye
+    - Thank you, goodbye
+    - Talk to you later
+    - See ya
+    - Bye HoopMind
+    - Goodbye HoopMind
+    - Later
+    - Peace
+    - Take care
+    - Catch you later
+    - I gotta go
+    - That's all I needed
+    - Thanks for the help, bye
+    - Alright, bye
+    - Have a good one
+    - Good night
+    - Cya
+    - I'm out
+
+- intent: player_info
+  examples: |
+    - Who is [Stephen Curry](player)
+    - Tell me about [LeBron James](player)
+    - What position does [Kevin Durant](player) play?
+    - How tall is [LeBron James](player)?
+    - When did [Kobe Bryant](player) debut?
+    - Where did [Stephen Curry](player) go to college?
+    - Who is [Michael Jordan](player)
+    - Tell me about [Giannis Antetokounmpo](player)
+    - Who is [mj](player)
+    - Who is [kd](player)
+    - Tell me about [shaq](player)
+    - [cp3](player)
+    - [ai](player)
+    - [ad](player)
+    - [pg](player)
+    - [scottie](player)
+    - [magic](player)
+    - [bird](player)
+    - What team does [Luka Doncic](player) play for
+    - How old is [Jayson Tatum](player)
+    - Give me info on [Nikola Jokic](player)
+    - What is [Damian Lillard](player) height
+    - Who is [Joel Embiid](player)
+    - Tell me about [Anthony Davis](player)
+    - What does [Stephen Curry](player) play
+    - Information about [Kevin Durant](player)
+    - What position is [LeBron James](player)
+    - Details about [James Harden](player)
+    - [Luka Doncic](player) who is he
+    - What can you tell me about [Stephen Curry](player)
+    - I want to know about [LeBron James](player)
+    - Describe [Michael Jordan](player)
+    - [LeBron James](player)
+    - [king james](player)
+    - [lebron james](player)
+    - [lebron](player)
+    - [Stephen Curry](player)
+    - [Kevin Durant](player)
+    - What was [Tim Duncan](player)'s career span?
+    - When did [Shaquille O'Neal](player) start and finish his career?
+    - Did [Bill Russell](player) make the Hall of Fame?
+    - When did [Magic Johnson](player) make his debut?
+    - Who is [steph](player)
+    - Tell me about [jordan](player)
+    - Who is [kobe](player)
+    - Tell me about [jokic](player)
+    - Who is [luka](player)
+    - Who is [dame](player)
+    - Info on [harden](player)
+    - Who is [embiid](player)
+    - Tell me about [giannis](player)
+    - Who is [dirk](player)
+    - Tell me about [wade](player)
+    - Who is [melo](player)
+    - Who is [russ](player)
+    - Tell me about [jimmy](player)
+    - Who is [klay](player)
+    - Who is [dwight](player)
+    - Tell me about [vince](player)
+    - Who is [ray allen](player)
+    - Who is [reggie](player)
+    - Tell me about [barkley](player)
+    - Who is [hakeem](player)
+    - Tell me about [stockton](player)
+    - Who is [malone](player)
+    - Who is [penny](player)
+    - Profile of [Wilt Chamberlain](player)
+    - Bio for [Allen Iverson](player)
+    - Career background of [Kareem Abdul-Jabbar](player)
+    - Career overview for [Charles Barkley](player)
+    - How tall is [Shaquille O'Neal](player)?
+    - Tell me about [Larry Bird](player)'s career
+    - Give me a profile of [Wilt Chamberlain](player)
+    - Is [Tracy McGrady](player) in the Hall of Fame?
+    - Is [Kobe Bryant](player) a Hall of Famer?
+    - Did [Michael Jordan](player) make the Hall of Fame?
+    - Is [Shaquille O'Neal](player) in the Hall of Fame?
+    - Did [Tim Duncan](player) get inducted into the Hall of Fame?
+    - Is [LeBron James](player) a Hall of Famer?
+    - Did [Magic Johnson](player) make the Hall of Fame?
+    - Is [Larry Bird](player) in the Hall of Fame?
+
+- intent: player_stats
+  examples: |
+    - What were [Stephen Curry](player)'s stats in [2016](season)?
+    - Show me [LeBron James](player)'s statistics for [2018](season)
+    - How many points did [Michael Jordan](player) average in [1991](season)?
+    - What was [Kevin Durant](player)'s [points](stat) in [2014](season)?
+    - Give me the [rebounds](stat) for [Nikola Jokic](player) in [2023](season)
+    - [LeBron James](player) stats [2013](season)
+    - Show [Stephen Curry](player) [2016](season) numbers
+    - What are [Giannis Antetokounmpo](player) stats for [2021](season)
+    - [Kevin Durant](player) statistics [2014](season)
+    - How did [James Harden](player) perform in [2019](season)
+    - Show me [Jayson Tatum](player) stats for [2023](season)
+    - What were [Joel Embiid](player) numbers in [2022](season)
+    - [Luka Doncic](player) stats [2024](season)
+    - [Damian Lillard](player) stats [2020](season)
+    - How many assists did [Chris Paul](player) have in [2015](season)
+    - Show [Anthony Davis](player) [2020](season) stats
+    - What were the [rebounds](stat) for [Nikola Jokic](player) in [2022](season)
+    - [LeBron James](player) in [2013](season)
+    - [Stephen Curry](player) numbers [2016](season)
+    - [Michael Jordan](player) [1991](season)
+    - What are [LeBron James](player)'s career totals?
+    - How many career points does [LeBron James](player) have?
+    - How many career assists did [John Stockton](player) record?
+    - Show career [rebounds](stat) for [Dennis Rodman](player)
+    - What was [Nikola Jokic](player)'s [PER](stat) in [2023](season)?
+    - Show [Giannis Antetokounmpo](player)'s [true shooting percentage](stat).
+    - What was [Stephen Curry](player)'s [usage percentage](stat) in [2016](season)?
+    - What was [LeBron James](player)'s [VORP](stat) in [2013](season)?
+    - How good was [Stephen Curry](player) from three in [2016](season)?
+    - What was [Klay Thompson](player)'s [three-point percentage](stat)?
+    - How many dunks did [LeBron James](player) have in [2013](season)?
+    - What are [James Harden](player)'s [per 100](stat_type) possession [points](stat)?
+    - Show [Stephen Curry](player)'s [per 100](stat_type) possession statistics in [2016](season)
+    - What was [LeBron James](player)'s offensive rating in [2013](season)?
+    - What are [Anthony Davis](player)'s [per 36](stat_type) [points](stat)?
+    - Show [Kevin Durant](player)'s [per 36](stat_type) statistics in [2014](season)
+    - What is [Nikola Jokic](player)'s [per 36](stat_type) [rebounds](stat)?
+    - How many [assists](stat) did [Chris Paul](player) generate in [2015](season)?
+    - What was [Stephen Curry](player)'s [plus-minus](stat) per 100 possessions?
+    - How many shooting fouls did [James Harden](player) draw?
+    - What was [LeBron James](player)'s [field goal percentage](stat)?
+    - How many [steals](stat) did [Michael Jordan](player) average?
+    - What is [Stephen Curry](player)'s [three point percentage](stat)?
+    - How many [blocks](stat) did [Hakeem Olajuwon](player) have?
+    - What was [Kobe Bryant](player)'s [free throw percentage](stat)?
+    - How many [minutes](stat) did [Kevin Durant](player) play?
+    - What is [James Harden](player)'s [usage percentage](stat)?
+    - How many [games played](stat) did [Robert Parish](player) have?
+    - What was [Tim Duncan](player)'s [win shares](stat)?
+    - Per 36 minutes stats for [Zion Williamson](player) in [2021](season)
+    - What are [Anthony Edwards](player)'s [per 36](stat_type) points this season?
+    - [DeMar DeRozan](player) points [per 36](stat_type) in [2016](season)
+    - Per minute production of [Manu Ginobili](player) in [2007](season)
+    - [per 100](stat_type) possessions, [Stephen Curry](player)'s points in [2016](season)
+    - What did [Joel Embiid](player) score [per 100](stat_type) possessions in [2021](season)?
+    - [Giannis Antetokounmpo](player) rebounds [per 100](stat_type) poss in [2020](season)
+    - Show [Damian Lillard](player]'s [per 100](stat_type) assists for [2019](season)
+    - How many [assists](stat) did [Chris Paul](player) generate in [2015](season)?
+    - What was [Stephen Curry](player)'s [plus-minus](stat) [per 100](stat_type) possessions?
+    - How many shooting fouls did [James Harden](player) draw?
+    - How many dunks did [Rudy Gobert](player) have in [2019](season)?
+    - [Trae Young](player) points generated by assists in [2022](season)
+    - What was [Draymond Green](player)'s plus-minus impact in [2017](season)?
+    - Show me [Kawhi Leonard](player)'s numbers in [2017](season)
+    - Show me [Stephen Curry](player)'s numbers in [2016](season)
+    - What were [LeBron James](player)'s numbers in [2018](season)?
+    - How many points did [Stephen Curry](player) average in [2016](season)?
+    - How many points did [Kawhi Leonard](player) average in [2017](season)?
+    - How many points did [Kevin Durant](player) average in [2014](season)?
+    - Career points of [Kareem Abdul-Jabbar](player)
+    - Career points of [LeBron James](player)
+    - Career points of [Michael Jordan](player)
+    - Career stats for [Magic Johnson](player)
+    - Show me [Damian Lillard](player)'s stats for [2020](season)
+    - What is [Nikola Jokic](player)'s PER in [2023](season)?
+    - What is [Stephen Curry](player)'s PER in [2016](season)?
+    - Show [Luka Doncic](player)'s shooting splits for [2024](season)
+    - [Trae Young](player) shooting splits for [2023](season)
+    - Per 36 minutes stats for [Zion Williamson](player) in [2021](season)
+    - Per 36 stats for [Giannis Antetokounmpo](player) in [2020](season)
+    - Per 100 possessions for [James Harden](player) in [2019](season)
+    - Draw fouls stats for [Jimmy Butler](player) in [2023](season)
+
+- intent: team_info
+  examples: |
+    - Tell me about the [Boston Celtics](team)
+    - What is the abbreviation for the [Golden State Warriors](team)?
+    - Which league did the [Los Angeles Lakers](team) play in?
+    - Who owns the [Miami Heat](team)
+    - What conference are the [Boston Celtics](team) in
+    - Tell me about [Chicago Bulls](team)
+    - Information on the [Phoenix Suns](team)
+    - What division are the [Golden State Warriors](team) in
+    - Tell me about [gsw](team)
+    - [lakers](team)
+    - [celtics](team)
+    - [heat](team)
+    - [bulls](team)
+    - Who is the coach of the [Los Angeles Lakers](team)
+    - Details about [Milwaukee Bucks](team)
+    - [Boston Celtics](team) info
+    - What arena do the [Golden State Warriors](team) play in
+    - Tell me about [Denver Nuggets](team)
+    - Who plays for the [Philadelphia 76ers](team)
+    - [Los Angeles Lakers](team)
+    - [Golden State Warriors](team)
+    - [Boston Celtics](team)
+    - Who are the [Los Angeles Lakers](team) starters?
+    - What is the [Boston Celtics](team) roster?
+    - Who is the star player on the [Golden State Warriors](team)?
+    - When was the [Miami Heat](team) founded?
+    - What city are the [Chicago Bulls](team) from?
+    - How many championships have the [Boston Celtics](team) won?
+    - Who is the owner of the [Phoenix Suns](team)?
+    - What is the home arena for the [Milwaukee Bucks](team)?
+    - Tell me about the history of the [Los Angeles Lakers](team)
+    - [warriors](team)
+    - [knicks](team)
+    - [sixers](team)
+    - [cavs](team)
+    - [clips](team)
+    - Tell me about the [New York Knicks](team)
+    - Info on [Cleveland Cavaliers](team)
+    - What about the [Dallas Mavericks](team)
+    - [Toronto Raptors](team) info
+    - Tell me about the [Brooklyn Nets](team)
+
+- intent: team_stats
+  examples: |
+    - What were the [Boston Celtics](team)'s stats in [2024](season)?
+    - How many points per game did the [Golden State Warriors](team) average in [2016](season)?
+    - What was the [Milwaukee Bucks](team)'s [three-point percentage](stat) in [2021](season)?
+    - Show me the [Los Angeles Lakers](team) statistics for [2023](season)
+    - What was the [Denver Nuggets](team)'s record in [2023](season)?
+    - How many wins did the [Boston Celtics](team) have in [2024](season)?
+    - What was the [Phoenix Suns](team)'s [offensive rating](stat) in [2022](season)?
+    - Show [Miami Heat](team) stats for [2023](season)
+    - How many [rebounds](stat) did the [Milwaukee Bucks](team) average last season?
+    - What was the [Philadelphia 76ers](team)'s [pace](stat) in [2024](season)?
+    - Show me the [Golden State Warriors](team) shooting stats for [2022](season)
+    - How many [assists](stat) did the [Denver Nuggets](team) average in [2023](season)?
+    - What was the [Boston Celtics](team)'s [defensive rating](stat) last season?
+    - Show the [Los Angeles Clippers](team) stats for [2024](season)
+    - How many [turnovers](stat) did the [Phoenix Suns](team) average last season?
+    - What was the [Dallas Mavericks](team)'s record in [2023](season)?
+    - Show me the [Miami Heat](team) [three-point percentage](stat) for [2024](season)
+    - How many [steals](stat) did the [Boston Celtics](team) average last season?
+    - What was the [Milwaukee Bucks](team)'s [field goal percentage](stat) in [2024](season)?
+    - Show the [Golden State Warriors](team) [rebounds](stat) for [2023](season)
+    - What was the record of the [Boston Celtics](team) in [2024](season)?
+    - What was the point differential for the [Golden State Warriors](team) in [2016](season)?
+    - What was the pace of the [Sacramento Kings](team) in [2023](season)?
+    - What was the offensive rating of the [Phoenix Suns](team) in [2021](season)?
+    - How many [points](stat) per game did the [Boston Celtics](team) average in [2024](season)?
+    - What was the [field goal percentage](stat) of the [Golden State Warriors](team) in [2016](season)?
+    - How many [wins](stat) did the [Milwaukee Bucks](team) have last season?
+    - [Lakers](team) stats [2024](season)
+    - [Bulls](team) record in [1996](season)
+    - [Celtics](team) [points](stat) allowed in [2008](season)
+    - [Warriors](team) [points](stat) in [2017](season)
+    - [Lakers](team) [assists](stat) in [2020](season)
+    - [Heat](team) [rebounds](stat) in [2013](season)
+    - [Spurs](team) record in [2014](season)
+    - [Nets](team) [points](stat) in [2002](season)
+    - [Knicks](team) record in [1999](season)
+    - [76ers](team) [points](stat) in [2001](season)
+    - [Mavericks](team) record in [2011](season)
+    - [Suns](team) [points](stat) in [2021](season)
+    - [Nuggets](team) record in [2023](season)
+    - [Bucks](team) [points](stat) in [2021](season)
+    - [Raptors](team) record in [2019](season)
+    - [Clippers](team) [points](stat) in [2024](season)
+    - [Hawks](team) record in [2015](season)
+    - [Trail Blazers](team) [points](stat) in [2019](season)
+    - [Cavaliers](team) record in [2016](season)
+    - [Pistons](team) [points](stat) in [2004](season)
+    - [Magic](team) record in [1995](season)
+    - [Kings](team) [points](stat) in [2002](season)
+    - [Pelicans](team) [points](stat) in [2024](season)
+    - [Timberwolves](team) record in [2024](season)
+    - [Grizzlies](team) [points](stat) in [2024](season)
+    - [Thunder](team) record in [2012](season)
+    - [Jazz](team) [points](stat) in [1997](season)
+    - [Hornets](team) [points](stat) in [2016](season)
+    - [Pacers](team) record in [2000](season)
+    - [Wizards](team) [points](stat) in [2024](season)
+    - [Rockets](team) record in [2018](season)
+    - [Bulls](team) [points](stat) in [1996](season)
+    - [Lakers](team) [points](stat) per game in [2000](season)
+    - [Celtics](team) [points](stat) per game in [2008](season)
+    - [Warriors](team) [points](stat) per game in [2016](season)
+    - [Heat](team) [points](stat) per game in [2012](season)
+    - [Golden State Warriors](team) stats [2016](season)
+    - [Celtics](team) stats [2024](season)
+    - [Heat](team) stats [2023](season)
+    - [Bucks](team) stats [2021](season)
+    - [Nets](team) stats [2022](season)
+    - [76ers](team) stats [2024](season)
+    - [Mavericks](team) stats [2023](season)
+    - [Suns](team) stats [2022](season)
+    - [Nuggets](team) stats [2023](season)
+    - lakers stats 2024
+    - golden state warriors stats 2016
+    - boston celtics stats 2024
+    - miami heat stats 2023
+    - [Jazz](team) points per game in [1997](season)
+    - [Spurs](team) stats in [2014](season)
+    - [Rockets](team) points per game in [2018](season)
+    - [Thunder](team) stats in [2012](season)
+    - [Pistons](team) record in [2004](season)
+    - [Knicks](team) stats in [1999](season)
+    - [Sixers](team) points per game in [2001](season)
+    - [Blazers](team) stats in [1990](season)
+    - How many points per game did the [Jazz](team) average in [1997](season)?
+    - What was the [Spurs](team)'s record in [2014](season)?
+    - [Rockets](team) [three-point percentage](stat) in [2018](season)
+    - [Thunder](team) [offensive rating](stat) in [2012](season)
+    - [Pistons](team) [defensive rating](stat) in [2004](season)
+
+- intent: compare
+  examples: |
+    - Compare [LeBron James](player) and [Michael Jordan](player)
+    - Who had more [points](stat), [LeBron James](player) or [Kevin Durant](player)?
+    - Compare the [rebounds](stat) of [Nikola Jokic](player) and [Joel Embiid](player)
+    - Compare the [Boston Celtics](team) and [Los Angeles Lakers](team)
+    - Which team scored more, the [Golden State Warriors](team) or the [Phoenix Suns](team)?
+    - Compare [Boston Celtics](team) and [Miami Heat](team) in [2024](season)
+    - Who scored more points, [Kobe Bryant](player) or [Tim Duncan](player)?
+    - Compare [Stephen Curry](player) and [Kyrie Irving](player) in assists
+    - rebounds comparison between [Dennis Rodman](player) and [Ben Wallace](player)
+    - Which player averaged more steals : [Chris Paul](player) or [Gary Payton](player)?
+    - [Kevin Durant](player) vs [Carmelo Anthony](player) career scoring
+    - Which team was better in [2016](season), the [Golden State Warriors](team) or the [San Antonio Spurs](team)?
+    - Head to head stats for the [Miami Heat](team) versus the [Dallas Mavericks](team) in [2011](season)
+    - Compare the [Los Angeles Clippers](team) with the [Sacramento Kings](team) this season
+    - Team comparison: [Portland Trail Blazers](team) against [Minnesota Timberwolves](team) in [2000](season)
+    - Who is better, [Stephen Curry](player) or [Kevin Durant](player)?
+    - Compare the [assists](stat) of [Chris Paul](player) and [John Stockton](player)
+    - Which player has more rings, [LeBron James](player) or [Michael Jordan](player)?
+    - Compare [Giannis Antetokounmpo](player) and [Nikola Jokic](player)
+    - Who won more [MVP](award)s, [LeBron James](player) or [Stephen Curry](player)?
+    - Compare the stats of [Jayson Tatum](player) and [Luka Doncic](player)
+    - Which team had a better record, [Boston Celtics](team) or [Denver Nuggets](team)?
+    - Compare [Philadelphia 76ers](team) and [Milwaukee Bucks](team)
+    - Who is taller, [Kevin Durant](player) or [Giannis Antetokounmpo](player)?
+    - Compare the shooting percentage of [Stephen Curry](player) and [Klay Thompson](player)
+    - How do [LeBron James](player) and [Kobe Bryant](player) compare?
+    - Which player scored more points last season, [Jayson Tatum](player) or [Luka Doncic](player)?
+    - Compare [Phoenix Suns](team) and [Dallas Mavericks](team) in [2024](season)
+    - Who had more [rebounds](stat) last season, [Nikola Jokic](player) or [Anthony Davis](player)?
+    - Compare the career stats of [Tim Duncan](player) and [Kevin Garnett](player)
+    - Which team has more championships, [Boston Celtics](team) or [Los Angeles Lakers](team)?
+    - Compare [Golden State Warriors](team) dynasty to [Chicago Bulls](team) dynasty
+    - Who was more dominant, [Shaquille O'Neal](player) or [Hakeem Olajuwon](player)?
+    - Compare [Trae Young](player) and [Damian Lillard](player)
+    - compare lebron james and michael jordan
+    - compare stephen curry and kevin durant
+    - kobe vs lebron
+    - kobe or lebron
+    - who scored more kobe or lebron
+    - who is better curry or durant
+    - Compare the shooting percentage of [Stephen Curry](player) and [Klay Thompson](player)
+    - How do [LeBron James](player) and [Kobe Bryant](player) compare?
+    - Which player scored more points last season, [Jayson Tatum](player) or [Luka Doncic](player)?
+    - Compare [Phoenix Suns](team) and [Dallas Mavericks](team) in [2024](season)
+    - Who had more [rebounds](stat) last season, [Nikola Jokic](player) or [Anthony Davis](player)?
+    - Compare the career stats of [Tim Duncan](player) and [Kevin Garnett](player)
+    - Which team has more championships, [Boston Celtics](team) or [Los Angeles Lakers](team)?
+    - Compare [Golden State Warriors](team) dynasty to [Chicago Bulls](team) dynasty
+    - Who was more dominant, [Shaquille O'Neal](player) or [Hakeem Olajuwon](player)?
+    - Compare [Trae Young](player) and [Damian Lillard](player)
+    - Compare [Jordan](player) and [LeBron](player) scoring
+    - [Bulls](team) vs [Lakers](team) best seasons
+    - [Warriors](team) or [Spurs](team) better in [2016](season)?
+    - [Celtics](team) versus [Nets](team) in [2023](season)
+    - Compare [Lakers](team) and [Celtics](team) all time
+    - [Heat](team) vs [Spurs](team) in [2013](season)
+
+- intent: all_star
+  examples: |
+    - Was [LeBron James](player) an All-Star in [2020](season)?
+    - How many All-Star selections does [LeBron James](player) have?
+    - How many All-Star selections does [Stephen Curry](player) have?
+    - How many All-Star selections does [Michael Jordan](player) have?
+    - How many All-Star selections does [Kobe Bryant](player) have?
+    - How many All-Star selections does [Tim Duncan](player) have?
+    - How many All-Star selections does [Kevin Durant](player) have?
+    - How many All-Star selections does [Shaquille O'Neal](player) have?
+    - How many times was [LeBron James](player) an All-Star?
+    - How many All-Star games did [LeBron James](player) make?
+    - Total All-Star selections for [Dirk Nowitzki](player)
+    - How many times did [Michael Jordan](player) make the All-Star team?
+    - How many All-Star appearances does [Magic Johnson](player) have?
+    - Which team did [Stephen Curry](player) represent as an All-Star in [2016](season)?
+    - Who was selected as an All-Star in [2015](season)?
+    - Was [LeBron James](player) selected to an All-NBA team in [2013](season)?
+    - Which All-NBA team was [Stephen Curry](player) selected to in [2016](season)?
+    - Did [Giannis Antetokounmpo](player) make an end of season team in [2019](season)?
+    - How many times was [Michael Jordan](player) an All-Star?
+    - Is [Kevin Durant](player) an All-Star?
+    - Was [Kobe Bryant](player) an All-Star in [2010](season)?
+    - How many All-Star games has [Tim Duncan](player) played in?
+    - Show me [LeBron James](player)'s All-Star history
+    - All-Star selections for [Shaquille O'Neal](player)
+    - Was [Nikola Jokic](player) an All-Star in [2022](season)?
+    - Did [Jayson Tatum](player) make the All-Star team?
+    - Which All-Defensive team was [Michael Jordan](player) on?
+    - All-NBA selections for [Kevin Durant](player)
+    - Was [Kawhi Leonard](player) on the All-NBA First Team in [2017](season)?
+    - End of season awards for [Giannis Antetokounmpo](player) in [2020](season)
+    - Did [LeBron James](player) play in the All-Star game?
+    - Has [Stephen Curry](player) been an All-Star?
+    - Were you an All-Star [Karl Malone](player)?
+
+- intent: draft_info
+  examples: |
+    - Where was [Stephen Curry](player) drafted?
+    - What pick was [LeBron James](player) in the draft?
+    - Which college did [Michael Jordan](player) enter the draft from?
+    - Who was the first overall pick in [2003](season)?
+    - What round was [Kobe Bryant](player) drafted in?
+    - When was [Stephen Curry](player) drafted?
+    - What was the draft position of [Giannis Antetokounmpo](player)?
+    - Who got picked first overall in [2003](season)?
+    - Tell me about the draft history of [Kobe Bryant](player)
+    - Where did [Tim Duncan](player) get drafted?
+    - Draft info for [Kevin Garnett](player)
+    - What pick was [Luka Doncic](player)?
+    - Which team drafted [Zion Williamson](player)?
+    - What was [Jayson Tatum](player)'s draft position?
+    - [2024](season) nba draft
+    - nba draft [2023](season)
+    - draft [2022](season)
+    - who was drafted in [2021](season)
+    - [2020](season) draft picks
+    - nba draft results [2019](season)
+    - Who was the number one pick in [2019](season)?
+    - What round was [Nikola Jokic](player) drafted in?
+    - Tell me about [Anthony Edwards](player) draft
+    - Where was [James Harden](player) selected in the draft?
+    - What pick was [Dwyane Wade](player)?
+    - Who was the second overall pick in [2003](season)?
+
+- intent: league_info
+  examples: |
+    - What league did [Michael Jordan](player) play in?
+    - What is the difference between the NBA and ABA?
+    - Was [Kareem Abdul-Jabbar](player) in the ABA?
+    - Which league was active in [1975](season)?
+    - Which basketball leagues do you support?
+    - Do you cover the NBA?
+    - Tell me about the league data you have
+    - What is the NBA?
+    - How many teams are in the NBA?
+    - When was the NBA founded?
+    - What is the history of the NBA?
+    - Tell me about the ABA
+    - What happened to the ABA?
+    - When did the NBA and ABA merge?
+    - What leagues existed before the NBA?
+    - What is the BAA?
+    - Tell me about basketball league history
+    - How many championships have been won in the NBA?
+    - What is the current NBA season?
+    - How is the NBA season structured?
+    - What are the NBA divisions?
+    - How does the NBA playoffs work?
+
+- intent: award_winner
+  examples: |
+    - Who won [MVP](award) in [2016](season)?
+    - Who won the [Most Valuable Player](award) award in [2015](season)?
+    - Who was the [DPOY](award) in [2020](season)?
+    - Who won [Defensive Player of the Year](award) in [2019](season)?
+    - Who won [Rookie of the Year](award) in [2018](season)?
+    - Who won the [ROY](award) in [2017](season)?
+    - Who was the [Finals MVP](award) in [2016](season)?
+    - Who won [MVP](award) in [2014](season)?
+    - Who won [MVP](award) in [2013](season)?
+    - Who won [Most Improved Player](award) in [2021](season)?
+    - Who won [Sixth Man of the Year](award) in [2020](season)?
+    - Who was [MVP](award) in [2012](season)?
+    - Who won [MVP](award) in [2011](season)?
+    - Who won [MVP](award) in [2010](season)?
+    - Who was the [SMOY](award) in [2019](season)?
+    - Who won [DPOY](award) in [2018](season)?
+    - Who won [ROY](award) in [2020](season)?
+    - Who was the [Finals MVP](award) in [2015](season)?
+    - Who won [MVP](award) in [2009](season)?
+    - Who won [MVP](award) in [2008](season)?
+
+- intent: player_awards
+  examples: |
+    - What awards did [Michael Jordan](player) win?
+    - What awards has [LeBron James](player) won?
+    - How many awards did [Kobe Bryant](player) win?
+    - Did [Tim Duncan](player) win any awards?
+    - What honors did [Magic Johnson](player) receive?
+    - List [Larry Bird](player)'s awards
+    - Show me [Shaquille O'Neal](player)'s awards
+    - What trophies did [Stephen Curry](player) win?
+    - How many MVPs did [Michael Jordan](player) win?
+    - How many championships did [LeBron James](player) win?
+    - Did [Kevin Durant](player) win MVP?
+    - What awards does [Giannis Antetokounmpo](player) have?
+    - Show [Nikola Jokic](player)'s awards
+    - List [Tim Duncan](player)'s honors
+    - What did [Hakeem Olajuwon](player) win?
+    - How many DPOY did [Kevin Garnett](player) win?
+    - Did [Dennis Rodman](player) win any awards?
+    - What awards has [Stephen Curry](player) won?
+    - How many All-Star selections does [LeBron James](player) have?
+    - Show me [Kobe Bryant](player]'s trophy case
+
+- intent: dataset_scope
+  examples: |
+    - What NBA data do you have?
+    - What seasons are available?
+    - Which players are in the database?
+    - What statistics can you provide?
+    - Which teams are included?
+    - What data do you have access to?
+    - Tell me about your database
+    - What information can you give me?
+    - Do you have historical NBA data?
+    - What years of data do you have?
+    - Can you tell me about the data available?
+    - What stats are stored in your database?
+    - How far back does your data go?
+    - Do you have data on all NBA teams?
+    - What players are in your system?
+    - Can you access NBA statistics?
+    - What kind of basketball data do you have?
+    - Do you have ABA data too?
+    - What is the scope of your knowledge?
+    - Do you have data from the 1990s?
+    - What can you answer questions about?
+
+
+- synonym: LeBron James
+  examples: |
+    - lebron
+    - king james
+    - lebron james
+    - bron
+    - lbj
+
+- synonym: Michael Jordan
+  examples: |
+    - mj
+    - jordan
+    - michael jordan
+    - mike jordan
+
+- synonym: Stephen Curry
+  examples: |
+    - steph
+    - curry
+    - steph curry
+    - stephen curry
+    - chef curry
+
+- synonym: Kobe Bryant
+  examples: |
+    - kobe
+    - black mamba
+    - kobe bryant
+
+- synonym: "Shaquille O'Neal"
+  examples: |
+    - shaq
+    - shaquille
+    - shaquille o'neal
+    - diesel
+
+- synonym: Kevin Durant
+  examples: |
+    - kd
+    - durant
+    - kevin durant
+
+- synonym: Giannis Antetokounmpo
+  examples: |
+    - giannis
+    - greek freak
+    - antetokounmpo
+
+- synonym: Nikola Jokic
+  examples: |
+    - jokic
+    - joker
+    - nikola jokic
+
+- synonym: Luka Doncic
+  examples: |
+    - luka
+    - doncic
+    - luka doncic
+
+- synonym: Jayson Tatum
+  examples: |
+    - tatum
+    - jayson tatum
+
+- synonym: Damian Lillard
+  examples: |
+    - dame
+    - lillard
+    - dame time
+
+- synonym: Chris Paul
+  examples: |
+    - cp3
+    - chris paul
+
+- synonym: Anthony Davis
+  examples: |
+    - ad
+    - anthony davis
+    - the brow
+
+- synonym: Joel Embiid
+  examples: |
+    - embiid
+    - joel embiid
+    - the process
+
+- synonym: James Harden
+  examples: |
+    - harden
+    - the beard
+    - james harden
+
+- synonym: Allen Iverson
+  examples: |
+    - ai
+    - iverson
+    - the answer
+
+- synonym: Paul George
+  examples: |
+    - pg
+    - pg13
+    - paul george
+
+- synonym: Scottie Pippen
+  examples: |
+    - scottie
+    - pippen
+    - scottie pippen
+
+- synonym: Magic Johnson
+  examples: |
+    - magic
+    - magic johnson
+
+- synonym: Larry Bird
+  examples: |
+    - bird
+    - larry legend
+    - larry bird
+
+- synonym: Dirk Nowitzki
+  examples: |
+    - dirk
+    - nowitzki
+    - dirk nowitzki
+
+- synonym: Dwyane Wade
+  examples: |
+    - wade
+    - d-wade
+    - dwyane wade
+    - flash
+
+- synonym: Carmelo Anthony
+  examples: |
+    - melo
+    - carmelo
+    - carmelo anthony
+
+- synonym: Russell Westbrook
+  examples: |
+    - russ
+    - westbrook
+    - russell westbrook
+
+- synonym: Jimmy Butler
+  examples: |
+    - jimmy
+    - butler
+    - jimmy butler
+    - jimmy buckets
+
+- synonym: Klay Thompson
+  examples: |
+    - klay
+    - klay thompson
+
+- synonym: Dwight Howard
+  examples: |
+    - dwight
+    - dwight howard
+
+- synonym: Vince Carter
+  examples: |
+    - vince
+    - vince carter
+    - vinsanity
+    - half man half amazing
+
+- synonym: Ray Allen
+  examples: |
+    - ray
+    - ray allen
+    - jesus shuttlesworth
+
+- synonym: Reggie Miller
+  examples: |
+    - reggie
+    - reggie miller
+
+- synonym: Charles Barkley
+  examples: |
+    - charles
+    - barkley
+    - sir charles
+    - charles barkley
+
+- synonym: Hakeem Olajuwon
+  examples: |
+    - hakeem
+    - olajuwon
+    - the dream
+    - hakeem olajuwon
+
+- synonym: John Stockton
+  examples: |
+    - stockton
+    - john stockton
+
+- synonym: Karl Malone
+  examples: |
+    - malone
+    - karl malone
+    - the mailman
+
+- synonym: Anfernee Hardaway
+  examples: |
+    - penny
+    - penny hardaway
+    - anfernee hardaway
+
+- synonym: Chris Webber
+  examples: |
+    - webber
+    - c-webb
+    - chris webber
+
+- synonym: Draymond Green
+  examples: |
+    - draymond
+    - draymond green
+
+- synonym: Trae Young
+  examples: |
+    - trae
+    - ice trae
+    - trae young
+
+- synonym: Ja Morant
+  examples: |
+    - ja
+    - ja morant
+
+- synonym: Anthony Edwards
+  examples: |
+    - ant
+    - ant man
+    - anthony edwards
+
+- synonym: LaMelo Ball
+  examples: |
+    - lamelo
+    - lamelo ball
+
+- synonym: Zion Williamson
+  examples: |
+    - zion
+    - zion williamson
+
+- synonym: Devin Booker
+  examples: |
+    - booker
+    - devin booker
+    - d-book
+
+- synonym: Bradley Beal
+  examples: |
+    - beal
+    - bradley beal
+
+- synonym: Golden State Warriors
+  examples: |
+    - gsw
+    - warriors
+    - dubs
+    - golden state
+
+- synonym: Los Angeles Lakers
+  examples: |
+    - lakers
+    - lal
+    - los angeles lakers
+    - lake show
+
+- synonym: Boston Celtics
+  examples: |
+    - celtics
+    - bos
+    - boston celtics
+
+- synonym: Miami Heat
+  examples: |
+    - heat
+    - mia
+    - miami heat
+
+- synonym: Chicago Bulls
+  examples: |
+    - bulls
+    - chi
+    - chicago bulls
+
+- synonym: New York Knicks
+  examples: |
+    - knicks
+    - nyk
+    - new york knicks
+
+- synonym: Philadelphia 76ers
+  examples: |
+    - sixers
+    - 76ers
+    - philly
+    - phi
+    - philadelphia 76ers
+
+- synonym: Cleveland Cavaliers
+  examples: |
+    - cavs
+    - cavaliers
+    - cle
+    - cleveland cavaliers
+
+- synonym: Los Angeles Clippers
+  examples: |
+    - clips
+    - clippers
+    - lac
+    - los angeles clippers
+
+
+lookup_tables:
+  - lookup: award
+    examples: |
+      - 6MOY
+      - ABA MVP
+      - ABA Most Valuable Player
+      - ABA ROY
+      - ABA Rookie of the Year
+      - All-NBA First Team
+      - All-NBA Second Team
+      - All-NBA Third Team
+      - All-Defensive First Team
+      - All-Defensive Second Team
+      - BAA ROY
+      - BAA Rookie of the Year
+      - CPOY
+      - Clutch Player
+      - Clutch Player of the Year
+      - DPOY
+      - Defensive Player of the Year
+      - Finals MVP
+      - Most Improved Player
+      - Most Valuable Player
+      - NBA DPOY
+      - NBA MIP
+      - NBA MVP
+      - NBA Rookie of the Year
+      - NBA Sixth Man of the Year
+      - ROY
+      - Rookie of the Year
+      - SMOY
+      - Sixth Man of the Year
+      - MVP
+  - lookup: stat
+    examples: |
+      - assists
+      - blocks
+      - defensive rating
+      - defensive rebounds
+      - field goal percentage
+      - field goals
+      - free throw percentage
+      - free throws
+      - games played
+      - minutes
+      - offensive rating
+      - offensive rebounds
+      - personal fouls
+      - plus-minus
+      - points
+      - rebounds
+      - steals
+      - team turnovers
+      - three point percentage
+      - three pointers
+      - total rebounds
+      - turnovers
+      - true shooting percentage
+      - usage percentage
+      - win shares
+      - PER
+      - VORP
+  - lookup: league
+    examples: |
+      - ABA
+      - American Basketball Association
+      - BAA
+      - Basketball Association of America
+      - NBA
+      - National Basketball Association
+  - lookup: player
+    examples: |
+      - LeBron James
+      - Michael Jordan
+      - Stephen Curry
+      - Kobe Bryant
+      - Shaquille O'Neal
+      - Kevin Durant
+      - Giannis Antetokounmpo
+      - Nikola Jokic
+      - Luka Doncic
+      - Jayson Tatum
+      - Joel Embiid
+      - James Harden
+      - Anthony Davis
+      - Damian Lillard
+      - Chris Paul
+      - Kevin Garnett
+      - Tim Duncan
+      - Larry Bird
+      - Magic Johnson
+      - Kareem Abdul-Jabbar
+      - Wilt Chamberlain
+      - Bill Russell
+      - Hakeem Olajuwon
+      - Karl Malone
+      - John Stockton
+      - Charles Barkley
+      - Allen Iverson
+      - Dwyane Wade
+      - Dirk Nowitzki
+      - Carmelo Anthony
+      - Russell Westbrook
+      - Paul George
+      - Jimmy Butler
+      - Kawhi Leonard
+      - Kyrie Irving
+      - Klay Thompson
+      - Draymond Green
+      - Ben Simmons
+      - Trae Young
+      - Ja Morant
+      - Anthony Edwards
+      - LaMelo Ball
+      - Zion Williamson
+      - Devin Booker
+      - Bradley Beal
+      - Donovan Mitchell
+      - Bam Adebayo
+      - Jaylen Brown
+      - Pascal Siakam
+      - De'Aaron Fox
+      - Shai Gilgeous-Alexander
+      - Tyrese Haliburton
+      - Victor Wembanyama
+      - Scottie Pippen
+      - Dennis Rodman
+      - Patrick Ewing
+      - David Robinson
+      - Clyde Drexler
+      - Isiah Thomas
+      - Gary Payton
+      - Ray Allen
+      - Reggie Miller
+      - Vince Carter
+      - Tracy McGrady
+      - Dwight Howard
+      - Chris Webber
+      - Anfernee Hardaway
+      - Robert Parish
+      - Moses Malone
+      - George Gervin
+      - Julius Erving
+      - Oscar Robertson
+      - Jerry West
+      - Elgin Baylor
+      - Bob Cousy
+      - Pete Maravich
+      - Walt Frazier
+      - Dave Cowens
+      - Bob Pettit
+      - Dolph Schayes
+      - George Mikan
+      - Yao Ming
+      - Steve Nash
+      - Chris Bosh
+      - Kevin Love
+      - Blake Griffin
+      - Derrick Rose
+      - Manu Ginobili
+      - Tony Parker
+      - Ben Wallace
+      - Rasheed Wallace
+      - Rajon Rondo
+      - Kyle Lowry
+      - Marc Gasol
+      - Pau Gasol
+      - Amar'e Stoudemire
+      - Carmelo Anthony
+      - Brandon Ingram
+      - CJ McCollum
+  - lookup: stat_type
+    examples: |
+      - per 36
+      - per 36 minutes
+      - per 100
+      - per 100 possessions
+      - per possession
+      - advanced
+      - career totals
+      - career
+      - totals
+      - shooting
+      - shooting splits
+      - per game
+  - lookup: team
+    examples: |
+      - Atlanta Hawks
+      - Boston Celtics
+      - Brooklyn Nets
+      - Charlotte Hornets
+      - Chicago Bulls
+      - Cleveland Cavaliers
+      - Dallas Mavericks
+      - Denver Nuggets
+      - Detroit Pistons
+      - Golden State Warriors
+      - Houston Rockets
+      - Indiana Pacers
+      - Los Angeles Clippers
+      - Los Angeles Lakers
+      - Memphis Grizzlies
+      - Miami Heat
+      - Milwaukee Bucks
+      - Minnesota Timberwolves
+      - New Orleans Pelicans
+      - New York Knicks
+      - Oklahoma City Thunder
+      - Orlando Magic
+      - Philadelphia 76ers
+      - Phoenix Suns
+      - Portland Trail Blazers
+      - Sacramento Kings
+      - San Antonio Spurs
+      - Toronto Raptors
+      - Utah Jazz
+      - Washington Wizards

@@ -1,0 +1,131 @@
+{
+  "name": "team_season_stats",
+  "displayName": "team_season_stats",
+  "priority": 500000,
+  "webhookState": "WEBHOOK_STATE_ENABLED",
+  "trainingPhrases": [
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "What were the "
+        },
+        {
+          "text": "Boston Celtics",
+          "entityType": "@team",
+          "alias": "team",
+          "userDefined": true
+        },
+        {
+          "text": "'s stats in "
+        },
+        {
+          "text": "2024",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "How many points per game did the "
+        },
+        {
+          "text": "Golden State Warriors",
+          "entityType": "@team",
+          "alias": "team",
+          "userDefined": true
+        },
+        {
+          "text": " average in "
+        },
+        {
+          "text": "2016",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "What was the "
+        },
+        {
+          "text": "Milwaukee Bucks",
+          "entityType": "@team",
+          "alias": "team",
+          "userDefined": true
+        },
+        {
+          "text": "'s "
+        },
+        {
+          "text": "three-point percentage",
+          "entityType": "@stat",
+          "alias": "stat",
+          "userDefined": true
+        },
+        {
+          "text": " in "
+        },
+        {
+          "text": "2021",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "name": "team",
+      "displayName": "team",
+      "value": "$team",
+      "entityTypeDisplayName": "@team",
+      "mandatory": false,
+      "prompts": []
+    },
+    {
+      "name": "season",
+      "displayName": "season",
+      "value": "$season",
+      "entityTypeDisplayName": "@season",
+      "mandatory": false,
+      "prompts": []
+    },
+    {
+      "name": "stat",
+      "displayName": "stat",
+      "value": "$stat",
+      "entityTypeDisplayName": "@stat",
+      "mandatory": false,
+      "prompts": []
+    }
+  ],
+  "messages": [],
+  "defaultResponsePlatforms": [
+    "PLATFORM_UNSPECIFIED"
+  ],
+  "rootFollowupIntentName": "",
+  "parentFollowupIntentName": "",
+  "followupIntentInfo": []
+}

@@ -1,0 +1,119 @@
+{
+  "name": "player_per_36_stats",
+  "displayName": "player_per_36_stats",
+  "priority": 500000,
+  "webhookState": "WEBHOOK_STATE_ENABLED",
+  "trainingPhrases": [
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "What are "
+        },
+        {
+          "text": "Anthony Davis",
+          "entityType": "@player",
+          "alias": "player",
+          "userDefined": true
+        },
+        {
+          "text": "'s per 36 "
+        },
+        {
+          "text": "points",
+          "entityType": "@stat",
+          "alias": "stat",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Show "
+        },
+        {
+          "text": "Kevin Durant",
+          "entityType": "@player",
+          "alias": "player",
+          "userDefined": true
+        },
+        {
+          "text": "'s per 36 statistics in "
+        },
+        {
+          "text": "2014",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "What is "
+        },
+        {
+          "text": "Nikola Jokic",
+          "entityType": "@player",
+          "alias": "player",
+          "userDefined": true
+        },
+        {
+          "text": "'s per 36 "
+        },
+        {
+          "text": "rebounds",
+          "entityType": "@stat",
+          "alias": "stat",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "name": "player",
+      "displayName": "player",
+      "value": "$player",
+      "entityTypeDisplayName": "@player",
+      "mandatory": false,
+      "prompts": []
+    },
+    {
+      "name": "season",
+      "displayName": "season",
+      "value": "$season",
+      "entityTypeDisplayName": "@season",
+      "mandatory": false,
+      "prompts": []
+    },
+    {
+      "name": "stat",
+      "displayName": "stat",
+      "value": "$stat",
+      "entityTypeDisplayName": "@stat",
+      "mandatory": false,
+      "prompts": []
+    }
+  ],
+  "messages": [],
+  "defaultResponsePlatforms": [
+    "PLATFORM_UNSPECIFIED"
+  ],
+  "rootFollowupIntentName": "",
+  "parentFollowupIntentName": "",
+  "followupIntentInfo": []
+}
