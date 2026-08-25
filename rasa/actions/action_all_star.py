@@ -26,12 +26,14 @@ class ActionAllStar(Action):
                 _ensure_loaded()
                 roster = self._get_roster_by_season(int(season))
                 if roster:
-                    east = [p for p, t in roster if t == "East"]
-                    west = [p for p, t in roster if t == "West"]
+                    from collections import defaultdict
+                    teams = defaultdict(list)
+                    for p, t in roster:
+                        teams[t].append(p)
                     response = f"The {season} NBA All-Star Game featured:\n"
-                    response += f"East: {', '.join(east)}\n"
-                    response += f"West: {', '.join(west)}"
-                    dispatcher.utter_message(text=response)
+                    for team_name, players in teams.items():
+                        response += f"{team_name}: {', '.join(players)}\n"
+                    dispatcher.utter_message(text=response.strip())
                 else:
                     dispatcher.utter_message(text=f"I couldn't find All-Star roster data for {season}.")
                 return []
