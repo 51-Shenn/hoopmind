@@ -983,219 +983,218 @@ nlu:
     - los angeles clippers
 
 
-lookup_tables:
-  - lookup: award
-    examples: |
-      - 6MOY
-      - ABA MVP
-      - ABA Most Valuable Player
-      - ABA ROY
-      - ABA Rookie of the Year
-      - All-NBA First Team
-      - All-NBA Second Team
-      - All-NBA Third Team
-      - All-Defensive First Team
-      - All-Defensive Second Team
-      - BAA ROY
-      - BAA Rookie of the Year
-      - CPOY
-      - Clutch Player
-      - Clutch Player of the Year
-      - DPOY
-      - Defensive Player of the Year
-      - Most Improved Player
-      - Most Valuable Player
-      - NBA DPOY
-      - NBA MIP
-      - NBA MVP
-      - NBA Rookie of the Year
-      - NBA Sixth Man of the Year
-      - ROY
-      - Rookie of the Year
-      - SMOY
-      - Sixth Man of the Year
-      - MVP
-  - lookup: stat
-    examples: |
-      - assists
-      - blocks
-      - defensive rating
-      - defensive rebounds
-      - field goal percentage
-      - field goals
-      - free throw percentage
-      - free throws
-      - games played
-      - minutes
-      - offensive rating
-      - offensive rebounds
-      - personal fouls
-      - plus-minus
-      - points
-      - rebounds
-      - steals
-      - team turnovers
-      - three point percentage
-      - three pointers
-      - total rebounds
-      - turnovers
-      - true shooting percentage
-      - usage percentage
-      - win shares
-      - PER
-      - VORP
-  - lookup: league
-    examples: |
-      - ABA
-      - American Basketball Association
-      - BAA
-      - Basketball Association of America
-      - NBA
-      - National Basketball Association
-  - lookup: player
-    examples: |
-      - LeBron James
-      - Michael Jordan
-      - Stephen Curry
-      - Kobe Bryant
-      - Shaquille O'Neal
-      - Kevin Durant
-      - Giannis Antetokounmpo
-      - Nikola Jokic
-      - Luka Doncic
-      - Jayson Tatum
-      - Joel Embiid
-      - James Harden
-      - Anthony Davis
-      - Damian Lillard
-      - Chris Paul
-      - Kevin Garnett
-      - Tim Duncan
-      - Larry Bird
-      - Magic Johnson
-      - Kareem Abdul-Jabbar
-      - Wilt Chamberlain
-      - Bill Russell
-      - Hakeem Olajuwon
-      - Karl Malone
-      - John Stockton
-      - Charles Barkley
-      - Allen Iverson
-      - Dwyane Wade
-      - Dirk Nowitzki
-      - Carmelo Anthony
-      - Russell Westbrook
-      - Paul George
-      - Jimmy Butler
-      - Kawhi Leonard
-      - Kyrie Irving
-      - Klay Thompson
-      - Draymond Green
-      - Ben Simmons
-      - Trae Young
-      - Ja Morant
-      - Anthony Edwards
-      - LaMelo Ball
-      - Zion Williamson
-      - Devin Booker
-      - Bradley Beal
-      - Donovan Mitchell
-      - Bam Adebayo
-      - Jaylen Brown
-      - Pascal Siakam
-      - De'Aaron Fox
-      - Shai Gilgeous-Alexander
-      - Tyrese Haliburton
-      - Victor Wembanyama
-      - Scottie Pippen
-      - Dennis Rodman
-      - Patrick Ewing
-      - David Robinson
-      - Clyde Drexler
-      - Isiah Thomas
-      - Gary Payton
-      - Ray Allen
-      - Reggie Miller
-      - Vince Carter
-      - Tracy McGrady
-      - Dwight Howard
-      - Chris Webber
-      - Anfernee Hardaway
-      - Robert Parish
-      - Moses Malone
-      - George Gervin
-      - Julius Erving
-      - Oscar Robertson
-      - Jerry West
-      - Elgin Baylor
-      - Bob Cousy
-      - Pete Maravich
-      - Walt Frazier
-      - Dave Cowens
-      - Bob Pettit
-      - Dolph Schayes
-      - George Mikan
-      - Yao Ming
-      - Steve Nash
-      - Chris Bosh
-      - Kevin Love
-      - Blake Griffin
-      - Derrick Rose
-      - Manu Ginobili
-      - Tony Parker
-      - Ben Wallace
-      - Rasheed Wallace
-      - Rajon Rondo
-      - Kyle Lowry
-      - Marc Gasol
-      - Pau Gasol
-      - Amar'e Stoudemire
-      - Carmelo Anthony
-      - Brandon Ingram
-      - CJ McCollum
-  - lookup: stat_type
-    examples: |
-      - per 36
-      - per 36 minutes
-      - per 100
-      - per 100 possessions
-      - per possession
-      - advanced
-      - career totals
-      - career
-      - totals
-      - shooting
-      - shooting splits
-      - per game
-  - lookup: team
-    examples: |
-      - Atlanta Hawks
-      - Boston Celtics
-      - Brooklyn Nets
-      - Charlotte Hornets
-      - Chicago Bulls
-      - Cleveland Cavaliers
-      - Dallas Mavericks
-      - Denver Nuggets
-      - Detroit Pistons
-      - Golden State Warriors
-      - Houston Rockets
-      - Indiana Pacers
-      - Los Angeles Clippers
-      - Los Angeles Lakers
-      - Memphis Grizzlies
-      - Miami Heat
-      - Milwaukee Bucks
-      - Minnesota Timberwolves
-      - New Orleans Pelicans
-      - New York Knicks
-      - Oklahoma City Thunder
-      - Orlando Magic
-      - Philadelphia 76ers
-      - Phoenix Suns
-      - Portland Trail Blazers
-      - Sacramento Kings
-      - San Antonio Spurs
-      - Toronto Raptors
-      - Utah Jazz
-      - Washington Wizards
+- lookup: award
+  examples: |
+    - 6MOY
+    - ABA MVP
+    - ABA Most Valuable Player
+    - ABA ROY
+    - ABA Rookie of the Year
+    - All-NBA First Team
+    - All-NBA Second Team
+    - All-NBA Third Team
+    - All-Defensive First Team
+    - All-Defensive Second Team
+    - BAA ROY
+    - BAA Rookie of the Year
+    - CPOY
+    - Clutch Player
+    - Clutch Player of the Year
+    - DPOY
+    - Defensive Player of the Year
+    - Most Improved Player
+    - Most Valuable Player
+    - NBA DPOY
+    - NBA MIP
+    - NBA MVP
+    - NBA Rookie of the Year
+    - NBA Sixth Man of the Year
+    - ROY
+    - Rookie of the Year
+    - SMOY
+    - Sixth Man of the Year
+    - MVP
+- lookup: stat
+  examples: |
+    - assists
+    - blocks
+    - defensive rating
+    - defensive rebounds
+    - field goal percentage
+    - field goals
+    - free throw percentage
+    - free throws
+    - games played
+    - minutes
+    - offensive rating
+    - offensive rebounds
+    - personal fouls
+    - plus-minus
+    - points
+    - rebounds
+    - steals
+    - team turnovers
+    - three point percentage
+    - three pointers
+    - total rebounds
+    - turnovers
+    - true shooting percentage
+    - usage percentage
+    - win shares
+    - PER
+    - VORP
+- lookup: league
+  examples: |
+    - ABA
+    - American Basketball Association
+    - BAA
+    - Basketball Association of America
+    - NBA
+    - National Basketball Association
+- lookup: player
+  examples: |
+    - LeBron James
+    - Michael Jordan
+    - Stephen Curry
+    - Kobe Bryant
+    - Shaquille O'Neal
+    - Kevin Durant
+    - Giannis Antetokounmpo
+    - Nikola Jokic
+    - Luka Doncic
+    - Jayson Tatum
+    - Joel Embiid
+    - James Harden
+    - Anthony Davis
+    - Damian Lillard
+    - Chris Paul
+    - Kevin Garnett
+    - Tim Duncan
+    - Larry Bird
+    - Magic Johnson
+    - Kareem Abdul-Jabbar
+    - Wilt Chamberlain
+    - Bill Russell
+    - Hakeem Olajuwon
+    - Karl Malone
+    - John Stockton
+    - Charles Barkley
+    - Allen Iverson
+    - Dwyane Wade
+    - Dirk Nowitzki
+    - Carmelo Anthony
+    - Russell Westbrook
+    - Paul George
+    - Jimmy Butler
+    - Kawhi Leonard
+    - Kyrie Irving
+    - Klay Thompson
+    - Draymond Green
+    - Ben Simmons
+    - Trae Young
+    - Ja Morant
+    - Anthony Edwards
+    - LaMelo Ball
+    - Zion Williamson
+    - Devin Booker
+    - Bradley Beal
+    - Donovan Mitchell
+    - Bam Adebayo
+    - Jaylen Brown
+    - Pascal Siakam
+    - De'Aaron Fox
+    - Shai Gilgeous-Alexander
+    - Tyrese Haliburton
+    - Victor Wembanyama
+    - Scottie Pippen
+    - Dennis Rodman
+    - Patrick Ewing
+    - David Robinson
+    - Clyde Drexler
+    - Isiah Thomas
+    - Gary Payton
+    - Ray Allen
+    - Reggie Miller
+    - Vince Carter
+    - Tracy McGrady
+    - Dwight Howard
+    - Chris Webber
+    - Anfernee Hardaway
+    - Robert Parish
+    - Moses Malone
+    - George Gervin
+    - Julius Erving
+    - Oscar Robertson
+    - Jerry West
+    - Elgin Baylor
+    - Bob Cousy
+    - Pete Maravich
+    - Walt Frazier
+    - Dave Cowens
+    - Bob Pettit
+    - Dolph Schayes
+    - George Mikan
+    - Yao Ming
+    - Steve Nash
+    - Chris Bosh
+    - Kevin Love
+    - Blake Griffin
+    - Derrick Rose
+    - Manu Ginobili
+    - Tony Parker
+    - Ben Wallace
+    - Rasheed Wallace
+    - Rajon Rondo
+    - Kyle Lowry
+    - Marc Gasol
+    - Pau Gasol
+    - Amar'e Stoudemire
+    - Carmelo Anthony
+    - Brandon Ingram
+    - CJ McCollum
+- lookup: stat_type
+  examples: |
+    - per 36
+    - per 36 minutes
+    - per 100
+    - per 100 possessions
+    - per possession
+    - advanced
+    - career totals
+    - career
+    - totals
+    - shooting
+    - shooting splits
+    - per game
+- lookup: team
+  examples: |
+    - Atlanta Hawks
+    - Boston Celtics
+    - Brooklyn Nets
+    - Charlotte Hornets
+    - Chicago Bulls
+    - Cleveland Cavaliers
+    - Dallas Mavericks
+    - Denver Nuggets
+    - Detroit Pistons
+    - Golden State Warriors
+    - Houston Rockets
+    - Indiana Pacers
+    - Los Angeles Clippers
+    - Los Angeles Lakers
+    - Memphis Grizzlies
+    - Miami Heat
+    - Milwaukee Bucks
+    - Minnesota Timberwolves
+    - New Orleans Pelicans
+    - New York Knicks
+    - Oklahoma City Thunder
+    - Orlando Magic
+    - Philadelphia 76ers
+    - Phoenix Suns
+    - Portland Trail Blazers
+    - Sacramento Kings
+    - San Antonio Spurs
+    - Toronto Raptors
+    - Utah Jazz
+    - Washington Wizards
