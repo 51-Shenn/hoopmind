@@ -120,7 +120,7 @@ the background action server (and the proxy, in LLM mode) on the way out.
 |---|---|
 | `5005` | Rasa server / Inspector UI |
 | `5055` | Rasa SDK action server (`rasa_sdk --actions actions`) |
-| `8080` | `gemini_proxy.py` key-rotation proxy (LLM mode only; `GET /status` reports key health) |
+| `8300` | `gemini_proxy.py` key-rotation proxy (LLM mode only; `GET /status` reports key health) |
 | `5006` / `5056` | second Inspector and second action server — side-by-side mode only (see below) |
 
 ### Both modes side by side
@@ -141,8 +141,11 @@ It sidesteps every one of those collisions:
 
 1. Trains both models up front under fixed names — `models/hoopmind_nlu.tar.gz` and
    `models/hoopmind_llm.tar.gz` — so `config.yml` only matters during training.
-2. Serves each bot from its archive with `rasa inspect -m …`. A model archive carries its own
-   config and domain, so the generated files are irrelevant once the servers are up.
+2. Serves each bot from its archive with `rasa inspect --model …`. A model archive carries its
+   own config and domain, so the generated files are irrelevant once the servers are up. The two
+   bot windows invoke `.venv\Scripts\python.exe -m rasa` by absolute path rather than
+   `uv run` — a spawned window does not inherit the parent's activated environment, so `uv` is
+   not on its PATH and `uv run rasa inspect` dies with *'uv' is not recognized*.
 3. Gives each bot its **own action server**: `:5055` with `HOOPMIND_GROUND_ANSWERS` cleared for
    the NLU bot, `:5056` with it set for the LLM bot. `compose_answer()` reads that variable from
    its own process at call time, so a shared server would leak Gemini grounding into the
@@ -151,10 +154,16 @@ It sidesteps every one of those collisions:
    `model_groups`) and `endpoints_llm.yml` (action server `:5056`, proxy model groups kept).
 
 Five processes in total: the proxy, two action servers (hidden), and one Inspector per bot in
-its own window. It refuses to start if any of `8080`, `5055`, `5056`, `5005`, `5006` is already
+its own window. It refuses to start if any of `8300`, `5055`, `5056`, `5005`, `5006` is already
 taken, so a leftover launcher window gives a clear error instead of a half-broken demo. Press
 Enter in the parent window to stop everything (`taskkill /T`, since `uv` spawns children that
 would otherwise keep holding the ports).
+
+A bot binds its port only after loading its model, and the NLU archive carries DIET, so cold
+start is **~60-90 s**. The launcher waits for both Inspector ports (up to 4 min) and prints
+`NLU Inspector is up on :5005` per bot before it shows the URLs — otherwise the links are handed
+out dead and look like a failure. If one never binds, the parent says so and points you at that
+bot's window, which stays open (`-NoExit`) with the error.
 
 > Training leaves `config.yml` / `domain.yml` in **LLM** mode. The running bots ignore that, but
 > a later bare `uv run rasa train` builds an LLM model. And do not run `run_rasa_nlu.ps1`
@@ -174,13 +183,13 @@ would otherwise keep holding the ports).
 7. Runs `uv run rasa inspect`.
 
 `run_rasa_llm.ps1` does the same, plus: sets `HOOPMIND_GROUND_ANSWERS=true`, validates the
-Gemini keys, and starts `gemini_proxy.py` on `:8080` (aborting if the proxy fails its health
+Gemini keys, and starts `gemini_proxy.py` on `:8300` (aborting if the proxy fails its health
 check) before training.
 
 Manual equivalent, if you prefer separate terminals:
 
 ```powershell
-python gemini_proxy.py                                              # :8080 (LLM mode only)
+python gemini_proxy.py                                              # :8300 (LLM mode only)
 python -m rasa_sdk --actions actions --port 5055                    # :5055 — must run from rasa/
 uv run rasa inspect --port 5005 -i 127.0.0.1 --cors "*"             # :5005
 ```
@@ -236,7 +245,7 @@ pipeline:
 ```
 
 The `gemini_llm` and `gemini_embeddings` model groups are declared in `endpoints.yml` and point
-at `http://127.0.0.1:8080/v1beta` — the local proxy — so *all* Gemini-bound traffic (Rasa's own
+at `http://127.0.0.1:8300/v1beta` — the local proxy — so *all* Gemini-bound traffic (Rasa's own
 command generation and embeddings, plus the actions' answer composition) is key-rotated.
 
 ---
@@ -384,7 +393,7 @@ completely offline.
 
 When it is active, it tries three things in order:
 
-1. **The local proxy** at `http://127.0.0.1:8080/v1beta` (which rotates keys internally).
+1. **The local proxy** at `http://127.0.0.1:8300/v1beta` (which rotates keys internally).
 2. **A direct Gemini call** using `actions/gemini_key_manager.py` for local rotation.
 3. **The template fallback.**
 
@@ -394,17 +403,17 @@ and never to mention "the data" — the numbers always come from pandas, never f
 
 ### `gemini_proxy.py`
 
-A dependency-free `http.server` proxy on `:8080`:
+A dependency-free `http.server` proxy on `:8300`:
 
 - Loads `GEMINI_API_KEY` and `GEMINI_API_KEY_1..9`.
 - Rotates on `429` and `5xx`, with per-key cooldown that grows after `_MAX_FAILURES` (3)
   consecutive failures; `mark_success` clears the record.
 - When every key is cooling down it picks the one with the shortest remaining wait and logs it.
 - `GET /status` returns per-key availability and remaining cooldown — check it at
-  <http://localhost:8080/status>.
+  <http://localhost:8300/status>.
 
 ```powershell
-python gemini_proxy.py                # :8080 (or $env:GEMINI_PROXY_PORT)
+python gemini_proxy.py                # :8300 (or $env:GEMINI_PROXY_PORT)
 python gemini_proxy.py --port 9090
 ```
 
@@ -533,7 +542,7 @@ rasa/
 ├── endpoints_nlu.yml               side-by-side mode: action server :5055, no model groups
 ├── endpoints_llm.yml               side-by-side mode: action server :5056 + model groups
 ├── credentials.yml                 channel credentials
-├── gemini_proxy.py                 local :8080 key-rotation proxy
+├── gemini_proxy.py                 local :8300 key-rotation proxy
 ├── generate_nlu.py                 STALE scaffold — do not run (see Training data)
 ├── setup.ps1                       uv sync + .env template
 ├── run_rasa.ps1                    unified launcher / mode picker
@@ -565,7 +574,7 @@ All commands run from `rasa/`.
 | `uv run rasa run` | HTTP server on `:5005` |
 | `uv run rasa shell` | CLI chat |
 | `python -m rasa_sdk --actions actions --port 5055` | action server alone (**must run from `rasa/`**) |
-| `python gemini_proxy.py` | key-rotation proxy on `:8080` |
+| `python gemini_proxy.py` | key-rotation proxy on `:8300` |
 | `uv run rasa test nlu --nlu data/nlu.yml --config config.yml --cross-validation -f 5 --out results` | the evaluation that counts |
 | `uv run python tests/csv_to_nlu.py` | regenerate `tests/nlu_test.yml` from `../test.csv` |
 
@@ -580,10 +589,11 @@ All commands run from `rasa/`.
 | Actions never fire / "action server not reachable" | `:5055` is not up, or `rasa_sdk` was started from the wrong directory — it must run from `rasa/` so `actions.data_loader` resolves |
 | Lookup tables seem to have no effect | They must be items of the top-level `nlu:` list (`- lookup: player`), not a separate `lookup_tables:` key |
 | `ERROR: No valid API keys found in .env` | Replace the `your-…-key-here` placeholders in `rasa/.env` |
-| LLM mode answers look like flat templates | `HOOPMIND_GROUND_ANSWERS` is unset (you launched NLU mode) or Gemini is unreachable — check <http://localhost:8080/status> |
+| LLM mode answers look like flat templates | `HOOPMIND_GROUND_ANSWERS` is unset (you launched NLU mode) or Gemini is unreachable — check <http://localhost:8300/status> |
 | Edits to `config.yml` / `domain.yml` keep disappearing | They are generated. Edit `config_{nlu,llm}.yml` and `domain_modes/domain_{nlu,llm}.yml`. |
 | `rasa test nlu` reports ~99 % accuracy | No held-out split. Add `--cross-validation -f 5`. |
-| Port already in use | `Get-NetTCPConnection -LocalPort 5005 -State Listen \| ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }` (same for 5055 / 8080) |
+| Port already in use | `Get-NetTCPConnection -LocalPort 5005 -State Listen \| ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }` (same for 5055 / 8300) |
+| `port(s) reserved by Windows` / proxy `WinError 10013` | WinNAT/Hyper-V claimed that TCP block at boot — nothing is listening, the port just cannot be bound. List the ranges with `netsh interface ipv4 show excludedportrange protocol=tcp`, then either move `$ProxyPort` (and `api_base` in `endpoints.yml` / `endpoints_llm.yml`) outside them, or release the reservations from an elevated shell with `net stop winnat; net start winnat`. This is why the proxy defaults to `8300`, not `8080`. |
 | `run_rasa_both.ps1` says `port(s) already in use` | A single-mode launcher is still running. Close its window, and check `5006` / `5056` too — a crashed Inspector can leave the port held. |
 | Side-by-side: `models/hoopmind_*.tar.gz is missing` | You ran `run_rasa_nlu.ps1` after `run_rasa_both.ps1` — its pruning step deleted the older archive. Re-run `run_rasa_both.ps1` without `-SkipTrain`. |
 | Side-by-side: the NLU bot gives Gemini-style prose | Both bots are pointing at the same action server. Check that `endpoints_nlu.yml` says `:5055` and `endpoints_llm.yml` says `:5056`. |

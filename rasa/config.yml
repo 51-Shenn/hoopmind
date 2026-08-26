@@ -2,23 +2,13 @@ recipe: default.v1
 assistant_id: leather-castle
 language: en
 pipeline:
-- name: WhitespaceTokenizer
-- name: RegexFeaturizer
-- name: CountVectorsFeaturizer
-- name: CountVectorsFeaturizer
-  analyzer: char_wb
-  min_ngram: 1
-  max_ngram: 4
-- name: EntitySynonymMapper
-- name: DIETClassifier
-  epochs: 30
-  BILOU_flag: true
-  constrain_similarities: true
-  model_confidence: softmax
-  regularization_scale: 0.01
-- name: FallbackClassifier
-  threshold: 0.3
-- name: NLUCommandAdapter
+- name: CompactLLMCommandGenerator
+  prompt_template: prompts/gemini_command_prompt.jinja2
+  llm:
+    model_group: gemini_llm
+  flow_retrieval:
+    embeddings:
+      model_group: gemini_embeddings
 policies:
 - name: FlowPolicy
 - name: RulePolicy

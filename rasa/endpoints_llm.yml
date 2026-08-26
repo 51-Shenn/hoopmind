@@ -7,16 +7,19 @@
 action_endpoint:
   url: "http://localhost:5056/webhook"
 
+# api_base points at gemini_proxy.py. Rasa cannot read GEMINI_PROXY_PORT here,
+# so this port is baked in - keep it in step with $ProxyPort in run_rasa_both.ps1
+# and run_rasa_llm.ps1.
 model_groups:
   - id: gemini_llm
     models:
       - provider: gemini
-        model: gemini-3.6-flash
-        api_base: http://127.0.0.1:8080/v1beta
+        model: gemini-3.1-flash-lite
+        api_base: http://127.0.0.1:8300/v1beta
         reasoning_effort: "none"
         timeout: 60
   - id: gemini_embeddings
     models:
       - provider: gemini
         model: gemini-embedding-001
-        api_base: http://127.0.0.1:8080/v1beta
+        api_base: http://127.0.0.1:8300/v1beta
