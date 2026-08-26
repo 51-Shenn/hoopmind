@@ -5,7 +5,7 @@ Streamlit chat flow: the Flask /chat endpoint forwards the raw
 user text to Dialogflow ES (intent + entities), then runs the
 same local pipeline as the offline fallback. If Dialogflow
 is unreachable or no credentials are configured, a local
-centroid classifier over the 217 training phrases keeps the
+centroid classifier over the training phrases keeps the
 demo alive offline.
 """
 
@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 
 _DF_PROJECT = None
 
@@ -41,10 +42,10 @@ def _project_id() -> str | None:
 
 def detect_via_dialogflow(
     text: str, session_id: str
-) -> tuple[str, dict, str] | None:
+) -> tuple[str, float, dict, str] | None:
     """
-    Returns (intent_name, parameters, query_text) or None when
-    Dialogflow cannot be used.
+    Returns (intent_name, confidence, parameters, query_text)
+    or None when Dialogflow cannot be used.
     """
 
     project = _project_id()
@@ -83,14 +84,9 @@ def detect_via_dialogflow(
                 cleaned[key] = value
 
         intent_name = result.intent.display_name
+        confidence = result.intent_detection_confidence
 
-        if (
-            result.intent_detection_confidence < 0.35
-            and intent_name != "Default Fallback Intent"
-        ):
-            return None  # let local classifier try
-        
-        return (intent_name, cleaned, result.query_text)
+        return (intent_name, confidence, cleaned, result.query_text)
 
     except Exception as exc:  # pragma: no cover
         print(f"[dialogflow] unavailable: {exc}")
@@ -99,52 +95,67 @@ def detect_via_dialogflow(
 
 # ------------------------------------------------------------
 # OFFLINE FALLBACK: centroid classifier over training phrases
+# Returns (intent, confidence) — confidence is the cosine
+# similarity to the best centroid.
 # ------------------------------------------------------------
 
 _FALLBACK = None
 
 
-def classify_locally(text: str) -> str | None:
+def classify_locally(text: str) -> tuple[str, float] | None:
     global _FALLBACK
     try:
         if _FALLBACK is None:
-            import sys
+            from pathlib import Path
+            import importlib.util
 
-            sys.path.insert(
-                0, os.path.join(os.path.dirname(__file__), "evaluation")
+            evaluation_dir = Path(__file__).resolve().parent / "evaluation"
+            evaluate_intent_path = evaluation_dir / "evaluate_intent.py"
+
+            spec = importlib.util.spec_from_file_location(
+                "hoopmind_evaluate_intent",
+                evaluate_intent_path
             )
 
-            import evaluate_intent as ei
+            if spec is None or spec.loader is None:
+                raise ImportError(
+                    f"Could not load evaluation module: {evaluate_intent_path}"
+                )
+
+            ei = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(ei)
 
             data_map = ei.load_training_data()
             utterances: list = []
-            labels: list = []
+            labels_intents: list = []
 
             for lab, phrases in data_map.items():
                 for phrase in phrases:
                     utterances.append(phrase)
-                    labels.append(lab)
-
-            data = list(zip(utterances, labels))
+                    labels_intents.append(lab)
 
             from sklearn.feature_extraction.text import TfidfVectorizer
 
             vec = TfidfVectorizer(analyzer=ei.tokenize, sublinear_tf=True)
-            X = vec.fit_transform([u for u, _ in data])
+            X = vec.fit_transform(utterances)
 
             import numpy as np
 
             centroids = {}
-            labels = sorted({lab for _, lab in data})
+            unique_labels = sorted(set(labels_intents))
 
-            for lab in labels:
-                idx = [i for i, (_, l) in enumerate(data) if l == lab]
+            for lab in unique_labels:
+                idx = [i for i, l in enumerate(labels_intents) if l == lab]
                 centroids[lab] = np.asarray(X[idx].mean(axis=0)).ravel()
 
-            def predict(t: str) -> str:
-                import numpy as np
-
-                v = vec.transform([t]).toarray()[0].ravel()
+            def predict(t: str) -> tuple[str, float] | None:
+                # Collapse repeated characters only for short inputs
+                # (handles misspelled greetings like "hii", "hey!!")
+                # without breaking valid names like "curry".
+                q = t
+                if len(t) <= 4:
+                    q = re.sub(r"(.)\1{1,}", r"\1", t)
+                v = vec.transform([q]).toarray()[0].ravel()
                 best, best_sim = "", -2.0
 
                 for lab, cen in centroids.items():
@@ -152,7 +163,8 @@ def classify_locally(text: str) -> str | None:
                     sim = float(v @ cen) / denom if denom else 0.0
                     if sim > best_sim:
                         best, best_sim = lab, sim
-                return best
+
+                return (best, best_sim)
 
             _FALLBACK = predict
 

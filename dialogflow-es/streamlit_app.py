@@ -3,7 +3,7 @@ HoopMind - custom chat UI (Streamlit).
 
 Run:
     python webhook.py            # terminal 1
-    streamlit run streamlit_app.py   # terminal 2
+    python -m streamlit run streamlit_app.py   # terminal 2
 """
 
 import requests
@@ -209,13 +209,16 @@ if prompt:
         chips = None
 
         if rich:
+            has_non_chip = False
             for row in rich:
                 for card in row:
-
                     if card["type"] == "chips":
                         chips = [o["text"] for o in card.get("options", [])]
                     else:
+                        has_non_chip = True
                         render_card(card)
+            if not has_non_chip and text:
+                st.write(text)
             if chips:
                 render_chips(chips, f"n{len(st.session_state.messages)}")
 
