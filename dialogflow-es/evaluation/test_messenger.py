@@ -1,7 +1,9 @@
 import json
 import sys
 
-sys.path.insert(0, r'C:\Users\Chen Wilson\OneDrive\Desktop\HoopMind_Implementation')
+import pathlib
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
 from webhook import process_message
 

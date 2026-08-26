@@ -1346,13 +1346,32 @@ class NBAQueryEngine:
     # ============================================================
     # PLAYER CAREER TOTALS
     # ============================================================
+    @staticmethod
+    def _drop_split_season_rows(sub: pd.DataFrame) -> pd.DataFrame:
+        """Drop per-team rows for seasons that also carry a combined row.
+
+        A traded player's season is stored twice: one combined row (team
+        "2TM"/"3TM"/..., historically "TOT") plus one row per team. Summing the
+        frame as-is counts those seasons twice - Vince Carter came out with
+        28,636 career points instead of 25,728.
+        """
+        if sub.empty or "team" not in sub.columns or "season" not in sub.columns:
+            return sub
+        combined = sub["team"].astype(str).str.upper().str.match(r"^(\d+TM|TOT)$")
+        split_seasons = set(sub.loc[combined, "season"])
+        if not split_seasons:
+            return sub
+        return sub[combined | ~sub["season"].isin(split_seasons)]
+
     def _player_career_total_query(
         self, params: dict[str, Any]
     ) -> QueryResult:
         df = self._load("Player Totals.csv")
         stat = params.get("stat")
         col = self._column_for_stat(stat, "totals", df.columns)
-        sub = self._filter_player(df, params.get("player"))
+        sub = self._drop_split_season_rows(
+            self._filter_player(df, params.get("player"))
+        )
 
         if sub.empty:
             return QueryResult(
