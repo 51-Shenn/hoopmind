@@ -1,10 +1,14 @@
-﻿from typing import Any, Text, Dict, List
+﻿import logging
+from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 
 from actions.data_loader import get_team_info
+from actions.entity_extract import extract_team
 from actions.llm_answer import compose_answer
+
+logger = logging.getLogger(__name__)
 
 # Team nickname synonyms for text-parsing fallback
 _TEAM_SYNONYMS = {
@@ -61,46 +65,37 @@ class ActionTeamInfo(Action):
         return "action_team_info"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        # Always extract from current message first
-        team_name = None
-        latest_msg = tracker.latest_message.get("text", "").strip()
-        cleaned = latest_msg.lower()
-        for phrase in ["tell me about the", "tell me about", "info on the", "info on",
-                       "information about the", "information about", "what about the",
-                       "what about", "details about the", "details about",
-                       "who are the", "who are", "who is the", "who is",
-                       "what are the", "what are", "what is the", "what is",
-                       "how are the", "how are", "how is the", "how is",
-                       "the", "team"]:
-            cleaned = cleaned.replace(phrase, "")
-        cleaned = cleaned.strip().strip("?").strip()
-        if cleaned:
-            if cleaned in _TEAM_SYNONYMS:
-                cleaned = _TEAM_SYNONYMS[cleaned]
-            team_name = cleaned
+        try:
+            # Always extract from current message first
+            latest_msg = tracker.latest_message.get("text", "").strip()
+            team_name = extract_team(latest_msg)
 
-        # Fallback to slot only if extraction failed
-        if not team_name:
-            team_name = tracker.get_slot("team")
+            # Fallback to slot only if extraction failed
+            if not team_name:
+                team_name = tracker.get_slot("team")
 
-        if not team_name:
-            dispatcher.utter_message(text="I'm not sure which team you're asking about. Could you provide the team name or abbreviation?")
+            if not team_name:
+                dispatcher.utter_message(text="I'm not sure which team you're asking about. Could you provide the team name or abbreviation?")
+                return [SlotSet("team", None)]
+
+            # Resolve synonym if it's a known nickname
+            resolved = team_name.lower().strip()
+            if resolved in _TEAM_SYNONYMS:
+                team_name = _TEAM_SYNONYMS[resolved]
+
+            info = get_team_info(team_name)
+            if info is None:
+                dispatcher.utter_message(text=f"I couldn't find information about {team_name}. Please check the name and try again.")
+                return [SlotSet("team", None)]
+
+            response = self._format_response(info)
+            response = compose_answer(tracker.latest_message.get("text", ""), response, response)
+            dispatcher.utter_message(text=response)
             return [SlotSet("team", None)]
-
-        # Resolve synonym if it's a known nickname
-        resolved = team_name.lower().strip()
-        if resolved in _TEAM_SYNONYMS:
-            team_name = _TEAM_SYNONYMS[resolved]
-
-        info = get_team_info(team_name)
-        if info is None:
-            dispatcher.utter_message(text=f"I couldn't find information about {team_name}. Please check the name and try again.")
+        except Exception as e:
+            logger.error(f"Error in action_team_info: {e}", exc_info=True)
+            dispatcher.utter_message(text="Sorry, I am having trouble looking up that team. Please try again.")
             return [SlotSet("team", None)]
-
-        response = self._format_response(info)
-        response = compose_answer(tracker.latest_message.get("text", ""), response, response)
-        dispatcher.utter_message(text=response)
-        return [SlotSet("team", None)]
 
     @staticmethod
     def _format_response(info: dict) -> str:

@@ -3,7 +3,8 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 
-from actions.data_loader import get_award_winner, get_player_awards, _fuzzy_find_player
+from actions.data_loader import get_award_winner, get_player_awards
+from actions.entity_extract import extract_player, extract_season
 from actions.llm_answer import compose_answer
 
 
@@ -22,11 +23,7 @@ class ActionAwardWinner(Action):
         # Always extract from current message first
         text = tracker.latest_message.get("text", "").lower()
 
-        import re
-        season = None
-        season_match = re.search(r'\b(19|20)\d{2}\b', text)
-        if season_match:
-            season = int(season_match.group())
+        season = extract_season(text)
 
         award = None
         award_keywords = {
@@ -103,20 +100,7 @@ class ActionPlayerAwards(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
         # Always extract from current message first
-        player = None
-        text = tracker.latest_message.get("text", "").lower()
-        # Strip question prefixes to extract player name
-        for phrase in ["what awards did", "what awards has", "what award did",
-                       "what honors did", "how many awards did", "how many mvps did",
-                       "how many championships did", "did", "list",
-                       "show me", "show", "what trophies did", "win",
-                       "won", "any awards", "any"]:
-            text = text.replace(phrase, "")
-        text = text.strip().strip("?").strip()
-        if text:
-            matched = _fuzzy_find_player(text)
-            if matched:
-                player = matched
+        player = extract_player(tracker.latest_message.get("text", ""))
 
         # Fallback to slot only if message extraction failed
         if not player:

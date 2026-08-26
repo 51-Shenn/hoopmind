@@ -1,9 +1,9 @@
-﻿import re
-from typing import Any, Text, Dict, List
+﻿from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
 from actions.data_loader import get_league_info, _fuzzy_find_player, player_per_game_df, _ensure_loaded
+from actions.entity_extract import extract_player
 from actions.llm_answer import compose_answer
 
 
@@ -49,13 +49,4 @@ class ActionLeagueInfo(Action):
 
     @staticmethod
     def _extract_player_from_text(text: str) -> str:
-        cleaned = text.lower().strip()
-        for phrase in ["what league did", "which league did", "what league does",
-                       "which league does", "what league"]:
-            cleaned = cleaned.replace(phrase, " ")
-        cleaned = re.sub(r'\b(the|a|an|play|plays|played|do|does|did|is|was|in|for)\b', ' ', cleaned)
-        cleaned = re.sub(r'[^\w\s]', ' ', cleaned)
-        cleaned = re.sub(r'\s+', ' ', cleaned).strip()
-        if not cleaned:
-            return None
-        return cleaned
+        return extract_player(text)

@@ -1,10 +1,10 @@
 ﻿import logging
-import re
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
 from actions.data_loader import get_draft_info, get_draft_year, _fuzzy_find_player, _PLAYER_SYNONYMS, _normalize_name, _ensure_loaded, draft_df
+from actions.entity_extract import extract_player, extract_season
 from actions.llm_answer import compose_answer
 
 logger = logging.getLogger(__name__)
@@ -76,50 +76,9 @@ class ActionDraftInfo(Action):
     @staticmethod
     def _extract_player_from_text(text: str) -> str:
         """Try to extract a player name from the raw message text."""
-        cleaned = text.lower().strip()
-
-        # Remove multi-word phrases first (regex word boundaries)
-        multi_phrases = [
-            r'when\s+was',
-            r'where\s+was',
-            r'which\s+team\s+drafted',
-            r'which\s+college\s+did',
-            r'what\s+pick\s+was',
-            r'what\s+round\s+was',
-            r'what\s+was\s+the\s+draft\s+position\s+of',
-            r'tell\s+me\s+about\s+the\s+draft\s+history\s+of',
-            r'draft\s+info\s+for',
-            r'who\s+got\s+picked\s+first\s+overall\s+in',
-            r'who\s+was\s+the\s+first\s+overall\s+pick\s+in',
-            r'who\s+was\s+the\s+second\s+overall\s+pick\s+in',
-            r'where\s+did',
-            r'get\s+drafted',
-            r'drafted\s+in',
-            r'nba\s+draft',
-        ]
-        for pattern in multi_phrases:
-            cleaned = re.sub(pattern, ' ', cleaned)
-
-        # Remove single words with word boundaries
-        cleaned = re.sub(r'\b(draft|drafted|in|the|a|an|was|is|does|did|do)\b', ' ', cleaned)
-
-        # Remove years
-        cleaned = re.sub(r'\b\d{4}\b', '', cleaned)
-        cleaned = re.sub(r'[^\w\s]', ' ', cleaned)
-        cleaned = re.sub(r'\s+', ' ', cleaned).strip()
-
-        if not cleaned:
-            return None
-
-        from actions.data_loader import player_per_game_df
-        from actions.data_loader import _fuzzy_find_player
-        found = _fuzzy_find_player(cleaned, player_per_game_df)
-        return found
+        return extract_player(text)
 
     @staticmethod
     def _extract_season_from_text(text: str) -> str:
         """Try to extract a season year from the raw message text."""
-        matches = re.findall(r'\b(19\d{2}|20\d{2})\b', text)
-        if matches:
-            return matches[-1]
-        return None
+        return extract_season(text)
