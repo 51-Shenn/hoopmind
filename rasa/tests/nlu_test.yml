@@ -1,0 +1,159 @@
+version: "3.1"
+
+nlu:
+- intent: team_stats
+  examples: |
+    - How many points per game did the Boston Celtics average in 2024?
+    - What was Golden State's scoring average during the 2016 season?
+    - How many rebounds did the Los Angeles Lakers average in 2020?
+    - What was the Warriors' assist average in 2017?
+    - How many steals per game did the Chicago Bulls record in 1996?
+    - What was the Celtics' field goal percentage in 2024?
+    - How many three-pointers did the Warriors make per game in 2016?
+    - What were the Miami Heat's blocks per game in 2013?
+    - How many turnovers did the Lakers average in 2020?
+    - What were the Toronto Raptors' free-throw numbers in 2019?
+- intent: league_info
+  examples: |
+    - What basketball league does LeBron James play in?
+    - Which professional basketball league is Stephen Curry part of?
+    - What league was Kobe Bryant known for playing in?
+    - Is Nikola Jokic an NBA player?
+    - Which league does Kevin Durant compete in?
+    - What is the name of the league that the Lakers play in?
+    - Michael Jordan played in which basketball league?
+    - What professional league is associated with the Boston Celtics?
+    - Which league does Giannis Antetokounmpo play in?
+    - What league is the Golden State Warriors part of?
+- intent: team_info
+  examples: |
+    - Give me some information about the Los Angeles Lakers.
+    - What can you tell me about the Boston Celtics?
+    - Tell me about the Golden State Warriors.
+    - Can you provide information on the Chicago Bulls?
+    - Give me details about the Miami Heat.
+    - What should I know about the San Antonio Spurs?
+    - Tell me something about the Toronto Raptors.
+    - Can you describe the New York Knicks?
+    - I want information about the Dallas Mavericks.
+    - What do you know about the Phoenix Suns?
+- intent: draft_info
+  examples: |
+    - Which team selected LeBron James in the draft?
+    - What draft position did Stephen Curry have?
+    - Who picked Kobe Bryant in the NBA draft?
+    - Which pick was Kevin Durant?
+    - Where was Michael Jordan selected?
+    - What team drafted Nikola Jokic?
+    - At what position in the draft was Giannis selected?
+    - Who chose Dwyane Wade in the draft?
+    - Which franchise selected James Harden?
+    - What was Anthony Davis's draft selection?
+- intent: compare
+  examples: |
+    - Who was the better player, LeBron James or Michael Jordan?
+    - How do Stephen Curry and Kevin Durant compare?
+    - Which player had the stronger career, Kobe Bryant or LeBron James?
+    - Who had more points, LeBron James or Kevin Durant?
+    - Compare Nikola Jokic with Joel Embiid.
+    - Which team was stronger, the Lakers or the Celtics?
+    - How do the Warriors compare with the Cavaliers?
+    - Which team had the better season, the 2016 Warriors or the 1996 Bulls?
+    - Between Giannis and Jokic, who performed better?
+    - Who had the better statistics, Curry or Damian Lillard?
+- intent: player_stats
+  examples: |
+    - What was LeBron James's scoring average in 2018?
+    - How many rebounds per game did Nikola Jokic have in 2023?
+    - What was Stephen Curry's assist average in 2016?
+    - How many steals did Kawhi Leonard average in 2017?
+    - What was Anthony Davis's block average in 2020?
+    - How many three-pointers did James Harden make per game in 2019?
+    - What was Kevin Durant's field goal percentage in 2014?
+    - How many turnovers per game did Russell Westbrook have in 2017?
+    - What was Giannis Antetokounmpo's free-throw percentage in 2021?
+    - How many games did Kobe Bryant play in 2009?
+- intent: player_awards
+  examples: |
+    - What awards has LeBron James received during his career?
+    - Can you list Stephen Curry's major awards?
+    - Which awards did Kobe Bryant win?
+    - Tell me about Michael Jordan's award history.
+    - What honors has Kevin Durant earned?
+    - Which awards has Nikola Jokic collected?
+    - What individual awards does Giannis have?
+    - Can you show me Anthony Davis's awards?
+    - What trophies has Dwyane Wade won?
+    - Which major honors belong to James Harden?
+- intent: greeting
+  examples: |
+    - Hi HoopMind!
+    - Hey, I have an NBA question.
+    - Hello there.
+    - Good evening, HoopMind.
+    - Hi, can you help me with basketball information?
+    - Hey chatbot!
+    - Greetings HoopMind.
+    - Hello, I would like to ask about the NBA.
+    - Hi there, are you available?
+    - Hey, let's talk about basketball.
+- intent: goodbye
+  examples: |
+    - See you next time.
+    - Bye HoopMind!
+    - Thanks, I'm finished.
+    - That's all I needed, goodbye.
+    - Catch you later.
+    - I have no more questions.
+    - Thanks for the help, bye.
+    - I'm done for now.
+    - Goodbye, HoopMind.
+    - See you around.
+- intent: dataset_scope
+  examples: |
+    - What NBA information can you answer questions about?
+    - What types of basketball data are available?
+    - Which NBA seasons can I ask about?
+    - What player statistics are included in your database?
+    - Which NBA teams are covered by the chatbot?
+    - What kind of historical NBA data do you have?
+    - What information is stored in your NBA dataset?
+    - What can HoopMind tell me about NBA players?
+    - Which basketball statistics can I look up?
+    - How far back does your NBA data go?
+- intent: player_info
+  examples: |
+    - Who is LeBron James?
+    - Can you introduce Stephen Curry?
+    - What can you tell me about Nikola Jokic?
+    - Give me some background on Kobe Bryant.
+    - Who is Kevin Durant?
+    - Tell me about Giannis Antetokounmpo.
+    - Can you provide information about Anthony Davis?
+    - Who is Kawhi Leonard?
+    - Give me an overview of James Harden.
+    - What should I know about Michael Jordan?
+- intent: award_winner
+  examples: |
+    - Who won the MVP award in 2020?
+    - Who received the Rookie of the Year award in 2019?
+    - Which player won Defensive Player of the Year in 2021?
+    - Who was named Sixth Man of the Year in 2018?
+    - Who won the MVP in 2016?
+    - Which player received the Most Improved Player award in 2020?
+    - Who was the Rookie of the Year in 2018?
+    - Who earned the Defensive Player of the Year award in 2019?
+    - Who won the Sixth Man award in 2021?
+    - Which player was named MVP in 2023?
+- intent: all_star
+  examples: |
+    - Was LeBron James selected for the All-Star Game in 2020?
+    - Did Stephen Curry make the All-Star team in 2019?
+    - Was Kevin Durant an All-Star in 2017?
+    - Did Kobe Bryant play in the All-Star Game in 2010?
+    - Was Nikola Jokic selected as an All-Star in 2023?
+    - Did Giannis Antetokounmpo make the All-Star roster in 2021?
+    - Was Anthony Davis an All-Star in 2018?
+    - Did James Harden receive an All-Star selection in 2019?
+    - Was Kawhi Leonard chosen for the All-Star Game in 2016?
+    - Did Dwyane Wade make the All-Star team in 2012?

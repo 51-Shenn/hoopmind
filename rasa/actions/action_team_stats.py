@@ -1,13 +1,56 @@
-﻿import logging
+import logging
 import re
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
 from actions.data_loader import get_team_stats, _normalize_name, _ensure_loaded
+from actions.entity_extract import extract_season, extract_team
 from actions.llm_answer import compose_answer
 
 logger = logging.getLogger(__name__)
+
+# Matched in order, most specific first. Word boundaries matter: the old
+# substring map read "three-pointers" as "points". "record" is matched last
+# because it is also a verb - "how many steals did the Bulls record in 1996"
+# is a question about steals, not about the win-loss record.
+_SPECIFIC_STATS = [
+    (re.compile(r'three[\s-]?point|3[\s-]?pt|\b3p%?\b'), 'three_pct'),
+    (re.compile(r'free[\s-]?throw|\bft%'), 'ft_pct'),
+    (re.compile(r'field[\s-]?goal|\bfg%'), 'fg_pct'),
+    (re.compile(r'offensive rating|\boff rating\b'), 'offensive_rating'),
+    (re.compile(r'defensive rating|\bdef rating\b'), 'defensive_rating'),
+    (re.compile(r'net rating'), 'net_rating'),
+    (re.compile(r'\bpace\b'), 'pace'),
+    (re.compile(r'\brebounds?\b|\brpg\b|\bboards\b'), 'rebounds'),
+    (re.compile(r'\bassists?\b|\bapg\b'), 'assists'),
+    (re.compile(r'\bsteals?\b|\bspg\b'), 'steals'),
+    (re.compile(r'\bblocks?\b|\bbpg\b'), 'blocks'),
+    (re.compile(r'\bturnovers?\b|\btov\b'), 'turnovers'),
+    (re.compile(r'\bfouls?\b'), 'fouls'),
+    (re.compile(r'\bpoints?\b|\bppg\b|\bscoring\b|\bscored?\b'), 'points'),
+    (re.compile(r'\bgames? played\b'), 'games'),
+    (re.compile(r'\brecords?\b|\bwins?\b|\bwin-loss\b|\blosses\b'), 'record'),
+]
+
+# stat key -> (label, suffix)
+_STAT_LABELS = {
+    'points': ('Points Per Game', ''),
+    'rebounds': ('Rebounds Per Game', ''),
+    'assists': ('Assists Per Game', ''),
+    'steals': ('Steals Per Game', ''),
+    'blocks': ('Blocks Per Game', ''),
+    'turnovers': ('Turnovers Per Game', ''),
+    'fouls': ('Fouls Per Game', ''),
+    'games': ('Games Played', ''),
+    'fg_pct': ('Field Goal Percentage', '%'),
+    'three_pct': ('Three-Point Percentage', '%'),
+    'ft_pct': ('Free-Throw Percentage', '%'),
+    'offensive_rating': ('Offensive Rating', ''),
+    'defensive_rating': ('Defensive Rating', ''),
+    'net_rating': ('Net Rating', ''),
+    'pace': ('Pace', ''),
+}
 
 _TEAM_SYNONYMS = {
     "gsw": "Golden State Warriors",
@@ -104,26 +147,8 @@ class ActionTeamStats(Action):
     @staticmethod
     def _detect_specific_stat(text: str) -> str:
         lower = text.lower()
-        stat_map = {
-            'points per game': 'points', 'ppg': 'points', 'points': 'points', 'scoring': 'points',
-            'rebounds per game': 'rebounds', 'rpg': 'rebounds', 'rebounds': 'rebounds',
-            'assists per game': 'assists', 'apg': 'assists', 'assists': 'assists',
-            'field goal': 'fg_pct', 'fg%': 'fg_pct', 'fg percentage': 'fg_pct',
-            'three point': 'three_pct', '3pt': 'three_pct', '3p%': 'three_pct', '3 point': 'three_pct',
-            'three-point percentage': 'three_pct',
-            'record': 'record', 'wins': 'record', 'wins and losses': 'record', 'win-loss': 'record',
-            'games': 'games', 'games played': 'games',
-            'offensive rating': 'offensive_rating', 'off rating': 'offensive_rating',
-            'defensive rating': 'defensive_rating', 'def rating': 'defensive_rating',
-            'net rating': 'net_rating',
-            'pace': 'pace',
-            'turnovers': 'turnovers', 'turnover': 'turnovers',
-            'steals': 'steals', 'steal': 'steals',
-            'blocks': 'blocks', 'block': 'blocks',
-            'fouls': 'fouls', 'foul': 'fouls',
-        }
-        for keyword, stat in stat_map.items():
-            if keyword in lower:
+        for pattern, stat in _SPECIFIC_STATS:
+            if pattern.search(lower):
                 return stat
         return None
 
@@ -139,34 +164,13 @@ class ActionTeamStats(Action):
             losses = stats.get('losses', '?')
             return f"{team}'s {season} record: {wins}-{losses}."
 
-        if specific == 'points':
-            return f"{team}'s {season} Points Per Game: {stats['points']}."
+        if specific in _STAT_LABELS:
+            value = stats.get(specific)
+            if value is not None and value == value:  # not None, not NaN
+                label, suffix = _STAT_LABELS[specific]
+                return f"{team}'s {season} {label}: {value}{suffix}."
 
-        if specific == 'rebounds':
-            return f"{team}'s {season} Rebounds Per Game: {stats['rebounds']}."
-
-        if specific == 'assists':
-            return f"{team}'s {season} Assists Per Game: {stats['assists']}."
-
-        if specific == 'fg_pct' and stats.get('fg_pct') is not None:
-            return f"{team}'s {season} Field Goal Percentage: {stats['fg_pct']}%."
-
-        if specific == 'three_pct' and stats.get('three_pct') is not None:
-            return f"{team}'s {season} Three-Point Percentage: {stats['three_pct']}%."
-
-        if specific == 'offensive_rating' and stats.get('offensive_rating') is not None:
-            return f"{team}'s {season} Offensive Rating: {stats['offensive_rating']}."
-
-        if specific == 'defensive_rating' and stats.get('defensive_rating') is not None:
-            return f"{team}'s {season} Defensive Rating: {stats['defensive_rating']}."
-
-        if specific == 'net_rating' and stats.get('net_rating') is not None:
-            return f"{team}'s {season} Net Rating: {stats['net_rating']}."
-
-        if specific == 'pace' and stats.get('pace') is not None:
-            return f"{team}'s {season} Pace: {stats['pace']}."
-
-        # Full stat line (no specific stat requested or unknown stat)
+        # Full stat line (no specific stat requested, or it isn't available)
         response = f"{team} {season} stats ({games} games):\n"
         response += f"- Points Per Game (PPG): {stats['points']}\n"
         response += f"- Rebounds Per Game (RPG): {stats['rebounds']}\n"
@@ -179,34 +183,8 @@ class ActionTeamStats(Action):
 
     @staticmethod
     def _extract_team_from_text(text: str) -> str:
-        cleaned = text.lower().strip()
-        for phrase in ["stats for the", "stats for", "statistics for the", "statistics for",
-                       "numbers for the", "numbers for", "how did the", "how did",
-                       "show me the", "show me", "show the", "show",
-                       "what were the", "what were", "what are the", "what are",
-                       "tell me about the", "tell me about", "info on the", "info on",
-                       "points allowed by the", "points allowed by", "points allowed",
-                       "points scored by the", "points scored by", "points scored",
-                       "points per game for the", "points per game for",
-                       "points per game for", "record for the", "record for",
-                       "record of the", "record of", "record in", "record",
-                       "the", "team"]:
-            cleaned = cleaned.replace(phrase, "")
-        for word in ["stats", "statistics", "numbers", "shooting", "scoring",
-                     "points per game", "points", "per game", "allowed",
-                     "offensive", "defensive", "rating", "in"]:
-            cleaned = cleaned.replace(word, "")
-        cleaned = re.sub(r'\b\d{4}\b', '', cleaned)
-        cleaned = re.sub(r'[^\w\s]', '', cleaned)
-        cleaned = re.sub(r'\s+', ' ', cleaned).strip()
-        if cleaned:
-            if cleaned in _TEAM_SYNONYMS:
-                return _TEAM_SYNONYMS[cleaned]
-        return cleaned if cleaned else None
+        return extract_team(text)
 
     @staticmethod
     def _extract_season_from_text(text: str) -> str:
-        matches = re.findall(r'\b(19\d{2}|20\d{2})\b', text)
-        if matches:
-            return matches[-1]
-        return None
+        return extract_season(text)

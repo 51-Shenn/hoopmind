@@ -13,7 +13,10 @@ import requests
 
 logger = logging.getLogger(__name__)
 
-_PROXY_BASE = "http://127.0.0.1:8080/v1beta"
+# Keep the default in step with $ProxyPort in run_rasa_both.ps1 / run_rasa_llm.ps1
+# and with api_base in endpoints.yml / endpoints_llm.yml.
+_PROXY_PORT = os.environ.get("GEMINI_PROXY_PORT", "8300")
+_PROXY_BASE = f"http://127.0.0.1:{_PROXY_PORT}/v1beta"
 _GOOGLE_BASE = "https://generativelanguage.googleapis.com/v1beta"
 _TIMEOUT_SECONDS = 12
 
@@ -31,7 +34,7 @@ Answer:"""
 
 
 def _get_model() -> str:
-    model = os.environ.get("GEMINI_MODEL", "gemini-2.0-flash")
+    model = os.environ.get("GEMINI_MODEL", "gemini-3.0-flash-lite")
     return model.strip().strip('"').strip("'")
 
 

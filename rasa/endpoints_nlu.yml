@@ -1,0 +1,8 @@
+# Endpoints for the NLU-mode assistant when both bots run side by side.
+# Used by run_rasa_both.ps1 -- see run_rasa_nlu.ps1 for the single-bot launcher.
+#
+# This mode is fully offline: it gets its own action server (no Gemini
+# grounding) and declares no model_groups, so nothing here touches the proxy.
+
+action_endpoint:
+  url: "http://localhost:5055/webhook"

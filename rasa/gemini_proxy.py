@@ -4,13 +4,13 @@ Runs a local HTTP server that proxies requests to the Gemini API,
 rotating between multiple API keys on failure.
 
 Usage:
-    python gemini_proxy.py                    # Start on default port 8080
+    python gemini_proxy.py                    # Start on default port 8300
     python gemini_proxy.py --port 9090        # Custom port
 
 Environment variables:
     GEMINI_API_KEY        - Primary key
     GEMINI_API_KEY_1..N   - Additional keys
-    GEMINI_PROXY_PORT     - Server port (default: 8080)
+    GEMINI_PROXY_PORT     - Server port (default: 8300)
 """
 
 import os
@@ -233,7 +233,7 @@ class ProxyHandler(BaseHTTPRequestHandler):
 
 def main():
     parser = argparse.ArgumentParser(description="Gemini API proxy with key rotation")
-    parser.add_argument("--port", type=int, default=int(os.environ.get("GEMINI_PROXY_PORT", 8080)))
+    parser.add_argument("--port", type=int, default=int(os.environ.get("GEMINI_PROXY_PORT", 8300)))
     args = parser.parse_args()
 
     km = KeyManager()
@@ -242,7 +242,21 @@ def main():
         sys.exit(1)
 
     ProxyHandler.km = km
-    server = HTTPServer(("127.0.0.1", args.port), ProxyHandler)
+    try:
+        server = HTTPServer(("127.0.0.1", args.port), ProxyHandler)
+    except PermissionError:
+        # WinError 10013: the port sits inside a Windows TCP exclusion range
+        # (WinNAT/Hyper-V reserves blocks at boot). Nothing is listening on it,
+        # so an "is anything bound here?" check will report the port as free.
+        logger.error(f"Cannot bind port {args.port}: it is reserved by Windows.")
+        logger.error("  Check:  netsh interface ipv4 show excludedportrange protocol=tcp")
+        logger.error("  Fix:    pick a port outside those ranges (GEMINI_PROXY_PORT or --port),")
+        logger.error("          or release them from an elevated shell:")
+        logger.error("          net stop winnat; net start winnat")
+        sys.exit(1)
+    except OSError as e:
+        logger.error(f"Cannot bind port {args.port}: {e}")
+        sys.exit(1)
     logger.info(f"Gemini proxy listening on http://127.0.0.1:{args.port}")
     logger.info(f"Status: {km.status()}")
 

@@ -85,6 +85,37 @@ def _ensure_loaded():
         load_all_data()
 
 
+def _as_int(value: Any, default: int = 0) -> int:
+    """int() that survives missing data.
+
+    Columns like games-started are blank for pre-1982 seasons; a bare
+    int(NaN) raises ValueError, and because every getter wraps its body in
+    try/except that surfaced as "I couldn't retrieve their stats" for every
+    player who retired before 1982.
+    """
+    try:
+        if value is None or not pd.notna(value):
+            return default
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _as_float(value: Any, digits: int = 1) -> Optional[float]:
+    """round() that reports missing data as None rather than NaN.
+
+    Rebounds were not tracked before 1951 and steals/blocks/turnovers not
+    before 1974, so round(NaN) used to print literally "Rebounds: nan" in
+    George Mikan's 1950 line. Callers treat None as "omit this stat".
+    """
+    try:
+        if value is None or not pd.notna(value):
+            return None
+        return round(float(value), digits)
+    except (TypeError, ValueError):
+        return None
+
+
 def _normalize_name(name: str) -> str:
     return name.strip().lower()
 
@@ -148,9 +179,6 @@ def _fuzzy_find_player(name: str, df: pd.DataFrame = None, col: str = "player") 
     _ensure_loaded()
     n = _normalize_name(name)
 
-    if n in _PLAYER_SYNONYMS:
-        return _PLAYER_SYNONYMS[n]
-
     # Use provided df, or default to player_per_game_df
     if df is None:
         df = player_per_game_df
@@ -161,6 +189,11 @@ def _fuzzy_find_player(name: str, df: pd.DataFrame = None, col: str = "player") 
     all_names = df[col].dropna().unique().tolist()
     all_names_lower = [a.lower() for a in all_names]
     name_to_original = {a.lower(): a for a in all_names}
+
+    if n in _PLAYER_SYNONYMS:
+        # The synonym table stores lowercase names; return the dataset's own
+        # spelling so callers echo "Stephen Curry", not "stephen curry".
+        return name_to_original.get(_PLAYER_SYNONYMS[n], _PLAYER_SYNONYMS[n])
 
     exact = name_to_original.get(n)
     if exact:
@@ -230,7 +263,7 @@ def find_team(name_or_abbr: str) -> Optional[pd.DataFrame]:
             mask = team_abbrev_df["team"].str.lower() == resolved.lower()
             matches = team_abbrev_df[mask]
     if matches.empty:
-        mask = team_abbrev_df["team"].str.lower().str.contains(n, na=False)
+        mask = team_abbrev_df["team"].str.lower().str.contains(n, na=False, regex=False)
         matches = team_abbrev_df[mask]
     return matches if not matches.empty else None
 
@@ -287,7 +320,7 @@ def get_player_stats(name: str, season: Optional[str] = None) -> Optional[Dict[s
                 season_int = int(season)
                 stats = stats[stats["season"] == season_int]
             except ValueError:
-                stats = stats[stats["season"].astype(str).str.contains(season, na=False)]
+                stats = stats[stats["season"].astype(str).str.contains(season, na=False, regex=False)]
 
         if stats.empty:
             return None
@@ -296,18 +329,18 @@ def get_player_stats(name: str, season: Optional[str] = None) -> Optional[Dict[s
 
         return {
             "player": row.get("player", name),
-            "season": int(row.get("season", 0)),
+            "season": _as_int(row.get("season")),
             "team": row.get("team", "Unknown"),
             "position": row.get("pos", "Unknown"),
-            "games": int(row.get("g", 0)),
-            "games_started": int(row.get("gs", 0)),
-            "minutes": round(row.get("mp_per_game", 0), 1),
-            "points": round(row.get("pts_per_game", 0), 1),
-            "rebounds": round(row.get("trb_per_game", 0), 1),
-            "assists": round(row.get("ast_per_game", 0), 1),
-            "steals": round(row.get("stl_per_game", 0), 1),
-            "blocks": round(row.get("blk_per_game", 0), 1),
-            "turnovers": round(row.get("tov_per_game", 0), 1),
+            "games": _as_int(row.get("g")),
+            "games_started": _as_int(row.get("gs")),
+            "minutes": _as_float(row.get("mp_per_game"), 1),
+            "points": _as_float(row.get("pts_per_game"), 1),
+            "rebounds": _as_float(row.get("trb_per_game"), 1),
+            "assists": _as_float(row.get("ast_per_game"), 1),
+            "steals": _as_float(row.get("stl_per_game"), 1),
+            "blocks": _as_float(row.get("blk_per_game"), 1),
+            "turnovers": _as_float(row.get("tov_per_game"), 1),
             "fg_pct": round(row.get("fg_percent", 0) * 100, 1) if pd.notna(row.get("fg_percent")) else None,
             "three_pct": round(row.get("x3p_percent", 0) * 100, 1) if pd.notna(row.get("x3p_percent")) else None,
             "ft_pct": round(row.get("ft_percent", 0) * 100, 1) if pd.notna(row.get("ft_percent")) else None,
@@ -333,7 +366,7 @@ def _filter_by_player_season(df, name, season):
             season_int = int(season)
             filtered = filtered[filtered["season"] == season_int]
         except ValueError:
-            filtered = filtered[filtered["season"].astype(str).str.contains(season, na=False)]
+            filtered = filtered[filtered["season"].astype(str).str.contains(season, na=False, regex=False)]
     if filtered.empty:
         return None
     return filtered, resolved
@@ -349,17 +382,17 @@ def get_per_36_stats(name: str, season: Optional[str] = None) -> Optional[Dict[s
         row = stats_df.iloc[0]
         return {
             "player": row.get("player", name),
-            "season": int(row.get("season", 0)),
+            "season": _as_int(row.get("season")),
             "team": row.get("team", "Unknown"),
             "position": row.get("pos", "Unknown"),
-            "games": int(row.get("g", 0)),
-            "minutes": round(row.get("mp", 0), 1),
-            "points": round(row.get("pts_per_36_min", 0), 1),
-            "rebounds": round(row.get("trb_per_36_min", 0), 1),
-            "assists": round(row.get("ast_per_36_min", 0), 1),
-            "steals": round(row.get("stl_per_36_min", 0), 1),
-            "blocks": round(row.get("blk_per_36_min", 0), 1),
-            "turnovers": round(row.get("tov_per_36_min", 0), 1),
+            "games": _as_int(row.get("g")),
+            "minutes": _as_float(row.get("mp"), 1),
+            "points": _as_float(row.get("pts_per_36_min"), 1),
+            "rebounds": _as_float(row.get("trb_per_36_min"), 1),
+            "assists": _as_float(row.get("ast_per_36_min"), 1),
+            "steals": _as_float(row.get("stl_per_36_min"), 1),
+            "blocks": _as_float(row.get("blk_per_36_min"), 1),
+            "turnovers": _as_float(row.get("tov_per_36_min"), 1),
             "fg_pct": round(row.get("fg_percent", 0) * 100, 1) if pd.notna(row.get("fg_percent")) else None,
             "three_pct": round(row.get("x3p_percent", 0) * 100, 1) if pd.notna(row.get("x3p_percent")) else None,
             "ft_pct": round(row.get("ft_percent", 0) * 100, 1) if pd.notna(row.get("ft_percent")) else None,
@@ -379,17 +412,17 @@ def get_per_100_stats(name: str, season: Optional[str] = None) -> Optional[Dict[
         row = stats_df.iloc[0]
         return {
             "player": row.get("player", name),
-            "season": int(row.get("season", 0)),
+            "season": _as_int(row.get("season")),
             "team": row.get("team", "Unknown"),
             "position": row.get("pos", "Unknown"),
-            "games": int(row.get("g", 0)),
-            "minutes": round(row.get("mp", 0), 1),
-            "points": round(row.get("pts_per_100_poss", 0), 1),
-            "rebounds": round(row.get("trb_per_100_poss", 0), 1),
-            "assists": round(row.get("ast_per_100_poss", 0), 1),
-            "steals": round(row.get("stl_per_100_poss", 0), 1),
-            "blocks": round(row.get("blk_per_100_poss", 0), 1),
-            "turnovers": round(row.get("tov_per_100_poss", 0), 1),
+            "games": _as_int(row.get("g")),
+            "minutes": _as_float(row.get("mp"), 1),
+            "points": _as_float(row.get("pts_per_100_poss"), 1),
+            "rebounds": _as_float(row.get("trb_per_100_poss"), 1),
+            "assists": _as_float(row.get("ast_per_100_poss"), 1),
+            "steals": _as_float(row.get("stl_per_100_poss"), 1),
+            "blocks": _as_float(row.get("blk_per_100_poss"), 1),
+            "turnovers": _as_float(row.get("tov_per_100_poss"), 1),
             "fg_pct": round(row.get("fg_percent", 0) * 100, 1) if pd.notna(row.get("fg_percent")) else None,
             "three_pct": round(row.get("x3p_percent", 0) * 100, 1) if pd.notna(row.get("x3p_percent")) else None,
             "ft_pct": round(row.get("ft_percent", 0) * 100, 1) if pd.notna(row.get("ft_percent")) else None,
@@ -411,11 +444,11 @@ def get_advanced_stats(name: str, season: Optional[str] = None) -> Optional[Dict
         row = stats_df.iloc[0]
         return {
             "player": row.get("player", name),
-            "season": int(row.get("season", 0)),
+            "season": _as_int(row.get("season")),
             "team": row.get("team", "Unknown"),
             "position": row.get("pos", "Unknown"),
-            "games": int(row.get("g", 0)),
-            "minutes": round(row.get("mp", 0), 1),
+            "games": _as_int(row.get("g")),
+            "minutes": _as_float(row.get("mp"), 1),
             "per": round(row.get("per", 0), 1) if pd.notna(row.get("per")) else None,
             "ts_pct": round(row.get("ts_percent", 0) * 100, 1) if pd.notna(row.get("ts_percent")) else None,
             "three_pct_ar": round(row.get("x3p_ar", 0) * 100, 1) if pd.notna(row.get("x3p_ar")) else None,
@@ -440,6 +473,24 @@ def get_advanced_stats(name: str, season: Optional[str] = None) -> Optional[Dict
         return None
 
 
+def _dedupe_traded_seasons(rows: pd.DataFrame) -> pd.DataFrame:
+    """Drop per-team rows for seasons that also carry a combined row.
+
+    Basketball Reference records a traded player's season twice: one combined
+    row (team "2TM"/"3TM"/..., historically "TOT") plus one row per team. Summing
+    the frame as-is counts those seasons twice - Vince Carter came out with
+    28,636 career points instead of 25,728.
+    """
+    if rows.empty or "team" not in rows.columns or "season" not in rows.columns:
+        return rows
+    combined = rows["team"].astype(str).str.upper().str.match(r"^(\d+TM|TOT)$")
+    seasons_with_combined = set(rows.loc[combined, "season"])
+    if not seasons_with_combined:
+        return rows
+    keep = combined | ~rows["season"].isin(seasons_with_combined)
+    return rows[keep]
+
+
 def get_career_totals(name: str) -> Optional[Dict[str, Any]]:
     """Get career totals for a player (aggregated across all seasons)."""
     try:
@@ -451,6 +502,7 @@ def get_career_totals(name: str) -> Optional[Dict[str, Any]]:
         totals = player_totals_df[mask]
         if totals.empty:
             return None
+        totals = _dedupe_traded_seasons(totals)
         return {
             "player": totals.iloc[0].get("player", name),
             "seasons": f"{int(totals['season'].min())}-{int(totals['season'].max())}",
@@ -480,10 +532,10 @@ def get_shooting_stats(name: str, season: Optional[str] = None) -> Optional[Dict
         row = stats_df.iloc[0]
         return {
             "player": row.get("player", name),
-            "season": int(row.get("season", 0)),
+            "season": _as_int(row.get("season")),
             "team": row.get("team", "Unknown"),
             "position": row.get("pos", "Unknown"),
-            "games": int(row.get("g", 0)),
+            "games": _as_int(row.get("g")),
             "fg_pct": round(row.get("fg_percent", 0) * 100, 1) if pd.notna(row.get("fg_percent")) else None,
             "avg_dist_fga": round(row.get("avg_dist_fga", 0), 1) if pd.notna(row.get("avg_dist_fga")) else None,
             "pct_fga_from_2p": round(row.get("percent_fga_from_x2p_range", 0) * 100, 1) if pd.notna(row.get("percent_fga_from_x2p_range")) else None,
@@ -516,7 +568,7 @@ def get_team_info(name_or_abbr: str) -> Optional[Dict[str, Any]]:
             mask = team_summaries_df["team"].str.lower() == resolved.lower()
             matches = team_summaries_df[mask]
     if matches.empty:
-        mask = team_summaries_df["team"].str.lower().str.contains(n, na=False)
+        mask = team_summaries_df["team"].str.lower().str.contains(n, na=False, regex=False)
         matches = team_summaries_df[mask]
 
     if matches.empty:
@@ -527,16 +579,16 @@ def get_team_info(name_or_abbr: str) -> Optional[Dict[str, Any]]:
     return {
         "name": latest.get("team", name_or_abbr),
         "abbreviation": latest.get("abbreviation", "Unknown"),
-        "season": int(latest.get("season", 0)),
-        "wins": int(latest.get("w", 0)),
-        "losses": int(latest.get("l", 0)),
+        "season": _as_int(latest.get("season")),
+        "wins": _as_int(latest.get("w")),
+        "losses": _as_int(latest.get("l")),
         "arena": latest.get("arena", "Unknown"),
-        "age": round(latest.get("age", 0), 1),
+        "age": _as_float(latest.get("age"), 1),
         "off_rating": round(latest.get("o_rtg", 0), 1) if pd.notna(latest.get("o_rtg")) else None,
         "def_rating": round(latest.get("d_rtg", 0), 1) if pd.notna(latest.get("d_rtg")) else None,
         "net_rating": round(latest.get("n_rtg", 0), 1) if pd.notna(latest.get("n_rtg")) else None,
         "pace": round(latest.get("pace", 0), 1) if pd.notna(latest.get("pace")) else None,
-        "attendance": int(latest.get("attend", 0)),
+        "attendance": _as_int(latest.get("attend")),
     }
 
 
@@ -555,7 +607,7 @@ def get_team_stats(name_or_abbr: str, season: str) -> Optional[Dict[str, Any]]:
             mask = team_stats_df["team"].str.lower() == resolved.lower()
             stats = team_stats_df[mask]
     if stats.empty:
-        mask = team_stats_df["team"].str.lower().str.contains(n, na=False)
+        mask = team_stats_df["team"].str.lower().str.contains(n, na=False, regex=False)
         stats = team_stats_df[mask]
 
     if stats.empty:
@@ -565,7 +617,7 @@ def get_team_stats(name_or_abbr: str, season: str) -> Optional[Dict[str, Any]]:
         season_int = int(season)
         stats = stats[stats["season"] == season_int]
     except ValueError:
-        stats = stats[stats["season"].astype(str).str.contains(season, na=False)]
+        stats = stats[stats["season"].astype(str).str.contains(season, na=False, regex=False)]
 
     if stats.empty:
         return None
@@ -579,7 +631,7 @@ def get_team_stats(name_or_abbr: str, season: str) -> Optional[Dict[str, Any]]:
         sum_mask = team_summaries_df["team"].str.lower() == row.get("team", "").lower()
         sum_stats = team_summaries_df[sum_mask]
         if not sum_stats.empty:
-            s_int = int(row.get("season", 0))
+            s_int = _as_int(row.get("season"))
             sum_stats = sum_stats[sum_stats["season"] == s_int]
             if not sum_stats.empty:
                 sum_row = sum_stats.iloc[0]
@@ -590,24 +642,90 @@ def get_team_stats(name_or_abbr: str, season: str) -> Optional[Dict[str, Any]]:
 
     return {
         "team": row.get("team", name_or_abbr),
-        "season": int(row.get("season", 0)),
-        "games": int(row.get("g", 0)),
+        "season": _as_int(row.get("season")),
+        "games": _as_int(row.get("g")),
         "wins": wins,
         "losses": losses,
-        "points": round(row.get("pts_per_game", 0), 1),
-        "rebounds": round(row.get("trb_per_game", 0), 1),
-        "assists": round(row.get("ast_per_game", 0), 1),
-        "steals": round(row.get("stl_per_game", 0), 1),
-        "blocks": round(row.get("blk_per_game", 0), 1),
+        "points": _as_float(row.get("pts_per_game"), 1),
+        "rebounds": _as_float(row.get("trb_per_game"), 1),
+        "assists": _as_float(row.get("ast_per_game"), 1),
+        "steals": _as_float(row.get("stl_per_game"), 1),
+        "blocks": _as_float(row.get("blk_per_game"), 1),
+        "turnovers": _as_float(row.get("tov_per_game"), 1),
+        "fouls": _as_float(row.get("pf_per_game"), 1),
         "fg_pct": round(row.get("fg_percent", 0) * 100, 1) if pd.notna(row.get("fg_percent")) else None,
         "three_pct": round(row.get("x3p_percent", 0) * 100, 1) if pd.notna(row.get("x3p_percent")) else None,
         "ft_pct": round(row.get("ft_percent", 0) * 100, 1) if pd.notna(row.get("ft_percent")) else None,
     }
 
 
-def compare_players(name1: str, name2: str) -> Optional[Dict[str, Any]]:
-    stats1 = get_player_stats(name1)
-    stats2 = get_player_stats(name2)
+def get_career_per_game(name: str) -> Optional[Dict[str, Any]]:
+    """Career per-game averages, shaped like `get_player_stats`.
+
+    Used when a comparison names no season: "who had the stronger career" must
+    not be answered from one arbitrary row of the per-game table, which for a
+    retired player is their farewell season (Kobe Bryant at 17.6 PPG).
+    """
+    try:
+        _ensure_loaded()
+        resolved = _fuzzy_find_player(name, player_totals_df)
+        if not resolved:
+            return None
+        mask = player_totals_df["player"].str.lower() == resolved.lower()
+        totals = _dedupe_traded_seasons(player_totals_df[mask])
+        if totals.empty:
+            return None
+
+        games = totals["g"].sum()
+        if not games:
+            return None
+
+        def per_game(column: str) -> Optional[float]:
+            if column not in totals.columns:
+                return None
+            values = totals[column]
+            # Steals and blocks were not recorded before 1974 - divide by the
+            # games from the seasons that actually carry the stat.
+            played = totals.loc[values.notna(), "g"].sum()
+            if not played:
+                return None
+            return round(values.sum() / played, 1)
+
+        def percentage(made: str, attempted: str) -> Optional[float]:
+            if made not in totals.columns or attempted not in totals.columns:
+                return None
+            att = totals[attempted].sum()
+            return round(totals[made].sum() / att * 100, 1) if att > 0 else None
+
+        return {
+            "player": totals.iloc[0].get("player", name),
+            "season": f"{int(totals['season'].min())}-{int(totals['season'].max())}",
+            "team": "career",
+            "games": int(games),
+            "points": per_game("pts"),
+            "rebounds": per_game("trb"),
+            "assists": per_game("ast"),
+            "steals": per_game("stl"),
+            "blocks": per_game("blk"),
+            "turnovers": per_game("tov"),
+            "fg_pct": percentage("fg", "fga"),
+            "three_pct": percentage("x3p", "x3pa"),
+            "ft_pct": percentage("ft", "fta"),
+        }
+    except Exception as e:
+        logger.error(f"Error in get_career_per_game for {name}: {e}", exc_info=True)
+        return None
+
+
+def compare_players(
+    name1: str, name2: str, season: Optional[str] = None
+) -> Optional[Dict[str, Any]]:
+    if season:
+        stats1 = get_player_stats(name1, season)
+        stats2 = get_player_stats(name2, season)
+    else:
+        stats1 = get_career_per_game(name1)
+        stats2 = get_career_per_game(name2)
     if stats1 is None or stats2 is None:
         return None
     return {"player1": stats1, "player2": stats2}
@@ -646,9 +764,9 @@ def get_draft_info(name: str) -> Optional[Dict[str, Any]]:
         college = "Unknown"
     return {
         "player": row.get("player", name),
-        "season": int(row.get("season", 0)),
-        "overall_pick": int(row.get("overall_pick", 0)),
-        "round": int(row.get("round", 0)),
+        "season": _as_int(row.get("season")),
+        "overall_pick": _as_int(row.get("overall_pick")),
+        "round": _as_int(row.get("round")),
         "team": row.get("tm", "Unknown"),
         "college": college,
     }
@@ -688,7 +806,7 @@ def get_draft_year(year: str) -> Optional[Dict[str, Any]]:
     picks_list = []
     for _, row in top_5.iterrows():
         picks_list.append({
-            "pick": int(row.get("overall_pick", 0)),
+            "pick": _as_int(row.get("overall_pick")),
             "player": row.get("player", "Unknown"),
             "team": row.get("tm", "Unknown"),
             "college": row.get("college", "Unknown"),

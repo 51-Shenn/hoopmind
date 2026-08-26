@@ -1,314 +1,146 @@
-# HoopMind
+# 🏀 HoopMind
 
-## Overview
+**HoopMind** is an NBA knowledge chatbot built three times over — once on each of three
+conversational AI platforms — so the same question set can be answered, measured and compared
+across all of them.
 
-HoopMind is a multi-platform AI chatbot project built with three conversational AI frameworks:
+All three answer from the **same dataset**: 22 CSV files covering **1947–2026** across the
+NBA, ABA and BAA — **5,367 players** and **96 teams**.
 
-- [Rasa Pro](https://rasa.com/docs/rasa-pro/) — open-source, LLM-powered dialogue engine
-- [Botpress](https://botpress.com/) — visual chatbot builder
-- [Dialogflow ES](https://cloud.google.com/dialogflow/es/docs) — Google's event-driven conversational agent
+> *"How many points did Stephen Curry average in 2016?"*
+> *"Compare Kobe and Jordan career scoring"*
+> *"Was Kevin Durant an All-Star in 2022?"*
+> *"Who was the first overall pick in 2003?"*
 
-Each platform is developed independently under its own directory.
+---
 
-## Prerequisites
+## The three implementations
 
-### Rasa Pro
+Each lives in its own directory, is documented in its own README, and is **completely
+independent** — they share no code. They do share the [dataset](#dataset): the two local builds
+each keep their own byte-identical copy of the same 22 CSVs, so a change to one does not affect
+the other.
 
-- **Python 3.11** (required by Rasa Pro 3.18)
-- **[uv](https://docs.astral.sh/uv/)** package manager
-- **Rasa Pro license** — from [app.rasa.com](https://app.rasa.com/), needed to run Rasa Pro
-- **Gemini API key** *(optional)* — only needed for LLM mode
+| Implementation | Stack | Runs | Docs |
+|---|---|---|---|
+| 🟣 **[Rasa Pro](rasa/README.md)** | Rasa Pro 3.18, Python 3.11 + `uv`, pandas, Gemini | Locally — PowerShell launcher, Inspector on `:5005` | **[rasa/README.md](rasa/README.md)** |
+| 🔵 **[Dialogflow ES](dialogflow-es/README.md)** | Dialogflow ES, Flask + Streamlit, Python 3.10–3.12, pandas | Locally — API on `:5000`, chat UI on `:8501` | **[dialogflow-es/README.md](dialogflow-es/README.md)** |
+| 🟠 **[Botpress](botpress/README.md)** | Botpress Cloud | Hosted — [open the webchat](https://cdn.botpress.cloud/webchat/v3.7/shareable.html?configUrl=https://files.bpcontent.cloud/2026/08/23/20/20260823204029-8F5ANTS0.json) | **[botpress/README.md](botpress/README.md)** |
 
-### Botpress
+### At a glance
 
-> Coming soon.
+**[Rasa Pro](rasa/README.md)** — 14 flows, 13 intents, 619 hand-maintained training phrases and
+one custom action per flow over a pandas data layer. Runs in two interchangeable modes from the
+same flows: an **offline DIETClassifier** pipeline (no API key, 83.0 % 5-fold accuracy) and an
+**LLM mode** where Gemini both generates flow commands and composes answers grounded in the
+retrieved CSV facts, behind a local key-rotation proxy.
 
-### Dialogflow ES
+**[Dialogflow ES](dialogflow-es/README.md)** — a Streamlit chat UI over a Flask backend.
+Deterministic chip rules → Dialogflow ES `detect_intent` (optional) → a local TF-IDF fallback
+classifier → entity recovery → a 2,275-line query engine → rich answer cards. Ships four layers
+of testing: regression suites, intent P/R/F1 and BLEU/ROUGE harnesses, a 50-case manual
+checklist, and SUS survey tooling.
 
-- **Python 3.10–3.12** (developed on 3.12)
-- Internet only needed for optional Google Dialogflow NLU mode; the offline classifier works fully offline
+**[Botpress](botpress/README.md)** — hosted on Botpress Cloud; nothing to install, just the
+shareable webchat link.
 
-## Installation
+---
 
-### Rasa Pro
+## Dataset
 
-#### 1. Install uv
+**[NBA / ABA / BAA Stats](https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats)** by
+Sumitro Datta on Kaggle — scraped from
+[Basketball Reference](https://www.basketball-reference.com/).
 
-```powershell
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+| | |
+|---|---|
+| **Files** | 22 CSVs (~32 MB) |
+| **Seasons** | 1947 – 2026 |
+| **Leagues** | NBA, ABA, BAA |
+| **Players** | 5,367 |
+| **Teams** | 96 |
+
+All three chatbots answer from this same dataset. The two local builds each vendor their own
+copy — `rasa/data/nba/` and `dialogflow-es/data/` — which are byte-identical across all 22
+files, so neither implementation depends on the other.
+
+<details>
+<summary>The 22 files</summary>
+
+```
+Advanced.csv                        Player Award Shares.csv       Team Abbrev.csv
+All-Star Selections.csv             Player Career Info.csv        Team Stats Per 100 Poss.csv
+Draft Pick History.csv              Player Per Game.csv           Team Stats Per Game.csv
+End of Season Teams (Voting).csv    Player Play By Play.csv       Team Summaries.csv
+End of Season Teams.csv             Player Season Info.csv        Team Totals.csv
+Opponent Stats Per 100 Poss.csv     Player Shooting.csv
+Opponent Stats Per Game.csv         Player Totals.csv
+Opponent Totals.csv                 Per 100 Poss.csv
+Per 36 Minutes.csv
 ```
 
-#### 2. Create a virtual environment and install dependencies
+</details>
+
+---
+
+## Quick start
+
+```powershell
+git clone <this-repo>
+cd hoopmind
+```
+
+**Rasa Pro** — full instructions in **[rasa/README.md](rasa/README.md)**:
 
 ```powershell
 cd rasa
-.\setup.ps1
+.\setup.ps1                 # uv sync -> .venv, creates .env template
+.\run_rasa.ps1 -Mode nlu    # offline mode, Inspector at http://localhost:5005
 ```
 
-This will:
-- Create a `.venv` virtual environment (Python 3.11)
-- Install exact locked dependencies from `uv.lock`
-- Create a `.env` template if one doesn't exist
-
-#### 3. Configure API keys
-
-Edit `rasa/.env` with your credentials:
-
-```env
-RASA_LICENSE=your-license-here
-GEMINI_API_KEY=your-primary-key-here
-GEMINI_API_KEY_1=your-second-key-here
-GEMINI_API_KEY_2=your-third-key-here
-GEMINI_API_KEY_3=your-fourth-key-here
-GEMINI_MODEL=gemini-2.0-flash
-```
-
-#### 4. Run the chatbot
-
-```powershell
-cd rasa
-
-.\run_rasa.ps1            # asks which mode, then launches it
-.\run_rasa.ps1 -Mode nlu  # straight to offline NLU mode (no API key needed)
-.\run_rasa.ps1 -Mode llm  # straight to LLM mode (Gemini + key rotation)
-```
-
-The launcher automatically switches mode if needed and trains the model on first run (~2 min). See the [Modes](#modes) section for details.
-
-### Botpress
-
-> Coming soon.
-
-### Dialogflow ES
-
-#### 1. Install dependencies
+**Dialogflow ES** — full instructions in **[dialogflow-es/README.md](dialogflow-es/README.md)**:
 
 ```powershell
 cd dialogflow-es
-python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
+run_hoopmind.bat            # then open http://localhost:8501
 ```
 
-#### 2. Run
+**Botpress** — no setup; see **[botpress/README.md](botpress/README.md)** for the link.
 
-**Windows:** double-click `run_hoopmind.bat`
+---
 
-**macOS / Linux:** from `dialogflow-es/`, in two terminals:
-
-```bash
-python -X utf8 webhook.py                          # terminal 1: API on :5000
-python -X utf8 -m streamlit run streamlit_app.py   # terminal 2: UI on :8501
-```
-
-Open **http://localhost:8501** in your browser.
-
-## Configuration
-
-### Rasa Pro
-
-#### Environment Variables
-
-Create a `.env` file in the `rasa/` directory:
-
-```
-RASA_LICENSE=your-license-key-here
-GEMINI_API_KEY=your-primary-key-here
-GEMINI_API_KEY_1=your-second-key-here
-GEMINI_API_KEY_2=your-third-key-here
-GEMINI_API_KEY_3=your-fourth-key-here
-GEMINI_MODEL=gemini-2.0-flash
-```
-
-#### Modes
-
-Switch between NLU and LLM modes:
-
-```powershell
-.\switch_mode.ps1 -Mode nlu    # DIETClassifier (default, offline)
-.\switch_mode.ps1 -Mode llm    # Gemini-powered (requires API key)
-```
-
-Each switch automatically retrains the model with the new config.
-
-To just chat, use one launcher — it switches mode if needed, trains on first run, manages the action server (`:5055`) in the background, and cleans up on exit:
-
-```powershell
-cd rasa                   # switch to rasa/ first
-```
-
-```powershell
-.\run_rasa.ps1            # interactive mode picker
-```
-
-```powershell
-.\run_rasa.ps1 -Mode nlu  # offline - Inspector UI on :5005, no API key needed
-```
-
-```powershell
-.\run_rasa.ps1 -Mode llm  # Gemini - key-rotation proxy on :8080 + server on :5005
-```
-
-#### LLM Mode with Key Rotation
-
-Custom actions compose natural-language answers with Gemini, grounded in the stats retrieved from the CSV datasets (`actions/llm_answer.py`). If the API is unreachable, actions fall back to their original template text.
-
-Set up your Gemini API keys in `rasa/.env`:
-
-```
-GEMINI_API_KEY=your-primary-key
-GEMINI_API_KEY_1=your-second-key
-GEMINI_API_KEY_2=your-third-key
-GEMINI_API_KEY_3=your-fourth-key
-```
-
-The project includes a built-in proxy (`gemini_proxy.py`) that rotates between keys automatically on rate limits or failures. Start everything with:
-
-```powershell
-.\run_rasa_llm.ps1
-```
-
-Or manually (with `.venv\Scripts\activate`):
-
-```powershell
-python gemini_proxy.py                                    # terminal 1: proxy on :8080
-python -m rasa_sdk --actions actions --port 5055          # terminal 2: actions on :5055
-python -m rasa run --enable-api --cors "*" --port 5005 -i 127.0.0.1   # terminal 3: Rasa on :5005 (localhost only)
-```
-
-Check proxy status at `http://localhost:8080/status`.
-
-#### Model Configuration
-
-**NLU mode** (`config.yml`): `WhitespaceTokenizer` → `RegexFeaturizer` → `CountVectorsFeaturizer` (word + char_wb) → `EntitySynonymMapper` → `DIETClassifier` (100 epochs) → `FallbackClassifier`
-
-**LLM mode** (`config_llm.yml`): `CompactLLMCommandGenerator` with Gemini embeddings
-
-### Botpress
-
-> Coming soon.
-
-### Dialogflow ES
-
-No configuration required by default — the built-in offline classifier handles all queries. To enable live Google Dialogflow NLU:
-
-1. Create a service account with the **Dialogflow API Client** role in Google Cloud Console
-2. Download the JSON key and set:
-
-   ```powershell
-   setx GOOGLE_APPLICATION_CREDENTIALS "C:\path\to\your-key.json"
-   ```
-
-3. Restart the terminal — the API log will show `source=dialogflow` when active
-
-## Usage
-
-### Rasa Pro
-
-All commands should be run from the `rasa/` directory with the virtual environment activated.
-
-#### Train the model
-
-```powershell
-uv run rasa train
-```
-
-Trains a Rasa model and saves it to `rasa/models/`.
-
-#### Inspect flows
-
-```powershell
-uv run rasa inspect
-```
-
-Opens the Rasa Inspector to debug and visualize conversation flows.
-
-#### Run the server
-
-```powershell
-uv run rasa run
-```
-
-Starts the Rasa HTTP server (default: `http://localhost:5005`).
-
-#### Train NLU model
-
-```powershell
-uv run rasa train nlu
-```
-
-Trains intent classification only (no dialogue). Model saved to `rasa/models/`.
-
-#### Test NLU model
-
-```powershell
-uv run rasa test nlu
-```
-
-Runs 80/20 train-test split evaluation. Results saved to `rasa/results/`.
-
-#### Cross-validation
-
-```powershell
-uv run rasa test nlu --cross-validation -f 10
-```
-
-Runs 10-fold cross-validation for more reliable intent performance estimates.
-
-### Botpress
-
-> Coming soon.
-
-### Dialogflow ES
-
-From `dialogflow-es/`:
-
-```powershell
-python -X utf8 webhook.py                          # API server on :5000
-python -X utf8 -m streamlit run streamlit_app.py   # Chat UI on :8501
-```
-
-Stop with Ctrl+C in each terminal, or close the windows.
-
-## Project Structure
+## Repository layout
 
 ```
 hoopmind/
-├── rasa/                   # Rasa Pro assistant
-│   ├── actions/            # Custom action code
-│   ├── data/               # Training data (flows + NLU)
-│   │   └── nba/            # NBA raw data files
-│   ├── domain.yml          # Active domain (copied from domain_modes/ by switch_mode)
-│   ├── domain_modes/       # Per-mode domain templates (nlu + llm)
-│   ├── models/             # Trained model archives
-│   ├── results/            # NLU evaluation reports
-│   ├── .env                # API keys + license (gitignored, created by setup.ps1)
-│   ├── config.yml          # Active pipeline config (copied from config_*.yml)
-│   ├── config_llm.yml      # LLM mode: CompactLLMCommandGenerator + Gemini
-│   ├── config_nlu.yml      # NLU mode: DIETClassifier + TEDPolicy
-│   ├── credentials.yml     # Input/output channel credentials
-│   ├── endpoints.yml       # Action server & LLM endpoint config
-│   ├── gemini_proxy.py     # Local key-rotation proxy (:8080)
-│   ├── switch_mode.ps1     # Switch NLU/LLM mode + auto-train
-│   ├── setup.ps1           # First-time venv + dependency setup
-│   ├── run_rasa.ps1        # One-command launcher (mode picker → nlu/llm)
-│   ├── run_rasa_llm.ps1    # LLM launcher (proxy + actions + server)
-│   ├── run_rasa_nlu.ps1    # Offline NLU launcher (auto-train + Inspector)
-│   └── INTENTS.md          # Intent & training phrase documentation
-├── botpress/               # Botpress integration (planned)
-├── dialogflow-es/          # Dialogflow ES integration
-│   ├── data/               # 22 Basketball Reference CSV datasets
-│   ├── evaluation/         # Test suites, metrics scripts, checklists
-│   ├── webhook.py          # Flask /chat endpoint + message pipeline
-│   ├── streamlit_app.py    # Chat UI (rich cards + suggestion chips)
-│   ├── dialogflow_client.py# Dialogflow ES detection + offline fallback
-│   ├── entity_extractor.py # Player/team/season/stat recovery from text
-│   ├── query_engine.py     # NBA queries over CSV datasets
-│   ├── response_generator.py# Text answers + rich card payloads
-│   ├── config.py           # Paths
-│   ├── run_hoopmind.bat    # One-click launcher (Windows)
-│   └── requirements.txt    # Python dependencies
+├── rasa/                   Rasa Pro assistant          → rasa/README.md
+├── dialogflow-es/          Dialogflow ES assistant     → dialogflow-es/README.md
+├── botpress/               Botpress Cloud assistant    → botpress/README.md
+├── example-queries.md      representative + edge-case queries for smoke testing either build
+├── test.csv                shared intent test phrases (source for rasa/tests/nlu_test.yml)
+├── CLAUDE.md               repository guidance for AI coding assistants
 └── LICENSE
 ```
+
+---
+
+## Reference
+
+- **[example-queries.md](example-queries.md)** — representative and edge-case queries per intent,
+  useful for smoke-testing either local implementation after a change
+- **[rasa/INTENTS.md](rasa/INTENTS.md)** — intents, entities, full training phrase lists and
+  cross-validated evaluation results
+- **[dialogflow-es/TESTING.md](dialogflow-es/TESTING.md)** — the six testing layers, from
+  regression suites to the user-satisfaction survey
+
+## Credits
+
+Data: [NBA / ABA / BAA Stats](https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats)
+by Sumitro Datta, via [Basketball Reference](https://www.basketball-reference.com/) ·
+Platforms: [Rasa Pro](https://rasa.com/docs/rasa-pro/),
+[Google Dialogflow ES](https://cloud.google.com/dialogflow/es/docs),
+[Botpress](https://botpress.com/)
 
 ## License
 

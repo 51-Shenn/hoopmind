@@ -1,5 +1,4 @@
 ﻿import logging
-import re
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
@@ -8,6 +7,7 @@ from actions.data_loader import (
     compare_players, get_team_stats,
     _fuzzy_find_player, _PLAYER_SYNONYMS, _normalize_name, _ensure_loaded
 )
+from actions.entity_extract import extract_entities, extract_season, extract_seasons
 from actions.llm_answer import compose_answer
 
 logger = logging.getLogger(__name__)
@@ -62,17 +62,21 @@ class ActionCompare(Action):
 
             _ensure_loaded()
 
-            # Try player comparison first
-            result = compare_players(name1, name2)
+            # Try player comparison first. With no season named this compares
+            # career averages rather than one arbitrary season.
+            result = compare_players(name1, name2, season)
             if result is not None:
                 p1 = result["player1"]
                 p2 = result["player2"]
                 response = f"{p1['player']} ({p1['season']}) vs {p2['player']} ({p2['season']}):\n"
-                response += f"- Points Per Game (PPG): {p1['points']} vs {p2['points']}\n"
-                response += f"- Rebounds Per Game (RPG): {p1['rebounds']} vs {p2['rebounds']}\n"
-                response += f"- Assists Per Game (APG): {p1['assists']} vs {p2['assists']}\n"
-                response += f"- Steals Per Game (SPG): {p1['steals']} vs {p2['steals']}\n"
-                response += f"- Blocks Per Game (BPG): {p1['blocks']} vs {p2['blocks']}\n"
+                for key, text in [("points", "Points Per Game (PPG)"),
+                                  ("rebounds", "Rebounds Per Game (RPG)"),
+                                  ("assists", "Assists Per Game (APG)"),
+                                  ("steals", "Steals Per Game (SPG)"),
+                                  ("blocks", "Blocks Per Game (BPG)")]:
+                    # Steals and blocks predate 1974 - skip rather than print None.
+                    if p1.get(key) is not None and p2.get(key) is not None:
+                        response += f"- {text}: {p1[key]} vs {p2[key]}\n"
                 if p1["fg_pct"] is not None and p2["fg_pct"] is not None:
                     response += f"- Field Goal Percentage (FG%): {p1['fg_pct']}% vs {p2['fg_pct']}%\n"
                 if p1["three_pct"] is not None and p2["three_pct"] is not None:
@@ -85,10 +89,15 @@ class ActionCompare(Action):
             resolved1 = self._resolve_team(name1)
             resolved2 = self._resolve_team(name2)
             if resolved1 and resolved2:
-                if not season:
-                    season = "2024"
-                t1 = get_team_stats(resolved1, season)
-                t2 = get_team_stats(resolved2, season)
+                # "the 2016 Warriors or the 1996 Bulls" gives each team its own
+                # season; a single year applies to both.
+                seasons = extract_seasons(latest_msg)
+                if len(seasons) >= 2:
+                    season1, season2 = seasons[0], seasons[1]
+                else:
+                    season1 = season2 = season or "2024"
+                t1 = get_team_stats(resolved1, season1)
+                t2 = get_team_stats(resolved2, season2)
                 if t1 and t2:
                     response = f"{t1['team']} ({t1['season']}) vs {t2['team']} ({t2['season']}):\n"
                     response += f"- Points Per Game (PPG): {t1['points']} vs {t2['points']}\n"
@@ -121,48 +130,13 @@ class ActionCompare(Action):
 
     @staticmethod
     def _extract_names_from_text(text: str) -> list:
-        cleaned = text.lower().strip()
-        parts = None
-        for sep in [" and ", " or ", " vs ", " versus ", " with "]:
-            if sep in cleaned:
-                parts = [p.strip() for p in cleaned.split(sep) if p.strip()]
-                break
-        if not parts or len(parts) < 2:
-            parts = [p.strip() for p in cleaned.split(",") if p.strip()]
-        if not parts or len(parts) < 2:
-            return None
-
-        _ensure_loaded()
-        from actions.data_loader import player_per_game_df, team_stats_df
-        validated = []
-        for part in parts:
-            for phrase in ["compare", "who scored more", "who has more", "who had more",
-                           "who is better", "who was better", "which team", "which player",
-                           "how do", "how did", "stats", "better", "worse",
-                           "best seasons", "best season",
-                           "scoring", "points", "rebounds", "assists",
-                           "steals", "blocks", "numbers"]:
-                part = part.replace(phrase, " ")
-            part = re.sub(r'\b(the|a|an|was|is|did|does|do|in|of|for)\b', ' ', part)
-            part = re.sub(r'\b\d{4}\b', '', part)
-            part = re.sub(r'[^\w\s]', ' ', part)
-            part = re.sub(r'\s+', ' ', part).strip()
-            if not part:
-                continue
-            # Try player first
-            found = _fuzzy_find_player(part, player_per_game_df)
-            if found:
-                validated.append(found)
-                continue
-            # Try team
-            found = _fuzzy_find_player(part, team_stats_df, col="team")
-            if found:
-                validated.append(found)
-        return validated if len(validated) >= 2 else None
+        """Two names to compare - both players or both teams, never a mix."""
+        entities = extract_entities(text)
+        for names in (entities["players"], entities["teams"]):
+            if len(names) >= 2:
+                return names[:2]
+        return None
 
     @staticmethod
     def _extract_season_from_text(text: str) -> str:
-        matches = re.findall(r'\b(19\d{2}|20\d{2})\b', text)
-        if matches:
-            return matches[-1]
-        return None
+        return extract_season(text)
