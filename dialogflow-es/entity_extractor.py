@@ -32,7 +32,6 @@ PLAYER_NICKS = {
     "kobe": "Kobe Bryant",
     "magic": "Magic Johnson",
     "lebron": "LeBron James",
-    "james": "LeBron James",
     "curry": "Stephen Curry",
     "jokic": "Nikola Jokic",
     "giannis": "Giannis Antetokounmpo",
@@ -41,8 +40,6 @@ PLAYER_NICKS = {
     "kareem": "Kareem Abdul-Jabbar",
     "tmac": "Tracy McGrady",
     "dirk": "Dirk Nowitzki",
-    "nowitzki": "Dirk Nowitzki",
-    "yao ming": "Yao Ming",
     "yao": "Yao Ming",
     "hakeem": "Hakeem Olajuwon",
     "olajuwon": "Hakeem Olajuwon",
@@ -50,21 +47,22 @@ PLAYER_NICKS = {
     "kawhi": "Kawhi Leonard",
     "leonard": "Kawhi Leonard",
     "cp3": "Chris Paul",
+    "pg": "Paul George",
     "kd": "Kevin Durant",
     "durant": "Kevin Durant",
     "harden": "James Harden",
     "westbrook": "Russell Westbrook",
+    "luka": "Luka Doncic",
     "doncic": "Luka Doncic",
     "kyrie": "Kyrie Irving",
     "irving": "Kyrie Irving",
     "stockton": "John Stockton",
     "nash": "Steve Nash",
     "rodman": "Dennis Rodman",
-    "pippen": "Scottie Pippen",
+    "scottie": "Scottie Pippen",
     "garnett": "Kevin Garnett",
     "carmelo": "Carmelo Anthony",
     "melo": "Carmelo Anthony",
-    "anthony": "Carmelo Anthony",
     "klay": "Klay Thompson",
     "korver": "Kyle Korver",
     "draymond": "Draymond Green",
@@ -72,25 +70,23 @@ PLAYER_NICKS = {
     "beverley": "Patrick Beverley",
     "gobert": "Rudy Gobert",
     "trae": "Trae Young",
-    "young": "Trae Young",
     "zion": "Zion Williamson",
     "derozan": "DeMar DeRozan",
     "manu": "Manu Ginobili",
-    "ginobili": "Manu Ginobili",
     "wembanyama": "Victor Wembanyama",
     "lillard": "Damian Lillard",
     "dame": "Damian Lillard",
     "rondo": "Rajon Rondo",
-    "crawford": "Jamal Crawford",
-    "howard": "Dwight Howard",
     "porzingis": "Kristaps Porzingis",
     "reggie miller": "Reggie Miller",
+    "bird": "Larry Bird",
     "jordan": "Michael Jordan",
+    "mj": "Michael Jordan",
 }
 
 TEAM_NICKS = {
     "lakers": "Los Angeles Lakers",
-    "celtics": "Boston Celtics",
+    "boston": "Boston Celtics",
     "warriors": "Golden State Warriors",
     "bulls": "Chicago Bulls",
     "nuggets": "Denver Nuggets",
@@ -241,19 +237,22 @@ def extract(query_text: str) -> dict:
         return {}
     _load_names()
 
+    # Strip possessive "'s" or bare "'s" so "Currys" matches "Curry"
+    _possessive = re.sub(r"['''\u2019]s\b", " ", query_text)
+
     candidates: list[tuple] = []
 
-    for m in _CACHE["player_pattern"].finditer(query_text):
+    for m in _CACHE["player_pattern"].finditer(_possessive):
         value = _CACHE["player_values"][m.group(1).lower()]
         candidates.append((m.start(), m.end(), "player", value))
     taken = {c[3] for c in candidates}
 
-    for m in _CACHE["surname_pattern"].finditer(query_text):
+    for m in _CACHE["surname_pattern"].finditer(_possessive):
         value = _CACHE["surname_values"][m.group(1).lower()]
         if value not in taken:
             candidates.append((m.start(), m.end(), "player", value))
 
-    for m in _CACHE["team_pattern"].finditer(query_text):
+    for m in _CACHE["team_pattern"].finditer(_possessive):
         value = _CACHE["team_values"][m.group(1).lower()]
         candidates.append((m.start(), m.end(), "team", value))
 
@@ -264,7 +263,7 @@ def extract(query_text: str) -> dict:
 
     # Earliest match wins; longer breaks ties.
 
-    order = {"player": 0, "team": 1, "season": 2}
+    order = {"team": 0, "player": 1, "season": 2}
     candidates.sort(key=lambda c: (c[0], -(c[1] - c[0]), order[c[2]]))
     picked: list[tuple] = []
     last_end = -1
@@ -281,4 +280,57 @@ def extract(query_text: str) -> dict:
             result.setdefault("season", value)
         else:
             result.setdefault(kind, []).append(value)
+
+    # ----------------------------------------------------------
+    # Fuzzy player fallback: when no player was found via exact
+    # regex, try close matches against the full player list so
+    # misspellings / missing punctuation still resolve.
+    #
+    # Safety rules to avoid hallucinations (e.g. "games" → "LeBron
+    # James"):
+    #   * Single tokens (1-word chunks) only match if the token
+    #     is ≥5 letters long (avoids short common words).
+    #   * All chunks use a tighter 0.85 cutoff.
+    #   * Longer chunks (≥2 tokens) are always preferred.
+    # ----------------------------------------------------------
+    if not result.get("player") and not result.get("team"):
+        from difflib import get_close_matches
+        tokens = _norm(query_text).split()
+        candidates_long: list[str] = []  # from 2+ token chunks (preferred)
+        candidates_short: list[str] = []  # from 1-token chunks (stricter)
+        player_list = list(_CACHE.get("player_values", {}))
+        for n in range(1, min(len(tokens) + 1, 5)):
+            for i in range(len(tokens) - n + 1):
+                chunk = " ".join(tokens[i : i + n])
+                if n == 1 and len(chunk) < 5:
+                    continue  # skip short single words
+                matches = get_close_matches(
+                    chunk, player_list, n=1, cutoff=0.85,
+                )
+                if matches:
+                    resolved = _CACHE["player_values"][matches[0].lower()]
+                    if n >= 2:
+                        candidates_long.append(resolved)
+                    else:
+                        candidates_short.append(resolved)
+        candidates = candidates_long or candidates_short
+        if candidates:
+            result["player"] = [candidates[0]]
+
+    q = query_text.lower()
+    attr_map = [
+        (["how tall", "height", "tall is"], "height"),
+        (["position", "what position", "plays"], "position"),
+        (["weight", "how much does", "how heavy"], "weight"),
+        (["born", "birthday", "birth date", "born when", "date of birth"], "born"),
+        (["college", "university", "school", "where did", "where did he go"], "college"),
+        (["career", "years active", "how long", "from.*to"], "career"),
+        (["hall of fame", "hof"], "hall_of_fame"),
+    ]
+    for keywords, attr in attr_map:
+        for kw in keywords:
+            if kw in q:
+                result["attribute"] = attr
+                return result
+
     return result
