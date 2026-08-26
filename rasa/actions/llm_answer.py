@@ -31,7 +31,7 @@ Answer:"""
 
 
 def _get_model() -> str:
-    model = os.environ.get("GEMINI_MODEL", "gemini-2.0-flash")
+    model = os.environ.get("GEMINI_MODEL", "gemini-3.0-flash-lite")
     return model.strip().strip('"').strip("'")
 
 
