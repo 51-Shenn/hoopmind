@@ -1,0 +1,26 @@
+recipe: default.v1
+assistant_id: leather-castle
+language: en
+pipeline:
+- name: WhitespaceTokenizer
+- name: RegexFeaturizer
+- name: CountVectorsFeaturizer
+- name: CountVectorsFeaturizer
+  analyzer: char_wb
+  min_ngram: 1
+  max_ngram: 4
+- name: EntitySynonymMapper
+- name: DIETClassifier
+  epochs: 30
+  BILOU_flag: true
+  constrain_similarities: true
+  model_confidence: softmax
+  regularization_scale: 0.01
+- name: FallbackClassifier
+  threshold: 0.3
+policies:
+- name: FlowPolicy
+- name: RulePolicy
+  core_fallback_threshold: 0.4
+  core_fallback_action_name: "action_default_fallback"
+  enable_fallback_prediction: true

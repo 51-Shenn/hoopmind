@@ -1,0 +1,176 @@
+{
+  "name": "player_advanced_stats",
+  "displayName": "player_advanced_stats",
+  "priority": 500000,
+  "webhookState": "WEBHOOK_STATE_ENABLED",
+  "trainingPhrases": [
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "What was "
+        },
+        {
+          "text": "Nikola Jokic",
+          "entityType": "@player",
+          "alias": "player",
+          "userDefined": true
+        },
+        {
+          "text": "'s "
+        },
+        {
+          "text": "PER",
+          "entityType": "@stat",
+          "alias": "stat",
+          "userDefined": true
+        },
+        {
+          "text": " in "
+        },
+        {
+          "text": "2023",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "Show "
+        },
+        {
+          "text": "Giannis Antetokounmpo",
+          "entityType": "@player",
+          "alias": "player",
+          "userDefined": true
+        },
+        {
+          "text": "'s "
+        },
+        {
+          "text": "true shooting percentage",
+          "entityType": "@stat",
+          "alias": "stat",
+          "userDefined": true
+        },
+        {
+          "text": "."
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "What was "
+        },
+        {
+          "text": "Stephen Curry",
+          "entityType": "@player",
+          "alias": "player",
+          "userDefined": true
+        },
+        {
+          "text": "'s "
+        },
+        {
+          "text": "usage percentage",
+          "entityType": "@stat",
+          "alias": "stat",
+          "userDefined": true
+        },
+        {
+          "text": " in "
+        },
+        {
+          "text": "2016",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "EXAMPLE",
+      "parts": [
+        {
+          "text": "What was "
+        },
+        {
+          "text": "LeBron James",
+          "entityType": "@player",
+          "alias": "player",
+          "userDefined": true
+        },
+        {
+          "text": "'s "
+        },
+        {
+          "text": "VORP",
+          "entityType": "@stat",
+          "alias": "stat",
+          "userDefined": true
+        },
+        {
+          "text": " in "
+        },
+        {
+          "text": "2013",
+          "entityType": "@season",
+          "alias": "season",
+          "userDefined": true
+        },
+        {
+          "text": "?"
+        }
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "name": "player",
+      "displayName": "player",
+      "value": "$player",
+      "entityTypeDisplayName": "@player",
+      "mandatory": false,
+      "prompts": []
+    },
+    {
+      "name": "season",
+      "displayName": "season",
+      "value": "$season",
+      "entityTypeDisplayName": "@season",
+      "mandatory": false,
+      "prompts": []
+    },
+    {
+      "name": "stat",
+      "displayName": "stat",
+      "value": "$stat",
+      "entityTypeDisplayName": "@stat",
+      "mandatory": false,
+      "prompts": []
+    }
+  ],
+  "messages": [],
+  "defaultResponsePlatforms": [
+    "PLATFORM_UNSPECIFIED"
+  ],
+  "rootFollowupIntentName": "",
+  "parentFollowupIntentName": "",
+  "followupIntentInfo": []
+}
