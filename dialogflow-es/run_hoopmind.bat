@@ -1,7 +1,7 @@
 @echo off
 REM HoopMind launcher: Flask backend + Streamlit UI
 set PYTHONUTF8=1
-
+cd /d "%~dp0"
 REM Optional local package dir (dev machine only); ignored elsewhere.
 if exist "%USERPROFILE%\hmdeps" set PYTHONPATH=%USERPROFILE%\hmdeps
 

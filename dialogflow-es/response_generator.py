@@ -30,7 +30,7 @@ AWARD_UPPER = {"nba", "mvp", "dpoy", "roy", "mip", "smoy"}
 # Canonical team names (match the CSVs) used for the random
 # comparison partner in suggestion chips.
 
-NBA_TEAM_NAMES = (
+NBA_TEAM_NAMES_FALLBACK = (
     "Atlanta Hawks",
     "Boston Celtics",
     "Brooklyn Nets",
@@ -63,12 +63,88 @@ NBA_TEAM_NAMES = (
     "Washington Wizards",
 )
 
+_NBA_TEAM_NAMES: list[str] | None = None
+
+
+def _load_team_names() -> list[str]:
+    global _NBA_TEAM_NAMES
+    if _NBA_TEAM_NAMES is not None:
+        return _NBA_TEAM_NAMES
+    try:
+        import pandas as pd
+        from pathlib import Path
+
+        csv = Path(__file__).resolve().parent / "data" / "Team Abbrev.csv"
+        df = pd.read_csv(csv, usecols=["team", "season"])
+        latest = int(df["season"].max())
+        current = df[df["season"] == latest]
+        names = sorted(set(current["team"].dropna().tolist()))
+        _NBA_TEAM_NAMES = names
+    except Exception:
+        _NBA_TEAM_NAMES = list(NBA_TEAM_NAMES_FALLBACK)
+    return _NBA_TEAM_NAMES
+
 
 def _random_team(exclude: str | None = None) -> str:
     name = (exclude or "").casefold()
-    pool = [team for team in NBA_TEAM_NAMES if team.casefold() != name]
-
+    pool = [t for t in _load_team_names() if t.casefold() != name]
+    if not pool:
+        return "Boston Celtics"
     return random.choice(pool)
+
+
+_NBA_PLAYER_NAMES: list[str] | None = None
+
+
+def _load_player_names() -> list[str]:
+    global _NBA_PLAYER_NAMES
+    if _NBA_PLAYER_NAMES is not None:
+        return _NBA_PLAYER_NAMES
+    try:
+        import pandas as pd
+        from pathlib import Path
+
+        csv = Path(__file__).resolve().parent / "data" / "Player Career Info.csv"
+        df = pd.read_csv(csv, usecols=["player"])
+        names = sorted(set(df["player"].dropna().tolist()))
+        _NBA_PLAYER_NAMES = names
+    except Exception:
+        _NBA_PLAYER_NAMES = []
+    return _NBA_PLAYER_NAMES
+
+
+def _random_player(exclude: str | None = None) -> str:
+    name = (exclude or "").casefold()
+    pool = [p for p in _load_player_names() if p.casefold() != name]
+    if not pool:
+        return "LeBron James"
+    return random.choice(pool)
+
+
+_SEASONS_CACHE: list[str] | None = None
+
+
+def _available_seasons() -> list[str]:
+    global _SEASONS_CACHE
+    if _SEASONS_CACHE is not None:
+        return _SEASONS_CACHE
+    try:
+        import pandas as pd
+        from pathlib import Path
+
+        csv = Path(__file__).resolve().parent / "data" / "Player Per Game.csv"
+        df = pd.read_csv(csv, usecols=["season"])
+        seasons = sorted(
+            set(str(int(s)) for s in df["season"].dropna().tolist()),
+            key=int,
+        )
+        _SEASONS_CACHE = [s for s in seasons if int(s) >= 2010]
+    except Exception:
+        _SEASONS_CACHE = [
+            "2000", "2005", "2008", "2010", "2012", "2015",
+            "2016", "2018", "2020", "2023", "2024",
+        ]
+    return _SEASONS_CACHE
 
 
 BOX_W = 46  # default inner width of box cards
@@ -1125,6 +1201,7 @@ def _generate_template(
     if kind == "team_stat":
         rows_out = result["rows"]
         stat = result.get("stat")
+        focused = bool(result.get("stat_requested"))
 
         pretty = _pretty_stat(stat)
 
@@ -1146,42 +1223,43 @@ def _generate_template(
             ctx_a = {c["label"]: c["value"] for c in (a.get("context") or [])}
             ctx_b = {c["label"]: c["value"] for c in (b.get("context") or [])}
 
-            for label in ctx_a:
-                if (
-                    label in ctx_b
-                    and label != pretty
-                    and not (
-                        _same_val(ctx_a[label], a["value"])
-                        and _same_val(ctx_b[label], b["value"])
-                    )
-                ):
+            if not focused:
+                for label in ctx_a:
+                    if (
+                        label in ctx_b
+                        and label != pretty
+                        and not (
+                            _same_val(ctx_a[label], a["value"])
+                            and _same_val(ctx_b[label], b["value"])
+                        )
+                    ):
+                        data_rows.append(
+                            [label, _fmt(ctx_a[label]), _fmt(ctx_b[label])]
+                        )
+
+                # Record rows when available.
+                rec_rows = {}
+
+                for idx, r in enumerate((a, b)):
+                    rec = r.get("record") or {}
+                    if rec.get("w") not in (None, "", "nan"):
+                        rec_rows[idx] = rec
+
+                if len(rec_rows) == 2:
                     data_rows.append(
-                        [label, _fmt(ctx_a[label]), _fmt(ctx_b[label])]
+                        [
+                            "Wins",
+                            _num(rec_rows[0].get("w")),
+                            _num(rec_rows[1].get("w")),
+                        ]
                     )
-
-            # Record rows when available.
-            rec_rows = {}
-
-            for idx, r in enumerate((a, b)):
-                rec = r.get("record") or {}
-                if rec.get("w") not in (None, "", "nan"):
-                    rec_rows[idx] = rec
-
-            if len(rec_rows) == 2:
-                data_rows.append(
-                    [
-                        "Wins",
-                        _num(rec_rows[0].get("w")),
-                        _num(rec_rows[1].get("w")),
-                    ]
-                )
-                data_rows.append(
-                    [
-                        "Losses",
-                        _num(rec_rows[0].get("l")),
-                        _num(rec_rows[1].get("l")),
-                    ]
-                )
+                    data_rows.append(
+                        [
+                            "Losses",
+                            _num(rec_rows[0].get("l")),
+                            _num(rec_rows[1].get("l")),
+                        ]
+                    )
 
             season_txt = _clean(a.get("season")) or ""
             title = f"⚔️ {a['team']} vs {b['team']}" + (
@@ -1189,7 +1267,7 @@ def _generate_template(
             )
 
             verdict = _verdict(a, b, stat)
-            record_note = _record_result_line(a, b)
+            record_note = _record_result_line(a, b) if not focused else ""
 
             if record_note.startswith("Result: "):
                 record_note = "📊 " + record_note[len("Result: ") :]
@@ -1205,33 +1283,34 @@ def _generate_template(
         primary_val = r["value"]
         data_rows = [(pretty, _stat_value(stat, primary_val))]
 
-        for c in r.get("context") or []:
-            if c["label"] == pretty:
-                continue
+        if not focused:
+            for c in r.get("context") or []:
+                if c["label"] == pretty:
+                    continue
 
-            if any(
-                _same_val(c["value"], existing_val)
-                for _, existing_val in [(pretty, primary_val)]
-                + [(lab, val) for lab, val in data_rows[1:]]
-            ):
-                continue
+                if any(
+                    _same_val(c["value"], existing_val)
+                    for _, existing_val in [(pretty, primary_val)]
+                    + [(lab, val) for lab, val in data_rows[1:]]
+                ):
+                    continue
 
-            data_rows.append((c["label"], _fmt(c["value"])))
+                data_rows.append((c["label"], _fmt(c["value"])))
 
-        rec = r.get("record") or {}
+            rec = r.get("record") or {}
 
-        if rec.get("w") not in (None, "", "nan"):
+            if rec.get("w") not in (None, "", "nan"):
 
-            data_rows.append(("Wins", _num(rec.get("w"))))
-            data_rows.append(("Losses", _num(rec.get("l"))))
+                data_rows.append(("Wins", _num(rec.get("w"))))
+                data_rows.append(("Losses", _num(rec.get("l"))))
 
-            if _clean(rec.get("playoffs")):
-                data_rows.append(
-                    ("Playoffs", _playoffs_txt(rec.get("playoffs")))
-                )
+                if _clean(rec.get("playoffs")):
+                    data_rows.append(
+                        ("Playoffs", _playoffs_txt(rec.get("playoffs")))
+                    )
 
-            if _clean(rec.get("pace")):
-                data_rows.append(("Pace", _num(rec.get("pace"))))
+                if _clean(rec.get("pace")):
+                    data_rows.append(("Pace", _num(rec.get("pace"))))
 
         return _box(f"🏀 {r['team']} — {_fmt(r.get('season'))}", data_rows)
 
@@ -1343,6 +1422,73 @@ def _generate_template(
             footer="No outright wins found in these records.",
         )
 
+    if kind == "compare_player_awards":
+        rows = result.get("rows", [])
+        if len(rows) < 2 or not all(r is not None for r in rows):
+            return "I could not find both players for that comparison."
+        a, b = rows[0], rows[1]
+        name_a = str(a.get("player", "Player 1"))
+        name_b = str(b.get("player", "Player 2"))
+        count_by_a: dict[str, list[str]] = a.get("win_count_by_award") or {}
+        count_by_b: dict[str, list[str]] = b.get("win_count_by_award") or {}
+        all_awards = list(dict.fromkeys(list(count_by_a) + list(count_by_b)))
+
+        headers = ["Award", name_a, name_b]
+        data_rows = []
+        total_a = sum(len(v) for v in count_by_a.values())
+        total_b = sum(len(v) for v in count_by_b.values())
+        for award in all_awards:
+            ya = count_by_a.get(award, [])
+            yb = count_by_b.get(award, [])
+            ca = len(ya)
+            cb = len(yb)
+            a_txt = f"×{ca}" if ca else "—"
+            b_txt = f"×{cb}" if cb else "—"
+            data_rows.append([award, a_txt, b_txt])
+
+        footers = []
+        conclusion_lines = []
+        if total_a + total_b > 0:
+            if total_a > total_b:
+                conclusion_lines.append(
+                    f"{name_a} has more wins ({total_a} vs {total_b})."
+                )
+            elif total_b > total_a:
+                conclusion_lines.append(
+                    f"{name_b} has more wins ({total_b} vs {total_a})."
+                )
+            else:
+                conclusion_lines.append(
+                    f"Both {name_a} and {name_b} have the same number "
+                    f"of wins in the dataset ({total_a})."
+                )
+        else:
+            conclusion_lines.append(
+                "No outright award wins found for either player."
+            )
+
+        main = _table_box(
+            f"🏆 {name_a} vs {name_b} — Awards",
+            headers,
+            data_rows,
+            footer=footers,
+        )
+        detail_lines = []
+        for award in all_awards:
+            ya = count_by_a.get(award, [])
+            yb = count_by_b.get(award, [])
+            if ya or yb:
+                parts = []
+                if ya:
+                    parts.append(f"{name_a}: {', '.join(ya)}")
+                if yb:
+                    parts.append(f"{name_b}: {', '.join(yb)}")
+                detail_lines.append(f"• {award} — " + " | ".join(parts))
+        if detail_lines:
+            main += "\n" + "\n".join(detail_lines)
+        main += "\n💡 " + " ".join(conclusion_lines)
+        return main
+
     # ============================================================
     # ALL-STAR SELECTIONS (3 shapes)
     # ============================================================
@@ -1398,20 +1544,27 @@ def _generate_template(
 
             shown = selected if mode == "selected" else appeared
             shown = shown or selected
-            header = (
-                f"⭐ {season} All-Star Roster "
-                f"({len(shown)} players appeared in the game)"
-            )
+            total_count = len(shown)
 
             if mode == "selected":
                 header = (
                     f"⭐ {season} All-Star Roster "
-                    f"({len(shown)} players were originally "
+                    f"({total_count} players were originally "
                     f"selected)"
                 )
+            else:
+                header = (
+                    f"⭐ {season} All-Star Roster "
+                    f"({total_count} players appeared in the game)"
+                )
 
-            grid = _two_col_grid(shown, "")
+            MAX_DISPLAY = 30
+            display_list = shown[:MAX_DISPLAY]
+            grid = _two_col_grid(display_list, "")
             text = header + "\n" + grid
+
+            if total_count > MAX_DISPLAY:
+                text += f"\n\n… and {total_count - MAX_DISPLAY} more players."
 
             if mode == "selected" and injured:
                 text += "\n\n🚑 Injured, did not play: " + ", ".join(injured)
@@ -1745,12 +1898,16 @@ def _build_rich(
                 title="👋 Welcome to HoopMind!",
             )
         ]
+        p1 = _random_player()
+        p2 = _random_player(exclude=p1)
+        t1 = _random_team()
+        season = random.choice(_available_seasons())
         chips = _chips(
             [
-                "Tell me about LeBron James",
-                "Stephen Curry stats in 2016",
-                "Celtics record in 2024",
-                "Compare Kobe and Jordan",
+                f"Tell me about {p1}",
+                f"{p2} stats in {season}",
+                f"{t1} record in {season}",
+                f"Compare {p1} and {p2}",
             ]
         )
         return [row + ([chips] if chips else [])]
@@ -1786,12 +1943,16 @@ def _build_rich(
                 title="📚 HoopMind Data",
             )
         ]
+        p1 = _random_player()
+        p2 = _random_player(exclude=p1)
+        t1 = _random_team()
+        season = random.choice(_available_seasons())
         chips = _chips(
             [
-                "What statistics can you provide?",
-                "Player stats",
-                "Team stats",
-                "Awards",
+                f"Tell me about {p1}",
+                f"{p2} stats in {season}",
+                f"{t1} record in {season}",
+                f"Compare {p1} and {p2}",
             ]
         )
 
@@ -1860,6 +2021,44 @@ def _build_rich(
         r = result["row"]
         name = r.get("player") or "Player"
         pos = str(_clean(r.get("pos")) or "").replace("-", "/")
+        attribute = result.get("attribute")
+
+        if attribute == "height":
+            height = _feet_inches(r.get("ht_in_in"))
+            if height:
+                try:
+                    cm = round(float(r.get("ht_in_in")) * 2.54)
+                    height = f"{height} ({cm} cm)"
+                except (TypeError, ValueError):
+                    pass
+            return [[_desc([f"👤 {name} is {height or 'N/A'} tall."])]]
+
+        if attribute == "position":
+            return [[_desc([f"👤 {name} plays {pos or 'N/A'}."])]]
+
+        if attribute == "weight":
+            wt = _clean(r.get("wt"))
+            if wt:
+                try:
+                    kg = round(float(_num(wt)) * 0.45359237)
+                    wt = f"{_num(wt)} lb ({kg} kg)"
+                except (TypeError, ValueError):
+                    wt = f"{_num(wt)} lb"
+            return [[_desc([f"👤 {name} weighs {wt or 'N/A'}."])]]
+
+        if attribute == "born":
+            born = _clean(r.get("birth_date"))
+            return [[_desc([f"👤 {name} was born on {born or 'N/A'}."])]]
+
+        if attribute == "college":
+            colleges = _clean(r.get("colleges"))
+            return [[_desc([f"👤 {name} attended {colleges or 'N/A'}."])]]
+
+        if attribute == "hall_of_fame":
+            hof = "Yes" if str(r.get("hof")).lower() == "true" else "No"
+            return [[_desc([f"👤 {name} — Hall of Fame: {hof}."])]]
+
+        # No specific attribute: show full profile card
         lines = []
         height = _feet_inches(r.get("ht_in_in"))
 
@@ -1897,7 +2096,6 @@ def _build_rich(
                     "Career", f"{_num(r.get('from'))} - {_num(r.get('to'))}"
                 )
             )
-
         lines.append(
             (
                 "Hall of Fame"
@@ -2042,17 +2240,19 @@ def _build_rich(
             value = _stat_value(stat, r["value"])
 
             lines = [pretty]
+            if measure == "per game":
+                lines = [f"{pretty} per game"]
             lines.append("")
             lines.append(f"⭐ {value}")
 
-            if measure == "career totals":
-                lines.insert(0, "(career totals)")
+            if measure in ("career totals", "season totals"):
+                lines.insert(0, f"({measure})")
 
             footer = []
 
             if games is not None:
                 footer.append(f"Games: {games}")
-            if age:
+            if age and age != "N/A":
                 footer.append(f"Age: {age}")
 
             cards = [
@@ -2256,6 +2456,76 @@ def _build_rich(
         ]
 
     # --------------------------------------------------------
+    # COMPARE PLAYER AWARDS
+    # --------------------------------------------------------
+    if kind == "compare_player_awards":
+        rows_cmp = result.get("rows", [])
+
+        if len(rows_cmp) < 2 or not all(r is not None for r in rows_cmp):
+            return [
+                [
+                    _desc(
+                        ["I could not find both players for that comparison."]
+                    )
+                ]
+            ]
+
+        a, b = rows_cmp[0], rows_cmp[1]
+        name_a = str(a.get("player", "Player 1"))
+        name_b = str(b.get("player", "Player 2"))
+        count_by_a: dict[str, list[str]] = a.get("win_count_by_award") or {}
+        count_by_b: dict[str, list[str]] = b.get("win_count_by_award") or {}
+        all_awards = list(dict.fromkeys(list(count_by_a) + list(count_by_b)))
+
+        total_a = sum(len(v) for v in count_by_a.values())
+        total_b = sum(len(v) for v in count_by_b.values())
+
+        blocks = []
+        for award in all_awards:
+            ya = count_by_a.get(award, [])
+            yb = count_by_b.get(award, [])
+            blocks.append(
+                [
+                    f"{award}",
+                    f"• {name_a}: "
+                    f"{', '.join(ya) if ya else '—'} (×{len(ya)})",
+                    f"• {name_b}: "
+                    f"{', '.join(yb) if yb else '—'} (×{len(yb)})",
+                ]
+            )
+
+        lines: list = []
+        for block in blocks:
+            lines.extend(block)
+            lines.append("")
+        while lines and lines[-1] == "":
+            lines.pop()
+
+        if not all_awards:
+            lines = ["No outright award wins found for either player."]
+
+        if total_a > total_b:
+            verdict = f"{name_a} has more wins ({total_a} vs {total_b})."
+        elif total_b > total_a:
+            verdict = f"{name_b} has more wins ({total_b} vs {total_a})."
+        elif total_a + total_b > 0:
+            verdict = (
+                f"Both {name_a} and {name_b} have the same number "
+                f"of wins in the dataset ({total_a})."
+            )
+        else:
+            verdict = "No outright award wins found for either player."
+
+        cards = [
+            _info(f"⚔️ {name_a} vs {name_b}", "Award Comparison"),
+            _desc(lines, title="Head-to-head"),
+            _desc([f"🏆 {verdict}"]),
+        ]
+
+        return [cards]
+
+    
+    # --------------------------------------------------------
     # ALL-STAR (three shapes)
     # --------------------------------------------------------
     if kind == "all_star_selection":
@@ -2325,14 +2595,20 @@ def _build_rich(
                 ]
 
             shown = (selected if mode == "selected" else appeared) or selected
+            total_count = len(shown)
 
             subtitle = (
-                f"{len(shown)} players were originally selected"
+                f"{total_count} players were originally selected"
                 if mode == "selected"
-                else (f"{len(shown)} players appeared in the game")
+                else (f"{total_count} players appeared in the game")
             )
 
-            lines = [", ".join(shown)]
+            MAX_DISPLAY = 30
+            display_list = shown[:MAX_DISPLAY]
+            lines = [", ".join(display_list)]
+
+            if total_count > MAX_DISPLAY:
+                lines.append(f"… and {total_count - MAX_DISPLAY} more players.")
 
             if mode == "selected" and injured:
                 lines.append("")
@@ -2483,11 +2759,9 @@ def _build_rich(
     # DRAFT
     # --------------------------------------------------------
     if kind == "draft_information":
-
         draft_rows = result.get("rows", [])
 
         if not draft_rows:
-
             return [
                 [
                     _desc(
@@ -2603,7 +2877,6 @@ def _build_rich(
             _info(f"🎓 {_fmt(d.get('player'))}", "Draft Profile"),
             _desc(lines),
         ]
-
         if footer:
             cards.append(_desc([footer]))
 
@@ -2862,6 +3135,7 @@ def _build_rich(
         stat_rows = result["rows"]
         stat = result.get("stat")
         pretty = _pretty_stat(stat)
+        focused = bool(result.get("stat_requested"))
 
         if len(stat_rows) > 1:
 
@@ -2882,16 +3156,17 @@ def _build_rich(
                     f"• {pretty}: " f"{_stat_value(stat, side['value'])}"
                 ]
 
-                for label, value in ctx.items():
-                    if label == pretty:
-                        continue
-                    if _same_val(value, side["value"]) and label not in (
-                        "Record",
-                        "Playoffs",
-                    ):
-                        continue
+                if not focused:
+                    for label, value in ctx.items():
+                        if label == pretty:
+                            continue
+                        if _same_val(value, side["value"]) and label not in (
+                            "Record",
+                            "Playoffs",
+                        ):
+                            continue
 
-                    bullets.append(f"• {label}: {_fmt(value)}")
+                        bullets.append(f"• {label}: {_fmt(value)}")
 
                 return bullets
 
@@ -2911,32 +3186,33 @@ def _build_rich(
                 _desc(_team_block(b, ctx_b), title=title_b),
             ]
 
-            rec_a = a.get("record") or {}
-            rec_b = b.get("record") or {}
+            if not focused:
+                rec_a = a.get("record") or {}
+                rec_b = b.get("record") or {}
 
-            if rec_a.get("w") not in (None, "", "nan") and rec_b.get(
-                "w"
-            ) not in (None, "", "nan"):
-                cards.append(
-                    _desc(
-                        [
-                            f"• Records: "
-                            f"{_num(rec_a.get('w'))}-"
-                            f"{_num(rec_a.get('l'))} "
-                            f"({a['team']}, "
-                            f"{_fmt(a.get('season') or rec_a.get('season'))})",
-                            f"• Records: "
-                            f"{_num(rec_b.get('w'))}-"
-                            f"{_num(rec_b.get('l'))} "
-                            f"({b['team']}, "
-                            f"{_fmt(b.get('season') or rec_b.get('season'))})",
-                        ],
-                        title="Season records",
+                if rec_a.get("w") not in (None, "", "nan") and rec_b.get(
+                    "w"
+                ) not in (None, "", "nan"):
+                    cards.append(
+                        _desc(
+                            [
+                                f"• Records: "
+                                f"{_num(rec_a.get('w'))}-"
+                                f"{_num(rec_a.get('l'))} "
+                                f"({a['team']}, "
+                                f"{_fmt(a.get('season') or rec_a.get('season'))})",
+                                f"• Records: "
+                                f"{_num(rec_b.get('w'))}-"
+                                f"{_num(rec_b.get('l'))} "
+                                f"({b['team']}, "
+                                f"{_fmt(b.get('season') or rec_b.get('season'))})",
+                            ],
+                            title="Season records",
+                        )
                     )
-                )
 
             verdict = _verdict(a, b, stat)
-            record_note = _record_result_line(a, b)
+            record_note = _record_result_line(a, b) if not focused else ""
 
             tail = [f"🏆 {verdict}"]
 
@@ -2956,28 +3232,29 @@ def _build_rich(
 
         lines = [f"{pretty}: {_stat_value(stat, primary_val)}"]
 
-        for c in r.get("context") or []:
+        if not focused:
+            for c in r.get("context") or []:
 
-            if _same_val(c["value"], primary_val):
-                continue
+                if _same_val(c["value"], primary_val):
+                    continue
 
-            lines.append(f"{c['label']}: {_fmt(c['value'])}")
+                lines.append(f"{c['label']}: {_fmt(c['value'])}")
 
-        rec = r.get("record") or {}
+            rec = r.get("record") or {}
 
-        if rec.get("w") not in (None, "", "nan"):
+            if rec.get("w") not in (None, "", "nan"):
 
-            lines.append(
-                f"Record: {_num(rec.get('w'))}-" f"{_num(rec.get('l'))}"
-            )
+                lines.append(
+                    f"Record: {_num(rec.get('w'))}-" f"{_num(rec.get('l'))}"
+                )
 
-            po = _playoffs_txt(rec.get("playoffs"))
+                po = _playoffs_txt(rec.get("playoffs"))
 
-            if po:
-                lines.append(f"Playoffs: {po}")
+                if po:
+                    lines.append(f"Playoffs: {po}")
 
-            if _clean(rec.get("pace")):
-                lines.append(f"Pace: {_num(rec.get('pace'))}")
+                if _clean(rec.get("pace")):
+                    lines.append(f"Pace: {_num(rec.get('pace'))}")
 
         return [
             [

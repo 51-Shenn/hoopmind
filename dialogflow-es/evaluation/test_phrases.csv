@@ -1,0 +1,131 @@
+﻿test_id,expected_intent,test_phrase
+T001,team_stats,What was Boston's average scoring output during the 2024 season?
+T002,team_stats,What was Golden State's scoring average during the 2016 season?
+T003,team_stats,How many rebounds did the Los Angeles Lakers average in 2020?
+T004,team_stats,What was the Warriors' assist average in 2017?
+T005,team_stats,How many steals per game did the Chicago Bulls record in 1996?
+T006,team_stats,What was the Celtics' field goal percentage in 2024?
+T007,team_stats,How many three-pointers did the Warriors make per game in 2016?
+T008,team_stats,What were the Miami Heat's blocks per game in 2013?
+T009,team_stats,How many turnovers did the Lakers average in 2020?
+T010,team_stats,What were the Toronto Raptors' free-throw numbers in 2019?
+T011,league_info,What basketball league does LeBron James play in?
+T012,league_info,Which professional basketball league is Stephen Curry part of?
+T013,league_info,What league was Kobe Bryant known for playing in?
+T014,league_info,Is Nikola Jokic an NBA player?
+T015,league_info,Which league does Kevin Durant compete in?
+T016,league_info,What is the name of the league that the Lakers play in?
+T017,league_info,Michael Jordan played in which basketball league?
+T018,league_info,What professional league is associated with the Boston Celtics?
+T019,league_info,Which league does Giannis Antetokounmpo play in?
+T020,league_info,What league is the Golden State Warriors part of?
+T021,team_info,Give me some information about the Los Angeles Lakers.
+T022,team_info,What can you tell me about the Boston Celtics?
+T023,team_info,Tell me about the Golden State Warriors.
+T024,team_info,Can you provide information on the Chicago Bulls?
+T025,team_info,Give me details about the Miami Heat.
+T026,team_info,What should I know about the San Antonio Spurs?
+T027,team_info,Tell me something about the Toronto Raptors.
+T028,team_info,Can you describe the New York Knicks?
+T029,team_info,I want information about the Dallas Mavericks.
+T030,team_info,What do you know about the Phoenix Suns?
+T031,draft_info,Which team selected LeBron James in the draft?
+T032,draft_info,What draft position did Stephen Curry have?
+T033,draft_info,Who picked Kobe Bryant in the NBA draft?
+T034,draft_info,Which pick was Kevin Durant?
+T035,draft_info,Where was Michael Jordan selected?
+T036,draft_info,What team drafted Nikola Jokic?
+T037,draft_info,At what position in the draft was Giannis selected?
+T038,draft_info,Who chose Dwyane Wade in the draft?
+T039,draft_info,Which franchise selected James Harden?
+T040,draft_info,What was Anthony Davis's draft selection?
+T041,compare,"Who was the better player, LeBron James or Michael Jordan?"
+T042,compare,How do Stephen Curry and Kevin Durant compare?
+T043,compare,"Which player had the stronger career, Kobe Bryant or LeBron James?"
+T044,compare,Which of LeBron James and Kevin Durant recorded the higher scoring numbers?
+T045,compare,Compare Nikola Jokic with Joel Embiid.
+T046,compare,"Which team was stronger, the Lakers or the Celtics?"
+T047,compare,How do the Warriors compare with the Cavaliers?
+T048,compare,"Which team had the better season, the 2016 Warriors or the 1996 Bulls?"
+T049,compare,"Between Giannis and Jokic, who performed better?"
+T050,compare,"Who had the better statistics, Curry or Damian Lillard?"
+T051,player_stats,What was LeBron James's scoring average in 2018?
+T052,player_stats,How many rebounds per game did Nikola Jokic have in 2023?
+T053,player_stats,What was Stephen Curry's assist average in 2016?
+T054,player_stats,How many steals did Kawhi Leonard average in 2017?
+T055,player_stats,What was Anthony Davis's block average in 2020?
+T056,player_stats,How many three-pointers did James Harden make per game in 2019?
+T057,player_stats,What was Kevin Durant's field goal percentage in 2014?
+T058,player_stats,How many turnovers per game did Russell Westbrook have in 2017?
+T059,player_stats,What was Giannis Antetokounmpo's free-throw percentage in 2021?
+T060,player_stats,How many games did Kobe Bryant play in 2009?
+T061,player_awards,What awards has LeBron James received during his career?
+T062,player_awards,Can you list Stephen Curry's major awards?
+T063,player_awards,Which awards did Kobe Bryant win?
+T064,player_awards,Tell me about Michael Jordan's award history.
+T065,player_awards,What honors has Kevin Durant earned?
+T066,player_awards,Which awards has Nikola Jokic collected?
+T067,player_awards,What individual awards does Giannis have?
+T068,player_awards,Can you show me Anthony Davis's awards?
+T069,player_awards,What trophies has Dwyane Wade won?
+T070,player_awards,Which major honors belong to James Harden?
+T071,greeting,Hi HoopMind!
+T072,greeting,"Hey, I have an NBA question."
+T073,greeting,Hello there.
+T074,greeting,"Good evening, HoopMind."
+T075,greeting,"Hi, can you help me with basketball information?"
+T076,greeting,Hey chatbot!
+T077,greeting,Greetings HoopMind.
+T078,greeting,"Hello, I would like to ask about the NBA."
+T079,greeting,"Hi there, are you available?"
+T080,greeting,"Hey, let's talk about basketball."
+T081,goodbye,See you next time.
+T082,goodbye,Bye HoopMind!
+T083,goodbye,"Thanks, I'm finished."
+T084,goodbye,"That's all I needed, goodbye."
+T085,goodbye,Catch you later.
+T086,goodbye,I have no more questions.
+T087,goodbye,"Thanks for the help, bye."
+T088,goodbye,I'm done for now.
+T089,goodbye,"Goodbye, HoopMind."
+T090,goodbye,See you around.
+T091,dataset_scope,What NBA information can you answer questions about?
+T092,dataset_scope,What types of basketball data are available?
+T093,dataset_scope,Which NBA seasons can I ask about?
+T094,dataset_scope,What player statistics are included in your database?
+T095,dataset_scope,Which NBA teams are covered by the chatbot?
+T096,dataset_scope,What kind of historical NBA data do you have?
+T097,dataset_scope,What information is stored in your NBA dataset?
+T098,dataset_scope,What can HoopMind tell me about NBA players?
+T099,dataset_scope,Which basketball statistics can I look up?
+T100,dataset_scope,How far back does your NBA data go?
+T101,player_info,Who is LeBron James?
+T102,player_info,Can you introduce Stephen Curry?
+T103,player_info,What can you tell me about Nikola Jokic?
+T104,player_info,Give me some background on Kobe Bryant.
+T105,player_info,Who is Kevin Durant?
+T106,player_info,Tell me about Giannis Antetokounmpo.
+T107,player_info,Can you provide information about Anthony Davis?
+T108,player_info,Who is Kawhi Leonard?
+T109,player_info,Give me an overview of James Harden.
+T110,player_info,What should I know about Michael Jordan?
+T111,award_winner,Who won the MVP award in 2020?
+T112,award_winner,Who received the Rookie of the Year award in 2019?
+T113,award_winner,Which player won Defensive Player of the Year in 2021?
+T114,award_winner,Who was named Sixth Man of the Year in 2018?
+T115,award_winner,Who won the MVP in 2016?
+T116,award_winner,Which player received the Most Improved Player award in 2020?
+T117,award_winner,Who was the Rookie of the Year in 2018?
+T118,award_winner,Who earned the Defensive Player of the Year award in 2019?
+T119,award_winner,Who won the Sixth Man award in 2021?
+T120,award_winner,Which player was named MVP in 2023?
+T121,all_star,Was LeBron James selected for the All-Star Game in 2020?
+T122,all_star,Did Stephen Curry make the All-Star team in 2019?
+T123,all_star,Was Kevin Durant an All-Star in 2017?
+T124,all_star,Did Kobe Bryant play in the All-Star Game in 2010?
+T125,all_star,Was Nikola Jokic selected as an All-Star in 2023?
+T126,all_star,Did Giannis Antetokounmpo make the All-Star roster in 2021?
+T127,all_star,Was Anthony Davis an All-Star in 2018?
+T128,all_star,Did James Harden receive an All-Star selection in 2019?
+T129,all_star,Was Kawhi Leonard chosen for the All-Star Game in 2016?
+T130,all_star,Did Dwyane Wade make the All-Star team in 2012?
