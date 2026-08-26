@@ -18,22 +18,44 @@ Source: `rasa/data/nlu.yml`
 
 ## Evaluation Results
 
-**Model**: DIETClassifier (100 epochs) + WhitespaceTokenizer + RegexFeaturizer + CountVectorsFeaturizer
+**Model**: `config_nlu.yml` — DIETClassifier (30 epochs) + WhitespaceTokenizer + RegexFeaturizer
++ CountVectorsFeaturizer (word + char_wb 1-4) + EntitySynonymMapper
 
-| Intent | Precision | Recall | F1-Support |
-|---|---|---|---|
-| team_stats | 1.00 | 1.00 | 1.00 (4) |
-| compare | 1.00 | 1.00 | 1.00 (4) |
-| all_star | 1.00 | 0.83 | 0.91 (6) |
-| draft_info | 1.00 | 1.00 | 1.00 (6) |
-| player_info | 0.93 | 1.00 | 0.97 (14) |
-| player_stats | 1.00 | 0.94 | 0.97 (16) |
-| league_info | 1.00 | 1.00 | 1.00 (4) |
-| award_winner | 1.00 | 1.00 | 1.00 (2) |
-| player_awards | 1.00 | 1.00 | 1.00 (2) |
-| **weighted avg** | **0.99** | **0.99** | **0.99 (60)** |
+**Protocol**: 5-fold cross-validation over all 605 examples. Reproduce with:
 
-**Overall accuracy**: 98.8% (was 82.8%)
+```powershell
+uv run rasa test nlu --nlu data/nlu.yml --config config.yml --cross-validation -f 5 --out results
+```
+
+Every example is held out exactly once, so these are out-of-sample numbers. Do **not** quote a
+plain `rasa test nlu --nlu data/nlu.yml` run: with no held-out split it trains and tests on the
+same data and reports ~99%, which is a train-set score, not accuracy.
+
+| Intent | Precision | Recall | F1 | Support |
+|---|---|---|---|---|
+| team_stats | 0.85 | 0.95 | 0.90 | 109 |
+| player_info | 0.79 | 0.74 | 0.76 | 81 |
+| player_stats | 0.85 | 0.89 | 0.87 | 79 |
+| compare | 0.88 | 0.81 | 0.84 | 69 |
+| team_info | 0.80 | 0.50 | 0.62 | 40 |
+| league_info | 0.86 | 0.92 | 0.89 | 39 |
+| dataset_scope | 0.89 | 0.82 | 0.85 | 39 |
+| all_star | 0.87 | 0.89 | 0.88 | 37 |
+| greeting | 0.51 | 0.85 | 0.64 | 26 |
+| draft_info | 0.93 | 1.00 | 0.96 | 26 |
+| goodbye | 0.89 | 0.67 | 0.76 | 24 |
+| player_awards | 0.80 | 0.67 | 0.73 | 18 |
+| award_winner | 0.94 | 0.83 | 0.88 | 18 |
+| **macro avg** | **0.83** | **0.81** | **0.81** | **605** |
+| **weighted avg** | **0.84** | **0.83** | **0.83** | **605** |
+
+**Overall accuracy**: 83.0% (0.8298)
+
+Weakest intents are `team_info` (recall 0.50 — mostly absorbed by `team_stats`) and `greeting`
+(precision 0.51 — acts as a catch-all for short unrecognised inputs).
+
+Measured on the same 5-fold protocol, nesting the lookup tables correctly under `nlu:` moved
+accuracy 0.8000 → 0.8298 and weighted F1 0.7988 → 0.8279.
 
 ## 1. greeting (26 phrases)
 
