@@ -1,0 +1,22 @@
+# Endpoints for the LLM-mode assistant when both bots run side by side.
+# Used by run_rasa_both.ps1 -- see run_rasa_llm.ps1 for the single-bot launcher.
+#
+# Its action server runs on 5056 with HOOPMIND_GROUND_ANSWERS=true, so the
+# grounded-answer path stays isolated from the offline NLU bot on 5055.
+
+action_endpoint:
+  url: "http://localhost:5056/webhook"
+
+model_groups:
+  - id: gemini_llm
+    models:
+      - provider: gemini
+        model: gemini-3.6-flash
+        api_base: http://127.0.0.1:8080/v1beta
+        reasoning_effort: "none"
+        timeout: 60
+  - id: gemini_embeddings
+    models:
+      - provider: gemini
+        model: gemini-embedding-001
+        api_base: http://127.0.0.1:8080/v1beta

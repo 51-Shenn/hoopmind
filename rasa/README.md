@@ -121,6 +121,45 @@ the background action server (and the proxy, in LLM mode) on the way out.
 | `5005` | Rasa server / Inspector UI |
 | `5055` | Rasa SDK action server (`rasa_sdk --actions actions`) |
 | `8080` | `gemini_proxy.py` key-rotation proxy (LLM mode only; `GET /status` reports key health) |
+| `5006` / `5056` | second Inspector and second action server — side-by-side mode only (see below) |
+
+### Both modes side by side
+
+For demos where you want to compare the two modes live, `run_rasa_both.ps1` runs them at the
+same time. The single-mode launchers **cannot** be used together — they share `config.yml` /
+`domain.yml`, both retrain on start, `run_rasa_nlu.ps1` prunes `models/` down to one archive,
+both bind `:5005`, and both reuse one action server on `:5055`, so whichever starts first
+decides `HOOPMIND_GROUND_ANSWERS` for both bots.
+
+```powershell
+.\run_rasa_both.ps1                              # train both, launch both
+.\run_rasa_both.ps1 -SkipTrain                   # reuse the existing archives
+.\run_rasa_both.ps1 -NluPort 5006 -LlmPort 5005  # swap the Inspector ports
+```
+
+It sidesteps every one of those collisions:
+
+1. Trains both models up front under fixed names — `models/hoopmind_nlu.tar.gz` and
+   `models/hoopmind_llm.tar.gz` — so `config.yml` only matters during training.
+2. Serves each bot from its archive with `rasa inspect -m …`. A model archive carries its own
+   config and domain, so the generated files are irrelevant once the servers are up.
+3. Gives each bot its **own action server**: `:5055` with `HOOPMIND_GROUND_ANSWERS` cleared for
+   the NLU bot, `:5056` with it set for the LLM bot. `compose_answer()` reads that variable from
+   its own process at call time, so a shared server would leak Gemini grounding into the
+   supposedly-offline NLU demo.
+4. Points each at its own endpoints file — `endpoints_nlu.yml` (action server `:5055`, no
+   `model_groups`) and `endpoints_llm.yml` (action server `:5056`, proxy model groups kept).
+
+Five processes in total: the proxy, two action servers (hidden), and one Inspector per bot in
+its own window. It refuses to start if any of `8080`, `5055`, `5056`, `5005`, `5006` is already
+taken, so a leftover launcher window gives a clear error instead of a half-broken demo. Press
+Enter in the parent window to stop everything (`taskkill /T`, since `uv` spawns children that
+would otherwise keep holding the ports).
+
+> Training leaves `config.yml` / `domain.yml` in **LLM** mode. The running bots ignore that, but
+> a later bare `uv run rasa train` builds an LLM model. And do not run `run_rasa_nlu.ps1`
+> afterwards — its pruning step deletes every archive but the newest, taking out one of the two
+> demo models.
 
 ### What the launchers do
 
@@ -491,6 +530,8 @@ rasa/
 ├── config_llm.yml                  CompactLLMCommandGenerator pipeline
 ├── domain.yml                      GENERATED — copied from domain_modes/
 ├── endpoints.yml                   action endpoint + Gemini model groups (via the proxy)
+├── endpoints_nlu.yml               side-by-side mode: action server :5055, no model groups
+├── endpoints_llm.yml               side-by-side mode: action server :5056 + model groups
 ├── credentials.yml                 channel credentials
 ├── gemini_proxy.py                 local :8080 key-rotation proxy
 ├── generate_nlu.py                 STALE scaffold — do not run (see Training data)
@@ -498,6 +539,7 @@ rasa/
 ├── run_rasa.ps1                    unified launcher / mode picker
 ├── run_rasa_nlu.ps1                offline launcher
 ├── run_rasa_llm.ps1                proxy + grounded-answers launcher
+├── run_rasa_both.ps1               both modes at once, on separate ports (demos)
 ├── switch_mode.ps1                 swap config + domain, retrain
 ├── pyproject.toml / uv.lock        pinned dependencies
 ├── INTENTS.md                      intents, entities, full phrase lists, eval results
@@ -516,6 +558,7 @@ All commands run from `rasa/`.
 |---|---|
 | `.\setup.ps1` | `uv sync` → `.venv`, create `.env` template |
 | `.\run_rasa.ps1 [-Mode nlu\|llm]` | switch mode if needed, train, start actions + Inspector |
+| `.\run_rasa_both.ps1 [-SkipTrain]` | both modes at once — NLU on `:5005`, LLM on `:5006` |
 | `.\switch_mode.ps1 -Mode nlu\|llm [-SkipTrain]` | swap `config.yml` + `domain.yml`, retrain |
 | `uv run rasa train` | train the full model (NLU + core) into `models/` |
 | `uv run rasa inspect` | Inspector UI on `:5005` |
@@ -541,6 +584,9 @@ All commands run from `rasa/`.
 | Edits to `config.yml` / `domain.yml` keep disappearing | They are generated. Edit `config_{nlu,llm}.yml` and `domain_modes/domain_{nlu,llm}.yml`. |
 | `rasa test nlu` reports ~99 % accuracy | No held-out split. Add `--cross-validation -f 5`. |
 | Port already in use | `Get-NetTCPConnection -LocalPort 5005 -State Listen \| ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }` (same for 5055 / 8080) |
+| `run_rasa_both.ps1` says `port(s) already in use` | A single-mode launcher is still running. Close its window, and check `5006` / `5056` too — a crashed Inspector can leave the port held. |
+| Side-by-side: `models/hoopmind_*.tar.gz is missing` | You ran `run_rasa_nlu.ps1` after `run_rasa_both.ps1` — its pruning step deleted the older archive. Re-run `run_rasa_both.ps1` without `-SkipTrain`. |
+| Side-by-side: the NLU bot gives Gemini-style prose | Both bots are pointing at the same action server. Check that `endpoints_nlu.yml` says `:5055` and `endpoints_llm.yml` says `:5056`. |
 
 ---
 
