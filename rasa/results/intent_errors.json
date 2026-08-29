@@ -1,0 +1,226 @@
+[
+  {
+    "text": "What league is the Golden State Warriors part of?",
+    "intent": "league_info",
+    "intent_prediction": {
+      "name": "team_info",
+      "confidence": 0.3524300158023834
+    }
+  },
+  {
+    "text": "Can you provide information on the Chicago Bulls?",
+    "intent": "team_info",
+    "intent_prediction": {
+      "name": "dataset_scope",
+      "confidence": 0.46133315563201904
+    }
+  },
+  {
+    "text": "What should I know about the San Antonio Spurs?",
+    "intent": "team_info",
+    "intent_prediction": {
+      "name": "greeting",
+      "confidence": 0.14080063998699188
+    }
+  },
+  {
+    "text": "Tell me something about the Toronto Raptors.",
+    "intent": "team_info",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.6882593631744385
+    }
+  },
+  {
+    "text": "What do you know about the Phoenix Suns?",
+    "intent": "team_info",
+    "intent_prediction": {
+      "name": "dataset_scope",
+      "confidence": 0.213113933801651
+    }
+  },
+  {
+    "text": "Where was Michael Jordan selected?",
+    "intent": "draft_info",
+    "intent_prediction": {
+      "name": "player_info",
+      "confidence": 0.30642879009246826
+    }
+  },
+  {
+    "text": "Which franchise selected James Harden?",
+    "intent": "draft_info",
+    "intent_prediction": {
+      "name": "player_info",
+      "confidence": 0.22331228852272034
+    }
+  },
+  {
+    "text": "Which team was stronger, the Lakers or the Celtics?",
+    "intent": "compare",
+    "intent_prediction": {
+      "name": "team_info",
+      "confidence": 0.28923341631889343
+    }
+  },
+  {
+    "text": "How do the Warriors compare with the Cavaliers?",
+    "intent": "compare",
+    "intent_prediction": {
+      "name": "team_info",
+      "confidence": 0.30212637782096863
+    }
+  },
+  {
+    "text": "Tell me about Michael Jordan's award history.",
+    "intent": "player_awards",
+    "intent_prediction": {
+      "name": "player_info",
+      "confidence": 0.3277937173843384
+    }
+  },
+  {
+    "text": "Hey, I have an NBA question.",
+    "intent": "greeting",
+    "intent_prediction": {
+      "name": "dataset_scope",
+      "confidence": 0.36381494998931885
+    }
+  },
+  {
+    "text": "Hi, can you help me with basketball information?",
+    "intent": "greeting",
+    "intent_prediction": {
+      "name": "dataset_scope",
+      "confidence": 0.4053153395652771
+    }
+  },
+  {
+    "text": "Hello, I would like to ask about the NBA.",
+    "intent": "greeting",
+    "intent_prediction": {
+      "name": "league_info",
+      "confidence": 0.6491790413856506
+    }
+  },
+  {
+    "text": "Hi there, are you available?",
+    "intent": "greeting",
+    "intent_prediction": {
+      "name": "dataset_scope",
+      "confidence": 0.6224386096000671
+    }
+  },
+  {
+    "text": "Hey, let's talk about basketball.",
+    "intent": "greeting",
+    "intent_prediction": {
+      "name": "league_info",
+      "confidence": 0.4819885492324829
+    }
+  },
+  {
+    "text": "I have no more questions.",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "compare",
+      "confidence": 0.7403733134269714
+    }
+  },
+  {
+    "text": "I'm done for now.",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "player_stats",
+      "confidence": 0.5372193455696106
+    }
+  },
+  {
+    "text": "Which NBA seasons can I ask about?",
+    "intent": "dataset_scope",
+    "intent_prediction": {
+      "name": "league_info",
+      "confidence": 0.6499355435371399
+    }
+  },
+  {
+    "text": "Which NBA teams are covered by the chatbot?",
+    "intent": "dataset_scope",
+    "intent_prediction": {
+      "name": "league_info",
+      "confidence": 0.7144445776939392
+    }
+  },
+  {
+    "text": "What information is stored in your NBA dataset?",
+    "intent": "dataset_scope",
+    "intent_prediction": {
+      "name": "league_info",
+      "confidence": 0.6197444200515747
+    }
+  },
+  {
+    "text": "How far back does your NBA data go?",
+    "intent": "dataset_scope",
+    "intent_prediction": {
+      "name": "league_info",
+      "confidence": 0.49647256731987
+    }
+  },
+  {
+    "text": "Can you provide information about Anthony Davis?",
+    "intent": "player_info",
+    "intent_prediction": {
+      "name": "dataset_scope",
+      "confidence": 0.34594884514808655
+    }
+  },
+  {
+    "text": "What should I know about Michael Jordan?",
+    "intent": "player_info",
+    "intent_prediction": {
+      "name": "player_stats",
+      "confidence": 0.5771114230155945
+    }
+  },
+  {
+    "text": "Who received the Rookie of the Year award in 2019?",
+    "intent": "award_winner",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.3468710780143738
+    }
+  },
+  {
+    "text": "Which player received the Most Improved Player award in 2020?",
+    "intent": "award_winner",
+    "intent_prediction": {
+      "name": "compare",
+      "confidence": 0.3188527226448059
+    }
+  },
+  {
+    "text": "Who was the Rookie of the Year in 2018?",
+    "intent": "award_winner",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.32179272174835205
+    }
+  },
+  {
+    "text": "Who earned the Defensive Player of the Year award in 2019?",
+    "intent": "award_winner",
+    "intent_prediction": {
+      "name": "team_stats",
+      "confidence": 0.23913344740867615
+    }
+  },
+  {
+    "text": "Which player was named MVP in 2023?",
+    "intent": "award_winner",
+    "intent_prediction": {
+      "name": "player_stats",
+      "confidence": 0.4226893484592438
+    }
+  }
+]

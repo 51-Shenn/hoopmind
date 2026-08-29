@@ -1,7 +1,33 @@
 version: "3.1"
 
-# HoopMind LLM-mode domain (active when switch_mode.ps1 -Mode llm runs).
-# Slots use from_llm mappings so the CompactLLMCommandGenerator can fill them.
+intents:
+  - greeting
+  - goodbye
+  - player_info
+  - player_stats
+  - team_info
+  - team_stats
+  - compare
+  - all_star
+  - draft_info
+  - league_info
+  - dataset_scope
+  - award_winner
+  - player_awards
+  # Emitted by FallbackClassifier below the 0.3 threshold. Declared so the
+  # default_fallback flow can nlu_trigger on it - without a flow, a
+  # low-confidence turn inside an active conversation gets no reply at all.
+  - nlu_fallback
+
+entities:
+  - player
+  - team
+  - season
+  - stat
+  - stat_type
+  - position
+  - award
+  - league
 
 slots:
   return_value:
@@ -12,32 +38,33 @@ slots:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_llm
+      - type: from_entity
+        entity: player
   player2:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_llm
+      - type: from_entity
+        entity: player
+        role: second
   team:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_llm
+      - type: from_entity
+        entity: team
   season:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_llm
+      - type: from_entity
+        entity: season
   stat_type:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_llm
-  award:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: from_llm
+      - type: from_entity
+        entity: stat_type
 
 actions:
   - action_player_info

@@ -226,7 +226,6 @@ node_modules/
 # Rasa
 rasa/.rasa/
 rasa/models/
-rasa/results/
 rasa/graphs/
 rasa/story_graph.dot
 rasa/graph.html
