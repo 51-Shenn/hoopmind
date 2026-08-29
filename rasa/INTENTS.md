@@ -266,7 +266,7 @@ accuracy 0.8000 → 0.8298 and weighted F1 0.7988 → 0.8279.
 65. [per 100](stat_type) possessions, [Stephen Curry](player)'s points in [2016](season)
 66. What did [Joel Embiid](player) score [per 100](stat_type) possessions in [2021](season)?
 67. [Giannis Antetokounmpo](player) rebounds [per 100](stat_type) poss in [2020](season)
-68. Show [Damian Lillard](player]'s [per 100](stat_type) assists for [2019](season)
+68. Show [Damian Lillard](player)'s [per 100](stat_type) assists for [2019](season)
 69. What was [Stephen Curry](player)'s [plus-minus](stat) [per 100](stat_type) possessions?
 70. How many [blocks](stat) did [Hakeem Olajuwon](player) have?
 71. What was [Kobe Bryant](player)'s [free throw percentage](stat)?
