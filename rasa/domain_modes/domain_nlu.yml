@@ -14,6 +14,10 @@ intents:
   - dataset_scope
   - award_winner
   - player_awards
+  # Emitted by FallbackClassifier below the 0.3 threshold. Declared so the
+  # default_fallback flow can nlu_trigger on it - without a flow, a
+  # low-confidence turn inside an active conversation gets no reply at all.
+  - nlu_fallback
 
 entities:
   - player

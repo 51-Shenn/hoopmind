@@ -4,6 +4,7 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 
 from actions.data_loader import get_player_info
+from actions.entity_extract import extract_player
 from actions.llm_answer import compose_answer
 
 
@@ -14,19 +15,10 @@ class ActionPlayerInfo(Action):
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # Always try to extract from current message first
         latest_msg = tracker.latest_message.get("text", "").strip()
-        cleaned = latest_msg.lower()
-        for phrase in ["who is", "tell me about", "info on", "information about",
-                       "give me info on", "details about", "describe",
-                       "what can you tell me about", "i want to know about",
-                       "profile of", "bio for", "career overview for",
-                       "career background of", "is", "what awards did",
-                       "in the hall of fame", "win", "winning", "did",
-                       "ever", "show me"]:
-            cleaned = cleaned.replace(phrase, "")
-        cleaned = cleaned.strip().strip("?").strip()
+        extracted = extract_player(latest_msg)
 
-        if cleaned:
-            info = get_player_info(cleaned)
+        if extracted:
+            info = get_player_info(extracted)
             if info:
                 response = self._format_response(info)
                 response = compose_answer(tracker.latest_message.get("text", ""), response, response)

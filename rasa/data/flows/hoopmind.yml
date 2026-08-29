@@ -20,6 +20,11 @@ flows:
   default_fallback:
     description: "handle unrecognized input by asking user to rephrase"
     name: default_fallback
+    # RulePolicy's core fallback only fires when no flow is active, so without
+    # this trigger a low-confidence turn mid-conversation produced no reply -
+    # the user saw the "anything else?" prompt and nothing else.
+    nlu_trigger:
+      - intent: nlu_fallback
     steps:
       - action: utter_default
         next: END

@@ -10,6 +10,11 @@ $ErrorActionPreference = "Stop"
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $venvPython = Join-Path $ScriptDir ".venv\Scripts\python.exe"
 
+# 8300, not 8080: WinNAT/Hyper-V reserves dynamic TCP blocks at boot (8030-8229
+# is a common one) and a reserved port cannot be bound. The proxy's api_base is
+# baked into endpoints.yml - change both together.
+$ProxyPort = 8300
+
 if (!(Test-Path $venvPython)) {
     Write-Host "Venv not found at $venvPython" -ForegroundColor Red
     Write-Host "Run: .\setup.ps1"
@@ -37,6 +42,9 @@ function Load-EnvFile($path) {
 
 Load-EnvFile (Join-Path $ScriptDir ".env")
 
+# gemini_proxy.py and actions/llm_answer.py both read this; endpoints.yml cannot.
+[Environment]::SetEnvironmentVariable("GEMINI_PROXY_PORT", "$ProxyPort", "Process")
+
 # LLM mode grounds custom-action answers in Gemini (actions/llm_answer.py)
 [Environment]::SetEnvironmentVariable("HOOPMIND_GROUND_ANSWERS", "true", "Process")
 
@@ -59,25 +67,55 @@ if ($keys.Count -eq 0) {
 Write-Host "Found $($keys.Count) API key(s) - proxy will rotate on failure" -ForegroundColor Green
 
 # -- Start proxy (BEFORE training: LLM-mode train embeds flows via this proxy)
-Write-Host "Starting Gemini key-rotation proxy on :8080..." -ForegroundColor Cyan
+# A port can be unusable two ways: something is listening on it, or Windows has
+# reserved it (WinNAT/Hyper-V claims dynamic blocks at boot - bind then fails
+# with WinError 10013 and there is no listener to find). Only a real bind sees both.
+$portProblem = ""
+$probe = [System.Net.Sockets.TcpListener]::new([System.Net.IPAddress]::Loopback, $ProxyPort)
+try {
+    $probe.Start()
+} catch [System.Net.Sockets.SocketException] {
+    if ($_.Exception.SocketErrorCode -eq [System.Net.Sockets.SocketError]::AccessDenied) {
+        $portProblem = "reserved by Windows (WinError 10013) - nothing is listening on it"
+    } else {
+        $portProblem = "already in use"
+    }
+} finally {
+    $probe.Stop()
+}
+if ($portProblem) {
+    Write-Host "ERROR: proxy port $ProxyPort is $portProblem." -ForegroundColor Red
+    Write-Host "  Reservations:  netsh interface ipv4 show excludedportrange protocol=tcp"
+    Write-Host "  Fix: move `$ProxyPort here and api_base in endpoints.yml to a free port, or"
+    Write-Host "       release the reservations from an elevated shell: net stop winnat; net start winnat"
+    exit 1
+}
+
+Write-Host "Starting Gemini key-rotation proxy on :$ProxyPort..." -ForegroundColor Cyan
+# A hidden window throws the traceback away, so keep stderr (logging writes there).
+$proxyLog = Join-Path $ScriptDir "proxy.log"
 $proxy = Start-Process $venvPython -ArgumentList "gemini_proxy.py" `
     -WorkingDirectory $ScriptDir `
-    -PassThru -WindowStyle Hidden
+    -PassThru -WindowStyle Hidden `
+    -RedirectStandardError $proxyLog
 
 Start-Sleep -Seconds 2
 
 $proxyOk = $false
 try {
-    Invoke-WebRequest -Uri "http://127.0.0.1:8080/v1beta/models" -Method GET -TimeoutSec 3 -ErrorAction Stop | Out-Null
+    Invoke-WebRequest -Uri "http://127.0.0.1:$ProxyPort/status" -Method GET -TimeoutSec 3 -ErrorAction Stop | Out-Null
     $proxyOk = $true
 } catch {
-    # 404 on /v1beta/models is fine - means proxy is running
     if ($_.Exception.Response.StatusCode.value__ -eq 404) { $proxyOk = $true }
 }
 if ($proxyOk) {
     Write-Host "Proxy is alive" -ForegroundColor Green
 } else {
     Write-Host "Proxy failed to start - aborting" -ForegroundColor Red
+    if (Test-Path $proxyLog) {
+        Write-Host "--- proxy.log ---" -ForegroundColor DarkGray
+        Get-Content $proxyLog -Tail 20 | ForEach-Object { Write-Host "  $_" -ForegroundColor DarkGray }
+    }
     exit 1
 }
 

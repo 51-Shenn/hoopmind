@@ -35,7 +35,9 @@ python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
-(One-time; downloads ~200 MB.)
+One-time; downloads roughly 200 MB.
+
+---
 
 ## 3. How to open / run the chatbot
 
@@ -303,8 +305,8 @@ dialogflow-es/
 
 | Problem | Fix |
 |---|---|
-| Port already in use | Kill leftovers: `Get-NetTCPConnection -LocalPort 5000 -State Listen \| ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }` (same for 8501) |
-| `'python' is not recognized` | Reinstall Python with "Add to PATH" ticked, reopen terminal |
+| Port already in use | `Get-NetTCPConnection -LocalPort 5000 -State Listen \| ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }` (same for 8501) |
+| `'python' is not recognized` | Reinstall Python with "Add to PATH" ticked, then reopen the terminal |
 | `streamlit: command not found` | Use `python -m streamlit run streamlit_app.py` |
 | First question is slow | The engine loads CSVs lazily on first use |
 | `run_dialogflow_evaluation.py` errors on import | `pip install google-cloud-dialogflow` and set `GOOGLE_APPLICATION_CREDENTIALS` |

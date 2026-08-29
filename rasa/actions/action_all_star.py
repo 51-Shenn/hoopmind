@@ -5,6 +5,7 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
 from actions.data_loader import get_all_star, get_player_info, _ensure_loaded
+from actions.entity_extract import extract_player, extract_season
 from actions.llm_answer import compose_answer
 import actions.data_loader as data_loader
 
@@ -22,8 +23,10 @@ class ActionAllStar(Action):
             season = self._extract_season_from_text(latest_msg)
             logger.info(f"Extracted: player={player_name}, season={season}")
 
-            # Handle "who played in" queries
-            if self._is_roster_query(latest_msg) and season:
+            # Roster queries ("who played in the 2010 All-Star Game") - only
+            # when no specific player was named, so "was X an All-Star in Y"
+            # still answers about X.
+            if not player_name and self._is_roster_query(latest_msg) and season:
                 _ensure_loaded()
                 roster = self._get_roster_by_season(int(season))
                 if roster:
@@ -86,7 +89,7 @@ class ActionAllStar(Action):
 
     @staticmethod
     def _is_roster_query(text: str) -> bool:
-        return bool(re.search(r'played\s+in', text.lower()))
+        return bool(re.search(r'played\s+in|\broster\b|who\s+(was|were)\s+', text.lower()))
 
     @staticmethod
     def _get_roster_by_season(season: int) -> List[tuple]:
@@ -97,7 +100,6 @@ class ActionAllStar(Action):
 
     @staticmethod
     def _extract_player_from_text(text: str) -> str:
-        import re
         cleaned = text.lower().strip()
 
         # Handle non-player queries first
@@ -106,40 +108,8 @@ class ActionAllStar(Action):
         if 'all-nba' in cleaned:
             return None
 
-        # Remove multi-word phrases first (before individual words)
-        multi_phrases = [
-            r'how\s+many\s+all[\s-]*star\s+selections\s+does',
-            r'was\s+an?\s+all[\s-]*star\s+in',
-            r'was\s+an?\s+all[\s-]*star',
-            r'an?\s+all[\s-]*star\s+in',
-            r'an?\s+all[\s-]*star',
-            r'all[\s-]*star\s+selections',
-            r'all[\s-]*star',
-            r'who\s+played\s+in',
-            r'how\s+many',
-        ]
-        for pattern in multi_phrases:
-            cleaned = re.sub(pattern, ' ', cleaned)
-
-        # Remove individual filler words (with word boundaries)
-        cleaned = re.sub(r'\b(was|is|did|does|do|have|has|had|make|made|the|a|an|in|of|for|or|and|times|game|team|end\s+of\s+season|selections)\b', ' ', cleaned)
-
-        # Remove years
-        cleaned = re.sub(r'\b\d{4}\b', '', cleaned)
-        cleaned = re.sub(r'[^\w\s]', ' ', cleaned)
-        cleaned = re.sub(r'\s+', ' ', cleaned).strip()
-
-        if not cleaned:
-            return None
-
-        # Try to find player
-        from actions.data_loader import player_per_game_df, _fuzzy_find_player
-        found = _fuzzy_find_player(cleaned, player_per_game_df)
-        return found
+        return extract_player(text)
 
     @staticmethod
     def _extract_season_from_text(text: str) -> str:
-        matches = re.findall(r'\b(19\d{2}|20\d{2})\b', text)
-        if matches:
-            return matches[-1]
-        return None
+        return extract_season(text)

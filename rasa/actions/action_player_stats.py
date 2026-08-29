@@ -11,9 +11,68 @@ from actions.data_loader import (
     normalize_stat_type,
     _fuzzy_find_player, _PLAYER_SYNONYMS, _normalize_name, _ensure_loaded
 )
+from actions.entity_extract import extract_player, extract_season
 from actions.llm_answer import compose_answer
 
 logger = logging.getLogger(__name__)
+
+# "PER" the advanced stat, but not the "per" in "per game" / "per 36 minutes".
+_PER_STAT_RE = re.compile(
+    r'\bper\b(?!\s*-?\s*(?:game|min|minute|minutes|36|100|poss|possession|possessions))'
+)
+
+# Matched in order, most specific first. Word boundaries matter: the old
+# substring map read "three-pointers" as "points" and "percentage" as nothing.
+_SPECIFIC_STATS = [
+    (re.compile(r'three[\s-]?point|3[\s-]?pt|\b3p%?\b'), 'three_pct'),
+    (re.compile(r'free[\s-]?throw|\bft%'), 'ft_pct'),
+    (re.compile(r'field[\s-]?goal|\bfg%'), 'fg_pct'),
+    (re.compile(r'true[\s-]?shooting|\bts%'), 'ts_pct'),
+    (re.compile(r'\busage\b|\busg%'), 'usg_pct'),
+    (re.compile(r'win shares?'), 'ws'),
+    (re.compile(r'offensive rating'), 'off_rating'),
+    (re.compile(r'defensive rating'), 'def_rating'),
+    (re.compile(r'\bvorp\b'), 'vorp'),
+    (re.compile(r'\bbpm\b'), 'bpm'),
+    (re.compile(r'\brebounds?\b|\brpg\b|\bboards\b'), 'rebounds'),
+    (re.compile(r'\bassists?\b|\bapg\b'), 'assists'),
+    (re.compile(r'\bsteals?\b|\bspg\b'), 'steals'),
+    (re.compile(r'\bblocks?\b|\bbpg\b'), 'blocks'),
+    (re.compile(r'\bturnovers?\b|\btov\b'), 'turnovers'),
+    (re.compile(r'\bpoints?\b|\bppg\b|\bscoring\b|\bscored?\b'), 'points'),
+    (re.compile(r'\bgames?\b'), 'games'),
+    (re.compile(r'\bmpg\b|\bminutes\b'), 'minutes'),
+]
+
+# stat key -> (label, suffix)
+_STAT_LABELS = {
+    'points': ('Points', ''),
+    'rebounds': ('Rebounds', ''),
+    'assists': ('Assists', ''),
+    'steals': ('Steals', ''),
+    'blocks': ('Blocks', ''),
+    'turnovers': ('Turnovers', ''),
+    'games': ('Games Played', ''),
+    'minutes': ('Minutes', ''),
+    'fg_pct': ('FG%', '%'),
+    'three_pct': ('3P%', '%'),
+    'ft_pct': ('FT%', '%'),
+    'fg_pct_from_2p': ('2P%', '%'),
+    'fg_pct_from_3p': ('3P%', '%'),
+    'corner_3_pct': ('Corner 3P%', '%'),
+    'ts_pct': ('True Shooting%', ''),
+    'usg_pct': ('Usage%', ''),
+    'per': ('PER', ''),
+    'ws': ('Win Shares', ''),
+    'vorp': ('VORP', ''),
+    'bpm': ('BPM', ''),
+    'off_rating': ('Offensive Rating', ''),
+    'def_rating': ('Defensive Rating', ''),
+}
+
+
+def _label_for(stat: str) -> tuple:
+    return _STAT_LABELS.get(stat, (stat.replace('_', ' '), ''))
 
 
 class ActionPlayerStats(Action):
@@ -90,39 +149,11 @@ class ActionPlayerStats(Action):
 
     @staticmethod
     def _extract_player_from_text(text: str, season: str = None) -> str:
-        cleaned = text.lower().strip()
-        for phrase in ["what were", "show me", "how many", "what are", "what was",
-                       "what is", "show", "give me", "how did", "how good was",
-                       "how many points did", "how many assists did",
-                       "how many rebounds did", "how many steals did",
-                       "how many blocks did", "career points of",
-                       "career stats for", "per 36 minutes stats for",
-                       "per 36 stats for", "per 100 stats for",
-                       "per 36 minutes for", "per 36 for"]:
-            cleaned = cleaned.replace(phrase, "")
-        for word in ["stats", "statistics", "numbers", "career totals",
-                     "per game", "per 100", "per 36", "per 100 possessions",
-                     "shooting splits for", "shooting splits",
-                     "shooting", "splits", "points", "rebounds", "assists",
-                     "steals", "blocks", "average", "career",
-                     "per", "for", "in", "did", "was", "is", "season",
-                     "warp", "vorp", "bpm", "ws", "ts", "true shooting",
-                     "usage", "win shares", "offensive rating", "defensive rating"]:
-            cleaned = cleaned.replace(word, "")
-        cleaned = cleaned.replace("\u2019", "").replace("\u2018", "").replace("'", "")
-        if season:
-            cleaned = cleaned.replace(season, "")
-        cleaned = re.sub(r'\b\d{4}\b', '', cleaned)
-        cleaned = re.sub(r"[^\w\s-]", '', cleaned)
-        cleaned = re.sub(r'\s+', ' ', cleaned).strip()
-        return cleaned if cleaned else None
+        return extract_player(text)
 
     @staticmethod
     def _extract_season_from_text(text: str) -> str:
-        matches = re.findall(r'\b(19\d{2}|20\d{2})\b', text)
-        if matches:
-            return matches[-1]
-        return None
+        return extract_season(text)
 
     @staticmethod
     def _extract_stat_type_from_text(text: str) -> str:
@@ -147,7 +178,9 @@ class ActionPlayerStats(Action):
             return "shooting"
         if re.search(r'\badvanced\b', lower):
             return "advanced"
-        if re.search(r'\b(per|vorp|bpm|ws|ts%|true shooting|usage|win shares|offensive rating|defensive rating|warp)\b', lower):
+        if re.search(r'\b(vorp|bpm|ws|ts%|true shooting|usage|win shares|offensive rating|defensive rating|warp)\b', lower):
+            return "advanced"
+        if _PER_STAT_RE.search(lower):
             return "advanced"
         return None
 
@@ -166,29 +199,11 @@ class ActionPlayerStats(Action):
     @staticmethod
     def _detect_specific_stat(text: str) -> str:
         lower = text.lower()
-        # Check for "per" as standalone word (PER stat) but not "per 36" or "per 100"
-        if re.search(r'\bper\b', lower) and not re.search(r'per[\s-]?(36|100)', lower):
+        # "PER" the advanced stat - not "points per game", "per 36", "per 100".
+        if _PER_STAT_RE.search(lower):
             return 'per'
-        stat_map = {
-            'points': 'points', 'point': 'points', 'ppg': 'points', 'score': 'points',
-            'rebounds': 'rebounds', 'rebound': 'rebounds', 'rpg': 'rebounds', 'boards': 'rebounds',
-            'assists': 'assists', 'assist': 'assists', 'apg': 'assists',
-            'steals': 'steals', 'steal': 'steals',
-            'blocks': 'blocks', 'block': 'blocks',
-            'turnovers': 'turnovers', 'turnover': 'turnovers',
-            'field goal': 'fg_pct', 'fg%': 'fg_pct', 'fg percentage': 'fg_pct',
-            'three point': 'three_pct', '3pt': 'three_pct', '3p%': 'three_pct',
-            'free throw': 'ft_pct', 'ft%': 'ft_pct',
-            'games': 'games', 'games played': 'games',
-            'mpg': 'minutes',
-            'true shooting': 'ts_pct', 'ts%': 'ts_pct',
-            'usage': 'usg_pct', 'usage rate': 'usg_pct',
-            'win shares': 'ws',
-            'vorp': 'vorp', 'bpm': 'bpm',
-            'offensive rating': 'off_rating', 'defensive rating': 'def_rating',
-        }
-        for keyword, stat in stat_map.items():
-            if keyword in lower:
+        for pattern, stat in _SPECIFIC_STATS:
+            if pattern.search(lower):
                 return stat
         return None
 
@@ -202,15 +217,16 @@ class ActionPlayerStats(Action):
         if stat_type == "career_totals":
             if specific:
                 val = stats.get(specific)
-                if val is not None:
-                    return f"{player} had {val} {specific.replace('_', ' ')} in their career ({stats.get('seasons', '')})."
-                return f"I found {player}'s career data, but {specific.replace('_', ' ')} isn't available."
+                name, suffix = _label_for(specific)
+                if val is not None and val == val:
+                    return f"{player} had {val}{suffix} {name.lower()} in their career ({stats.get('seasons', '')})."
+                return f"I found {player}'s career data, but {name.lower()} isn't available."
             response = f"{player}'s career totals ({stats.get('seasons', '')}):\n"
-            response += f"- Points: {stats['points']}\n"
-            response += f"- Rebounds: {stats['rebounds']}\n"
-            response += f"- Assists: {stats['assists']}\n"
-            response += f"- Steals: {stats['steals']}\n"
-            response += f"- Blocks: {stats['blocks']}\n"
+            for key, text in [("points", "Points"), ("rebounds", "Rebounds"),
+                              ("assists", "Assists"), ("steals", "Steals"),
+                              ("blocks", "Blocks")]:
+                if stats.get(key) is not None:
+                    response += f"- {text}: {stats[key]}\n"
             if stats.get("fg_pct") is not None:
                 response += f"- FG%: {stats['fg_pct']}%\n"
             if stats.get("three_pct") is not None:
@@ -222,9 +238,10 @@ class ActionPlayerStats(Action):
         if stat_type == "advanced":
             if specific:
                 val = stats.get(specific)
-                if val is not None:
-                    return f"{player}'s {season} {specific.upper().replace('_', ' ')}: {val}"
-                return f"I found {player}'s advanced stats for {season}, but {specific.upper().replace('_', ' ')} isn't available."
+                name, suffix = _label_for(specific)
+                if val is not None and val == val:
+                    return f"{player}'s {season} {name}: {val}{suffix}"
+                return f"I found {player}'s advanced stats for {season}, but {name} isn't available."
             response = f"{player}'s {season} advanced stats with {team}:\n"
             for key, label in [("per", "PER"), ("ts_pct", "True Shooting%"), ("usg_pct", "Usage%"),
                                ("ws", "Win Shares"), ("ws_48", "Win Shares/48"), ("bpm", "BPM"),
@@ -237,9 +254,10 @@ class ActionPlayerStats(Action):
         if stat_type == "shooting":
             if specific:
                 val = stats.get(specific)
-                if val is not None:
-                    return f"{player}'s {season} {specific.replace('_', ' ')}: {val}%"
-                return f"I found {player}'s shooting stats for {season}, but {specific.replace('_', ' ')} isn't available."
+                name, suffix = _label_for(specific)
+                if val is not None and val == val:
+                    return f"{player}'s {season} {name}: {val}{suffix}"
+                return f"I found {player}'s shooting stats for {season}, but {name} isn't available."
             response = f"{player}'s {season} shooting stats with {team}:\n"
             for key, label in [("fg_pct", "FG%"), ("fg_pct_from_2p", "2P%"), ("fg_pct_from_3p", "3P%"),
                                ("corner_3_pct", "Corner 3P%"), ("pct_fga_from_3p", "% of FGA from 3P"),
@@ -258,19 +276,26 @@ class ActionPlayerStats(Action):
 
         if specific:
             val = stats.get(specific)
-            if val is not None:
-                return f"{player}'s {season} {label} {specific.replace('_', ' ')}: {val}"
-            return f"I found {player}'s {label.lower()} stats for {season}, but {specific.replace('_', ' ')} isn't available."
+            name, suffix = _label_for(specific)
+            # "Per Game" is the default reading - only spell it out for the
+            # rescaled tables, so this reads "Points" not "Per Game Points".
+            qualifier = "" if stat_type in (None, "per_game") else f"{label} "
+            if val is not None and val == val:
+                return f"{player}'s {season} {qualifier}{name}: {val}{suffix}"
+            return f"I found {player}'s {label.lower()} stats for {season}, but {name} isn't available."
 
         response = f"{player}'s {season} {label} stats with {team}:\n"
-        response += f"- Points: {stats['points']}\n"
-        response += f"- Rebounds: {stats['rebounds']}\n"
-        response += f"- Assists: {stats['assists']}\n"
-        if stats["steals"] > 0:
+        # None means the stat was not recorded in that era - rebounds before
+        # 1951, steals/blocks/turnovers before 1974 - so omit the line.
+        for key, text in [("points", "Points"), ("rebounds", "Rebounds"),
+                          ("assists", "Assists")]:
+            if stats.get(key) is not None:
+                response += f"- {text}: {stats[key]}\n"
+        if stats.get("steals"):
             response += f"- Steals: {stats['steals']}\n"
-        if stats["blocks"] > 0:
+        if stats.get("blocks"):
             response += f"- Blocks: {stats['blocks']}\n"
-        if stats.get("turnovers") is not None and stats["turnovers"] > 0:
+        if stats.get("turnovers"):
             response += f"- Turnovers: {stats['turnovers']}\n"
         if stats.get("fg_pct") is not None:
             response += f"- FG%: {stats['fg_pct']}%\n"

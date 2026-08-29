@@ -1,16 +1,21 @@
 #!/usr/bin/env python
 """Generate merged NLU file with combined intents."""
 import os
+import re
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-# Read existing file to get lookup tables
+# Read existing file to get the hand-maintained synonym + lookup blocks
 with open('data/nlu.yml', 'r', encoding='utf-8') as f:
     content = f.read()
 
-# Find lookup_tables section
-lookup_start = content.find('lookup_tables:')
-lookup_section = content[lookup_start:]
+# Everything from the first `- synonym:` onward is carried over verbatim:
+# the synonym blocks and the `- lookup:` tables that follow them. Both must
+# stay as items of the top-level `nlu:` list or Rasa silently ignores them.
+carry_match = re.search(r'^- synonym:', content, re.M)
+if carry_match is None:
+    raise SystemExit('data/nlu.yml: no `- synonym:` block found to carry over')
+carry_section = content[carry_match.start():]
 
 # Build merged NLU
 nlu_intents = [
@@ -233,7 +238,7 @@ with open('data/nlu.yml', 'w', encoding='utf-8') as f:
             f.write(f'    {ex}\n')
         f.write('\n')
     f.write('\n')
-    f.write(lookup_section)
+    f.write(carry_section)
 
 print(f'Done! Wrote {len(nlu_intents)} intents to data/nlu.yml')
 for intent_data in nlu_intents:
