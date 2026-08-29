@@ -1,0 +1,7 @@
+{
+  "scored_responses": 130,
+  "average_bleu_4": 0.16425850916879212,
+  "average_rouge_l": 0.3093514704191521,
+  "manual_quality_ratings": 130,
+  "average_response_quality_1_to_5": 4.484615384615385
+}
