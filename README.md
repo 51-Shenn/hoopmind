@@ -25,24 +25,25 @@ the other.
 |---|---|---|---|
 | 🟣 **[Rasa Pro](rasa/README.md)** | Rasa Pro 3.18, Python 3.11 + `uv`, pandas, Gemini | Locally — PowerShell launcher, Inspector on `:5005` | **[rasa/README.md](rasa/README.md)** |
 | 🔵 **[Dialogflow ES](dialogflow-es/README.md)** | Dialogflow ES, Flask + Streamlit, Python 3.10–3.12, pandas | Locally — API on `:5000`, chat UI on `:8501` | **[dialogflow-es/README.md](dialogflow-es/README.md)** |
-| 🟠 **[Botpress](botpress/README.md)** | Botpress Cloud | Hosted — [open the webchat](https://cdn.botpress.cloud/webchat/v3.7/shareable.html?configUrl=https://files.bpcontent.cloud/2026/08/23/20/20260823204029-8F5ANTS0.json) | **[botpress/README.md](botpress/README.md)** |
+| 🟠 **[Botpress](botpress/README.md)** | Botpress Cloud | Hosted — [open the webchat](https://cdn.botpress.cloud/webchat/v3.7/shareable.html?configUrl=https://files.bpcontent.cloud/2026/08/27/19/20260827194750-N3YOHYZ0.json) | **[botpress/README.md](botpress/README.md)** |
 
 ### At a glance
 
 **[Rasa Pro](rasa/README.md)** — 14 flows, 13 intents, 619 hand-maintained training phrases and
 one custom action per flow over a pandas data layer. Runs in two interchangeable modes from the
-same flows: an **offline DIETClassifier** pipeline (no API key, 83.0 % 5-fold accuracy) and an
-**LLM mode** where Gemini both generates flow commands and composes answers grounded in the
-retrieved CSV facts, behind a local key-rotation proxy.
+same flows: an **offline DIETClassifier** pipeline and an **LLM mode** where Gemini both 
+generates flow commands and composes answers grounded in the retrieved CSV facts, 
+behind a local key-rotation proxy.
 
 **[Dialogflow ES](dialogflow-es/README.md)** — a Streamlit chat UI over a Flask backend.
 Deterministic chip rules → Dialogflow ES `detect_intent` (optional) → a local TF-IDF fallback
-classifier → entity recovery → a 2,275-line query engine → rich answer cards. Ships four layers
-of testing: regression suites, intent P/R/F1 and BLEU/ROUGE harnesses, a 50-case manual
-checklist, and SUS survey tooling.
+classifier → entity recovery → a 2,724-line query engine → rich answer cards. Ships three layers
+of evaluation over a held-out 130-phrase test set: intent P/R/F1 against the live agent,
+BLEU/ROUGE plus manual response-quality scoring, and a 10-task SUS usability survey.
 
 **[Botpress](botpress/README.md)** — hosted on Botpress Cloud; nothing to install, just the
-shareable webchat link.
+shareable webchat link. The `Hoopmind.bpz.zip` export sits alongside it for importing the bot
+into your own workspace.
 
 ---
 
@@ -106,7 +107,8 @@ python -m pip install -r requirements.txt
 run_hoopmind.bat            # then open http://localhost:8501
 ```
 
-**Botpress** — no setup; see **[botpress/README.md](botpress/README.md)** for the link.
+**Botpress** — no setup; see **[botpress/README.md](botpress/README.md)** for the webchat link
+and the import steps.
 
 ---
 
@@ -117,22 +119,10 @@ hoopmind/
 ├── rasa/                   Rasa Pro assistant          → rasa/README.md
 ├── dialogflow-es/          Dialogflow ES assistant     → dialogflow-es/README.md
 ├── botpress/               Botpress Cloud assistant    → botpress/README.md
-├── example-queries.md      representative + edge-case queries for smoke testing either build
-├── test.csv                shared intent test phrases (source for rasa/tests/nlu_test.yml)
-├── CLAUDE.md               repository guidance for AI coding assistants
 └── LICENSE
 ```
 
 ---
-
-## Reference
-
-- **[example-queries.md](example-queries.md)** — representative and edge-case queries per intent,
-  useful for smoke-testing either local implementation after a change
-- **[rasa/INTENTS.md](rasa/INTENTS.md)** — intents, entities, full training phrase lists and
-  cross-validated evaluation results
-- **[dialogflow-es/TESTING.md](dialogflow-es/TESTING.md)** — the six testing layers, from
-  regression suites to the user-satisfaction survey
 
 ## Credits
 

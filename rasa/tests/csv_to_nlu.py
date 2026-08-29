@@ -1,4 +1,4 @@
-"""Convert the repo-root test.csv (test_id,expected_intent,test_phrase) into a
+"""Convert tests/test.csv (test_id,expected_intent,test_phrase) into a
 Rasa NLU test file. Regenerate with:
 
     uv run python tests/csv_to_nlu.py
@@ -7,9 +7,9 @@ import csv
 import pathlib
 from collections import OrderedDict
 
-ROOT = pathlib.Path(__file__).resolve().parents[2]
-SRC = ROOT / "test.csv"
-DEST = pathlib.Path(__file__).resolve().parent / "nlu_test.yml"
+HERE = pathlib.Path(__file__).resolve().parent
+SRC = HERE / "test.csv"
+DEST = HERE / "nlu_test.yml"
 
 by_intent: "OrderedDict[str, list[str]]" = OrderedDict()
 with SRC.open(encoding="utf-8-sig", newline="") as fh:

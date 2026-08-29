@@ -26,7 +26,7 @@ app, not by a Dialogflow fulfillment webhook.
 
 **Step 1 — Get the project.** Copy/download the whole `dialogflow-es` folder
 to your machine, keeping the folder structure intact — especially `data/`
-(22 CSV files, ~31 MB).
+(22 CSV files, ~32 MB).
 
 **Step 2 — Install dependencies.** Open a terminal in the project folder:
 
@@ -55,14 +55,14 @@ This opens two windows (Flask API on `:5000`, Streamlit chat UI on
 **macOS / Linux** — in two separate terminals, from the project folder:
 
 ```bash
-python -X utf8 webhook.py                          # terminal 1: API on :5000
+python -X utf8 webhook.py                           # terminal 1: API on :5000
 python -X utf8 -m streamlit run streamlit_app.py    # terminal 2: UI on :8501
 ```
 
 To stop, close the two console windows (or `Ctrl+C` in each).
 
 By default HoopMind classifies questions with its built-in **offline
-classifier** — no Google account or internet needed. See §5 to switch it to
+classifier** — no Google account or internet needed. See §6 to switch it to
 live Dialogflow ES.
 
 ## 4. How to use it
@@ -104,7 +104,6 @@ general "what can you tell me" / dataset-scope questions.
 - Type IMPORT to confirm (this action overwrites the current blank agent — fine since it's empty)
 - Upload Google_Dialogflow.zip (in the dialogflow-es folder)
 - Wait for the "Agent imported successfully" confirmation
-- Explore the 13 intents and 7 entities
 
 **IMPORTANT**
 - Google Dialogflow only handles the detection of intents and entities.
@@ -149,7 +148,7 @@ from the training data and were never imported into Dialogflow.
 ### 7.1 Intent recognition — Accuracy, Precision, Recall, F1
 
 Requires `GOOGLE_APPLICATION_CREDENTIALS` set to a Dialogflow-enabled
-service account (see §5), plus `pip install google-cloud-dialogflow`.
+service account (see §6), plus `pip install google-cloud-dialogflow`.
 
 ```bash
 python evaluation/run_dialogflow_evaluation.py YOUR_PROJECT_ID
@@ -208,7 +207,7 @@ Outputs `response_metrics.json`:
 | Scored responses | 130 |
 | Average BLEU-4 | 0.164 |
 | Average ROUGE-L | 0.309 |
-| Manual quality rating | *pending — see below* |
+| Manual quality rating | **4.48 / 5** (all 130 rated) |
 
 Low BLEU is expected: the chatbot answers in structured card fragments
 (`"📈 Boston Celtics — 2024 \| Points: 120.6"`) against narrative reference
@@ -216,19 +215,22 @@ sentences, so raw n-gram overlap is naturally low even when the content is
 correct — ROUGE-L is the fairer of the two here. Use BLEU/ROUGE as
 **supplementary** evidence, not the primary quality signal.
 
-**To add the manual quality score:** open `test_results.csv` and fill
-`response_quality_1_to_5` (1 = very poor, 5 = excellent) for each row based
-on your own judgement of the `chatbot_response`, then re-run
-`evaluate_responses.py`.
+**How the manual quality score was produced:** every row of
+`test_results.csv` carries a `response_quality_1_to_5` rating (1 = very
+poor, 5 = excellent) judged against its `chatbot_response`; `evaluate_responses.py`
+averages them into `response_metrics.json`. Re-rate a row and re-run the
+script to refresh the number.
 
 **Known response-generation issues found during this evaluation** (worth
 citing as findings, separate from the raw accuracy numbers):
-- `player_awards` for LeBron James returns a career-totals card instead of
-  an awards list, even though the intent is classified correctly.
-- `player_awards` for James Harden returns "no award record found," even
-  though he won 2018 NBA MVP and 2012 Sixth Man of the Year.
 - `team_stats` for "Golden State's scoring average" fails to resolve the
-  nickname "Golden State" and falls back to a clarification prompt.
+  nickname "Golden State" and falls back to a clarification prompt. *Still
+  open.*
+- ~~`player_awards` for LeBron James returns a career-totals card instead
+  of an awards list.~~ **Fixed** — now returns `NBA MVP x4: 2009, 2010,
+  2012, 2013 / NBA ROY x1: 2004`.
+- ~~`player_awards` for James Harden returns "no award record found."~~
+  **Fixed** — now returns `NBA SMOY x1: 2012 / NBA MVP x1: 2018`.
 
 ### 7.3 Usability and user satisfaction
 
@@ -237,14 +239,15 @@ evaluation/usability_survey.md
 ```
 
 is a three-part survey: 10 task-success checks, the standard 10-item
-System Usability Scale (SUS), and 6 satisfaction ratings. Give it to **real
-testers** (≥5 recommended, excluding yourself as the developer) using the
-live app.
+System Usability Scale (SUS), and 6 satisfaction ratings. It was given to
+**10 real testers** using the live app; their raw answers are in
+`evaluation/usability_responses.csv`.
 
-Transcribe each participant's answers as one row in
+Each participant's answers are transcribed as one row in
 `evaluation/usability_responses.csv` (columns: `respondent`,
 `task_success_1_to_10`, `sus1`–`sus10`, `sat_overall`, `sat_accuracy`,
-`sat_quality`, `sat_speed`, `sat_paraphrase`, `sat_recommend`), then:
+`sat_quality`, `sat_speed`, `sat_paraphrase`, `sat_recommend`). Re-score
+them with:
 
 ```bash
 python evaluation/score_usability.py
@@ -252,8 +255,15 @@ python evaluation/score_usability.py
 
 Outputs `usability_metrics.json`: average SUS (0–100; ~68 is the
 conventional "average" benchmark), average satisfaction (1–5), and average
-task-success rate (%). *Pending real participant data at time of writing —
-see limitations below.*
+task-success rate (%).
+
+**Latest run (10 participants):**
+
+| Metric | Value |
+|---|---|
+| Average SUS | **93.5** / 100 |
+| Average satisfaction | 4.7 / 5 |
+| Average task success | 96 % |
 
 ### 7.4 Recommended evidence for the report
 
@@ -263,16 +273,16 @@ see limitations below.*
 - `evaluation/response_metrics.json`
 - `evaluation/usability_metrics.json`
 - A handful of example rows from `test_results.csv` showing both correct
-  and incorrect responses (see §6.2 for pre-identified examples)
+  and incorrect responses (see §7.2 for pre-identified examples)
 
 ### 7.5 Limitations
 
-- Manual response-quality ratings and usability survey data require human
-  input and were not fabricated for this evaluation — see §6.2/6.3 for
-  exactly what still needs to be collected before those numbers are final.
+- Manual response-quality ratings (§7.2) were made by the developer, not by
+  independent raters, and the 10 usability participants (§7.3) are a small,
+  self-selected sample — both are real data, but neither is blind.
 - BLEU/ROUGE reference answers were written independently from the raw
   data rather than by a second human rater; treat them as a supplementary,
-  not authoritative, quality signal (see §6.2).
+  not authoritative, quality signal (see §7.2).
 
 ---
 
@@ -281,6 +291,7 @@ see limitations below.*
 ```
 dialogflow-es/
 ├── run_hoopmind.bat            one-click launcher (Windows)
+├── requirements.txt            pip dependencies (§2)
 ├── webhook.py                  Flask /chat endpoint + message pipeline
 ├── streamlit_app.py            chat interface (rich cards + suggestion chips)
 ├── dialogflow_client.py        Dialogflow ES detection + offline fallback classifier
@@ -291,17 +302,19 @@ dialogflow-es/
 ├── data/                       22 Basketball Reference CSV datasets
 └── evaluation/                 test set, evaluation scripts, metrics, survey
     ├── test_phrases.csv                held-out 130-phrase test set
-    ├── run_dialogflow_evaluation.py    §6.1 — intent P/R/F1 against live agent
-    ├── generate_chatbot_responses.py   §6.2 — real chatbot answers for the test set
-    ├── build_reference_responses.py    §6.2 — independent gold answers for BLEU/ROUGE
-    ├── evaluate_responses.py           §6.2 — BLEU/ROUGE + quality scoring
-    ├── usability_survey.md             §6.3 — survey to give testers
-    ├── score_usability.py              §6.3 — SUS + satisfaction scoring
-    └── test_results.csv, intent_metrics.json, response_metrics.json,
-        usability_metrics.json          — generated outputs
+    ├── intent_training_phrases.json    the 13 deployed intents + their training phrases
+    ├── run_dialogflow_evaluation.py    §7.1 — intent P/R/F1 against live agent
+    ├── generate_chatbot_responses.py   §7.2 — real chatbot answers for the test set
+    ├── build_reference_responses.py    §7.2 — independent gold answers for BLEU/ROUGE
+    ├── evaluate_responses.py           §7.2 — BLEU/ROUGE + quality scoring
+    ├── usability_survey.md             §7.3 — survey given to testers
+    ├── usability_responses.csv         §7.3 — 10 participants' raw answers
+    ├── score_usability.py              §7.3 — SUS + satisfaction scoring
+    └── test_results.csv, intent_metrics.json, intent_report.txt,
+        response_metrics.json, usability_metrics.json   — generated outputs
 ```
 
-## 8. Troubleshooting
+## 9. Troubleshooting
 
 | Problem | Fix |
 |---|---|

@@ -233,7 +233,6 @@ rasa/logs/
 rasa/debug.log
 
 # Dialogflow ES
-dialogflow-es/**/*.zip
 dialogflow-es/**/*credential*.json
 dialogflow-es/**/*key*.json
 dialogflow-es/.df-*.json
