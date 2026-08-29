@@ -1,131 +1,139 @@
 ﻿test_id,expected_intent,test_phrase,predicted_intent,confidence,correct,chatbot_response,response_quality_1_to_5,reference_response
-T001,team_stats,What was Boston's average scoring output during the 2024 season?,team_stats,0.8319,1,,,
-T002,team_stats,What was Golden State's scoring average during the 2016 season?,team_stats,0.7382,1,,,
-T003,team_stats,How many rebounds did the Los Angeles Lakers average in 2020?,team_stats,1.0000,1,,,
-T004,team_stats,What was the Warriors' assist average in 2017?,team_stats,0.8934,1,,,
-T005,team_stats,How many steals per game did the Chicago Bulls record in 1996?,team_stats,0.8675,1,,,
-T006,team_stats,What was the Celtics' field goal percentage in 2024?,team_stats,0.8415,1,,,
-T007,team_stats,How many three-pointers did the Warriors make per game in 2016?,team_stats,0.7604,1,,,
-T008,team_stats,What were the Miami Heat's blocks per game in 2013?,team_stats,0.7897,1,,,
-T009,team_stats,How many turnovers did the Lakers average in 2020?,team_stats,1.0000,1,,,
-T010,team_stats,What were the Toronto Raptors' free-throw numbers in 2019?,team_stats,0.8502,1,,,
-T011,league_info,What basketball league does LeBron James play in?,league_info,0.7887,1,,,
-T012,league_info,Which professional basketball league is Stephen Curry part of?,league_info,0.8260,1,,,
-T013,league_info,What league was Kobe Bryant known for playing in?,league_info,0.8080,1,,,
-T014,league_info,Is Nikola Jokic an NBA player?,league_info,0.7583,1,,,
-T015,league_info,Which league does Kevin Durant compete in?,league_info,0.8122,1,,,
-T016,league_info,What is the name of the league that the Lakers play in?,team_info,0.8241,0,,,
-T017,league_info,Michael Jordan played in which basketball league?,league_info,0.8217,1,,,
-T018,league_info,What professional league is associated with the Boston Celtics?,league_info,0.8676,1,,,
-T019,league_info,Which league does Giannis Antetokounmpo play in?,league_info,0.8340,1,,,
-T020,league_info,What league is the Golden State Warriors part of?,league_info,0.8159,1,,,
-T021,team_info,Give me some information about the Los Angeles Lakers.,team_info,0.8360,1,,,
-T022,team_info,What can you tell me about the Boston Celtics?,team_info,0.8223,1,,,
-T023,team_info,Tell me about the Golden State Warriors.,team_info,1.0000,1,,,
-T024,team_info,Can you provide information on the Chicago Bulls?,team_info,0.8011,1,,,
-T025,team_info,Give me details about the Miami Heat.,team_info,1.0000,1,,,
-T026,team_info,What should I know about the San Antonio Spurs?,team_info,0.6352,1,,,
-T027,team_info,Tell me something about the Toronto Raptors.,team_info,0.8276,1,,,
-T028,team_info,Can you describe the New York Knicks?,team_info,0.7181,1,,,
-T029,team_info,I want information about the Dallas Mavericks.,team_info,0.7802,1,,,
-T030,team_info,What do you know about the Phoenix Suns?,team_info,0.6985,1,,,
-T031,draft_info,Which team selected LeBron James in the draft?,draft_info,0.7431,1,,,
-T032,draft_info,What draft position did Stephen Curry have?,draft_info,0.8304,1,,,
-T033,draft_info,Who picked Kobe Bryant in the NBA draft?,draft_info,0.9092,1,,,
-T034,draft_info,Which pick was Kevin Durant?,draft_info,0.7713,1,,,
-T035,draft_info,Where was Michael Jordan selected?,all_star,0.5255,0,,,
-T036,draft_info,What team drafted Nikola Jokic?,draft_info,0.8219,1,,,
-T037,draft_info,At what position in the draft was Giannis selected?,draft_info,0.8708,1,,,
-T038,draft_info,Who chose Dwyane Wade in the draft?,draft_info,0.8810,1,,,
-T039,draft_info,Which franchise selected James Harden?,all_star,0.4949,0,,,
-T040,draft_info,What was Anthony Davis's draft selection?,draft_info,0.8614,1,,,
-T041,compare,"Who was the better player, LeBron James or Michael Jordan?",compare,0.9194,1,,,
-T042,compare,How do Stephen Curry and Kevin Durant compare?,compare,1.0000,1,,,
-T043,compare,"Which player had the stronger career, Kobe Bryant or LeBron James?",compare,0.8419,1,,,
-T044,compare,Which of LeBron James and Kevin Durant recorded the higher scoring numbers?,compare,0.7085,1,,,
-T045,compare,Compare Nikola Jokic with Joel Embiid.,compare,0.9024,1,,,
-T046,compare,"Which team was stronger, the Lakers or the Celtics?",compare,0.7514,1,,,
-T047,compare,How do the Warriors compare with the Cavaliers?,compare,0.8916,1,,,
-T048,compare,"Which team had the better season, the 2016 Warriors or the 1996 Bulls?",compare,0.7824,1,,,
-T049,compare,"Between Giannis and Jokic, who performed better?",compare,0.6937,1,,,
-T050,compare,"Who had the better statistics, Curry or Damian Lillard?",compare,0.7976,1,,,
-T051,player_stats,What was LeBron James's scoring average in 2018?,player_stats,0.7803,1,,,
-T052,player_stats,How many rebounds per game did Nikola Jokic have in 2023?,player_stats,1.0000,1,,,
-T053,player_stats,What was Stephen Curry's assist average in 2016?,player_stats,0.8232,1,,,
-T054,player_stats,How many steals did Kawhi Leonard average in 2017?,player_stats,1.0000,1,,,
-T055,player_stats,What was Anthony Davis's block average in 2020?,player_stats,0.8205,1,,,
-T056,player_stats,How many three-pointers did James Harden make per game in 2019?,player_stats,0.6958,1,,,
-T057,player_stats,What was Kevin Durant's field goal percentage in 2014?,player_stats,1.0000,1,,,
-T058,player_stats,How many turnovers per game did Russell Westbrook have in 2017?,team_stats,0.7520,0,,,
-T059,player_stats,What was Giannis Antetokounmpo's free-throw percentage in 2021?,player_stats,1.0000,1,,,
-T060,player_stats,How many games did Kobe Bryant play in 2009?,player_stats,0.7460,1,,,
-T061,player_awards,What awards has LeBron James received during his career?,player_awards,0.7698,1,,,
-T062,player_awards,Can you list Stephen Curry's major awards?,player_awards,0.8404,1,,,
-T063,player_awards,Which awards did Kobe Bryant win?,player_awards,0.8930,1,,,
-T064,player_awards,Tell me about Michael Jordan's award history.,player_awards,0.5603,1,,,
-T065,player_awards,What honors has Kevin Durant earned?,player_awards,0.7007,1,,,
-T066,player_awards,Which awards has Nikola Jokic collected?,player_awards,0.8268,1,,,
-T067,player_awards,What individual awards does Giannis have?,player_awards,0.7860,1,,,
-T068,player_awards,Can you show me Anthony Davis's awards?,player_awards,1.0000,1,,,
-T069,player_awards,What trophies has Dwyane Wade won?,player_awards,0.6688,1,,,
-T070,player_awards,Which major honors belong to James Harden?,player_awards,0.6566,1,,,
-T071,greeting,Hi HoopMind!,greeting,1.0000,1,,,
-T072,greeting,"Hey, I have an NBA question.",league_info,0.8143,0,,,
-T073,greeting,Hello there.,greeting,1.0000,1,,,
-T074,greeting,"Good evening, HoopMind.",greeting,0.4551,1,,,
-T075,greeting,"Hi, can you help me with basketball information?",Default Fallback Intent,0.0000,0,,,
-T076,greeting,Hey chatbot!,greeting,0.3373,1,,,
-T077,greeting,Greetings HoopMind.,greeting,1.0000,1,,,
-T078,greeting,"Hello, I would like to ask about the NBA.",league_info,0.8149,0,,,
-T079,greeting,"Hi there, are you available?",dataset_scope,0.6940,0,,,
-T080,greeting,"Hey, let's talk about basketball.",Default Fallback Intent,0.0000,0,,,
-T081,goodbye,See you next time.,goodbye,0.6161,1,,,
-T082,goodbye,Bye HoopMind!,goodbye,1.0000,1,,,
-T083,goodbye,"Thanks, I'm finished.",goodbye,0.5976,1,,,
-T084,goodbye,"That's all I needed, goodbye.",goodbye,1.0000,1,,,
-T085,goodbye,Catch you later.,goodbye,1.0000,1,,,
-T086,goodbye,I have no more questions.,Default Fallback Intent,0.0000,0,,,
-T087,goodbye,"Thanks for the help, bye.",goodbye,1.0000,1,,,
-T088,goodbye,I'm done for now.,goodbye,0.6069,1,,,
-T089,goodbye,"Goodbye, HoopMind.",goodbye,1.0000,1,,,
-T090,goodbye,See you around.,goodbye,0.7592,1,,,
-T091,dataset_scope,What NBA information can you answer questions about?,league_info,0.5315,0,,,
-T092,dataset_scope,What types of basketball data are available?,dataset_scope,0.8082,1,,,
-T093,dataset_scope,Which NBA seasons can I ask about?,league_info,0.7868,0,,,
-T094,dataset_scope,What player statistics are included in your database?,dataset_scope,0.8924,1,,,
-T095,dataset_scope,Which NBA teams are covered by the chatbot?,league_info,0.7637,0,,,
-T096,dataset_scope,What kind of historical NBA data do you have?,dataset_scope,0.8485,1,,,
-T097,dataset_scope,What information is stored in your NBA dataset?,league_info,0.6826,0,,,
-T098,dataset_scope,What can HoopMind tell me about NBA players?,dataset_scope,0.7071,1,,,
-T099,dataset_scope,Which basketball statistics can I look up?,dataset_scope,0.4875,1,,,
-T100,dataset_scope,How far back does your NBA data go?,dataset_scope,0.7375,1,,,
-T101,player_info,Who is LeBron James?,player_info,1.0000,1,,,
-T102,player_info,Can you introduce Stephen Curry?,player_info,0.8621,1,,,
-T103,player_info,What can you tell me about Nikola Jokic?,player_info,1.0000,1,,,
-T104,player_info,Give me some background on Kobe Bryant.,player_info,0.7638,1,,,
-T105,player_info,Who is Kevin Durant?,player_info,1.0000,1,,,
-T106,player_info,Tell me about Giannis Antetokounmpo.,player_info,1.0000,1,,,
-T107,player_info,Can you provide information about Anthony Davis?,player_info,0.6788,1,,,
-T108,player_info,Who is Kawhi Leonard?,player_info,1.0000,1,,,
-T109,player_info,Give me an overview of James Harden.,player_info,0.6217,1,,,
-T110,player_info,What should I know about Michael Jordan?,player_info,0.7810,1,,,
-T111,award_winner,Who won the MVP award in 2020?,award_winner,0.8855,1,,,
-T112,award_winner,Who received the Rookie of the Year award in 2019?,award_winner,0.7862,1,,,
-T113,award_winner,Which player won Defensive Player of the Year in 2021?,award_winner,0.6374,1,,,
-T114,award_winner,Who was named Sixth Man of the Year in 2018?,award_winner,0.5253,1,,,
-T115,award_winner,Who won the MVP in 2016?,award_winner,1.0000,1,,,
-T116,award_winner,Which player received the Most Improved Player award in 2020?,award_winner,0.7553,1,,,
-T117,award_winner,Who was the Rookie of the Year in 2018?,award_winner,0.6302,1,,,
-T118,award_winner,Who earned the Defensive Player of the Year award in 2019?,award_winner,0.7184,1,,,
-T119,award_winner,Who won the Sixth Man award in 2021?,award_winner,0.6801,1,,,
-T120,award_winner,Which player was named MVP in 2023?,Default Fallback Intent,0.0000,0,,,
-T121,all_star,Was LeBron James selected for the All-Star Game in 2020?,all_star,0.8954,1,,,
-T122,all_star,Did Stephen Curry make the All-Star team in 2019?,all_star,0.8951,1,,,
-T123,all_star,Was Kevin Durant an All-Star in 2017?,all_star,1.0000,1,,,
-T124,all_star,Did Kobe Bryant play in the All-Star Game in 2010?,all_star,1.0000,1,,,
-T125,all_star,Was Nikola Jokic selected as an All-Star in 2023?,all_star,0.8526,1,,,
-T126,all_star,Did Giannis Antetokounmpo make the All-Star roster in 2021?,all_star,0.8712,1,,,
-T127,all_star,Was Anthony Davis an All-Star in 2018?,all_star,1.0000,1,,,
-T128,all_star,Did James Harden receive an All-Star selection in 2019?,all_star,0.8899,1,,,
-T129,all_star,Was Kawhi Leonard chosen for the All-Star Game in 2016?,all_star,0.8435,1,,,
-T130,all_star,Did Dwyane Wade make the All-Star team in 2012?,all_star,0.8979,1,,,
+T001,team_stats,What was Boston's average scoring output during the 2024 season?,team_stats,0.8319,1,📈 Boston Celtics — 2024 | Season Statistics | Points: 120.6,5,The Boston Celtics averaged 120.6 points per game in the 2024 season.
+T002,team_stats,What was Golden State's scoring average during the 2016 season?,team_stats,0.7382,1,"Please tell me which NBA team you're asking about — for example 'Team stats of the Boston Celtics in 2008'.
+
+Or tap one of these:",2,The Golden State Warriors averaged 114.9 points per game in the 2016 season.
+T003,team_stats,How many rebounds did the Los Angeles Lakers average in 2020?,team_stats,1,1,📈 Los Angeles Lakers — 2020 | Season Statistics | Rebounds: 45.7,5,The Los Angeles Lakers averaged 45.7 rebounds per game in the 2020 season.
+T004,team_stats,What was the Warriors' assist average in 2017?,team_stats,0.8934,1,📈 Golden State Warriors — 2017 | Season Statistics | Assists: 30.4,5,The Golden State Warriors averaged 30.4 assists per game in the 2017 season.
+T005,team_stats,How many steals per game did the Chicago Bulls record in 1996?,team_stats,0.8675,1,📈 Chicago Bulls — 1996 | Season Statistics | Steals: 9.1,5,The Chicago Bulls averaged 9.1 steals per game in the 1996 season.
+T006,team_stats,What was the Celtics' field goal percentage in 2024?,team_stats,0.8415,1,"Please tell me which NBA team you're asking about — for example 'Team stats of the Boston Celtics in 2008'.
+
+Or tap one of these:",2,The Boston Celtics shot 48.7% from the field in the 2024 season.
+T007,team_stats,How many three-pointers did the Warriors make per game in 2016?,team_stats,0.7604,1,📈 Golden State Warriors — 2016 | Season Statistics | Three-Pointers: 13.1,5,The Golden State Warriors made 13.1 three-pointers per game in the 2016 season.
+T008,team_stats,What were the Miami Heat's blocks per game in 2013?,team_stats,0.7897,1,📈 Miami Heat — 2013 | Season Statistics | Blocks: 5.4,5,The Miami Heat averaged 5.4 blocks per game in the 2013 season.
+T009,team_stats,How many turnovers did the Lakers average in 2020?,team_stats,1,1,📈 Los Angeles Lakers — 2020 | Season Statistics | Turnovers: 15.2,5,The Los Angeles Lakers averaged 15.2 turnovers per game in the 2020 season.
+T010,team_stats,What were the Toronto Raptors' free-throw numbers in 2019?,team_stats,0.8502,1,📈 Toronto Raptors — 2019 | Season Statistics | Free throws: 17.7,5,The Toronto Raptors made 17.7 free throws per game in the 2019 season.
+T011,league_info,What basketball league does LeBron James play in?,league_info,0.7887,1,🌎 LeBron James | League History | NBA (2004 - 2026),5,LeBron James plays in the National Basketball Association (NBA).
+T012,league_info,Which professional basketball league is Stephen Curry part of?,league_info,0.826,1,🌎 Stephen Curry | League History | NBA (2010 - 2026),5,Stephen Curry plays in the National Basketball Association (NBA).
+T013,league_info,What league was Kobe Bryant known for playing in?,league_info,0.808,1,🌎 Kobe Bryant | League History | NBA (1997 - 2016),5,Kobe Bryant plays in the National Basketball Association (NBA).
+T014,league_info,Is Nikola Jokic an NBA player?,league_info,0.7583,1,🌎 Nikola Jokić | League History | NBA (2016 - 2026),5,"Yes, Nikola Jokić is an NBA player."
+T015,league_info,Which league does Kevin Durant compete in?,league_info,0.8122,1,🌎 Kevin Durant | League History | NBA (2008 - 2026),5,Kevin Durant plays in the National Basketball Association (NBA).
+T016,league_info,What is the name of the league that the Lakers play in?,team_info,0.8241,0,🏀 Los Angeles Lakers | Abbreviation: LAL | League: NBA | First season: 1961 | Arena: Crypto.com Arena | Seasons completed: 66 | All-time record: 3196-2133 | Win rate: 60.0% | Playoff appearances: 66 | Best season: 1972 (69-13) | Last season (2026): 53-29,5,The Lakers play in the National Basketball Association (NBA).
+T017,league_info,Michael Jordan played in which basketball league?,league_info,0.8217,1,🌎 Michael Jordan | League History | NBA (1985 - 2003),5,Michael Jordan plays in the National Basketball Association (NBA).
+T018,league_info,What professional league is associated with the Boston Celtics?,league_info,0.8676,1,"🌎 NBA coverage | HoopMind currently covers NBA history from the first season through recent seasons, | spanning player, team and awards data.",3,The Boston Celtics are associated with the National Basketball Association (NBA).
+T019,league_info,Which league does Giannis Antetokounmpo play in?,league_info,0.834,1,🌎 Giannis Antetokounmpo | League History | NBA (2014 - 2026),5,Giannis Antetokounmpo plays in the National Basketball Association (NBA).
+T020,league_info,What league is the Golden State Warriors part of?,league_info,0.8159,1,"🌎 NBA coverage | HoopMind currently covers NBA history from the first season through recent seasons, | spanning player, team and awards data.",3,The Golden State Warriors are part of the National Basketball Association (NBA).
+T021,team_info,Give me some information about the Los Angeles Lakers.,team_info,0.836,1,🏀 Los Angeles Lakers | Abbreviation: LAL | League: NBA | First season: 1961 | Arena: Crypto.com Arena | Seasons completed: 66 | All-time record: 3196-2133 | Win rate: 60.0% | Playoff appearances: 66 | Best season: 1972 (69-13) | Last season (2026): 53-29,5,"The Los Angeles Lakers are an NBA franchise. In their most recent season on record (2026), they went 53-29 and played home games at Crypto.com Arena."
+T022,team_info,What can you tell me about the Boston Celtics?,team_info,0.8223,1,🏀 Boston Celtics | Abbreviation: BOS | League: NBA | First season: 1947 | Arena: TD Garden | Seasons completed: 80 | All-time record: 3751-2527 | Win rate: 59.7% | Playoff appearances: 80 | Best season: 1973 (68-14) | Last season (2026): 56-26,5,"The Boston Celtics are an NBA franchise. In their most recent season on record (2026), they went 56-26 and played home games at TD Garden."
+T023,team_info,Tell me about the Golden State Warriors.,team_info,1,1,🏀 Golden State Warriors | Abbreviation: GSW | League: NBA | First season: 1972 | Arena: Chase Center | Seasons completed: 55 | All-time record: 2166-2269 | Win rate: 48.8% | Playoff appearances: 55 | Best season: 2016 (73-9) | Last season (2026): 37-45,5,"The Golden State Warriors are an NBA franchise. In their most recent season on record (2026), they went 37-45 and played home games at Chase Center."
+T024,team_info,Can you provide information on the Chicago Bulls?,team_info,0.8011,1,🏀 Chicago Bulls | Abbreviation: CHI | League: NBA | First season: 1967 | Arena: United Center | Seasons completed: 60 | All-time record: 2453-2391 | Win rate: 50.6% | Playoff appearances: 60 | Best season: 1996 (72-10) | Last season (2026): 31-51,5,"The Chicago Bulls are an NBA franchise. In their most recent season on record (2026), they went 31-51 and played home games at United Center."
+T025,team_info,Give me details about the Miami Heat.,team_info,1,1,🏀 Miami Heat | Abbreviation: MIA | League: NBA | First season: 1989 | Arena: Kaseya Center | Seasons completed: 38 | All-time record: 1601-1448 | Win rate: 52.5% | Playoff appearances: 38 | Best season: 2013 (66-16) | Last season (2026): 43-39,5,"The Miami Heat are an NBA franchise. In their most recent season on record (2026), they went 43-39 and played home games at Kaseya Center."
+T026,team_info,What should I know about the San Antonio Spurs?,team_info,0.6352,1,🏀 San Antonio Spurs | Abbreviation: SAS | League: NBA | First season: 1974 | Arena: Frost Bank Center | Seasons completed: 53 | All-time record: 2547-1736 | Win rate: 59.5% | Playoff appearances: 53 | Best season: 2016 (67-15) | Last season (2026): 62-20,5,"The San Antonio Spurs are an NBA franchise. In their most recent season on record (2026), they went 62-20 and played home games at Frost Bank Center."
+T027,team_info,Tell me something about the Toronto Raptors.,team_info,0.8276,1,🏀 Toronto Raptors | Abbreviation: TOR | League: NBA | First season: 1996 | Arena: Scotiabank Arena | Seasons completed: 31 | All-time record: 1172-1302 | Win rate: 47.4% | Playoff appearances: 31 | Best season: 2018 (59-23) | Last season (2026): 46-36,5,"The Toronto Raptors are an NBA franchise. In their most recent season on record (2026), they went 46-36 and played home games at Scotiabank Arena."
+T028,team_info,Can you describe the New York Knicks?,team_info,0.7181,1,🏀 New York Knicks | Abbreviation: NYK | League: NBA | First season: 1947 | Arena: Madison Square Garden (IV) | Seasons completed: 80 | All-time record: 3078-3191 | Win rate: 49.1% | Playoff appearances: 80 | Best season: 1970 (60-22) | Last season (2026): 53-29,5,"The New York Knicks are an NBA franchise. In their most recent season on record (2026), they went 53-29 and played home games at Madison Square Garden (IV)."
+T029,team_info,I want information about the Dallas Mavericks.,team_info,0.7802,1,🏀 Dallas Mavericks | Abbreviation: DAL | League: NBA | First season: 1981 | Arena: American Airlines Center | Seasons completed: 46 | All-time record: 1862-1845 | Win rate: 50.2% | Playoff appearances: 46 | Best season: 2007 (67-15) | Last season (2026): 26-56,5,"The Dallas Mavericks are an NBA franchise. In their most recent season on record (2026), they went 26-56 and played home games at American Airlines Center."
+T030,team_info,What do you know about the Phoenix Suns?,team_info,0.6985,1,🏀 Phoenix Suns | Abbreviation: PHO | League: NBA | First season: 1969 | Arena: Mortgage Matchup Center | Seasons completed: 58 | All-time record: 2510-2179 | Win rate: 53.5% | Playoff appearances: 58 | Best season: 2022 (64-18) | Last season (2026): 45-37,5,"The Phoenix Suns are an NBA franchise. In their most recent season on record (2026), they went 45-37 and played home games at Mortgage Matchup Center."
+T031,draft_info,Which team selected LeBron James in the draft?,draft_info,0.7431,1,🎓 LeBron James | Draft Profile | Draft year: 2003 | Round: 1st | Pick: 1st overall | Drafted by: Cleveland Cavaliers | College: N/A,5,"LeBron James was selected by the Cleveland Cavaliers in the 1(st/nd/rd/th) round, pick #1 overall, in the 2003 draft."
+T032,draft_info,What draft position did Stephen Curry have?,draft_info,0.8304,1,👤 Stephen Curry plays G.,5,"Stephen Curry was selected by the Golden State Warriors in the 1(st/nd/rd/th) round, pick #7 overall, in the 2009 draft."
+T033,draft_info,Who picked Kobe Bryant in the NBA draft?,draft_info,0.9092,1,🎓 Kobe Bryant | Draft Profile | Draft year: 1996 | Round: 1st | Pick: 13th overall | Drafted by: Charlotte Hornets | College: N/A,5,"Kobe Bryant was selected by the CHH in the 1(st/nd/rd/th) round, pick #13 overall, in the 1996 draft."
+T034,draft_info,Which pick was Kevin Durant?,draft_info,0.7713,1,🎓 Kevin Durant | Draft Profile | Draft year: 2007 | Round: 1st | Pick: 2nd overall | Drafted by: Seattle SuperSonics | College: Texas,5,"Kevin Durant was selected by the Seattle SuperSonics in the 1(st/nd/rd/th) round, pick #2 overall, in the 2007 draft."
+T035,draft_info,Where was Michael Jordan selected?,all_star,0.5255,0,"⭐ Michael Jordan | All-Star Selections | ⭐ 14 | selections | First: 1985   Latest: 2003 | 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1996, 1997, 1998, 2002, 2003",1,"Michael Jordan was selected by the Chicago Bulls in the 1(st/nd/rd/th) round, pick #3 overall, in the 1984 draft."
+T036,draft_info,What team drafted Nikola Jokic?,draft_info,0.8219,1,🎓 Nikola Jokić | Draft Profile | Draft year: 2014 | Round: 2nd | Pick: 41st overall | Drafted by: Denver Nuggets | College: N/A,5,"Nikola Jokić was selected by the Denver Nuggets in the 2(st/nd/rd/th) round, pick #41 overall, in the 2014 draft."
+T037,draft_info,At what position in the draft was Giannis selected?,draft_info,0.8708,1,👤 Giannis Antetokounmpo plays F/G.,5,"Giannis Antetokounmpo was selected by the Milwaukee Bucks in the 1(st/nd/rd/th) round, pick #15 overall, in the 2013 draft."
+T038,draft_info,Who chose Dwyane Wade in the draft?,draft_info,0.881,1,🎓 Dwyane Wade | Draft Profile | Draft year: 2003 | Round: 1st | Pick: 5th overall | Drafted by: Miami Heat | College: Marquette,5,"Dwyane Wade was selected by the Miami Heat in the 1(st/nd/rd/th) round, pick #5 overall, in the 2003 draft."
+T039,draft_info,Which franchise selected James Harden?,all_star,0.4949,0,"⭐ James Harden | All-Star Selections | ⭐ 11 | selections | First: 2013   Latest: 2025 | 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2025",5,"James Harden was selected by the Oklahoma City Thunder in the 1(st/nd/rd/th) round, pick #3 overall, in the 2009 draft."
+T040,draft_info,What was Anthony Davis's draft selection?,draft_info,0.8614,1,🎓 Anthony Davis | Draft Profile | Draft year: 2012 | Round: 1st | Pick: 1st overall | Drafted by: New Orleans Hornets | College: Kentucky,5,"Anthony Davis was selected by the NOH in the 1(st/nd/rd/th) round, pick #1 overall, in the 2012 draft."
+T041,compare,"Who was the better player, LeBron James or Michael Jordan?",compare,0.9194,1,"⚔️ LeBron James vs Michael Jordan | Player Comparison | Head-to-head | Points | • LeBron James: 43,440 | • Michael Jordan: 32,292 | Rebounds | • LeBron James: 12,095 | • Michael Jordan: 6,672 | Assists | • LeBron James: 12,016 | • Michael Jordan: 5,633 | Steals | • LeBron James: 2,417 | • Michael Jordan: 2,514 | Blocks | • LeBron James: 1,185 | • Michael Jordan: 893 | Games | • LeBron James: 1,622 | • Michael Jordan: 1,072 | Based on career totals. | 🏆 Result: LeBron James leads with 43,440 versus 32,292 for Michael Jordan.",5,"By career points, LeBron James has 43,440 and Michael Jordan has 32,292; LeBron James leads."
+T042,compare,How do Stephen Curry and Kevin Durant compare?,compare,1,1,"⚔️ Stephen Curry vs Kevin Durant | Player Comparison | Head-to-head | Points | • Stephen Curry: 26,528 | • Kevin Durant: 33,963 | Rebounds | • Stephen Curry: 4,973 | • Kevin Durant: 8,567 | Assists | • Stephen Curry: 6,743 | • Kevin Durant: 5,515 | Steals | • Stephen Curry: 1,602 | • Kevin Durant: 1,270 | Blocks | • Stephen Curry: 282 | • Kevin Durant: 1,411 | Games | • Stephen Curry: 1,069 | • Kevin Durant: 1,248 | Based on career totals. | 🏆 Result: Kevin Durant leads with 33,963 versus 26,528 for Stephen Curry.",5,"Stephen Curry and Kevin Durant are both elite scorers; Durant has more career points, Curry more career three-pointers made."
+T043,compare,"Which player had the stronger career, Kobe Bryant or LeBron James?",compare,0.8419,1,"⚔️ Kobe Bryant vs LeBron James | Player Comparison | Head-to-head | Points | • Kobe Bryant: 33,643 | • LeBron James: 43,440 | Rebounds | • Kobe Bryant: 7,047 | • LeBron James: 12,095 | Assists | • Kobe Bryant: 6,306 | • LeBron James: 12,016 | Steals | • Kobe Bryant: 1,944 | • LeBron James: 2,417 | Blocks | • Kobe Bryant: 640 | • LeBron James: 1,185 | Games | • Kobe Bryant: 1,346 | • LeBron James: 1,622 | Based on career totals. | 🏆 Result: LeBron James leads with 43,440 versus 33,643 for Kobe Bryant.",5,"By career points, Kobe Bryant has 33,643 and LeBron James has 43,440; LeBron James leads."
+T044,compare,Which of LeBron James and Kevin Durant recorded the higher scoring numbers?,compare,0.7085,1,"⚔️ LeBron James vs Kevin Durant | Player Comparison | Head-to-head | Points | • LeBron James: 43,440 | • Kevin Durant: 33,963 | Based on career totals. | 🏆 Result: LeBron James leads with 43,440 versus 33,963 for Kevin Durant.",5,LeBron James has more total career points than Kevin Durant.
+T045,compare,Compare Nikola Jokic with Joel Embiid.,compare,0.9024,1,"⚔️ Nikola Jokić vs Joel Embiid | Player Comparison | Head-to-head | Points | • Nikola Jokić: 18,009 | • Joel Embiid: 13,544 | Rebounds | • Nikola Jokić: 8,977 | • Joel Embiid: 5,280 | Assists | • Nikola Jokić: 6,080 | • Joel Embiid: 1,808 | Steals | • Nikola Jokić: 1,041 | • Joel Embiid: 432 | Blocks | • Nikola Jokić: 589 | • Joel Embiid: 784 | Games | • Nikola Jokić: 810 | • Joel Embiid: 490 | Based on career totals. | 🏆 Result: Nikola Jokić leads with 18,009 versus 13,544 for Joel Embiid.",5,"By career points, Nikola Jokić has 18,009 and Joel Embiid has 13,544; Nikola Jokić leads."
+T046,compare,"Which team was stronger, the Lakers or the Celtics?",compare,0.7514,1,"Please name two teams to compare — for example 'Compare the Bulls and the Lakers'.
+
+Or tap one of these:",2,The Lakers and Celtics are the two most decorated NBA franchises by championships; historically close in overall success.
+T047,compare,How do the Warriors compare with the Cavaliers?,compare,0.8916,1,"⚔️ Golden State Warriors vs Cleveland Cavaliers | Team Comparison | Golden State Warriors — 2026 | • Points: 114.6 | • Field goal %: 46.1% | • Three-point %: 35.6% | Cleveland Cavaliers — 2026 | • Points: 119.5 | • Field goal %: 48.2% | • Three-point %: 36.0% | Season records | • Records: 37-45 (Golden State Warriors, 2026) | • Records: 52-30 (Cleveland Cavaliers, 2026) | 🏆 Result: The Cleveland Cavaliers leads with 119.5 versus 114.6 for the Golden State Warriors. | Result: The Cleveland Cavaliers had the better record (63.4% wins).",5,The Warriors and Cavaliers met in four straight NBA Finals (2015-2018); the Warriors won three of those series.
+T048,compare,"Which team had the better season, the 2016 Warriors or the 1996 Bulls?",compare,0.7824,1,⚔️ Team Comparison | Golden State Warriors vs Chicago Bulls | Golden State Warriors | • Season: 2016 | • Record: 73-9 | • Point differential: +10.8 | • Offensive rating: 114.5 | • Defensive rating: 103.8 | • Pace: 99.3 | • Playoffs: Yes | Chicago Bulls | • Season: 2016 | • Record: 42-40 | • Point differential: -1.5 | • Offensive rating: 105.0 | • Defensive rating: 106.5 | • Pace: 95.7 | • Playoffs: No | 🏆 Result: The Golden State Warriors had the better record (89.0% wins).,5,"The 2016 Warriors (73-9) had a better regular-season record than the 1996 Bulls (72-10), though the Bulls won the title that year."
+T049,compare,"Between Giannis and Jokic, who performed better?",compare,0.6937,1,"⚔️ Giannis Antetokounmpo vs Nikola Jokić | Player Comparison | Head-to-head | Points | • Giannis Antetokounmpo: 21,531 | • Nikola Jokić: 18,009 | Rebounds | • Giannis Antetokounmpo: 8,882 | • Nikola Jokić: 8,977 | Assists | • Giannis Antetokounmpo: 4,484 | • Nikola Jokić: 6,080 | Steals | • Giannis Antetokounmpo: 995 | • Nikola Jokić: 1,041 | Blocks | • Giannis Antetokounmpo: 1,088 | • Nikola Jokić: 589 | Games | • Giannis Antetokounmpo: 895 | • Nikola Jokić: 810 | Based on career totals. | 🏆 Result: Giannis Antetokounmpo leads with 21,531 versus 18,009 for Nikola Jokić.",5,"By career points, Giannis Antetokounmpo has 21,531 and Nikola Jokić has 18,009; Giannis Antetokounmpo leads."
+T050,compare,"Who had the better statistics, Curry or Damian Lillard?",compare,0.7976,1,"⚔️ Stephen Curry vs Damian Lillard | Player Comparison | Head-to-head | Points | • Stephen Curry: 26,528 | • Damian Lillard: 22,598 | Rebounds | • Stephen Curry: 4,973 | • Damian Lillard: 3,845 | Assists | • Stephen Curry: 6,743 | • Damian Lillard: 6,069 | Steals | • Stephen Curry: 1,602 | • Damian Lillard: 874 | Blocks | • Stephen Curry: 282 | • Damian Lillard: 267 | Games | • Stephen Curry: 1,069 | • Damian Lillard: 900 | Based on career totals. | 🏆 Result: Stephen Curry leads with 26,528 versus 22,598 for Damian Lillard.",5,"By career points, Stephen Curry has 26,528 and Damian Lillard has 22,598; Stephen Curry leads."
+T051,player_stats,What was LeBron James's scoring average in 2018?,player_stats,0.7803,1,📊 LeBron James - 2018 | Cleveland Cavaliers | Points per game | ⭐ 27.5 | Games: 82  •  Age: 33,5,LeBron James averaged 27.5 points per game in the 2018 season.
+T052,player_stats,How many rebounds per game did Nikola Jokic have in 2023?,player_stats,1,1,📊 Nikola Jokić - 2023 | Denver Nuggets | Rebounds per game | ⭐ 11.8 | Games: 69  •  Age: 27,5,Nikola Jokić averaged 11.8 rebounds per game in the 2023 season.
+T053,player_stats,What was Stephen Curry's assist average in 2016?,player_stats,0.8232,1,📊 Stephen Curry - 2016 | Golden State Warriors | Assists per game | ⭐ 6.7 | Games: 79  •  Age: 27,5,Stephen Curry averaged 6.7 assists per game in the 2016 season.
+T054,player_stats,How many steals did Kawhi Leonard average in 2017?,player_stats,1,1,📊 Kawhi Leonard - 2017 | San Antonio Spurs | Steals per game | ⭐ 1.8 | Games: 74  •  Age: 25,5,Kawhi Leonard averaged 1.8 steals per game in the 2017 season.
+T055,player_stats,What was Anthony Davis's block average in 2020?,player_stats,0.8205,1,📊 Anthony Davis - 2020 | Los Angeles Lakers | Blocks per game | ⭐ 2.3 | Games: 62  •  Age: 26,5,Anthony Davis averaged 2.3 blocks per game in the 2020 season.
+T056,player_stats,How many three-pointers did James Harden make per game in 2019?,player_stats,0.6958,1,"I couldn't map 'three-pointers' to a statistic. Supported examples: points, rebounds, assists, steals, blocks, field goal percentage, three-pointers.",1,James Harden made 4.8 three-pointers per game in the 2019 season.
+T057,player_stats,What was Kevin Durant's field goal percentage in 2014?,player_stats,1,1,"📊 Kevin Durant - 2014 | Oklahoma City Thunder, Shooting | Field goal % per game | ⭐ 50.3% | Games: 81  •  Age: 25",5,Kevin Durant shot 50.3% from the field in the 2014 season.
+T058,player_stats,How many turnovers per game did Russell Westbrook have in 2017?,team_stats,0.752,0,"Please tell me which NBA team you're asking about — for example 'Team stats of the Boston Celtics in 2008'.
+
+Or tap one of these:",1,Russell Westbrook averaged 5.4 turnovers per game in the 2017 season.
+T059,player_stats,What was Giannis Antetokounmpo's free-throw percentage in 2021?,player_stats,1,1,📊 Giannis Antetokounmpo - 2021 | Milwaukee Bucks | Free throws per game | ⭐ 6.5 | Games: 61  •  Age: 26,5,Giannis Antetokounmpo shot 68.5% from the free-throw line in the 2021 season.
+T060,player_stats,How many games did Kobe Bryant play in 2009?,player_stats,0.746,1,📊 Kobe Bryant - 2009 | Los Angeles Lakers | Statistics | Points per game: 26.8 | Rebounds per game: 5.2 | Assists per game: 4.9 | Steals per game: 1.5 | Blocks per game: 0.5 | Minutes per game: 36.1 | Team: Los Angeles Lakers  •  Games: 82,5,Kobe Bryant played 82 games in the 2009 season.
+T061,player_awards,What awards has LeBron James received during his career?,player_awards,0.7698,1,"👑 LeBron James | Career Totals | All-time totals | Points: 43,440 | Rebounds: 12,095 | Assists: 12,016 | Steals: 2,417 | Blocks: 1,185 | Games: 1,622 | Seasons played: 23 (2004-2026)",5,"LeBron James has won: NBA MVP (2013), NBA MVP (2012), NBA MVP (2010), NBA MVP (2009), NBA ROY (2004)."
+T062,player_awards,Can you list Stephen Curry's major awards?,player_awards,0.8404,1,"🏆 Stephen Curry | Awards | NBA MVP x2: 2015, 2016 | NBA Clutch Poy x1: 2024",5,"Stephen Curry has won: NBA CLUTCH_POY (2024), NBA MVP (2016), NBA MVP (2015)."
+T063,player_awards,Which awards did Kobe Bryant win?,player_awards,0.893,1,🏆 Kobe Bryant | Awards | NBA MVP x1: 2008,5,Kobe Bryant has won: NBA MVP (2008).
+T064,player_awards,Tell me about Michael Jordan's award history.,player_awards,0.5603,1,"🏆 Michael Jordan | Awards | NBA MVP x5: 1988, 1991, 1992, 1996, 1998 | NBA ROY x1: 1985 | NBA DPOY x1: 1988",5,"Michael Jordan has won: NBA MVP (1998), NBA MVP (1996), NBA MVP (1992), NBA MVP (1991), NBA DPOY (1988), NBA MVP (1988), NBA ROY (1985)."
+T065,player_awards,What honors has Kevin Durant earned?,player_awards,0.7007,1,🏆 Kevin Durant | Awards | NBA MVP x1: 2014 | NBA ROY x1: 2008,5,"Kevin Durant has won: NBA MVP (2014), NBA ROY (2008)."
+T066,player_awards,Which awards has Nikola Jokic collected?,player_awards,0.8268,1,"🏆 Nikola Jokić | Awards | NBA MVP x3: 2021, 2022, 2024",5,"Nikola Jokić has won: NBA MVP (2024), NBA MVP (2022), NBA MVP (2021)."
+T067,player_awards,What individual awards does Giannis have?,player_awards,0.786,1,"🏆 Giannis Antetokounmpo | Awards | NBA MVP x2: 2019, 2020 | NBA DPOY x1: 2020 | NBA MIP x1: 2017",5,"Giannis Antetokounmpo has won: NBA DPOY (2020), NBA MVP (2020), NBA MVP (2019), NBA MIP (2017)."
+T068,player_awards,Can you show me Anthony Davis's awards?,player_awards,1,1,🗳️ Anthony Davis | Award voting | NBA ROY 2013: share 0.506 | NBA MVP 2018: share 0.441 | NBA DPOY 2020: share 0.400 | NBA DPOY 2018: share 0.275 | NBA MIP 2014: share 0.246 | NBA DPOY 2024: share 0.168 | No outright wins found in these records.,5,No major award wins were found on record for Anthony Davis in the dataset.
+T069,player_awards,What trophies has Dwyane Wade won?,player_awards,0.6688,1,🗳️ Dwyane Wade | Award voting | NBA MVP 2009: share 0.562 | NBA MIP 2005: share 0.210 | NBA ROY 2004: share 0.198 | NBA DPOY 2009: share 0.151 | NBA MVP 2010: share 0.097 | NBA MVP 2006: share 0.070 | No outright wins found in these records.,5,No major award wins were found on record for Dwyane Wade in the dataset.
+T070,player_awards,Which major honors belong to James Harden?,player_awards,0.6566,1,Couldn't find an award record for that player/season.,3,"James Harden has won: NBA MVP (2018), NBA SMOY (2012)."
+T071,greeting,Hi HoopMind!,greeting,1,1,👋 Welcome to HoopMind! | Your NBA knowledge assistant. | I can help you with: | 👤 Players      📊 Statistics | 🏀 Teams        🏆 Awards | 🎓 Drafts       ⭐ All-Stars,5,"Hello! I'm HoopMind, your NBA assistant — ask me about players, teams, stats, awards, drafts or All-Star selections."
+T072,greeting,"Hey, I have an NBA question.",league_info,0.8143,0,"🌎 NBA coverage | HoopMind currently covers NBA history from the first season through recent seasons, | spanning player, team and awards data.",1,"Hello! I'm HoopMind, your NBA assistant — ask me about players, teams, stats, awards, drafts or All-Star selections."
+T073,greeting,Hello there.,greeting,1,1,👋 Welcome to HoopMind! | Your NBA knowledge assistant. | I can help you with: | 👤 Players      📊 Statistics | 🏀 Teams        🏆 Awards | 🎓 Drafts       ⭐ All-Stars,5,"Hello! I'm HoopMind, your NBA assistant — ask me about players, teams, stats, awards, drafts or All-Star selections."
+T074,greeting,"Good evening, HoopMind.",greeting,0.4551,1,👋 Welcome to HoopMind! | Your NBA knowledge assistant. | I can help you with: | 👤 Players      📊 Statistics | 🏀 Teams        🏆 Awards | 🎓 Drafts       ⭐ All-Stars,5,"Hello! I'm HoopMind, your NBA assistant — ask me about players, teams, stats, awards, drafts or All-Star selections."
+T075,greeting,"Hi, can you help me with basketball information?",Default Fallback Intent,0,0,Intent Default Fallback Intent is not implemented yet.,1,"Hello! I'm HoopMind, your NBA assistant — ask me about players, teams, stats, awards, drafts or All-Star selections."
+T076,greeting,Hey chatbot!,greeting,0.3373,1,👋 Welcome to HoopMind! | Your NBA knowledge assistant. | I can help you with: | 👤 Players      📊 Statistics | 🏀 Teams        🏆 Awards | 🎓 Drafts       ⭐ All-Stars,5,"Hello! I'm HoopMind, your NBA assistant — ask me about players, teams, stats, awards, drafts or All-Star selections."
+T077,greeting,Greetings HoopMind.,greeting,1,1,👋 Welcome to HoopMind! | Your NBA knowledge assistant. | I can help you with: | 👤 Players      📊 Statistics | 🏀 Teams        🏆 Awards | 🎓 Drafts       ⭐ All-Stars,5,"Hello! I'm HoopMind, your NBA assistant — ask me about players, teams, stats, awards, drafts or All-Star selections."
+T078,greeting,"Hello, I would like to ask about the NBA.",league_info,0.8149,0,"🌎 NBA coverage | HoopMind currently covers NBA history from the first season through recent seasons, | spanning player, team and awards data.",1,"Hello! I'm HoopMind, your NBA assistant — ask me about players, teams, stats, awards, drafts or All-Star selections."
+T079,greeting,"Hi there, are you available?",dataset_scope,0.694,0,"📚 HoopMind Data | I can provide information about: | 👤 NBA Players (profiles & careers) | 📊 Player statistics (season, advanced, | shooting, per-36, per-100, play-by-play) | 🏀 Teams (records, season stats, defense) | 🏆 Awards & All-Star selections | 🎓 Draft history | 📅 Seasons covered across 22 datasets",1,"Hello! I'm HoopMind, your NBA assistant — ask me about players, teams, stats, awards, drafts or All-Star selections."
+T080,greeting,"Hey, let's talk about basketball.",Default Fallback Intent,0,0,Intent Default Fallback Intent is not implemented yet.,1,"Hello! I'm HoopMind, your NBA assistant — ask me about players, teams, stats, awards, drafts or All-Star selections."
+T081,goodbye,See you next time.,goodbye,0.6161,1,👋 Thanks for using HoopMind! | Come back anytime for more NBA information. 🏀,5,Goodbye! Come back anytime for more NBA information.
+T082,goodbye,Bye HoopMind!,goodbye,1,1,👋 Thanks for using HoopMind! | Come back anytime for more NBA information. 🏀,5,Goodbye! Come back anytime for more NBA information.
+T083,goodbye,"Thanks, I'm finished.",goodbye,0.5976,1,👋 Thanks for using HoopMind! | Come back anytime for more NBA information. 🏀,5,Goodbye! Come back anytime for more NBA information.
+T084,goodbye,"That's all I needed, goodbye.",goodbye,1,1,👋 Thanks for using HoopMind! | Come back anytime for more NBA information. 🏀,5,Goodbye! Come back anytime for more NBA information.
+T085,goodbye,Catch you later.,goodbye,1,1,👋 Thanks for using HoopMind! | Come back anytime for more NBA information. 🏀,5,Goodbye! Come back anytime for more NBA information.
+T086,goodbye,I have no more questions.,Default Fallback Intent,0,0,Intent Default Fallback Intent is not implemented yet.,1,Goodbye! Come back anytime for more NBA information.
+T087,goodbye,"Thanks for the help, bye.",goodbye,1,1,👋 Thanks for using HoopMind! | Come back anytime for more NBA information. 🏀,5,Goodbye! Come back anytime for more NBA information.
+T088,goodbye,I'm done for now.,goodbye,0.6069,1,👋 Thanks for using HoopMind! | Come back anytime for more NBA information. 🏀,5,Goodbye! Come back anytime for more NBA information.
+T089,goodbye,"Goodbye, HoopMind.",goodbye,1,1,👋 Thanks for using HoopMind! | Come back anytime for more NBA information. 🏀,5,Goodbye! Come back anytime for more NBA information.
+T090,goodbye,See you around.,goodbye,0.7592,1,👋 Thanks for using HoopMind! | Come back anytime for more NBA information. 🏀,5,Goodbye! Come back anytime for more NBA information.
+T091,dataset_scope,What NBA information can you answer questions about?,league_info,0.5315,0,"🌎 NBA coverage | HoopMind currently covers NBA history from the first season through recent seasons, | spanning player, team and awards data.",1,"HoopMind can answer questions about NBA players, teams, season and career statistics, awards, draft history and All-Star selections, covering seasons from 1947 to 2026."
+T092,dataset_scope,What types of basketball data are available?,dataset_scope,0.8082,1,"📚 HoopMind Data | I can provide information about: | 👤 NBA Players (profiles & careers) | 📊 Player statistics (season, advanced, | shooting, per-36, per-100, play-by-play) | 🏀 Teams (records, season stats, defense) | 🏆 Awards & All-Star selections | 🎓 Draft history | 📅 Seasons covered across 22 datasets",5,"HoopMind can answer questions about NBA players, teams, season and career statistics, awards, draft history and All-Star selections, covering seasons from 1947 to 2026."
+T093,dataset_scope,Which NBA seasons can I ask about?,league_info,0.7868,0,"🌎 NBA coverage | HoopMind currently covers NBA history from the first season through recent seasons, | spanning player, team and awards data.",1,"HoopMind can answer questions about NBA players, teams, season and career statistics, awards, draft history and All-Star selections, covering seasons from 1947 to 2026."
+T094,dataset_scope,What player statistics are included in your database?,dataset_scope,0.8924,1,"📚 HoopMind Data | I can provide information about: | 👤 NBA Players (profiles & careers) | 📊 Player statistics (season, advanced, | shooting, per-36, per-100, play-by-play) | 🏀 Teams (records, season stats, defense) | 🏆 Awards & All-Star selections | 🎓 Draft history | 📅 Seasons covered across 22 datasets",5,"HoopMind can answer questions about NBA players, teams, season and career statistics, awards, draft history and All-Star selections, covering seasons from 1947 to 2026."
+T095,dataset_scope,Which NBA teams are covered by the chatbot?,league_info,0.7637,0,"🌎 NBA coverage | HoopMind currently covers NBA history from the first season through recent seasons, | spanning player, team and awards data.",1,"HoopMind can answer questions about NBA players, teams, season and career statistics, awards, draft history and All-Star selections, covering seasons from 1947 to 2026."
+T096,dataset_scope,What kind of historical NBA data do you have?,dataset_scope,0.8485,1,"📚 HoopMind Data | I can provide information about: | 👤 NBA Players (profiles & careers) | 📊 Player statistics (season, advanced, | shooting, per-36, per-100, play-by-play) | 🏀 Teams (records, season stats, defense) | 🏆 Awards & All-Star selections | 🎓 Draft history | 📅 Seasons covered across 22 datasets",5,"HoopMind can answer questions about NBA players, teams, season and career statistics, awards, draft history and All-Star selections, covering seasons from 1947 to 2026."
+T097,dataset_scope,What information is stored in your NBA dataset?,league_info,0.6826,0,"🌎 NBA coverage | HoopMind currently covers NBA history from the first season through recent seasons, | spanning player, team and awards data.",1,"HoopMind can answer questions about NBA players, teams, season and career statistics, awards, draft history and All-Star selections, covering seasons from 1947 to 2026."
+T098,dataset_scope,What can HoopMind tell me about NBA players?,dataset_scope,0.7071,1,"📚 HoopMind Data | I can provide information about: | 👤 NBA Players (profiles & careers) | 📊 Player statistics (season, advanced, | shooting, per-36, per-100, play-by-play) | 🏀 Teams (records, season stats, defense) | 🏆 Awards & All-Star selections | 🎓 Draft history | 📅 Seasons covered across 22 datasets",5,"HoopMind can answer questions about NBA players, teams, season and career statistics, awards, draft history and All-Star selections, covering seasons from 1947 to 2026."
+T099,dataset_scope,Which basketball statistics can I look up?,dataset_scope,0.4875,1,"📚 HoopMind Data | I can provide information about: | 👤 NBA Players (profiles & careers) | 📊 Player statistics (season, advanced, | shooting, per-36, per-100, play-by-play) | 🏀 Teams (records, season stats, defense) | 🏆 Awards & All-Star selections | 🎓 Draft history | 📅 Seasons covered across 22 datasets",5,"HoopMind can answer questions about NBA players, teams, season and career statistics, awards, draft history and All-Star selections, covering seasons from 1947 to 2026."
+T100,dataset_scope,How far back does your NBA data go?,dataset_scope,0.7375,1,"📚 HoopMind Data | I can provide information about: | 👤 NBA Players (profiles & careers) | 📊 Player statistics (season, advanced, | shooting, per-36, per-100, play-by-play) | 🏀 Teams (records, season stats, defense) | 🏆 Awards & All-Star selections | 🎓 Draft history | 📅 Seasons covered across 22 datasets",5,"HoopMind can answer questions about NBA players, teams, season and career statistics, awards, draft history and All-Star selections, covering seasons from 1947 to 2026."
+T101,player_info,Who is LeBron James?,player_info,1,1,"👤 LeBron James | F/G | Player Profile | Position: F/G | Height: 6'9"" (206 cm) | Weight: 250 lb (113 kg) | Born: 1984-12-30 | Career: 2004 - 2026 | Hall of Fame: No",5,LeBron James is a F-G who played from 2004 to 2026 (NBA debut: 2003-10-29T00:00:00Z).
+T102,player_info,Can you introduce Stephen Curry?,player_info,0.8621,1,"👤 Stephen Curry | G | Player Profile | Position: G | Height: 6'2"" (188 cm) | Weight: 185 lb (84 kg) | Born: 1988-03-14 | College: Davidson | Career: 2010 - 2026 | Hall of Fame: No",5,Stephen Curry is a G who played from 2010 to 2026 (NBA debut: 2009-10-28T00:00:00Z).
+T103,player_info,What can you tell me about Nikola Jokic?,player_info,1,1,"👤 Nikola Jokić | C/F | Player Profile | Position: C/F | Height: 6'11"" (211 cm) | Weight: 284 lb (129 kg) | Born: 1995-02-19 | Career: 2016 - 2026 | Hall of Fame: No",5,Nikola Jokić is a C-F who played from 2016 to 2026 (NBA debut: 2015-10-28T00:00:00Z).
+T104,player_info,Give me some background on Kobe Bryant.,player_info,0.7638,1,🎓 Kobe Bryant | Draft Profile | Draft year: 1996 | Round: 1st | Pick: 13th overall | Drafted by: Charlotte Hornets | College: N/A,5,Kobe Bryant is a G-F who played from 1997 to 2016 (NBA debut: 1996-11-03T00:00:00Z).
+T105,player_info,Who is Kevin Durant?,player_info,1,1,"👤 Kevin Durant | F/G | Player Profile | Position: F/G | Height: 6'11"" (211 cm) | Weight: 240 lb (109 kg) | Born: 1988-09-29 | College: Texas | Career: 2008 - 2026 | Hall of Fame: No",5,Kevin Durant is a F-G who played from 2008 to 2026 (NBA debut: 2007-10-31T00:00:00Z).
+T106,player_info,Tell me about Giannis Antetokounmpo.,player_info,1,1,"👤 Giannis Antetokounmpo | F/G | Player Profile | Position: F/G | Height: 6'11"" (211 cm) | Weight: 243 lb (110 kg) | Born: 1994-12-06 | Career: 2014 - 2026 | Hall of Fame: No",5,Giannis Antetokounmpo is a F-G who played from 2014 to 2026 (NBA debut: 2013-10-30T00:00:00Z).
+T107,player_info,Can you provide information about Anthony Davis?,player_info,0.6788,1,"👤 Anthony Davis | F/C | Player Profile | Position: F/C | Height: 6'10"" (208 cm) | Weight: 253 lb (115 kg) | Born: 1993-03-11 | College: Kentucky | Career: 2013 - 2026 | Hall of Fame: No",5,Anthony Davis is a F-C who played from 2013 to 2026 (NBA debut: 2012-10-31T00:00:00Z).
+T108,player_info,Who is Kawhi Leonard?,player_info,1,1,"👤 Kawhi Leonard | F | Player Profile | Position: F | Height: 6'6"" (198 cm) | Weight: 225 lb (102 kg) | Born: 1991-06-29 | College: San Diego State | Career: 2012 - 2026 | Hall of Fame: No",5,Kawhi Leonard is a F who played from 2012 to 2026 (NBA debut: 2011-12-26T00:00:00Z).
+T109,player_info,Give me an overview of James Harden.,player_info,0.6217,1,"👤 James Harden | G | Player Profile | Position: G | Height: 6'5"" (196 cm) | Weight: 220 lb (100 kg) | Born: 1989-08-26 | College: Arizona State | Career: 2010 - 2026 | Hall of Fame: No",5,James Harden is a G who played from 2010 to 2026 (NBA debut: 2009-10-28T00:00:00Z).
+T110,player_info,What should I know about Michael Jordan?,player_info,0.781,1,"👤 Michael Jordan | G/F | Player Profile | Position: G/F | Height: 6'6"" (198 cm) | Weight: 198 lb (90 kg) | Born: 1963-02-17 | College: UNC | Career: 1985 - 2003 | Hall of Fame 🏆: Yes",5,Michael Jordan is a G-F who played from 1985 to 2003 (NBA debut: 1984-10-26T00:00:00Z).
+T111,award_winner,Who won the MVP award in 2020?,award_winner,0.8855,1,🏆 2020 NBA MVP | Giannis Antetokounmpo (share 0.952),5,Giannis Antetokounmpo won the 2020 MVP.
+T112,award_winner,Who received the Rookie of the Year award in 2019?,award_winner,0.7862,1,🏆 2019 NBA ROY | Luka Dončić (share 0.992),5,Luka Dončić won the 2019 ROY.
+T113,award_winner,Which player won Defensive Player of the Year in 2021?,award_winner,0.6374,1,🏆 2021 NBA DPOY | Rudy Gobert (share 0.928),5,Rudy Gobert won the 2021 DPOY.
+T114,award_winner,Who was named Sixth Man of the Year in 2018?,award_winner,0.5253,1,🏆 2018 NBA SMOY | Lou Williams (share 0.980),5,Lou Williams won the 2018 SMOY.
+T115,award_winner,Who won the MVP in 2016?,award_winner,1,1,🏆 2016 NBA MVP | Stephen Curry (share 1.000),5,Stephen Curry won the 2016 MVP.
+T116,award_winner,Which player received the Most Improved Player award in 2020?,award_winner,0.7553,1,🏆 2020 NBA MIP | Brandon Ingram (share 0.652),5,Brandon Ingram won the 2020 MIP.
+T117,award_winner,Who was the Rookie of the Year in 2018?,award_winner,0.6302,1,🏆 2018 NBA ROY | Ben Simmons (share 0.952),5,Ben Simmons won the 2018 ROY.
+T118,award_winner,Who earned the Defensive Player of the Year award in 2019?,award_winner,0.7184,1,🏆 2019 NBA DPOY | Rudy Gobert (share 0.822),5,Rudy Gobert won the 2019 DPOY.
+T119,award_winner,Who won the Sixth Man award in 2021?,award_winner,0.6801,1,🏆 2021 NBA DPOY | Rudy Gobert (share 0.928) | Julius Randle (share 0.986) | Nikola Jokić (share 0.961) | LaMelo Ball (share 0.939) | Jordan Clarkson (share 0.814),5,Jordan Clarkson won the 2021 SMOY.
+T120,award_winner,Which player was named MVP in 2023?,Default Fallback Intent,0,0,🏆 2023 NBA MVP | Joel Embiid (share 0.915),5,Joel Embiid won the 2023 MVP.
+T121,all_star,Was LeBron James selected for the All-Star Game in 2020?,all_star,0.8954,1,⭐ 2020 All-Star | LeBron James | Selected: ✅ YES | Team: Team LeBron,5,"Yes, LeBron James played in the 2020 NBA All-Star Game."
+T122,all_star,Did Stephen Curry make the All-Star team in 2019?,all_star,0.8951,1,⭐ 2019 All-Star | Stephen Curry | Selected: ✅ YES | Team: Team Giannis,5,"Yes, Stephen Curry played in the 2019 NBA All-Star Game."
+T123,all_star,Was Kevin Durant an All-Star in 2017?,all_star,1,1,⭐ 2017 All-Star | Kevin Durant | Selected: ✅ YES | Team: West,5,"Yes, Kevin Durant played in the 2017 NBA All-Star Game."
+T124,all_star,Did Kobe Bryant play in the All-Star Game in 2010?,all_star,1,1,⭐ 2010 All-Star | Kobe Bryant | ❌ NO | Injured — selected but did not play | Team: West,5,Kobe Bryant was selected for the 2010 NBA All-Star Game but did not play (replaced due to injury).
+T125,all_star,Was Nikola Jokic selected as an All-Star in 2023?,all_star,0.8526,1,⭐ 2023 All-Star | Nikola Jokić | Selected: ✅ YES | Team: LeBron,5,"Yes, Nikola Jokić played in the 2023 NBA All-Star Game."
+T126,all_star,Did Giannis Antetokounmpo make the All-Star roster in 2021?,all_star,0.8712,1,⭐ 2021 All-Star | Giannis Antetokounmpo | Selected: ✅ YES | Team: Team LeBron,5,"Yes, Giannis Antetokounmpo played in the 2021 NBA All-Star Game."
+T127,all_star,Was Anthony Davis an All-Star in 2018?,all_star,1,1,⭐ 2018 All-Star | Anthony Davis | Selected: ✅ YES | Team: Team LeBron,5,"Yes, Anthony Davis played in the 2018 NBA All-Star Game."
+T128,all_star,Did James Harden receive an All-Star selection in 2019?,all_star,0.8899,1,⭐ 2019 All-Star | James Harden | Selected: ✅ YES | Team: Team LeBron,5,"Yes, James Harden played in the 2019 NBA All-Star Game."
+T129,all_star,Was Kawhi Leonard chosen for the All-Star Game in 2016?,all_star,0.8435,1,⭐ 2016 All-Star | Kawhi Leonard | Selected: ✅ YES | Team: West,5,"Yes, Kawhi Leonard played in the 2016 NBA All-Star Game."
+T130,all_star,Did Dwyane Wade make the All-Star team in 2012?,all_star,0.8979,1,⭐ 2012 All-Star | Dwyane Wade | Selected: ✅ YES | Team: East,5,"Yes, Dwyane Wade played in the 2012 NBA All-Star Game."
