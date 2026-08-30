@@ -1,5 +1,8 @@
 # 🏀 HoopMind — NBA Knowledge Chatbot (Dialogflow ES)
 
+> Part of the [HoopMind](../README.md) multi-platform chatbot project.
+> Sibling implementations: [Rasa Pro](../rasa/README.md) · [Botpress](../botpress/README.md)
+
 HoopMind is a conversational chatbot that answers questions about NBA
 players, teams, statistics, awards, All-Star selections and draft history —
 covering seasons from 1947 to the present across 22 Basketball-Reference
