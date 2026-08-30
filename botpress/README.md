@@ -7,11 +7,11 @@ The Botpress build of HoopMind is hosted on **Botpress Cloud** — there is no l
 install and nothing to run from this directory. Open the shareable webchat link and start asking,
 or import the bundled export into your own workspace to inspect the flows.
 
-It answers from the same [dataset](#4-dataset) as the [Rasa](../rasa/README.md) and
+It answers from the same [dataset](#dataset) as the [Rasa](../rasa/README.md) and
 [Dialogflow ES](../dialogflow-es/README.md) builds: 22 CSVs covering the NBA, ABA and BAA from
 **1947 to 2026**, 5,367 players and 96 teams.
 
-## 1. Botpress Webchat Preview
+## Botpress Webchat Preview
 
 Open the following link to preview and test the published chatbot:
 
@@ -41,7 +41,7 @@ The same shareable page works inside an `<iframe>`:
 </iframe>
 ```
 
-## 2. Import the Botpress Project
+## Import the Botpress Project
 
 The export lives in this folder as **`Hoopmind.bpz.zip`** (~58 MB) — it carries the bot's flows,
 knowledge base and uploaded data files.
@@ -60,16 +60,7 @@ knowledge base and uploaded data files.
 Publishing mints a **new** `configUrl`. If you republish, update the link in §1 — the one above
 points at the original deployment.
 
-## 3. Example questions
-
-- *"Tell me about LeBron James"*
-- *"How many points did Stephen Curry average in 2016?"*
-- *"Compare Kobe and Jordan career scoring"*
-- *"Was Dirk an All-Star in 2010?"*
-- *"Who was the first overall pick in 2003?"*
-- *"Who won MVP in 2016?"*
-
-## 4. Dataset
+## Dataset
 
 **[NBA / ABA / BAA Stats](https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats)** by
 Sumitro Datta on Kaggle, scraped from
@@ -89,7 +80,7 @@ which is why this directory has no `data/` folder — the export carries its own
 local builds keep theirs in [`rasa/data/nba/`](../rasa/data/nba/) and
 [`dialogflow-es/data/`](../dialogflow-es/data/).
 
-## 5. Notes
+## Notes
 
 - The bot logic lives in the Botpress Cloud workspace. This directory holds the webchat link plus
   the `.bpz` export — there is no source to run locally.
@@ -99,7 +90,7 @@ local builds keep theirs in [`rasa/data/nba/`](../rasa/data/nba/) and
 - Refreshing the dataset means re-uploading it in Botpress Studio — it is not picked up from this
   repository the way the Rasa and Dialogflow builds pick up their local copies.
 
-## 6. Credits
+## Credits
 
 - Platform: [Botpress](https://botpress.com/)
 - Data: [NBA / ABA / BAA Stats](https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats)

@@ -14,7 +14,7 @@ app, not by a Dialogflow fulfillment webhook.
 
 ---
 
-## 1. Requirements
+## Requirements
 
 - **Python 3.10 – 3.12** (developed on 3.12) — <https://www.python.org/downloads/>
   - On the installer's first screen, tick **"Add python.exe to PATH."**
@@ -22,7 +22,7 @@ app, not by a Dialogflow fulfillment webhook.
 - Internet is only needed for the optional live Dialogflow ES mode; everything
   else, including all evaluation scripts, runs fully offline.
 
-## 2. Setup
+## Setup
 
 **Step 1 — Get the project.** Copy/download the whole `dialogflow-es` folder
 to your machine, keeping the folder structure intact — especially `data/`
@@ -31,6 +31,9 @@ to your machine, keeping the folder structure intact — especially `data/`
 **Step 2 — Install dependencies.** Open a terminal in the project folder:
 
 ```bash
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+python -m venv venv
+venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
@@ -39,7 +42,7 @@ One-time; downloads roughly 200 MB.
 
 ---
 
-## 3. How to open / run the chatbot
+## How to open / run the chatbot
 
 **Windows** — double-click:
 
@@ -55,8 +58,8 @@ This opens two windows (Flask API on `:5000`, Streamlit chat UI on
 **macOS / Linux** — in two separate terminals, from the project folder:
 
 ```bash
-python -X utf8 webhook.py                           # terminal 1: API on :5000
-python -X utf8 -m streamlit run streamlit_app.py    # terminal 2: UI on :8501
+python webhook.py                          # terminal 1: API on :5000
+python -m streamlit run streamlit_app.py   # terminal 2: UI on :8501
 ```
 
 To stop, close the two console windows (or `Ctrl+C` in each).
@@ -65,7 +68,7 @@ By default HoopMind classifies questions with its built-in **offline
 classifier** — no Google account or internet needed. See §6 to switch it to
 live Dialogflow ES.
 
-## 4. How to use it
+## How to use it
 
 Type an NBA question into the chat box at `http://localhost:8501`. Example
 questions it understands:
@@ -87,7 +90,7 @@ season stats, player/team comparisons, awards (won and voting share),
 league (single-award) winners, draft history, All-Star selections, and
 general "what can you tell me" / dataset-scope questions.
 
-## 5. View HoopMind's Dialogflow ES intents & entities
+## View HoopMind's Dialogflow ES intents & entities
 1. Open Dialogflow ES console and create a new agent
 - Go to dialogflow.cloud.google.com
 - Sign in with the Google account
@@ -110,7 +113,7 @@ general "what can you tell me" / dataset-scope questions.
 - Hence, there is no responses if ask question in "Try it now".
 - For better user interface, pls refer "3. How to open / run the chatbot"
 
-## 6. Optional: enable live Google Dialogflow ES NLU
+## Optional: enable live Google Dialogflow ES NLU
 
 Out of the box, HoopMind uses its offline classifier. To route messages
 through your trained Dialogflow ES agent instead:
@@ -135,7 +138,7 @@ through your trained Dialogflow ES agent instead:
 
 ---
 
-## 7. Evaluation
+## Evaluation
 
 Everything needed to reproduce the evaluation lives in `evaluation/`. It
 tests the actual 13-intent Dialogflow ES agent — `team_stats`,
@@ -145,7 +148,7 @@ tests the actual 13-intent Dialogflow ES agent — `team_stats`,
 (`test_phrases.csv`, 10 per intent). These phrases were written separately
 from the training data and were never imported into Dialogflow.
 
-### 7.1 Intent recognition — Accuracy, Precision, Recall, F1
+### 1. Intent recognition — Accuracy, Precision, Recall, F1
 
 Requires `GOOGLE_APPLICATION_CREDENTIALS` set to a Dialogflow-enabled
 service account (see §6), plus `pip install google-cloud-dialogflow`.
@@ -172,7 +175,7 @@ Weakest intents: `greeting` (recall 0.50 — some phrasings are being
 misread) and `dataset_scope` (recall 0.60). Full per-intent breakdown is in
 `evaluation/intent_report.txt`.
 
-### 7.2 Response relevancy, quality, and BLEU / ROUGE
+### 2. Response relevancy, quality, and BLEU / ROUGE
 
 Dialogflow's own `fulfillment_text` is never populated in this app —
 HoopMind uses Dialogflow only for intent detection and builds the actual
@@ -232,7 +235,7 @@ citing as findings, separate from the raw accuracy numbers):
 - ~~`player_awards` for James Harden returns "no award record found."~~
   **Fixed** — now returns `NBA SMOY x1: 2012 / NBA MVP x1: 2018`.
 
-### 7.3 Usability and user satisfaction
+### 3. Usability and user satisfaction
 
 ```
 evaluation/usability_survey.md
@@ -265,7 +268,7 @@ task-success rate (%).
 | Average satisfaction | 4.7 / 5 |
 | Average task success | 96 % |
 
-### 7.4 Recommended evidence for the report
+### 4. Recommended evidence for the report
 
 - Screenshot of the Dialogflow ES console: intent list + a live "Try it
   now" test
@@ -275,7 +278,7 @@ task-success rate (%).
 - A handful of example rows from `test_results.csv` showing both correct
   and incorrect responses (see §7.2 for pre-identified examples)
 
-### 7.5 Limitations
+### 5. Limitations
 
 - Manual response-quality ratings (§7.2) were made by the developer, not by
   independent raters, and the 10 usability participants (§7.3) are a small,
@@ -286,7 +289,7 @@ task-success rate (%).
 
 ---
 
-## 8. Project layout
+## Project layout
 
 ```
 dialogflow-es/
@@ -314,7 +317,7 @@ dialogflow-es/
         response_metrics.json, usability_metrics.json   — generated outputs
 ```
 
-## 9. Troubleshooting
+## Troubleshooting
 
 | Problem | Fix |
 |---|---|

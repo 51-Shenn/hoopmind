@@ -48,14 +48,6 @@ modes from the same flows and the same custom actions:
 | **Gemini API key(s)** | Optional — LLM mode only. Get them at [aistudio.google.com/apikey](https://aistudio.google.com/apikey) |
 | **OS** | Windows-first (PowerShell launchers). The `uv run rasa …` commands work anywhere. |
 
-Pinned dependencies (`pyproject.toml`, locked in `uv.lock`):
-
-```
-rasa-pro==3.18.1
-rasa-sdk==3.18.0
-setuptools==80.10.2
-```
-
 ---
 
 ## Setup
