@@ -21,7 +21,7 @@ app, not by a Dialogflow fulfillment webhook.
 
 - **Python 3.10 – 3.12** (developed on 3.12) — <https://www.python.org/downloads/>
   - On the installer's first screen, tick **"Add python.exe to PATH."**
-- Windows (one-click launcher) or macOS/Linux (two terminal commands — see below).
+- Windows (batch launcher) or macOS/Linux (two terminal commands — see below).
 - Internet is only needed for the optional live Dialogflow ES mode; everything
   else, including all evaluation scripts, runs fully offline.
 
@@ -31,9 +31,13 @@ app, not by a Dialogflow fulfillment webhook.
 to your machine, keeping the folder structure intact — especially `data/`
 (22 CSV files, ~32 MB).
 
-**Step 2 — Install dependencies.** Open a terminal in the project folder:
+**Step 2 — Install dependencies.** Open a terminal in the project folder
+(the one containing `requirements.txt` — `cd` into it first if your terminal
+opened somewhere else).
 
-```bash
+**Windows (PowerShell):**
+
+```powershell
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 python -m venv venv
 venv\Scripts\Activate.ps1
@@ -41,16 +45,36 @@ python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
-One-time; downloads roughly 200 MB.
+`Set-ExecutionPolicy` is only needed so PowerShell will run `Activate.ps1`; it
+applies to this window only. In `cmd.exe`, skip that line and use
+`venv\Scripts\activate.bat` instead.
+
+**macOS / Linux:**
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+One-time; downloads roughly 200 MB. Once activated, the prompt shows
+`(venv)` — that is how you know the next commands use the right Python.
 
 ---
 
 ## How to open / run the chatbot
 
-**Windows** — double-click:
+**Activate the virtual environment first** — every terminal you use, every
+time. The launcher and both commands below call plain `python`, so without an
+active `venv` they pick up the system Python and fail with
+`ModuleNotFoundError: No module named 'flask'`.
 
-```bat
-run_hoopmind.bat
+**Windows (PowerShell)** — from the project folder:
+
+```powershell
+venv\Scripts\Activate.ps1
+.\run_hoopmind.bat
 ```
 
 This opens two windows (Flask API on `:5000`, Streamlit chat UI on
@@ -58,10 +82,21 @@ This opens two windows (Flask API on `:5000`, Streamlit chat UI on
 
 **<http://localhost:8501>**
 
-**macOS / Linux** — in two separate terminals, from the project folder:
+Launching it this way matters: the two windows inherit the activated
+environment from the shell that started them. Double-clicking
+`run_hoopmind.bat` in File Explorer does **not** activate the `venv` and will
+fail unless the dependencies are installed system-wide.
+
+**macOS / Linux** — in two separate terminals, from the project folder,
+activating in each:
 
 ```bash
+source venv/bin/activate
 python webhook.py                          # terminal 1: API on :5000
+```
+
+```bash
+source venv/bin/activate
 python -m streamlit run streamlit_app.py   # terminal 2: UI on :8501
 ```
 
@@ -296,7 +331,7 @@ task-success rate (%).
 
 ```
 dialogflow-es/
-├── run_hoopmind.bat            one-click launcher (Windows)
+├── run_hoopmind.bat            batch launcher (Windows, §3)
 ├── requirements.txt            pip dependencies (§2)
 ├── webhook.py                  Flask /chat endpoint + message pipeline
 ├── streamlit_app.py            chat interface (rich cards + suggestion chips)
@@ -326,6 +361,9 @@ dialogflow-es/
 |---|---|
 | Port already in use | `Get-NetTCPConnection -LocalPort 5000 -State Listen \| ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }` (same for 8501) |
 | `'python' is not recognized` | Reinstall Python with "Add to PATH" ticked, then reopen the terminal |
+| `ModuleNotFoundError: No module named 'flask'` (or `streamlit`, `pandas`, `sklearn`) | The `venv` is not active. Run `venv\Scripts\Activate.ps1` (Windows) / `source venv/bin/activate` (macOS/Linux) in that terminal, then retry — see §3 |
+| `run_hoopmind.bat` windows close instantly or show import errors | It was double-clicked from File Explorer, so no `venv` was active. Launch it from an activated PowerShell instead — see §3 |
+| `Activate.ps1 cannot be loaded because running scripts is disabled` | Run `Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process` in that window first |
 | `streamlit: command not found` | Use `python -m streamlit run streamlit_app.py` |
 | First question is slow | The engine loads CSVs lazily on first use |
 | `run_dialogflow_evaluation.py` errors on import | `pip install google-cloud-dialogflow` and set `GOOGLE_APPLICATION_CREDENTIALS` |
