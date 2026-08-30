@@ -1,6 +1,6 @@
 # HoopMind - Intents and Training Phrases
 
-Total intents: 13 | Total training phrases: 620
+Total intents: 13 | Total training phrases: 619
 
 Source: `rasa/data/nlu.yml`
 
@@ -21,7 +21,7 @@ Source: `rasa/data/nlu.yml`
 **Model**: `config_nlu.yml` — DIETClassifier (30 epochs) + WhitespaceTokenizer + RegexFeaturizer
 + CountVectorsFeaturizer (word + char_wb 1-4) + EntitySynonymMapper
 
-**Protocol**: 5-fold cross-validation over all 605 examples. Reproduce with:
+**Protocol**: 5-fold cross-validation. Reproduce with:
 
 ```powershell
 uv run rasa test nlu --nlu data/nlu.yml --config config.yml --cross-validation -f 5 --out results
@@ -30,32 +30,6 @@ uv run rasa test nlu --nlu data/nlu.yml --config config.yml --cross-validation -
 Every example is held out exactly once, so these are out-of-sample numbers. Do **not** quote a
 plain `rasa test nlu --nlu data/nlu.yml` run: with no held-out split it trains and tests on the
 same data and reports ~99%, which is a train-set score, not accuracy.
-
-| Intent | Precision | Recall | F1 | Support |
-|---|---|---|---|---|
-| team_stats | 0.85 | 0.95 | 0.90 | 109 |
-| player_info | 0.79 | 0.74 | 0.76 | 81 |
-| player_stats | 0.85 | 0.89 | 0.87 | 79 |
-| compare | 0.88 | 0.81 | 0.84 | 69 |
-| team_info | 0.80 | 0.50 | 0.62 | 40 |
-| league_info | 0.86 | 0.92 | 0.89 | 39 |
-| dataset_scope | 0.89 | 0.82 | 0.85 | 39 |
-| all_star | 0.87 | 0.89 | 0.88 | 37 |
-| greeting | 0.51 | 0.85 | 0.64 | 26 |
-| draft_info | 0.93 | 1.00 | 0.96 | 26 |
-| goodbye | 0.89 | 0.67 | 0.76 | 24 |
-| player_awards | 0.80 | 0.67 | 0.73 | 18 |
-| award_winner | 0.94 | 0.83 | 0.88 | 18 |
-| **macro avg** | **0.83** | **0.81** | **0.81** | **605** |
-| **weighted avg** | **0.84** | **0.83** | **0.83** | **605** |
-
-**Overall accuracy**: 83.0% (0.8298)
-
-Weakest intents are `team_info` (recall 0.50 — mostly absorbed by `team_stats`) and `greeting`
-(precision 0.51 — acts as a catch-all for short unrecognised inputs).
-
-Measured on the same 5-fold protocol, nesting the lookup tables correctly under `nlu:` moved
-accuracy 0.8000 → 0.8298 and weighted F1 0.7988 → 0.8279.
 
 ## 1. greeting (26 phrases)
 
@@ -266,7 +240,7 @@ accuracy 0.8000 → 0.8298 and weighted F1 0.7988 → 0.8279.
 65. [per 100](stat_type) possessions, [Stephen Curry](player)'s points in [2016](season)
 66. What did [Joel Embiid](player) score [per 100](stat_type) possessions in [2021](season)?
 67. [Giannis Antetokounmpo](player) rebounds [per 100](stat_type) poss in [2020](season)
-68. Show [Damian Lillard](player]'s [per 100](stat_type) assists for [2019](season)
+68. Show [Damian Lillard](player)'s [per 100](stat_type) assists for [2019](season)
 69. What was [Stephen Curry](player)'s [plus-minus](stat) [per 100](stat_type) possessions?
 70. How many [blocks](stat) did [Hakeem Olajuwon](player) have?
 71. What was [Kobe Bryant](player)'s [free throw percentage](stat)?
@@ -629,7 +603,7 @@ accuracy 0.8000 → 0.8298 and weighted F1 0.7988 → 0.8279.
 38. What basketball competition does your data come from?
 39. Which league does your database focus on?
 
-## 11. dataset_scope (40 phrases)
+## 11. dataset_scope (41 phrases)
 
 1. What NBA data do you have?
 2. What seasons are available?
@@ -671,6 +645,7 @@ accuracy 0.8000 → 0.8298 and weighted F1 0.7988 → 0.8279.
 38. What can HoopMind tell me?
 39. What does your database contain?
 40. What kind of NBA information do you have?
+41. What statistics does your database contain?
 
 ## 12. award_winner (18 phrases)
 
@@ -693,7 +668,7 @@ accuracy 0.8000 → 0.8298 and weighted F1 0.7988 → 0.8279.
 17. Who won [MVP](award) in [2009](season)?
 18. Who won [MVP](award) in [2008](season)?
 
-## 13. player_awards (19 phrases)
+## 13. player_awards (18 phrases)
 
 1. What awards did [Michael Jordan](player) win?
 2. What awards has [LeBron James](player) won?
@@ -712,5 +687,4 @@ accuracy 0.8000 → 0.8298 and weighted F1 0.7988 → 0.8279.
 15. How many DPOY did [Kevin Garnett](player) win?
 16. Did [Dennis Rodman](player) win any awards?
 17. What awards has [Stephen Curry](player) won?
-18. How many All-Star selections does [LeBron James](player) have?
-19. Show me [Kobe Bryant](player)'s trophy case
+18. Show me [Kobe Bryant](player)'s trophy case

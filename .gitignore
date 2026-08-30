@@ -226,7 +226,6 @@ node_modules/
 # Rasa
 rasa/.rasa/
 rasa/models/
-rasa/results/
 rasa/graphs/
 rasa/story_graph.dot
 rasa/graph.html
@@ -234,7 +233,6 @@ rasa/logs/
 rasa/debug.log
 
 # Dialogflow ES
-dialogflow-es/**/*.zip
 dialogflow-es/**/*credential*.json
 dialogflow-es/**/*key*.json
 dialogflow-es/.df-*.json

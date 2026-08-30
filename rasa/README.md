@@ -94,7 +94,7 @@ GEMINI_API_KEY_2=your-third-key-here
 GEMINI_API_KEY_3=your-fourth-key-here
 
 # Model used by actions/llm_answer.py
-GEMINI_MODEL=gemini-2.0-flash
+GEMINI_MODEL=gemini-3.1-flash-lite
 ```
 
 `run_rasa_llm.ps1` refuses to start if every key is still a placeholder (`your-…-key-here`).
@@ -107,9 +107,17 @@ One launcher does everything — mode switch, retrain, action server, Inspector,
 
 ```powershell
 cd rasa
+```
 
+```powershell
 .\run_rasa.ps1            # interactive picker: [1] NLU  [2] LLM
+```
+
+```powershell
 .\run_rasa.ps1 -Mode nlu  # offline DIETClassifier, no API key needed
+```
+
+```powershell
 .\run_rasa.ps1 -Mode llm  # Gemini + key-rotation proxy
 ```
 
@@ -277,7 +285,7 @@ that either utters a response or calls one custom action, then ends:
 |---|---|---|
 | `greeting` | `greeting` | `utter_greeting` |
 | `goodbye` | `goodbye` | `utter_goodbye` |
-| `default_fallback` | *(core fallback)* | `utter_default` |
+| `default_fallback` | `nlu_fallback` | `utter_default` |
 | `player_info` | `player_info` | `action_player_info` |
 | `player_stats` | `player_stats` | `action_player_stats` |
 | `team_info` | `team_info` | `action_team_info` |
@@ -460,12 +468,14 @@ uv run rasa test nlu --nlu data/nlu.yml --config config.yml --cross-validation -
 > tests on the same examples and reports ~99 %. That is a train-set score, not accuracy. The real
 > cross-validated figure is ~83 %.
 
-`results/` is gitignored and holds the latest run only.
+### Cross-validation results
 
-### Latest results
+5-fold cross-validation over `config_nlu.yml`, measured on the **605-example snapshot** of
+`data/nlu.yml`.
 
-5-fold cross-validation over 605 examples, `config_nlu.yml`. Every example is held out exactly
-once, so these are out-of-sample numbers.
+> The file has since grown to 619 examples (`player_stats` 82, `compare` 78, `dataset_scope` 41),
+> so the supports below no longer match the current corpus. Re-run the command above to refresh
+> the table.
 
 | Intent | Precision | Recall | F1 | Support |
 |---|---|---|---|---|
@@ -491,11 +501,12 @@ inputs).
 
 ### Held-out test set
 
-`tests/nlu_test.yml` is a separate evaluation set generated from the repo-root `test.csv`
+`tests/nlu_test.yml` is a separate evaluation set generated from `tests/test.csv`
 (`test_id,expected_intent,test_phrase`):
 
 ```powershell
-uv run python tests/csv_to_nlu.py     # test.csv -> tests/nlu_test.yml
+uv run python tests/csv_to_nlu.py                                      # test.csv -> nlu_test.yml
+uv run rasa test nlu -m models --nlu tests/nlu_test.yml --out results  # score the latest model
 ```
 
 There is no Python unit-test suite on the Rasa side; NLU evaluation is the test layer.
@@ -532,7 +543,8 @@ rasa/
 ├── prompts/
 │   └── gemini_command_prompt.jinja2
 ├── tests/
-│   ├── csv_to_nlu.py               ../test.csv -> nlu_test.yml
+│   ├── csv_to_nlu.py               test.csv -> nlu_test.yml
+│   ├── test.csv                    shared intent test phrases (source for nlu_test.yml)
 │   └── nlu_test.yml                held-out evaluation set
 ├── config.yml                      GENERATED — copied from config_{nlu,llm}.yml
 ├── config_nlu.yml                  DIETClassifier pipeline
@@ -576,7 +588,7 @@ All commands run from `rasa/`.
 | `python -m rasa_sdk --actions actions --port 5055` | action server alone (**must run from `rasa/`**) |
 | `python gemini_proxy.py` | key-rotation proxy on `:8300` |
 | `uv run rasa test nlu --nlu data/nlu.yml --config config.yml --cross-validation -f 5 --out results` | the evaluation that counts |
-| `uv run python tests/csv_to_nlu.py` | regenerate `tests/nlu_test.yml` from `../test.csv` |
+| `uv run python tests/csv_to_nlu.py` | regenerate `tests/nlu_test.yml` from `tests/test.csv` |
 
 ---
 
@@ -603,7 +615,6 @@ All commands run from `rasa/`.
 ## Reference
 
 - [INTENTS.md](INTENTS.md) — intents, entities, full training phrase lists, evaluation results
-- [example-queries.md](../example-queries.md) — representative and edge-case queries for smoke testing
 - [Rasa Pro documentation](https://rasa.com/docs/rasa-pro/)
 
 ## Credits
