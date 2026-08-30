@@ -615,7 +615,6 @@ All commands run from `rasa/`.
 ## Reference
 
 - [INTENTS.md](INTENTS.md) — intents, entities, full training phrase lists, evaluation results
-- [example-queries.md](../example-queries.md) — representative and edge-case queries for smoke testing
 - [Rasa Pro documentation](https://rasa.com/docs/rasa-pro/)
 
 ## Credits

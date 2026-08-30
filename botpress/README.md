@@ -62,9 +62,6 @@ points at the original deployment.
 
 ## 3. Example questions
 
-The same query set that exercises the other two implementations works here — see
-[example-queries.md](../example-queries.md) for the full list.
-
 - *"Tell me about LeBron James"*
 - *"How many points did Stephen Curry average in 2016?"*
 - *"Compare Kobe and Jordan career scoring"*
